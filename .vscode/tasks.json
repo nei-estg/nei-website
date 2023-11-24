@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Docker Build and Run",
+      "type": "shell",
+      "command": "docker-compose up --build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Docker Stop",
+      "type": "shell",
+      "command": "docker-compose down",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Django Make Migrations",
+      "type": "shell",
+      "command": "docker-compose exec django python manage.py makemigrations",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Django Migrate",
+      "type": "shell",
+      "command": "docker-compose exec django python manage.py migrate",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Django Create Superuser",
+      "type": "shell",
+      "command": "docker-compose exec django python manage.py createsuperuser",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    }
+  ]
+}
