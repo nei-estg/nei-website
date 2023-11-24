@@ -11,6 +11,24 @@
       }
     },
     {
+      "label": "Docker Build",
+      "type": "shell",
+      "command": "docker-compose build",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Docker Run",
+      "type": "shell",
+      "command": "docker-compose up",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
       "label": "Docker Stop",
       "type": "shell",
       "command": "docker-compose down",
