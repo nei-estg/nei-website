@@ -16,7 +16,7 @@ services:
 
   django:
     build:
-      context: .
+      context: ./django
       dockerfile: Dockerfile
     container_name: django
     environment:
@@ -30,6 +30,17 @@ services:
       - "8000:8000"
     depends_on:
       - postgres
+    restart: unless-stopped
+  
+  react:
+    build:
+      context: ./react
+      dockerfile: Dockerfile
+    container_name: react
+    volumes:
+      - ./react:/app
+    ports:
+      - "3000:3000"
     restart: unless-stopped
 
 volumes:
