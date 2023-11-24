@@ -1,0 +1,12 @@
+# env
+.env
+
+# PyCharm
+.idea/
+venv/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
