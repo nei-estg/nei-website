@@ -1,2 +1,11 @@
 django
+django-extensions
 psycopg2
+djangorestframework
+django-rest-knox
+django-filter
+pyyaml
+uritemplate
+django-admin-interface
+django-prometheus
+django_redis
