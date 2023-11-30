@@ -81,10 +81,10 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.2/topics/cache/#redis
 
 CACHES = {
-    "default": {
-        "BACKEND": "django_prometheus.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://redis:6379",
-    }
+  "default": {
+    "BACKEND": "django_prometheus.cache.backends.redis.RedisCache",
+    "LOCATION": "redis://redis:6379",
+  }
 }
 
 # Password validation
@@ -148,6 +148,7 @@ REST_FRAMEWORK = {
     'rest_framework.authentication.SessionAuthentication',
     'knox.auth.TokenAuthentication'
   ],
+  'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
   'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
   'PAGE_SIZE': 10
 }

@@ -1,6 +1,5 @@
-FROM node
+FROM node:latest
 WORKDIR /app
 COPY . /app
-RUN npm install
-EXPOSE 3000
-CMD ["npm", "start"]
+EXPOSE 5173
+CMD ["/bin/bash", "-c", "npm install; npm run dev"]

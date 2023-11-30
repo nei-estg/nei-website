@@ -16,6 +16,7 @@ services:
 
   redis:
     image: "redis:latest"
+    container_name: redis
     ports:
       - "6379:6379"
     volumes:
@@ -37,6 +38,7 @@ services:
       - "8000:8000"
     depends_on:
       - postgres
+      - redis
     restart: unless-stopped
   
   react:
@@ -47,11 +49,13 @@ services:
     volumes:
       - ./react:/app
     ports:
-      - "3000:3000"
+      - "5173:5173"
+    depends_on:
+      - django
     restart: unless-stopped
 
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:latest
     container_name: prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -66,7 +70,7 @@ services:
 
 
   grafana:
-    image: grafana/grafana-enterprise
+    image: grafana/grafana-enterprise:latest
     container_name: grafana
     volumes:
       - ./grafana:/etc/grafana/provisioning/datasources
