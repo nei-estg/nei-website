@@ -1,0 +1,1 @@
+//aqui na api/utils incluam interfaces de dados da base de dados
