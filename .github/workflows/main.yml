@@ -1,0 +1,59 @@
+name: NEI CI
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: |
+          cd react
+          npm install
+
+      - name: Build React App
+        run: |
+          cd react
+          npm run build
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Python Dependencies
+        run: |
+          pip install -r django/requirements.txt
+
+      - name: Docker Compose Action
+        uses: isbang/compose-action@v1.5.1
+        with:
+          compose-file: docker-compose.yml
+          services: |
+            redis
+            postgres
+                  
+      - name: Run Django Tests
+        run: |
+          cd django
+          python manage.py makemigrations
+          python manage.py migrate
+          python manage.py test
+
+      - name: Clean up
+        run: docker-compose down
