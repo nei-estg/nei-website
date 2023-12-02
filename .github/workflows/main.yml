@@ -28,7 +28,7 @@ jobs:
           compose-file: docker-compose.yml
           
       - name: Run Django Tests
-        run: docker-compose exec django python manage.py test
+        run: docker-compose exec -T django python manage.py test
         
       - name: Clean up
         run: docker-compose down
