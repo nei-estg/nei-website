@@ -1,4 +1,7 @@
-
+import {
+  BrowserRouter
+} from "react-router-dom";
+import Router from "./router/Router";
 
 function App() {
   // TODO: ADD REACT ROUTER DOM <BrowserRouter> 
@@ -6,7 +9,9 @@ function App() {
   // para acrescentar dark/light mode toggle é preciso state management ;)
 
   return (
-    <></>
+    <BrowserRouter>
+      <Router/>
+    </BrowserRouter>
   )
 }
 
