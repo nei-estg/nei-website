@@ -1,0 +1,149 @@
+{
+  "courses": [
+    {
+      "name": "Mestrado em Engenharia Informática",
+      "abbreviation": "MEI",
+      "curricularUnits": {
+        "1": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ],
+        "2": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "Licenciatura em Segurança Informática em Redes de Computadores",
+      "abbreviation": "LSIRC",
+      "curricularUnits": {
+        "1": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ],
+        "2": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ],
+        "3": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "Licenciatura em Engenharia Informática",
+      "abbreviation": "LEI",
+      "curricularUnits": {
+        "1": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ],
+        "2": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ],
+        "3": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "Licenciatura em Sistemas de Informação para a Gestão",
+      "abbreviation": "LSIG",
+      "curricularUnits": {
+        "1": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ],
+        "2": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ],
+        "3": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "CTeSP em Cibersegurança, Redes e Sistemas Informáticos",
+      "abbreviation": "CRSI",
+      "curricularUnits": {
+        "1": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ],
+        "2": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "CTeSP em Desenvolvimento para a WEB e Dispositivos Móveis",
+      "abbreviation": "DWDM",
+      "curricularUnits": {
+        "1": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ],
+        "2": [
+          {
+            "name": "",
+            "abbreviation": ""
+          }
+        ]
+      }
+    }
+  ],
+  "FAQs": [
+    {
+      "question": "",
+      "answer": ""
+    }
+  ],
+  "MaterialTags": [
+    "Teste",
+    "Exame",
+    "Trabalho",
+    "Ficha",
+    "Teoria",
+    "Prática",
+    "Resumo",
+    "Apontamentos"
+  ],
+  "BlogTopics": [
+    "Geral"
+  ]
+}
