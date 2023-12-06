@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django_prometheus.models import ExportModelOperationsMixin
-import datetime
+import pika
 
 
 class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
@@ -242,3 +242,16 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
   instance.profilemodel.save()
+
+
+@receiver(post_save, sender=ContactModel)
+async def HandleContactModel(sender, instance, created, **kwargs):
+  try:
+    connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq'))
+    channel = connection.channel()
+    channel.queue_declare(queue='contact')
+    channel.basic_publish(exchange='', routing_key='contact', body=instance.name + ' (' + instance.email + '): ' + instance.message)
+    channel.close()
+    connection.close()
+  except:
+    pass

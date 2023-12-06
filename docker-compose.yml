@@ -12,7 +12,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    restart: unless-stopped
+    restart: always
 
   redis:
     image: "redis:latest"
@@ -21,6 +21,21 @@ services:
       - "6379:6379"
     volumes:
         - redis_data:/data
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    hostname: 'rabbitmq'
+    environment:
+      RABBITMQ_DEFAULT_USER: $RABBITMQ_USER
+      RABBITMQ_DEFAULT_PASS: $RABBITMQ_PASS
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: always
 
   django:
     build:
@@ -39,7 +54,8 @@ services:
     depends_on:
       - postgres
       - redis
-    restart: unless-stopped
+      - rabbitmq
+    restart: always
   
   react:
     build:
@@ -52,7 +68,7 @@ services:
       - "5173:5173"
     depends_on:
       - django
-    restart: unless-stopped
+    restart: always
 
   prometheus:
     image: prom/prometheus:latest
@@ -66,7 +82,7 @@ services:
       - 9090:9090
     depends_on:
       - django
-    restart: unless-stopped
+    restart: always
 
 
   grafana:
@@ -82,10 +98,26 @@ services:
       - '9999:3000'
     depends_on:
       - prometheus
-    restart: unless-stopped
+    restart: always
 
+  discord:
+    build:
+      context: ./discord
+      dockerfile: Dockerfile
+    container_name: discord
+    volumes:
+      - ./discord:/app
+    environment:
+      RABBITMQ_USER: $RABBITMQ_USER
+      RABBITMQ_PASS: $RABBITMQ_PASS
+      DISCORD_TOKEN: $DISCORD_TOKEN
+    depends_on:
+      - rabbitmq
+      - django
+    restart: always
 volumes:
   postgres_data:
   redis_data:
   prometheus_data:
   grafana_data:
+  rabbitmq_data:
