@@ -9,4 +9,3 @@ uritemplate
 django-admin-interface
 django-prometheus
 django_redis
-django-cors-headers

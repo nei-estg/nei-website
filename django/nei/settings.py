@@ -9,12 +9,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = True
 
 # SECURITY WARNING: only allow requests from the domain in production!
-ALLOWED_HOSTS = ['django', 'localhost', "*"]
-
-CORS_ALLOWED_ORIGINS = [
-  'http://*',
-  "moz-extension://3bafb2ad-b7bd-4ead-b341-31a4bfc5a7be"
-]
+ALLOWED_HOSTS = ['django', 'localhost']
 
 # Application definition
 
@@ -28,7 +23,6 @@ INSTALLED_APPS = [
   'django.contrib.messages',
   'django.contrib.staticfiles',
   'django_extensions',
-  'corsheaders',
   'rest_framework',
   'django_filters',
   'knox',
@@ -37,11 +31,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-  'django.middleware.common.CommonMiddleware',
-  'corsheaders.middleware.CorsMiddleware',
   'django_prometheus.middleware.PrometheusBeforeMiddleware',
   'django.middleware.security.SecurityMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
+  'django.middleware.common.CommonMiddleware',
   'django.middleware.csrf.CsrfViewMiddleware',
   'django.contrib.auth.middleware.AuthenticationMiddleware',
   'django.contrib.messages.middleware.MessageMiddleware',
