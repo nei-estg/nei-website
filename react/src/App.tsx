@@ -1,6 +1,4 @@
-import {
-  BrowserRouter
-} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Router from "./router/Router";
 
 function App() {
@@ -11,6 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <Router/>
+      {/* //teste */}
     </BrowserRouter>
   )
 }
