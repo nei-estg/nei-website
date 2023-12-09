@@ -143,6 +143,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # https://www.django-rest-framework.org/api-guide/settings/
 
 REST_FRAMEWORK = {
+  'DEFAULT_THROTTLE_CLASSES': [
+    'rest_framework.throttling.AnonRateThrottle',
+    'rest_framework.throttling.UserRateThrottle'
+  ],
+  'DEFAULT_THROTTLE_RATES': {
+    'anon': '100/hour',
+    'user': '1000/hour'
+  },
   'DEFAULT_AUTHENTICATION_CLASSES': [
     'rest_framework.authentication.BasicAuthentication',
     'rest_framework.authentication.SessionAuthentication',
