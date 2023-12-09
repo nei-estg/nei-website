@@ -12,7 +12,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    restart: unless-stopped
+    restart: always
 
   redis:
     image: "redis:latest"
@@ -21,6 +21,7 @@ services:
       - "6379:6379"
     volumes:
         - redis_data:/data
+    restart: always
 
   django:
     build:
@@ -39,7 +40,7 @@ services:
     depends_on:
       - postgres
       - redis
-    restart: unless-stopped
+    restart: always
   
   react:
     build:
@@ -52,7 +53,7 @@ services:
       - "5173:5173"
     depends_on:
       - django
-    restart: unless-stopped
+    restart: always
 
   prometheus:
     image: prom/prometheus:latest
@@ -66,7 +67,7 @@ services:
       - 9090:9090
     depends_on:
       - django
-    restart: unless-stopped
+    restart: always
 
 
   grafana:
@@ -82,7 +83,7 @@ services:
       - '9999:3000'
     depends_on:
       - prometheus
-    restart: unless-stopped
+    restart: always
 
 volumes:
   postgres_data:
