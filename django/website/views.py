@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, permissions, mixins
-from django_filters import rest_framework as filters
 from rest_framework.response import Response
 from rest_framework import status
 from .models import *
@@ -16,7 +15,6 @@ class ContactViewSet(CreateOnlyModelViewSet):
   queryset = ContactModel.objects.all()
   serializer_class = ContactSerializer
   permission_classes = []
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = ContactSerializer.Meta.fields
 
 class FAQViewSet(viewsets.ModelViewSet):
@@ -26,7 +24,6 @@ class FAQViewSet(viewsets.ModelViewSet):
   queryset = FAQModel.objects.all()
   serializer_class = FAQSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = FAQSerializer.Meta.fields
 
 class CalendarViewSet(viewsets.ModelViewSet):
@@ -36,7 +33,6 @@ class CalendarViewSet(viewsets.ModelViewSet):
   queryset = CalendarModel.objects.all()
   serializer_class = CalendarSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = CalendarSerializer.Meta.fields
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -46,7 +42,6 @@ class CourseViewSet(viewsets.ModelViewSet):
   queryset = CourseModel.objects.all()
   serializer_class = CourseSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = CourseSerializer.Meta.fields
 
 class CurricularUnitViewSet(viewsets.ModelViewSet):
@@ -56,7 +51,6 @@ class CurricularUnitViewSet(viewsets.ModelViewSet):
   queryset = CurricularUnitModel.objects.all()
   serializer_class = CurricularUnitSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = CurricularUnitSerializer.Meta.fields
 
 class MaterialTagViewSet(viewsets.ModelViewSet):
@@ -66,7 +60,6 @@ class MaterialTagViewSet(viewsets.ModelViewSet):
   queryset = MaterialTagModel.objects.all()
   serializer_class = MaterialTagSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = MaterialTagSerializer.Meta.fields
 
 class MaterialViewSet(viewsets.ModelViewSet):
@@ -76,7 +69,6 @@ class MaterialViewSet(viewsets.ModelViewSet):
   queryset = MaterialModel.objects.all()
   serializer_class = MaterialSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = MaterialSerializer.Meta.fields
 
 class MaterialLinkViewSet(viewsets.ModelViewSet):
@@ -86,7 +78,6 @@ class MaterialLinkViewSet(viewsets.ModelViewSet):
   queryset = MaterialLinkModel.objects.all()
   serializer_class = MaterialLinkSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = MaterialLinkSerializer.Meta.fields
 
 class MentorshipRequestViewSet(viewsets.ModelViewSet):
@@ -96,8 +87,7 @@ class MentorshipRequestViewSet(viewsets.ModelViewSet):
   queryset = MentorshipRequestModel.objects.all()
   serializer_class = MentorshipRequestSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
-  filter_backends = (filters.DjangoFilterBackend,)
-  filterset_fields = ['mentee', 'curricular_unit']
+  filterset_fields = MentorshipRequestSerializer.Meta.fields
 
   def create(self, request, *args, **kwargs):
     if isinstance(self.request.data, dict):
@@ -119,7 +109,6 @@ class MentorshipViewSet(viewsets.ModelViewSet):
   queryset = MentorshipModel.objects.all()
   serializer_class = MentorshipSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = MentorshipSerializer.Meta.fields
 
 class MentorshipReviewViewSet(viewsets.ModelViewSet):
@@ -129,7 +118,6 @@ class MentorshipReviewViewSet(viewsets.ModelViewSet):
   queryset = MentorshipReviewModel.objects.all()
   serializer_class = MentorshipReviewSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = MentorshipReviewSerializer.Meta.fields
 
 class BlogTopicViewSet(viewsets.ModelViewSet):
@@ -139,7 +127,6 @@ class BlogTopicViewSet(viewsets.ModelViewSet):
   queryset = BlogTopicModel.objects.all()
   serializer_class = BlogTopicSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = BlogTopicSerializer.Meta.fields
 
 class BlogImageViewSet(viewsets.ModelViewSet):
@@ -149,7 +136,6 @@ class BlogImageViewSet(viewsets.ModelViewSet):
   queryset = BlogImageModel.objects.all()
   serializer_class = BlogImageSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = BlogImageSerializer.Meta.fields
 
 class BlogPostViewSet(viewsets.ModelViewSet):
@@ -159,5 +145,4 @@ class BlogPostViewSet(viewsets.ModelViewSet):
   queryset = BlogPostModel.objects.all()
   serializer_class = BlogPostSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
-  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = BlogPostSerializer.Meta.fields
