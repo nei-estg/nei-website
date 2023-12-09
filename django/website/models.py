@@ -5,7 +5,6 @@ from django.dispatch import receiver
 from django_prometheus.models import ExportModelOperationsMixin
 import datetime
 
-
 class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
   name = models.TextField()
   email = models.EmailField()
@@ -15,6 +14,7 @@ class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
   open = models.BooleanField(default=True)
 
   class Meta:
+    unique_together = ('name', 'email', 'subject', 'message')
     verbose_name = "Formulário de Contacto"
     verbose_name_plural = "Formulário de Contactos"
 
@@ -110,6 +110,7 @@ class MaterialLinkModel(ExportModelOperationsMixin('MaterialLinkModel'), models.
 class CalendarModel(ExportModelOperationsMixin('CalendarModel'), models.Model):
   name = models.TextField()
   date = models.DateTimeField()
+  description = models.TextField()
   curricular_unit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE, null=True, blank=True)
   
   class Meta:
@@ -126,8 +127,8 @@ class MentorshipRequestModel(ExportModelOperationsMixin('MentorshipRequestModel'
   date = models.DateTimeField(auto_now_add=True)
 
   class Meta:
-      verbose_name = "Pedido de Mentoria"
-      verbose_name_plural = "Pedidos de Mentoria"
+    verbose_name = "Pedido de Mentoria"
+    verbose_name_plural = "Pedidos de Mentoria"
 
   def __str__(self):
     return self.mentee.username + " - " + self.curricular_unit.name
@@ -162,7 +163,7 @@ class MentorshipReviewModel(ExportModelOperationsMixin('MentorshipReviewModel'),
     ]
   )
   date = models.DateTimeField(auto_now_add=True)
-  
+
   class Meta:
     verbose_name = "Review de Mentoria"
     verbose_name_plural = "Reviews de Mentoria"
@@ -211,7 +212,7 @@ class BlogPostModel(ExportModelOperationsMixin('BlogPostModel'), models.Model):
 
 class ProfileModel(ExportModelOperationsMixin('ProfileModel'), models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
-  course = models.ForeignKey(CourseModel, on_delete=models.CASCADE, null=True)
+  course = models.ManyToManyField(CourseModel, blank=True)
   year = models.IntegerField(
     choices=[
       (1, '1º'),
