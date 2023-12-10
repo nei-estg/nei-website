@@ -7,6 +7,8 @@ networks:
 volumes:
   postgres_data:
   redis_data:
+  prometheus_data:
+  grafana_data:
 
 services:
   postgres:
@@ -114,4 +116,48 @@ services:
     depends_on:
       django:
         condition: service_healthy
+    restart: always
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "1"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+    networks:
+      - nei
+    ports:
+      - "127.0.0.1:9090:9090"
+    depends_on:
+      django:
+        condition: service_healthy
+    restart: always
+
+  grafana:
+    image: grafana/grafana-enterprise:latest
+    container_name: grafana
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "1"
+    volumes:
+      - ./grafana:/etc/grafana/provisioning/datasources
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=$GRAFANA_USER
+      - GF_SECURITY_ADMIN_PASSWORD=$GRAFANA_PASSWORD
+    networks:
+      - nei
+    ports:
+      - '127.0.0.1:9999:3000'
+    depends_on:
+      - prometheus
     restart: always
