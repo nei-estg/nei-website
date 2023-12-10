@@ -5,9 +5,6 @@ if [ ! -d "/app/venv" ]; then
   python3 -m venv /app/venv
 fi
 
-# Change Ownership of the App Directory
-chown -R 777 /app
-
 # Activate Virtual Environment
 source /app/venv/bin/activate
 
