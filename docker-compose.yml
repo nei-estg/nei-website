@@ -27,12 +27,6 @@ services:
       - nei
     ports:
       - "127.0.0.1:5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_interval: 15s
     restart: always
 
   redis:
@@ -47,12 +41,6 @@ services:
       - redis_data:/data
     networks:
       - nei
-    healthcheck:
-      test: ["CMD-SHELL", "redis-cli ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_interval: 15s
     restart: always
 
   django:
@@ -76,12 +64,6 @@ services:
       - nei
     ports:
       - "127.0.0.1:8000:8000"
-    healthcheck:
-      test: ["CMD-SHELL", "curl --fail http://localhost:8000/hello/ || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_interval: 60s
     depends_on:
       postgres:
         condition: service_healthy
@@ -105,12 +87,6 @@ services:
       - nei
     ports:
       - "127.0.0.1:5173:5173"
-    healthcheck:
-      test: ["CMD-SHELL", "curl --fail http://localhost:5173/ || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_interval: 30s
     depends_on:
       django:
         condition: service_healthy
