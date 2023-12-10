@@ -1,16 +1,5 @@
 #!/bin/bash
 
-# Check if Virtual Environment exists and create it if it doesn't
-if [ ! -d "/app/venv" ]; then
-  python3 -m venv /app/venv
-fi
-
-# Activate Virtual Environment
-source /app/venv/bin/activate
-
-# Upgrade Pip
-pip install --upgrade pip --no-cache-dir
-
 # Install Requirements
 pip install -r requirements.txt --no-cache-dir
 
