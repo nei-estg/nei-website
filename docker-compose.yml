@@ -65,10 +65,8 @@ services:
     ports:
       - "127.0.0.1:8000:8000"
     depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
+      - postgres
+      - redis
     restart: always
   
   react:
@@ -88,6 +86,5 @@ services:
     ports:
       - "127.0.0.1:5173:5173"
     depends_on:
-      django:
-        condition: service_healthy
+      - django
     restart: always
