@@ -34,11 +34,7 @@ export default function Login() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const result = await loginUser(event.currentTarget.username.value, event.currentTarget.password.value);
-    if (result != "") {
-      if (result.response.status !== 200) {
-        alert(result.response.data.detail);
-      }
-    }
+    console.log(result);
   };
 
   return (
