@@ -5,14 +5,14 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/material";
-import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import  GitHubIcon  from '@mui/icons-material/GitHub';
 
 export const Footer = () => {
   return (
     <div>
-        <Box component="footer" style={{ backgroundColor: '#a98467' }}
+        <Box component="footer" style={{ backgroundColor: '#002855', color: '#FFFFFF' }}
       sx={{
         p: 6,
       }}
@@ -21,10 +21,10 @@ export const Footer = () => {
         <Grid container spacing={5}>
           <Grid item xs={12} sm={3}>
             <Typography variant="h6" color="text.primary" gutterBottom >
-              NEI.
+              NEI
             </Typography>
             <Typography variant="body2" color="text.secondary" >
-             Description
+             Núcleo de Engenharia Informática da ESTG
             </Typography>
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -32,7 +32,7 @@ export const Footer = () => {
               Morada
             </Typography>
             <Typography variant="body2" color="text.secondary" >
-              R. do Parque Industrial, Lousada
+              Rua do Curral, Casa do Curral, Margaride
             </Typography>
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -51,7 +51,7 @@ export const Footer = () => {
               Redes Sociais
             </Typography>
             <Typography variant="body2">
-                <FacebookIcon color="primary" />
+                <GitHubIcon color="primary" />
             </Typography>
             <Typography variant="body2">
                 <InstagramIcon color="primary" />
