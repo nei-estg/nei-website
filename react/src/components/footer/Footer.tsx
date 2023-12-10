@@ -43,7 +43,7 @@ export const Footer = () => {
               Email: add email
             </Typography>
             <Typography variant="body2" color="text.secondary" >
-              Tel: add tell
+              Tel: add telemovel
             </Typography>  
           </Grid>
           <Grid item xs={12} sm={3}>
