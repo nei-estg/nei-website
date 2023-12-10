@@ -15,7 +15,7 @@ jobs:
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-      PROSTGRES_USER: ${{ secrets.PROSTGRES_USER }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
 
     steps:
