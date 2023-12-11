@@ -54,6 +54,7 @@ services:
           memory: 4G
           cpus: "2"
     environment:
+      DEBUG: "True"
       SECRET_KEY: $SECRET_KEY
       POSTGRES_DB: $POSTGRES_DB
       POSTGRES_USER: $POSTGRES_USER
@@ -86,5 +87,24 @@ services:
     ports:
       - "127.0.0.1:5173:5173"
     depends_on:
+      - django
+    restart: always
+
+  nginx:
+    image: nginx:1.25.3
+    container_name: nginx
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "2"
+    volumes:
+      - ./nginx/nginx-dev.conf:/etc/nginx/nginx.conf
+    networks:
+      - nei
+    ports:
+      - "127.0.0.1:80:80"
+    depends_on:
+      - react
       - django
     restart: always

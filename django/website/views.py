@@ -136,7 +136,7 @@ class BlogImageViewSet(viewsets.ModelViewSet):
   queryset = BlogImageModel.objects.all()
   serializer_class = BlogImageSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
-  filterset_fields = BlogImageSerializer.Meta.fields
+  filterset_fields = ['id', 'name']
 
 class BlogPostViewSet(viewsets.ModelViewSet):
   """

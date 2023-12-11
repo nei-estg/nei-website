@@ -1,0 +1,11 @@
+FROM python:3.12.1
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+RUN pip install --upgrade pip --no-cache-dir
+WORKDIR /app
+COPY . /app
+RUN pip install -r requirements.txt --no-cache-dir && \
+    python manage.py collectstatic --noinput && \
+    adduser --disabled-password --gecos '' nei
+USER nei
+EXPOSE 8000
+CMD ["/bin/bash", "-c", "python manage.py makemigrations --noinput; python manage.py migrate --noinput; gunicorn --bind 0.0.0.0:8000 --access-logfile '-' --error-logfile '-' nei.wsgi"]
