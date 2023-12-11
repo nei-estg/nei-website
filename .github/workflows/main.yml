@@ -31,7 +31,7 @@ jobs:
         run: docker-compose exec -T django python manage.py test
 
       - name: Build React
-        run: docker-compose exec -T react npm run build
+        run: docker-compose exec react npm run build
         
       - name: Clean up
         run: docker-compose down
