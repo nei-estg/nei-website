@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.urls import path, include
 from rest_framework import routers
 from .views import *
@@ -20,6 +21,8 @@ router.register(r'blogPost', BlogPostViewSet)
 
 urlpatterns = [
   path('', include(router.urls)),
-  path('auth/', include('rest_framework.urls', namespace='rest_framework')),
-  path('api/auth/', include('knox.urls')),
+  path('auth/', include('knox.urls')),
 ]
+
+if settings.DEBUG:
+  urlpatterns.append(path('insecure-auth/', include('rest_framework.urls', namespace='rest_framework')))

@@ -4,7 +4,7 @@ from rest_framework import serializers
 class ContactSerializer(serializers.ModelSerializer):
   class Meta:
     model = ContactModel
-    fields = '__all__'
+    fields = ['id', 'name', 'email', 'subject', 'message']
     
 class FAQSerializer(serializers.ModelSerializer):
   class Meta:
@@ -29,12 +29,12 @@ class MaterialTagSerializer(serializers.ModelSerializer):
 class MaterialSerializer(serializers.ModelSerializer):
   class Meta:
     model = MaterialModel
-    fields = '__all__'
+    fields = ['name', 'file', 'tags', 'curricular_unit']
     
 class MaterialLinkSerializer(serializers.ModelSerializer):
   class Meta:
     model = MaterialLinkModel
-    fields = '__all__'
+    fields = ['name', 'link', 'tags', 'curricular_unit']
     
 class CalendarSerializer(serializers.ModelSerializer):
   class Meta:
@@ -44,7 +44,7 @@ class CalendarSerializer(serializers.ModelSerializer):
 class MentorshipRequestSerializer(serializers.ModelSerializer):
   class Meta:
     model = MentorshipRequestModel
-    fields = '__all__'
+    fields = ['mentee', 'curricular_unit']
     
 class MentorshipSerializer(serializers.ModelSerializer):
   class Meta:
@@ -54,7 +54,7 @@ class MentorshipSerializer(serializers.ModelSerializer):
 class MentorshipReviewSerializer(serializers.ModelSerializer):
   class Meta:
     model = MentorshipReviewModel
-    fields = '__all__'
+    fields = ['mentee', 'mentor', 'curricular_unit', 'rating', 'comment']
     
 class BlogTopicSerializer(serializers.ModelSerializer):
   class Meta:

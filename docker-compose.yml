@@ -1,26 +1,48 @@
 version: '3.7'
 
+networks:
+  nei:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  rabbitmq_data:
+
+
 services:
   postgres:
-    image: postgres:latest
+    image: postgres:16.1
     container_name: postgres
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2"
     environment:
       POSTGRES_DB: $POSTGRES_DB
       POSTGRES_USER: $POSTGRES_USER
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - nei
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     restart: always
 
   redis:
-    image: "redis:latest"
+    image: redis:7.2.3
     container_name: redis
-    ports:
-      - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "1"
     volumes:
-        - redis_data:/data
+      - redis_data:/data
+    networks:
+      - nei
     restart: always
 
   rabbitmq:
@@ -33,8 +55,10 @@ services:
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     ports:
-      - "5672:5672"
       - "15672:15672"
+    restart: always
+    networks:
+      - nei
     restart: always
 
   django:
@@ -42,15 +66,23 @@ services:
       context: ./django
       dockerfile: Dockerfile
     container_name: django
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2"
     environment:
+      DEBUG: "True"
       SECRET_KEY: $SECRET_KEY
       POSTGRES_DB: $POSTGRES_DB
       POSTGRES_USER: $POSTGRES_USER
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     volumes:
       - ./django:/app
+    networks:
+      - nei
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     depends_on:
       - postgres
       - redis
@@ -62,42 +94,38 @@ services:
       context: ./react
       dockerfile: Dockerfile
     container_name: react
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2"
     volumes:
       - ./react:/app
+    networks:
+      - nei
     ports:
-      - "5173:5173"
+      - "127.0.0.1:5173:5173"
     depends_on:
       - django
     restart: always
 
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+  nginx:
+    image: nginx:1.25.3
+    container_name: nginx
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "2"
     volumes:
-      - ./prometheus:/etc/prometheus
-      - prometheus_data:/prometheus
+      - ./nginx/nginx-dev.conf:/etc/nginx/nginx.conf
+    networks:
+      - nei
     ports:
-      - 9090:9090
+      - "127.0.0.1:80:80"
     depends_on:
+      - react
       - django
-    restart: always
-
-
-  grafana:
-    image: grafana/grafana-enterprise:latest
-    container_name: grafana
-    volumes:
-      - ./grafana:/etc/grafana/provisioning/datasources
-      - grafana_data:/var/lib/grafana
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=grafana
-    ports:
-      - '9999:3000'
-    depends_on:
-      - prometheus
     restart: always
 
   discord:
@@ -115,9 +143,4 @@ services:
       - rabbitmq
       - django
     restart: always
-volumes:
-  postgres_data:
-  redis_data:
-  prometheus_data:
-  grafana_data:
-  rabbitmq_data:
+
