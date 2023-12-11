@@ -6,13 +6,15 @@ from django.conf.urls.static import static
 from rest_framework.schemas import get_schema_view
 
 urlpatterns = [
-  path('', include('website.urls')),
   path('hello/', lambda request: HttpResponse('Hello World!')),
-  path('nei/', admin.site.urls),
-  path('openapi/', get_schema_view(
-    title="NEI",
-    description="NEI API",
-    version="1.0.0"
-  ), name='openapi-schema'),
   path('prometheus/', include('django_prometheus.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+  path('api/', include('website.urls')),
+  path('api/nei/', admin.site.urls),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+  urlpatterns.append(path('api/openapi/', get_schema_view(
+      title="NEI",
+      description="NEI API",
+      version="1.0.0"
+    ), name='openapi-schema'))

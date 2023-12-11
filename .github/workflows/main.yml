@@ -25,10 +25,10 @@ jobs:
       - name: Docker Compose Action
         uses: isbang/compose-action@v1.5.1
         with:
-          compose-file: docker-compose.yml
+          compose-file: docker-compose.prod.yml
           
       - name: Run Django Tests
         run: docker-compose exec -T django python manage.py test
         
       - name: Clean up
-        run: docker-compose down
+        run: docker-compose down --remove-orphans --volumes

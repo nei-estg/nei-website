@@ -6,10 +6,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # SECURITY WARNING: only allow requests from the domain in production!
-ALLOWED_HOSTS = ['django', 'localhost']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+if DEBUG:
+  ALLOWED_HOSTS += ['*']
+else:
+  ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOST', '')]
 
 # Application definition
 
@@ -128,11 +133,11 @@ STATICFILES_DIRS = (
 
 STATIC_URL = "/static/"
 
-#STATIC_ROOT = somewhere in the server (production)
+STATIC_ROOT = '/shared/static'
 
 MEDIA_URL = "/media/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #in production, this should be next to static root
+MEDIA_ROOT = '/shared/media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -152,15 +157,21 @@ REST_FRAMEWORK = {
     'user': '1000/hour'
   },
   'DEFAULT_AUTHENTICATION_CLASSES': [
-    'rest_framework.authentication.BasicAuthentication',
-    'rest_framework.authentication.SessionAuthentication',
     'knox.auth.TokenAuthentication'
+  ],
+  'DEFAULT_RENDERER_CLASSES': [
+    'rest_framework.renderers.JSONRenderer',
   ],
   'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
   'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
   'PAGE_SIZE': 10
 }
 
-LOGIN_REDIRECT_URL = '/'
+if DEBUG:
+  REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] += ['rest_framework.renderers.BrowsableAPIRenderer']
+  REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] += ['rest_framework.authentication.BasicAuthentication']
+  REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] += ['rest_framework.authentication.SessionAuthentication']
 
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/api'
+
+LOGOUT_REDIRECT_URL = '/api'
