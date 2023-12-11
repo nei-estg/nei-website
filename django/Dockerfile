@@ -1,4 +1,4 @@
-FROM python:3.13.0a2-slim-bullseye
+FROM python:3.12.1
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 RUN pip install --upgrade pip --no-cache-dir
 WORKDIR /app
