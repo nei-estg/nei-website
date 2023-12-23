@@ -1,8 +1,7 @@
-import NavBar from "@src/components/NavBar";
 
 function FrontPage() {
   return (
-    <NavBar />
+    <div>FrontPage</div>
   )
 }
 
