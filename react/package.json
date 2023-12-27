@@ -15,7 +15,7 @@
     "@mui/icons-material": "^5.14.19",
     "@mui/material": "^5.14.20",
     "@types/react-router-dom": "^5.3.3",
-    "axios": "^1.6.2",
+    "axios": "^1.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1"
