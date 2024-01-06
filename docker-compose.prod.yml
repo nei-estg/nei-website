@@ -1,0 +1,165 @@
+version: '3.7'
+
+networks:
+  nei:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  django_static_data:
+  django_media_data:
+  prometheus_data:
+  grafana_data:
+
+services:
+  postgres:
+    image: postgres:16.1
+    container_name: postgres
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2"
+    environment:
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - nei
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_interval: 15s
+    restart: always
+
+  redis:
+    image: redis:7.2.3
+    container_name: redis
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "1"
+    volumes:
+      - redis_data:/data
+    networks:
+      - nei
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_interval: 15s
+    restart: always
+
+  django:
+    build:
+      context: ./django
+      dockerfile: Dockerfile.prod
+    container_name: django
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2"
+    environment:
+      SECRET_KEY: $SECRET_KEY
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      ALLOWED_HOST: $ALLOWED_HOST
+    volumes:
+      - django_static_data:/shared/static
+      - django_media_data:/shared/media
+    networks:
+      - nei
+    ports:
+      - "127.0.0.1:8000:8000"
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:8000/hello/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_interval: 60s
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: always
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    container_name: nginx
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "2"
+    volumes:
+      - ./nginx/nginx-prod.conf:/etc/nginx/nginx.conf
+      - django_static_data:/shared/static
+      - django_media_data:/shared/media
+    networks:
+      - nei
+    ports:
+      - "0.0.0.0:80:80"
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:80/hello/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_interval: 15s
+    depends_on:
+      django:
+        condition: service_healthy
+    restart: always
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "1"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+    networks:
+      - nei
+    depends_on:
+      django:
+        condition: service_healthy
+    restart: always
+
+  grafana:
+    image: grafana/grafana-enterprise:latest
+    container_name: grafana
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "1"
+    volumes:
+      - ./grafana:/etc/grafana/provisioning/datasources
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=$GRAFANA_USER
+      - GF_SECURITY_ADMIN_PASSWORD=$GRAFANA_PASSWORD
+    networks:
+      - nei
+    ports:
+      - '0.0.0.0:9000:3000'
+    depends_on:
+      - prometheus
+    restart: always

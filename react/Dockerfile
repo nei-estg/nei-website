@@ -1,5 +1,7 @@
-FROM node:latest
+FROM node:21.4-bullseye-slim
 WORKDIR /app
 COPY . /app
+RUN npm install -g npm@latest typescript vite && npm install
 EXPOSE 5173
-CMD ["/bin/bash", "-c", "npm install; npm run dev"]
+CMD npm install; \
+    npm run dev

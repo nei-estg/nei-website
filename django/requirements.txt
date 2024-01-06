@@ -1,11 +1,13 @@
-django
-django-extensions
-psycopg2
-djangorestframework
-django-rest-knox
-django-filter
-pyyaml
-uritemplate
-django-admin-interface
-django-prometheus
-django_redis
+gunicorn
+Django==5.0
+django-extensions==3.2.3
+psycopg2-binary==2.9.9
+djangorestframework==3.14.0
+django-rest-knox==4.2.0
+django-filter==23.5
+PyYAML==6.0.1
+uritemplate==4.1.1
+django-admin-interface==0.27.0
+django-prometheus==2.3.1
+django-redis==5.4.0
+pillow>=10.0.1 # not directly required, pinned by Snyk to avoid a vulnerability
