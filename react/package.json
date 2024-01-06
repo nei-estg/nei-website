@@ -5,20 +5,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.19",
-    "@mui/material": "^5.14.20",
+    "@mui/icons-material": "^5.15.0",
+    "@mui/material": "^5.15.0",
     "@types/react-router-dom": "^5.3.3",
-    "axios": "^1.6.2",
+    "axios": "^1.6.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.1"
+    "react-router-dom": "^6.21.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.3",

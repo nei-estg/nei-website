@@ -8,4 +8,6 @@ RUN pip install -r requirements.txt --no-cache-dir && \
     adduser --disabled-password --gecos '' nei
 USER nei
 EXPOSE 8000
-CMD ["/bin/bash", "-c", "python manage.py makemigrations --noinput; python manage.py migrate --noinput; gunicorn --bind 0.0.0.0:8000 --access-logfile '-' --error-logfile '-' nei.wsgi"]
+CMD python manage.py makemigrations --noinput; \
+    python manage.py migrate --noinput; \
+    gunicorn --bind 0.0.0.0:8000 --access-logfile '-' --error-logfile '-' nei.wsgi
