@@ -18,6 +18,7 @@ router.register(r'mentorshipReview', MentorshipReviewViewSet)
 router.register(r'blogTopic', BlogTopicViewSet)
 router.register(r'blogImage', BlogImageViewSet)
 router.register(r'blogPost', BlogPostViewSet)
+router.register(r'user', UserViewSet)
 
 urlpatterns = [
   path('', include(router.urls)),

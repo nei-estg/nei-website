@@ -5,4 +5,8 @@ WORKDIR /app
 COPY . /app
 RUN pip install -r requirements.txt --no-cache-dir
 EXPOSE 8000
-CMD ["/bin/bash", "/app/entrypoint.sh"]
+CMD find ./website/migrations/ -type f ! -name '__init__.py' -exec rm -f '{}' \; && \
+    pip install -r requirements.txt --no-cache-dir && \
+    python manage.py makemigrations --noinput && \
+    python manage.py migrate && \
+    python manage.py runserver 0.0.0.0:8000

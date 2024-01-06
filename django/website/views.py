@@ -69,7 +69,7 @@ class MaterialViewSet(viewsets.ModelViewSet):
   queryset = MaterialModel.objects.all()
   serializer_class = MaterialSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
-  filterset_fields = MaterialSerializer.Meta.fields
+  filterset_fields = ['name', 'tags', 'curricular_unit']
 
 class MaterialLinkViewSet(viewsets.ModelViewSet):
   """
@@ -96,9 +96,7 @@ class MentorshipRequestViewSet(viewsets.ModelViewSet):
     return super().create(request, *args, **kwargs)
 
   def destroy(self, request, *args, **kwargs):
-    if request.user.is_superuser:
-      return super().destroy(request, *args, **kwargs)
-    elif request.user == self.get_object().mentee:
+    if request.user.is_superuser or request.user == self.get_object().mentee:
       return super().destroy(request, *args, **kwargs)
     return Response({'detail': 'Deletion is not allowed for this resource.'}, status=status.HTTP_403_FORBIDDEN)
 
@@ -146,3 +144,14 @@ class BlogPostViewSet(viewsets.ModelViewSet):
   serializer_class = BlogPostSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
   filterset_fields = BlogPostSerializer.Meta.fields
+
+class UserViewSet(viewsets.ModelViewSet):
+  """
+  API endpoint that allows users to be viewed or edited.
+  """
+  queryset = User.objects.all()
+  serializer_class = UserSerializer
+  permission_classes = [permissions.DjangoModelPermissions]
+  filterset_fields = ['id', 'username', 'first_name', 'last_name', 'email']
+  
+  #TODO: Limit access to this ViewSet

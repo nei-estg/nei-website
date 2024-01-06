@@ -67,7 +67,7 @@
     {
       "label": "Django pip install",
       "type": "shell",
-      "command": "docker-compose exec django /bin/bash -c 'source ./venv/bin/activate && pip install -r requirements.txt'",
+      "command": "docker-compose exec django pip install -r requirements.txt",
       "group": {
         "kind": "build",
         "isDefault": false
