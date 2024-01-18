@@ -10,15 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
+    "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.0",
+    "@mui/icons-material": "^5.15.1",
     "@mui/material": "^5.15.1",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.0"
+    "react-router-dom": "^6.21.1"
   },
   "devDependencies": {
     "@types/node": "^20.10.3",
