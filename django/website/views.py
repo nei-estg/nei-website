@@ -151,7 +151,7 @@ class UserViewSet(viewsets.ModelViewSet):
   """
   queryset = User.objects.all()
   serializer_class = UserSerializer
-  permission_classes = [permissions.DjangoModelPermissions]
+  permission_classes = []
   filterset_fields = ['id', 'username', 'first_name', 'last_name', 'email']
   
   #TODO: Limit access to this ViewSet

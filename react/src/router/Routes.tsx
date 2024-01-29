@@ -1,6 +1,7 @@
 import FrontPage from "@src/pages/FrontPage";
 import LoginPage from "@src/pages/LoginPage";
-import SignUpPage from "@src/pages/SignUpPage";
+import RegisterPage from "@src/pages/RegisterPage";
+import MentoringPage from "@src/pages/MentoringPage";
 
 interface IRoutes {
   [key: string]: {
@@ -14,13 +15,17 @@ const routes: IRoutes = {
     path: '/login',
     element: <LoginPage />,
   },
-  signuppage: {
-    path: '/signup',
-    element: <SignUpPage />,
+  registerpage: {
+    path: '/register',
+    element: <RegisterPage />,
   },
   frontpage: {
     path: '/',
     element: <FrontPage />,
+  },
+  mentoringpage: {
+    path: '/mentoring',
+    element: <MentoringPage />,
   },
 }
 
