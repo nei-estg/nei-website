@@ -17,6 +17,9 @@ jobs:
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      ALLOWED_HOST: ${{ secrets.ALLOWED_HOST }}
+      GRAFANA_USER: ${{ secrets.GRAFANA_USER }}
+      GRAFA_PASSWORD: ${{ secrets.GRAFANA_PASSWORD }}
 
     steps:
       - name: Checkout Repository

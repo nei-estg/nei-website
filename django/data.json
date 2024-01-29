@@ -24,20 +24,128 @@
       "curricularUnits": {
         "1": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Álgebra Linear e Geometria Analítica",
+            "abbreviation": "ALGA"
+          },
+          {
+            "name": "Ética e Legislação Informática",
+            "abbreviation": "ELI"
+          },
+          {
+            "name": "Fundamentos da Programação",
+            "abbreviation": "FP"
+          },
+          {
+            "name": "Inglês Técnico",
+            "abbreviation": "IT"
+          },
+          {
+            "name": "Introdução aos Sistemas Computacionais",
+            "abbreviation": "ISC"
+          },
+          {
+            "name": "Laboratório de Programação",
+            "abbreviation": "LP"
+          },
+          {
+            "name": "Matemática Discreta",
+            "abbreviation": "MD"
+          },
+          {
+            "name": "Paradigmas de Programação",
+            "abbreviation": "PP"
+          },
+          {
+            "name": "Redes de Computadores I",
+            "abbreviation": "RCI"
+          },
+          {
+            "name": "Segurança Informática",
+            "abbreviation": "SI"
+          },
+          {
+            "name": "Sistemas Digitais e Arquitetura de Computadores",
+            "abbreviation": "SDAC"
           }
         ],
         "2": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Análise Forense Digital",
+            "abbreviation": "AFD"
+          },
+          {
+            "name": "Estruturas de Dados",
+            "abbreviation": "ED"
+          },
+          {
+            "name": "Processamento Estruturado de Informação",
+            "abbreviation": "PEI"
+          },
+          {
+            "name": "Redes de Computadores II",
+            "abbreviation": "RCII"
+          },
+          {
+            "name": "Sistemas Operativos",
+            "abbreviation": "SO"
+          },
+          {
+            "name": "Bases de Dados",
+            "abbreviation": "BD"
+          },
+          {
+            "name": "Criptografia Aplicada",
+            "abbreviation": "CA"
+          },
+          {
+            "name": "Programação em Ambiente Web",
+            "abbreviation": "PAW"
+          },
+          {
+            "name": "Projeção e Planeamento de Redes",
+            "abbreviation": "PPR"
+          },
+          {
+            "name": "Segurança de Redes",
+            "abbreviation": "SR"
           }
         ],
         "3": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Administração de Sistemas Informáticos",
+            "abbreviation": "ASI"
+          },
+          {
+            "name": "Sistemas Críticos",
+            "abbreviation": "SC"
+          },
+          {
+            "name": "Sistemas de Gestão de Segurança da Informação",
+            "abbreviation": "SGSI"
+          },
+          {
+            "name": "Sistemas Distribuídos",
+            "abbreviation": "SD"
+          },
+          {
+            "name": "Testes de Penetração e Hacking Ético",
+            "abbreviation": "TPHE"
+          },
+          {
+            "name": "Auditoria Informática",
+            "abbreviation": "AI"
+          },
+          {
+            "name": "Programação Segura",
+            "abbreviation": "PS"
+          },
+          {
+            "name": "Projeto Final",
+            "abbreviation": "PF"
+          },
+          {
+            "name": "Noções de Gestão",
+            "abbreviation": "NG"
           }
         ]
       }
