@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "./components/footer/Footer";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/navbar/NavBar";
 import { ToastContainer } from "react-toastify";
 
 function App() {
