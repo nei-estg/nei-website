@@ -11,7 +11,7 @@ import  GitHubIcon  from '@mui/icons-material/GitHub';
 export const Footer = () => {
   return (
     <div>
-        <Box component="footer" style={{ backgroundColor: '#002855', color: '#FFFFFF' }}
+        <Box component="footer" style={{ backgroundColor: '#002855', color: '#ffffff' }}
       sx={{
         p: 6,
       }}
@@ -19,34 +19,34 @@ export const Footer = () => {
       <Container maxWidth="lg">
         <Grid container spacing={5}>
           <Grid item xs={12} sm={3}>
-            <Typography variant="h6" color="text.primary" gutterBottom >
+            <Typography variant="h6" gutterBottom >
               NEI
             </Typography>
-            <Typography variant="body2" color="text.secondary" >
+            <Typography variant="body2" >
              Núcleo de Engenharia Informática da ESTG
             </Typography>
           </Grid>
           <Grid item xs={12} sm={3}>
-            <Typography variant="h6" color="text.primary" gutterBottom >
+            <Typography variant="h6" gutterBottom >
               Morada
             </Typography>
-            <Typography variant="body2" color="text.secondary" >
+            <Typography variant="body2" >
               Rua do Curral, Casa do Curral, Margaride
             </Typography>
           </Grid>
           <Grid item xs={12} sm={3}>
-            <Typography variant="h6" color="text.primary" gutterBottom >
+            <Typography variant="h6" gutterBottom >
               Contacto
             </Typography>
-            <Typography variant="body2" color="text.secondary" >
+            <Typography variant="body2">
               Email: add email
             </Typography>
-            <Typography variant="body2" color="text.secondary" >
+            <Typography variant="body2">
               Tel: add telemovel
             </Typography>  
           </Grid>
           <Grid item xs={12} sm={3}>
-            <Typography variant="h6" color="text.primary" gutterBottom >
+            <Typography variant="h6" gutterBottom >
               Redes Sociais
             </Typography>
             <Typography variant="body2">
@@ -61,7 +61,7 @@ export const Footer = () => {
           </Grid>
         </Grid>
         <Box mt={5}>
-          <Typography variant="body2" color="text.secondary" align="center" >
+          <Typography variant="body2" align="center" >
             {"Copyright © "}
             <Link color="inherit" href="" >
               NEI.
