@@ -5,6 +5,7 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "./components/footer/Footer";
 import NavBar from "./components/NavBar";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Router />
         </Container>
         <Footer />
+        <ToastContainer />
       </Box>
     </BrowserRouter>
   </>

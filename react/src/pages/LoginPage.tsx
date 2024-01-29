@@ -12,6 +12,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ILogin } from '@src/api/utils/ILogin';
 import { loginUser } from '@src/api/UserRoutes'
+import { toast, Bounce } from 'react-toastify';
 
 const defaultTheme = createTheme();
 
@@ -23,8 +24,19 @@ export default function LoginPage() {
       password: event.currentTarget.password.value,
     };
     const result = await loginUser(signIn);
+    console.log(result);
     if (result != "") {
-      alert(result);
+      toast(result, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       return;
     }
     window.location.href = '/';

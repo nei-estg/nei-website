@@ -1,4 +1,9 @@
-import client from "./Client";
+import axios from "axios";
+import { toast, Bounce } from 'react-toastify';
+
+const client = axios.create({
+  baseURL: "http://localhost:8000",
+});
 
 client.interceptors.request.use(
   (config) => {
@@ -33,6 +38,32 @@ client.interceptors.response.use(
     if (error.response) {
       if (error.response.status === 401) {
         window.location.href = "/login";
+      }
+      if (error.response.status === 403) {
+        toast("You don't have permission to do this!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
+      if (error.response.status === 500) {
+        toast('Server Returned a Bad Error!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
     }
     return error;

@@ -32,6 +32,7 @@ export const loginUser = async (login : ILogin) => {
         }
       }
     }
+    return "Something went wrong";
   }
 };
 
