@@ -2,7 +2,9 @@ import NavBar from "@src/components/NavBar";
 
 function FrontPage() {
   return (
-    <NavBar />
+    <>
+<p>FrontPage</p>
+    </>
   )
 }
 

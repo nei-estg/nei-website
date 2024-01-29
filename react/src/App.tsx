@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "./components/footer/Footer";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           color: "text.primary",
         }}
       >
+        <NavBar/>
         <Container maxWidth={false} disableGutters={true}>
           <Router />
         </Container>
