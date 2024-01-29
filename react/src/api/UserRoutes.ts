@@ -1,12 +1,12 @@
-import axios from 'axios';
+import client from './Client';
+import { AxiosError } from 'axios';
 
-const client = axios.create({
-  baseURL: 'http://localhost',
-});
+import { ILogin } from './utils/ILogin';
+import { IRegister } from './utils/IRegister';
 
-export const loginUser = async (username: string, password: string) => {
+export const loginUser = async (login : ILogin) => {
   try {
-    const base64Credentials = btoa(`${username}:${password}`);
+    const base64Credentials = btoa(`${login.username}:${login.password}`);
     const response = await client.post(
       '/api/auth/login/',
       {},
@@ -16,9 +16,29 @@ export const loginUser = async (username: string, password: string) => {
         },
       }
     );
-    localStorage.setItem('token', response.data.token);
-    localStorage.setItem('expiry', response.data.expiry);
-    return "";
+    if (response.status === 200) {
+      if (response.data.token && response.data.expiry) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('expiry', response.data.expiry);
+        return "";
+      }
+    }
+    return "Invalid credentials";
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      if (error.response) {
+        if (error.response.status === 401) {
+          return "Invalid credentials";
+        }
+      }
+    }
+  }
+};
+
+export const registerUser = async (register : IRegister) => {
+  try {
+    const response = await client.post('/api/user/', register);
+    return response;
   } catch (error) {
     return error;
   }

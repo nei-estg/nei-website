@@ -80,7 +80,7 @@ class MaterialLinkViewSet(viewsets.ModelViewSet):
   permission_classes = [permissions.DjangoObjectPermissions]
   filterset_fields = MaterialLinkSerializer.Meta.fields
 
-class MentorshipRequestViewSet(viewsets.ModelViewSet):
+class MentoringRequestViewSet(viewsets.ModelViewSet):
   """
   API endpoint that allows mentorship requests to be viewed or edited.
   """
@@ -100,23 +100,23 @@ class MentorshipRequestViewSet(viewsets.ModelViewSet):
       return super().destroy(request, *args, **kwargs)
     return Response({'detail': 'Deletion is not allowed for this resource.'}, status=status.HTTP_403_FORBIDDEN)
 
-class MentorshipViewSet(viewsets.ModelViewSet):
+class MentoringViewSet(viewsets.ModelViewSet):
   """
   API endpoint that allows mentorships to be viewed or edited.
   """
   queryset = MentorshipModel.objects.all()
-  serializer_class = MentorshipSerializer
+  serializer_class = MentoringSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
-  filterset_fields = MentorshipSerializer.Meta.fields
+  filterset_fields = MentoringSerializer.Meta.fields
 
-class MentorshipReviewViewSet(viewsets.ModelViewSet):
+class MentoringReviewViewSet(viewsets.ModelViewSet):
   """
   API endpoint that allows mentorship reviews to be viewed or edited.
   """
   queryset = MentorshipReviewModel.objects.all()
-  serializer_class = MentorshipReviewSerializer
+  serializer_class = MentoringReviewSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
-  filterset_fields = MentorshipReviewSerializer.Meta.fields
+  filterset_fields = MentoringReviewSerializer.Meta.fields
 
 class BlogTopicViewSet(viewsets.ModelViewSet):
   """
@@ -151,7 +151,7 @@ class UserViewSet(viewsets.ModelViewSet):
   """
   queryset = User.objects.all()
   serializer_class = UserSerializer
-  permission_classes = [permissions.DjangoModelPermissions]
+  permission_classes = []
   filterset_fields = ['id', 'username', 'first_name', 'last_name', 'email']
   
   #TODO: Limit access to this ViewSet
