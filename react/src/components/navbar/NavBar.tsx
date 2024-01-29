@@ -59,11 +59,11 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#333' /* Set your desired dark color here */ }}>
+    <AppBar position="static" sx={{ backgroundColor: '#002454'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Avatar alt="NEI" src="https://media.discordapp.net/attachments/697858645559476265/1184562524327268404/363778414_302322208867958_74034641211861317_n-removebg-preview.png?ex=6595a751&is=65833251&hm=405333d88b44c5ecd55b3084cb3edf95ec951abff352efeca4a7ae476a1f91f4&=&format=webp&quality=lossless"
-            component="a" href="" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }} />
+            component="a" href="" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }} />
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton size="large" aria-label="nei menu" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
@@ -89,7 +89,6 @@ function NavBar() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -108,12 +107,12 @@ function NavBar() {
             {isLogged ?
               <Tooltip title="Abrir Definições">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar sx={{ backgroundColor: "#002454" }}><PersonIcon /></Avatar>
+                  <Avatar sx={{ backgroundColor: "#054496" }}><PersonIcon /></Avatar>
                 </IconButton>
               </Tooltip>
               : <Tooltip title="Iniciar Sessão">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar sx={{ backgroundColor: "#002454" }}><PersonIcon /></Avatar>
+                  <Avatar sx={{ backgroundColor: "#054496" }}><PersonIcon /></Avatar>
                 </IconButton>
               </Tooltip>
             }
