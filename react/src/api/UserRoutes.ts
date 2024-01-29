@@ -1,11 +1,8 @@
-import axios, { AxiosError } from 'axios';
+import client from './Client';
+import { AxiosError } from 'axios';
 
 import { ILogin } from './utils/ILogin';
 import { IRegister } from './utils/IRegister';
-
-const client = axios.create({
-  baseURL: 'http://localhost',
-});
 
 export const loginUser = async (login : ILogin) => {
   try {
@@ -27,7 +24,7 @@ export const loginUser = async (login : ILogin) => {
       }
     }
     return "Invalid credentials";
-  } catch (error: unknown) {
+  } catch (error) {
     if (error instanceof AxiosError) {
       if (error.response) {
         if (error.response.status === 401) {

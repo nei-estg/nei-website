@@ -1,11 +1,8 @@
-import NavBar from "@src/components/NavBar";
 
-function FrontPage() {
+export default function FrontPage() {
   return (
     <>
-<p>FrontPage</p>
+      <p>FrontPage</p>
     </>
   )
 }
-
-export default FrontPage

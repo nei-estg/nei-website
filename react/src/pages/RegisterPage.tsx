@@ -15,7 +15,7 @@ import { registerUser } from "@src/api/UserRoutes";
 
 const defaultTheme = createTheme();
 
-export default function SignUp() {
+export default function Register() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const signUp: IRegister = {

@@ -49,12 +49,12 @@ class MentorshipRequestSerializer(serializers.ModelSerializer):
     model = MentorshipRequestModel
     fields = ['mentee', 'curricular_unit']
 
-class MentorshipSerializer(serializers.ModelSerializer):
+class MentoringSerializer(serializers.ModelSerializer):
   class Meta:
     model = MentorshipModel
     fields = '__all__'
 
-class MentorshipReviewSerializer(serializers.ModelSerializer):
+class MentoringReviewSerializer(serializers.ModelSerializer):
   class Meta:
     model = MentorshipReviewModel
     fields = ['mentee', 'mentor', 'curricular_unit', 'rating', 'comment']
