@@ -4,9 +4,9 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "./components/footer/Footer";
-import NavBar from "./components/NavBar";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import "./App.css";
+import NavBar from "./components/navbar/NavBar";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
  
@@ -18,25 +18,25 @@ const theme = createTheme({
 });
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <Box
-          sx={{
-            fontFamily: "'Cabin', sans-serif",
-            minHeight: "100vh",
-            bgcolor: "background.default",
-            color: "text.primary",
-          }}
-        >
-          <NavBar />
-          <Container maxWidth={false} disableGutters={true}>
-            <Router />
-          </Container>
-          <Footer />
-        </Box>
-      </BrowserRouter>
-    </ThemeProvider>
+  <>
+    <CssBaseline />
+    <BrowserRouter>
+      <Box
+        sx={{
+          minHeight: "100vh",
+          bgcolor: "background.default",
+          color: "text.primary",
+        }}
+      >
+        <NavBar/>
+        <Container maxWidth={false} disableGutters={true}>
+          <Router />
+        </Container>
+        <Footer />
+        <ToastContainer />
+      </Box>
+    </BrowserRouter>
+  </>
   );
 }
 

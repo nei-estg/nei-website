@@ -10,36 +10,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { ILogin } from '@src/api/utils/ILogin';
-import { loginUser } from '@src/api/UserRoutes'
-import { toast, Bounce } from 'react-toastify';
 
 const defaultTheme = createTheme();
 
-export default function LoginPage() {
+export default function ResetPasswordPage() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const signIn: ILogin = {
-      username: event.currentTarget.username.value,
-      password: event.currentTarget.password.value,
-    };
-    const result = await loginUser(signIn);
-    console.log(result);
-    if (result != "") {
-      toast(result, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      return;
-    }
-    window.location.href = '/';
+    
   };
 
   return (
@@ -58,7 +35,7 @@ export default function LoginPage() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Reset Password
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -75,11 +52,19 @@ export default function LoginPage() {
               margin="normal"
               required
               fullWidth
+              name="resetCode"
+              label="Reset Code"
+              id="resetCode"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
               name="password"
-              label="Password"
+              label="New Password"
               type="password"
               id="password"
-              autoComplete="current-password"
+              autoComplete='new-password'
             />
             <Button
               type="submit"
@@ -87,17 +72,12 @@ export default function LoginPage() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Reset
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="/reset-password" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
-                <Link href="/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/login" variant="body2">
+                  {"Want to go back? Login"}
                 </Link>
               </Grid>
             </Grid>
