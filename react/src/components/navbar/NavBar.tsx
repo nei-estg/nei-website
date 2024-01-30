@@ -49,6 +49,7 @@ function NavBar() {
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -65,9 +66,8 @@ function NavBar() {
     <AppBar position="static" sx={{ backgroundColor: '#002454'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* screen <= 899 x 877 */}
-          <Avatar alt="NEI" src="https://media.discordapp.net/attachments/697858645559476265/1184562524327268404/363778414_302322208867958_74034641211861317_n-removebg-preview.png?ex=6595a751&is=65833251&hm=405333d88b44c5ecd55b3084cb3edf95ec951abff352efeca4a7ae476a1f91f4&=&format=webp&quality=lossless"
-            component="a" href="" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }} />
+          {/* screen > 899 x 877 */}
+          <Avatar alt="NEI" src="/public/logo.png" component="a" href="/" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }} />
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton size="large" aria-label="nei menu" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
@@ -81,9 +81,8 @@ function NavBar() {
             </Menu>
           </Box>
 
-          {/* screen > 899 x 877 */}
-          <Avatar alt="NEI" src="https://media.discordapp.net/attachments/697858645559476265/1184562524327268404/363778414_302322208867958_74034641211861317_n-removebg-preview.png?ex=6595a751&is=65833251&hm=405333d88b44c5ecd55b3084cb3edf95ec951abff352efeca4a7ae476a1f91f4&=&format=webp&quality=lossless"
-            sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* screen <= 899 x 877 */}
+          <Avatar alt="NEI" src="/public/logo.png" sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} component="a" href="/"/>
 
           <Typography
             variant="h5"
