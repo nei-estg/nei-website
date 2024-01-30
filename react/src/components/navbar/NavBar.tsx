@@ -18,11 +18,11 @@ import { useNavigate } from 'react-router-dom';
 
 const navbar = {
   pages: [
-    { name: 'Blog', URL: '/blog' },
-    { name: 'Calendário', URL: '/calendar' },
-    { name: 'Mentoria', URL: '/mentoring' },
-    { name: 'Materiais', URL: '/materials' },
-    { name: 'Sobre Nós', URL: '/about' },
+    { name: 'Sobre Nós', URL: '/about', requiredLogin: false },
+    { name: 'Blog', URL: '/blog', requiredLogin: false },
+    { name: 'Calendário', URL: '/calendar', requiredLogin: false },
+    { name: 'Mentoria', URL: '/mentoring', requiredLogin: true },
+    { name: 'Materiais', URL: '/materials', requiredLogin: false },
   ],
 };
 
@@ -76,7 +76,11 @@ function NavBar() {
             <Menu id="menu-appbar" anchorEl={anchorElNav} anchorOrigin={{ vertical: 'bottom', horizontal: 'left', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'left', }}
               open={Boolean(anchorElNav)} onClose={handleCloseNavMenu} sx={{ display: { xs: 'block', md: 'none' }, }}>
               {navbar.pages.map((page) => (
-                <MenuItem key={page.name} onClick={() =>  { handleCloseNavMenu(); navigate(page.URL);}}>{page.name}</MenuItem>
+                <MenuItem key={page.name}
+                  onClick={() => { handleCloseNavMenu(); navigate(page.URL); }}
+                  disabled={!isLogged && page.requiredLogin}>
+                  <Button onClick={() => navigate(page.URL)} sx={{ color: 'inherit', textTransform: 'none' }}>{page.name}</Button>
+                </MenuItem>
               ))}
             </Menu>
           </Box>
@@ -102,7 +106,15 @@ function NavBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {navbar.pages.map((page) => (
-              <Button key={page.name} onClick={() =>  { handleCloseNavMenu(); navigate(page.URL);}} sx={{ my: 2, color: 'white', display: 'block' }}>{page.name}</Button>
+              <Button key={page.name} 
+                onClick={() => { handleCloseNavMenu(); navigate(page.URL);}} 
+                style={{
+                  my: 2,
+                  color: !isLogged && page.requiredLogin ? '#969696' : 'white',
+                  display: 'block',
+                }}
+                disabled={!isLogged && page.requiredLogin}
+                >{page.name}</Button>
             ))}
           </Box>
 
