@@ -1,4 +1,5 @@
 import client from './Client';
+import AuthenticatedClient from './AuthenticatedClient';
 import { AxiosError } from 'axios';
 
 import { ILogin } from './utils/ILogin';
@@ -43,4 +44,18 @@ export const registerUser = async (register : IRegister) => {
   } catch (error) {
     return error;
   }
+};
+
+export const logoutUser = async (allDevices: boolean) => {
+  try {
+    if (allDevices) {
+      await AuthenticatedClient.post('/api/auth/logoutall/');
+    } else {
+      await AuthenticatedClient.post('/api/auth/logout/');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  localStorage.removeItem('token');
+  localStorage.removeItem('expiry');
 };
