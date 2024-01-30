@@ -13,32 +13,35 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import PersonIcon from '@mui/icons-material/Person';
 import Link from '@mui/material/Link';
+import { useNavigate } from 'react-router-dom';
 
 
 const navbar = {
   pages: [
     { name: 'Blog', URL: '/blog' },
-    { name: 'Calendário', URL: '' },
-    { name: 'Mentoria', URL: '' },
-    { name: 'Materiais', URL: '' },
-    { name: 'Sobre Nós', URL: '' },
+    { name: 'Calendário', URL: '/calendar' },
+    { name: 'Mentoria', URL: '/mentoring' },
+    { name: 'Materiais', URL: '/materials' },
+    { name: 'Sobre Nós', URL: '/about' },
   ],
 };
 
 const settings =
 {
   guest: [
-    { name: "Iniciar Sessão", URL: "" },
-    { name: "Criar Conta", URL: "" },
+    { name: "Iniciar Sessão", URL: "/login" },
+    { name: "Criar Conta", URL: "/register" },
   ],
   logged: [
-    { name: 'Perfil', URL: "" },
-    { name: "Definições", URL: "" },
-    { name: "Terminar Sessão", URL: "" },
+    { name: 'Perfil', URL: "/profile" },
+    //{ name: "Definições", URL: "" },
+    { name: "Terminar Sessão", URL: "/logout" },
   ],
 };
 
 function NavBar() {
+  const navigate = useNavigate();
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const [isLogged, setIsLogged] = React.useState(false);
@@ -62,6 +65,7 @@ function NavBar() {
     <AppBar position="static" sx={{ backgroundColor: '#002454'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* screen <= 899 x 877 */}
           <Avatar alt="NEI" src="https://media.discordapp.net/attachments/697858645559476265/1184562524327268404/363778414_302322208867958_74034641211861317_n-removebg-preview.png?ex=6595a751&is=65833251&hm=405333d88b44c5ecd55b3084cb3edf95ec951abff352efeca4a7ae476a1f91f4&=&format=webp&quality=lossless"
             component="a" href="" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }} />
 
@@ -72,12 +76,12 @@ function NavBar() {
             <Menu id="menu-appbar" anchorEl={anchorElNav} anchorOrigin={{ vertical: 'bottom', horizontal: 'left', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'left', }}
               open={Boolean(anchorElNav)} onClose={handleCloseNavMenu} sx={{ display: { xs: 'block', md: 'none' }, }}>
               {navbar.pages.map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" component="a" href={page.URL} style={{ textDecoration: 'none', color: 'inherit' }}>{page.name}</Typography>
-                </MenuItem>
+                <MenuItem key={page.name} onClick={() =>  { handleCloseNavMenu(); navigate(page.URL);}}>{page.name}</MenuItem>
               ))}
             </Menu>
           </Box>
+
+          {/* screen > 899 x 877 */}
           <Avatar alt="NEI" src="https://media.discordapp.net/attachments/697858645559476265/1184562524327268404/363778414_302322208867958_74034641211861317_n-removebg-preview.png?ex=6595a751&is=65833251&hm=405333d88b44c5ecd55b3084cb3edf95ec951abff352efeca4a7ae476a1f91f4&=&format=webp&quality=lossless"
             sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
 
@@ -99,7 +103,7 @@ function NavBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {navbar.pages.map((page) => (
-              <Button key={page.name} onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>{page.name}</Button>
+              <Button key={page.name} onClick={() =>  { handleCloseNavMenu(); navigate(page.URL);}} sx={{ my: 2, color: 'white', display: 'block' }}>{page.name}</Button>
             ))}
           </Box>
 
@@ -117,6 +121,7 @@ function NavBar() {
               </Tooltip>
             }
 
+            {/* icon user */}
             <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right', }} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>
               {isLogged
                 ? settings.logged.map((setting) => (
