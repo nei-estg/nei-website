@@ -4,6 +4,7 @@ import RegisterPage from "@src/pages/RegisterPage";
 import ProfilePage from "@src/pages/ProfilePage";
 import MentoringPage from "@src/pages/MentoringPage";
 import CalendarPage from "@src/pages/CalendarPage";
+import AboutFAQPage from "@src/pages/AboutFAQ";
 
 interface IRoutes {
   [key: string]: {
@@ -36,6 +37,10 @@ const routes: IRoutes = {
   calendarpage: {
     path: '/calendar',
     element: <CalendarPage />,
+  },
+  aboutFAQpage: {
+    path: '/about',
+    element: <AboutFAQPage />,
   },
 }
 
