@@ -156,20 +156,124 @@
       "curricularUnits": {
         "1": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Álgebra Linear e Geometria Analítica",
+            "abbreviation": "ALGA"
+          },
+          {
+            "name": "Física Aplicada",
+            "abbreviation": "FA"
+          },
+          {
+            "name": "Fundamentos de Programação",
+            "abbreviation": "FP"
+          },
+          {
+            "name": "Introdução aos Sistemas Computacionais",
+            "abbreviation": "ISC"
+          },
+          {
+            "name": "Laboratório de Programação",
+            "abbreviation": "LP"
+          },
+          {
+            "name": "Engenharia de Software I",
+            "abbreviation": "ES1"
+          },
+          {
+            "name": "Matemática Computacional I",
+            "abbreviation": "MC1"
+          },
+          {
+            "name": "Matemática Discreta",
+            "abbreviation": "MD"
+          },
+          {
+            "name": "Paradigmas de Programação",
+            "abbreviation": "PP"
+          },
+          {
+            "name": "Sistemas Digitais e Arquitetura de Computadores",
+            "abbreviation": "SDAC"
           }
         ],
         "2": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Engenharia de Software II",
+            "abbreviation": "ES2"
+          },
+          {
+            "name": "Estruturas de Dados",
+            "abbreviation": "ED"
+          },
+          {
+            "name": "Matemática Computacional II",
+            "abbreviation": "MC2"
+          },
+          {
+            "name": "Processamento Estruturado de Informação",
+            "abbreviation": "PEI"
+          },
+          {
+            "name": "Sistemas Operativos",
+            "abbreviation": "SO"
+          },
+          {
+            "name": "Análise Algorítmica e Otimização",
+            "abbreviation": "AAO"
+          },
+          {
+            "name": "Bases de Dados",
+            "abbreviation": "BD"
+          },
+          {
+            "name": "Gestão de Projetos Informáticos",
+            "abbreviation": "GPI"
+          },
+          {
+            "name": "Programação em Ambiente Web",
+            "abbreviation": "PAW"
+          },
+          {
+            "name": "Redes de Computadores",
+            "abbreviation": "RC"
           }
         ],
         "3": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Administração de Sistemas Informáticos",
+            "abbreviation": "ASI"
+          },
+          {
+            "name": "Computação Móvel e Ubíqua",
+            "abbreviation": "CMU"
+          },
+          {
+            "name": "Laboratório de Desenvolvimento de Software",
+            "abbreviation": "LDS"
+          },
+          {
+            "name": "Sistemas Distribuídos",
+            "abbreviation": "SD"
+          },
+          {
+            "name": "Sistemas de Informação",
+            "abbreviation": "SI"
+          },
+          {
+            "name": "Inteligência Artificial",
+            "abbreviation": "IA"
+          },
+          {
+            "name": "Projeto Final",
+            "abbreviation": "PF"
+          },
+          {
+            "name": "Sistemas de Informação Organizacionais",
+            "abbreviation": "SIO"
+          },
+          {
+            "name": "Noções de Gestão",
+            "abbreviation": "NG"
           }
         ]
       }
