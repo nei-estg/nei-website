@@ -1,5 +1,5 @@
 import { GitHub, LinkedIn } from "@mui/icons-material";
-import { Avatar, Grid, Paper, Tab, Tabs, Typography, styled } from "@mui/material";
+import { Avatar, Box, Grid, Paper, Tab, Tabs, Typography, styled } from "@mui/material";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AccordionUsage from "@src/components/aboutFAQ/Accordion";
@@ -23,6 +23,12 @@ interface DirecaoItem {
 
 const direcao: DirecaoItem[] = 
 [
+  /* {
+    year: "2024/2025",
+    team: [
+      { photo: "logo.png", role: "Presidente", fullname: "Hélder Branco", github: "", linkedin: "" },
+    ],
+  }, */
   {
     year: "2023/2024",
     team: [
@@ -129,18 +135,19 @@ export default function AboutFAQPage() {
           }} 
         >Direção</Typography>
 
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="scrollable"
-        scrollButtons="auto"
-        aria-label="scrollable auto tabs example"
-        sx={{marginBottom: '20px'}}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example">
           
-        {direcao.map((member, index) => (
-          <Tab label={member.year} key={index} />
-        ))}
-      </Tabs>
+          {direcao.map((member, index) => (
+            <Tab label={member.year} key={index} />
+          ))}
+        </Tabs>
+      </Box>
 
       
       {/* Conteudo de cada tab (cada ano) */}
@@ -149,8 +156,8 @@ export default function AboutFAQPage() {
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           
           {member.team.map((teamMember, teamIndex) => (
-            <Grid item xs={3} sm={2} md={2} key={teamIndex} display="flex" alignItems="center">
-              <Grid container direction="column" display="flex" alignItems="center" spacing={1} sx={{marginBottom: '5px'}}>
+            <Grid item xs={4} sm={2} md={2} key={teamIndex} display="flex" alignItems="center">
+              <Grid container direction="column" display="flex" alignItems="center" sx={{marginBottom: '5px'}}>
                 <Item>
                   <Avatar src={teamMember.photo} sx={{ width: '128px', height: '128px', marginBottom: '10px' }} variant="rounded"/>
                   
