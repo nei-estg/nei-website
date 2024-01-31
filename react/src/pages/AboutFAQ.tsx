@@ -114,7 +114,7 @@ export default function AboutFAQPage() {
       <Container maxWidth="xl" sx={{marginBottom: '60px'}}>
       
       {/*About Us*/}
-      <Typography variant="h3"
+      <Typography variant="h4"
         sx={{ 
           color: '#1E2022', 
           display: 'flex', 
@@ -201,7 +201,7 @@ export default function AboutFAQPage() {
 
 
       {/*F.A.Q.*/}
-      <Typography variant="h3"
+      <Typography variant="h4"
         sx={{ 
           color: '#1E2022', 
           display: 'flex', 
