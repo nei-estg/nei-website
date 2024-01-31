@@ -6,14 +6,106 @@
       "curricularUnits": {
         "1": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "MÉTODOS E TÉCNICAS DE SUPORTE AO DESENVOLVIMENTO DE SOFTWARE",
+            "abbreviation": "MTSDS"
+          },
+          {
+            "name": "TÓPICOS AVANÇADOS DE ARMAZENAMENTO DE DADOS",
+            "abbreviation": "TAAD"
+          },
+          {
+            "name": "COMPUTAÇÃO DISTRIBUÍDA E EM NÚVEM",
+            "abbreviation": "CDN"
+          },
+          {
+            "name": "NOÇÕES FUNDAMENTAIS DE MACHINE LEARNING",
+            "abbreviation": "NFML"
+          },
+          {
+            "name": "REALIDADE VIRTUAL AUMENTADA",
+            "abbreviation": "RVA"
+          },
+          {
+            "name": "DADOS E PRIVACIDADE",
+            "abbreviation": "DP"
+          },
+          {
+            "name": "DESIGN DE INTERAÇÃO",
+            "abbreviation": "DI"
+          },
+          {
+            "name": "MACHINE LEARNING",
+            "abbreviation": "ML"
+          },
+          {
+            "name": "PROJETO DE SISTEMAS DE INFORMAÇÃO",
+            "abbreviation": "PSI"
+          },
+          {
+            "name": "SIMULAÇÃO E OTIMIZAÇÃO",
+            "abbreviation": "SO"
+          },
+          {
+            "name": "TECNOLOGIAS ESCALÁVEIS PARA ANÁLISE DE DADOS",
+            "abbreviation": "TEAD"
+          },
+          {
+            "name": "CIBERINTELIGÊNCIA",
+            "abbreviation": "CI"
+          },
+          {
+            "name": "INFORMÁTICA FORENSE E CIBERCRIME",
+            "abbreviation": "IFC"
+          },
+          {
+            "name": "PARADIGMAS EMERGENTES PARA O DESENVOLVIMENTO WEB E MOBILE",
+            "abbreviation": "PEDWM"
+          },
+          {
+            "name": "GESTÃO DA IDENTIDADE",
+            "abbreviation": "GI"
+          },
+          {
+            "name": "INDÚSTRIA",
+            "abbreviation": "I"
           }
         ],
         "2": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "SEMINÁRIO DE PROJETO",
+            "abbreviation": "SP"
+          },
+          {
+            "name": "COMPORTAMENTO ORGANIZACIONAL",
+            "abbreviation": "CO"
+          },
+          {
+            "name": "GESTÃO DA CADEIA DE ABASTECIMENTO INTERNACIONAL",
+            "abbreviation": "GCAI"
+          },
+          {
+            "name": "GESTÃO DA IDI",
+            "abbreviation": "GIDI"
+          },
+          {
+            "name": "LIDERANÇA E GESTÃO DE EQUIPAS",
+            "abbreviation": "LGE"
+          },
+          {
+            "name": "NOÇÕES FUNDAMENTAIS DE DIREITO",
+            "abbreviation": "NFD"
+          },
+          {
+            "name": "ORGANIZAÇÃO E GESTÃO DE EMPRESAS",
+            "abbreviation": "OGE"
+          },
+          {
+            "name": "RECURSOS HUMANOS",
+            "abbreviation": "RH"
+          },
+          {
+            "name": "ESTUDOS PREPARATÓRIOS E ELABORAÇÃO DA DISSERTAÇÃO/PROJETO/ESTÁGIO",
+            "abbreviation": "EPEDPE"
           }
         ]
       }
