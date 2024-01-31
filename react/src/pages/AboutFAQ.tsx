@@ -160,8 +160,8 @@ export default function AboutFAQPage() {
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           
           {member.team.map((teamMember, teamIndex) => (
-            <Grid item xs={3} sm={2} md={2} key={teamIndex} display="flex" alignItems="center">
-              <Grid container direction="column" display="flex" alignItems="center" spacing={1} sx={{marginBottom: '5px'}}>
+            <Grid item xs={4} sm={2} md={2} key={teamIndex} display="flex" alignItems="center">
+              <Grid container direction="column" display="flex" alignItems="center" sx={{marginBottom: '5px'}}>
                 <Item>
                   <Avatar src={teamMember.photo} sx={{ width: '128px', height: '128px', marginBottom: '10px' }} variant="rounded"/>
                   
