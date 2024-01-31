@@ -1,25 +1,15 @@
 import axios from "axios";
+import isLoggedIn from "./utils/LoginStatus";
 import { toast, Bounce } from 'react-toastify';
 
 const client = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "/",
 });
 
 client.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
-    const expiry = localStorage.getItem("expiry"); // 2024-01-30T01:14:30.725785Z
-    if (expiry) {
-      const now = new Date();
-      const expiryDate = new Date(expiry);
-      if (now >= expiryDate) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("expiry");
-        window.location.href = "/login";
-      }
-    }
-    if (token) {
-      config.headers.Authorization = `Token ${token}`;
+    if (isLoggedIn()) {
+      config.headers.Authorization = `Token ${localStorage.getItem("token")}`;
     } else {
       window.location.href = "/login";
     }
