@@ -26,23 +26,17 @@ const direcao: DirecaoItem[] =
   {
     year: "2023/2024",
     team: [
-      { photo: "logo.png", role: "Presidente", fullname: "Hélder Branco", github: "", linkedin: "https://www.linkedin.com/in/h%C3%A9lder-branco/" },
-      { photo: "logo.png", role: "Vice-Presidente", fullname: "Daniel Teixeira", github: "https://github.com/8200378", linkedin: "https://www.linkedin.com/in/daniel-fr-teixeira/" },
-      { photo: "logo.png", role: "Vice-Presidente", fullname: "Emanuel Rego", github: "https://github.com/RegoJunior09", linkedin: "https://www.google.com/" },
-      { photo: "logo.png", role: "Tesoureiro", fullname: "João Oliveira", github: "https://github.com/joaopsoliveira2003", linkedin: "https://www.linkedin.com/in/joaopsoliveira2003/" },
-      { photo: "logo.png", role: "Secretário", fullname: "Hélder Carneiro", github: "https://github.com/zyeinn", linkedin: "https://www.linkedin.com/in/heldercarneir0/" },
-      { photo: "logo.png", role: "Vogal", fullname: "Mariana Martins", github: "", linkedin: "https://www.linkedin.com/in/mariana-silva-a757a3221/" },
-      { photo: "logo.png", role: "Vogal", fullname: "Orlando Pires", github: "https://github.com/duarte-pires", linkedin: "https://www.linkedin.com/in/duartespires/" },
-      { photo: "logo.png", role: "Vogal", fullname: "Eduardo Dias", github: "", linkedin: "https://www.linkedin.com/in/eduardo-dias-287b1a260/" },
-      { photo: "logo.png", role: "Vogal", fullname: "Guilherme Castro", github: "", linkedin: "https://www.linkedin.com/in/guilherme-castro-957002273/" },
-    ],
-  },
-  {
-    year: "2024/2025",
-    team: [
-      { photo: "logo.png", role: "Presidente", fullname: "Hélder Branco", github: "https://www.google.com/", linkedin: "https://www.google.com/" },
-    ],
-  },
+      { photo: "2023-24/helder-branco.png", role: "Presidente", fullname: "Hélder Branco", github: "", linkedin: "https://www.linkedin.com/in/h%C3%A9lder-branco/" },
+      { photo: "2023-24/daniel-teixeira.png", role: "Vice-Presidente", fullname: "Daniel Teixeira", github: "https://github.com/8200378", linkedin: "https://www.linkedin.com/in/daniel-fr-teixeira/" },
+      { photo: "2023-24/emanuel-rego.png", role: "Vice-Presidente", fullname: "Emanuel Rego", github: "https://github.com/RegoJunior09", linkedin: "https://www.google.com/" },
+      { photo: "2023-24/joao-oliveira.png", role: "Tesoureiro", fullname: "João Oliveira", github: "https://github.com/joaopsoliveira2003", linkedin: "https://www.linkedin.com/in/joaopsoliveira2003/" },
+      { photo: "2023-24/helder-carneiro.png", role: "Secretário", fullname: "Hélder Carneiro", github: "https://github.com/zyeinn", linkedin: "https://www.linkedin.com/in/heldercarneir0/" },
+      { photo: "2023-24/mariana-martins.png", role: "Vogal", fullname: "Mariana Martins", github: "", linkedin: "https://www.linkedin.com/in/mariana-silva-a757a3221/" },
+      { photo: "2023-24/orlando-pires.png", role: "Vogal", fullname: "Orlando Pires", github: "https://github.com/duarte-pires", linkedin: "https://www.linkedin.com/in/duartespires/" },
+      { photo: "2023-24/eduardo-dias.png", role: "Vogal", fullname: "Eduardo Dias", github: "", linkedin: "https://www.linkedin.com/in/eduardo-dias-287b1a260/" },
+      { photo: "2023-24/guilherme-castro.png", role: "Vogal", fullname: "Guilherme Castro", github: "", linkedin: "https://www.linkedin.com/in/guilherme-castro-957002273/" },
+    ]
+  }
 ];
 
 
@@ -54,16 +48,12 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-
-
-interface QaItem
-{
+interface QaItem {
   question: string;
   answer: string;
 }
 
-interface FaqSection
- {
+interface FaqSection {
   section: string;
   qa: QaItem[];
 }
