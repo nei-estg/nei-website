@@ -376,21 +376,133 @@
       "curricularUnits": {
         "1": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Análise de Sistemas de Informação",
+            "abbreviation": "ASI"
+          },
+          {
+            "name": "Gestão e Contabilidade Empresarial",
+            "abbreviation": "GCE"
+          },
+          {
+            "name": "Inglês Técnico",
+            "abbreviation": "IT"
+          },
+          {
+            "name": "Introdução à Programação",
+            "abbreviation": "IP"
+          },
+          {
+            "name": "Noções de Gestão e de Sistemas de Informação",
+            "abbreviation": "NGSI"
+          },
+          {
+            "name": "Sociologia do Trabalho e dos Processos de Gestão",
+            "abbreviation": "STPG"
+          },
+          {
+            "name": "Direito para os Negócios",
+            "abbreviation": "DN"
+          },
+          {
+            "name": "Gestão das Operações",
+            "abbreviation": "GO"
+          },
+          {
+            "name": "Matemática Computacional",
+            "abbreviation": "MC"
+          },
+          {
+            "name": "Noções de Redes e Comunicação de Dados",
+            "abbreviation": "NRCD"
+          },
+          {
+            "name": "Programação Orientada a Objetos",
+            "abbreviation": "POO"
+          },
+          {
+            "name": "Sistemas de Gestão de Bases de Dados I",
+            "abbreviation": "SGBD1"
           }
         ],
         "2": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Estruturação e Organização da Informação",
+            "abbreviation": "EOI"
+          },
+          {
+            "name": "Gestão de Processos de Negócio",
+            "abbreviation": "GPN"
+          },
+          {
+            "name": "Investigação Operacional",
+            "abbreviation": "IO"
+          },
+          {
+            "name": "Logística",
+            "abbreviation": "L"
+          },
+          {
+            "name": "Qualidade de Softwareca",
+            "abbreviation": "QS"
+          },
+          {
+            "name": "Sistemas de Gestão de Bases de Dados II",
+            "abbreviation": "SGBD2"
+          },
+          {
+            "name": "Gestão de Projetos de Sistemas de Informação",
+            "abbreviation": "GPSI"
+          },
+          {
+            "name": "Interação Homem-Computador",
+            "abbreviation": "IHC"
+          },
+          {
+            "name": "Marketing Empresarial",
+            "abbreviation": "ME"
+          },
+          {
+            "name": "Projeto de Desenvolvimento de Software",
+            "abbreviation": "PDS"
+          },
+          {
+            "name": "Projeto Integrado",
+            "abbreviation": "PI"
+          },
+          {
+            "name": "Técnicas de Extração de Informação",
+            "abbreviation": "TEI"
           }
         ],
         "3": [
           {
-            "name": "",
-            "abbreviation": ""
-          }
+            "name": "Arquitetura de Sistemas de Informação",
+            "abbreviation": "ASI"
+          },
+          {
+            "name": "Desenvolvimento de Competências Pessoais e Organizacionais",
+            "abbreviation": "DCPO"
+          },
+          {
+            "name": "Gestão e Técnicas Comerciais",
+            "abbreviation": "GTC"
+          },
+          {
+            "name": "Inovação e Estratégia Empresarial",
+            "abbreviation": "IEE"
+          },
+          {
+            "name": "Métodos e Técnicas de Análise de Dados",
+            "abbreviation": "MTAD"
+          },
+          {
+            "name": "Sistemas de Informação para Gestão Empresarial",
+            "abbreviation": "SIGE"
+          },
+          {
+            "name": "Estágio/Projeto",
+            "abbreviation": "EP"
+          },
         ]
       }
     },
