@@ -237,8 +237,18 @@
   ],
   "FAQs": [
     {
-      "question": "",
-      "answer": ""
+      "Section 1": [
+        {
+          "question": "",
+          "answer": ""
+        }
+      ],
+      "Section 2": [
+        {
+          "question": "",
+          "answer": ""
+        }
+      ]
     }
   ],
   "MaterialTags": [
@@ -252,6 +262,11 @@
     "Apontamentos"
   ],
   "BlogTopics": [
-    "Geral"
+    "Geral",
+    "Notícias",
+    "Eventos",
+    "Dicas",
+    "Tutoriais",
+    "Palestras"
   ]
 }
