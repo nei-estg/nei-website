@@ -1,12 +1,20 @@
-import React from "react";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
-import { Box, Container, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import Button from "@mui/material/Button";
+import routes from "@src/router/Routes";
+import {
+  Box,
+  Container,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import logo from "../../assets/logo.png";
 
 export const Footer = () => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <div>
@@ -20,7 +28,12 @@ export const Footer = () => {
         <Container maxWidth="lg">
           <Grid container spacing={5}>
             <Grid item xs={12} sm={5}>
-              <Grid container direction="row" alignItems="center" justifyContent={isSmallScreen ? 'center' : 'flex-start'}>
+              <Grid
+                container
+                direction="row"
+                alignItems="center"
+                justifyContent={isSmallScreen ? "center" : "flex-start"}
+              >
                 <img
                   src={logo}
                   alt="logo"
@@ -31,7 +44,14 @@ export const Footer = () => {
                   }}
                 />
                 <div>
-                  <Typography variant="body2">NEI</Typography>
+                  <Typography
+                    sx={{
+                      textAlign: { xs: "center", sm: "center", md: "left" },
+                    }}
+                    variant="body2"
+                  >
+                    NEI
+                  </Typography>
                   <Typography variant="body2">
                     Núcleo de Estudantes de Informática da ESTG
                   </Typography>
@@ -39,23 +59,66 @@ export const Footer = () => {
               </Grid>
             </Grid>
             <Grid item xs={12} sm={3}>
-              <Typography variant="h6" gutterBottom align={isSmallScreen ? 'center' : 'inherit'}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                align={isSmallScreen ? "center" : "inherit"}
+              >
                 Contacto
               </Typography>
-              <Typography variant="body2" align={isSmallScreen ? 'center' : 'inherit'}>Sobre Nós</Typography>
-              <Typography variant="body2" align={isSmallScreen ? 'center' : 'inherit'}>Email: nei@estg.ipp.pt</Typography>
+
+              <Typography
+                variant="body2"
+                align={isSmallScreen ? "center" : "inherit"}
+              >
+                Email: nei@estg.ipp.pt
+              </Typography>
             </Grid>
             <Grid item xs={12} sm={2}>
-              <Typography variant="h6" gutterBottom align={isSmallScreen ? 'center' : 'inherit'}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                align={isSmallScreen ? "center" : "inherit"}
+              >
+                Links
+              </Typography>
+              <Box
+                display="flex"
+                justifyContent={isSmallScreen ? "center" : "flex-start"}
+              >
+                <Button
+                  component={RouterLink}
+                  sx={{ marginLeft: "-10px", color: "#ffffff" }}
+                  to={routes.aboutFAQpage.path}
+                >
+                  Sobre Nós
+                </Button>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={2}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                align={isSmallScreen ? "center" : "inherit"}
+              >
                 Redes Sociais
               </Typography>
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  width="48"
-                  height="48"
-                  src="https://img.icons8.com/pulsar-line/48/linktree.png"
-                  alt="linktree"
-                />
+              <Box
+                display="flex"
+                justifyContent={{ xs: "center", md: "flex-start" }}
+              >
+                <a
+                  href="https://linktr.ee/nei.estg?fbclid=PAAaYh9fNTvpGLUa4_QOyGW3EhAatawD5xQ7XXIVufpv1WlJCF3jsy48RWjGA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    width="48"
+                    height="48"
+                    src="https://img.icons8.com/pulsar-line/48/linktree.png"
+                    alt="linktree"
+                  />
+                </a>
               </Box>
             </Grid>
           </Grid>
@@ -65,7 +128,7 @@ export const Footer = () => {
               <Link color="inherit" href="/">
                 NEI
               </Link>{" "}
-              2023 - {new Date().getFullYear()}
+              {new Date().getFullYear()}
               {"."}
             </Typography>
           </Box>
