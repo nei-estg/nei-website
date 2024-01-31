@@ -1,5 +1,5 @@
 import { GitHub, LinkedIn } from "@mui/icons-material";
-import { Avatar, Grid, Paper, Tab, Tabs, Typography, styled } from "@mui/material";
+import { Avatar, Box, Grid, Paper, Tab, Tabs, Typography, styled } from "@mui/material";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AccordionUsage from "@src/components/aboutFAQ/Accordion";
@@ -23,24 +23,24 @@ interface DirecaoItem {
 
 const direcao: DirecaoItem[] = 
 [
+  /* {
+    year: "2024/2025",
+    team: [
+      { photo: "logo.png", role: "Presidente", fullname: "Hélder Branco", github: "", linkedin: "" },
+    ],
+  }, */
   {
     year: "2023/2024",
     team: [
       { photo: "logo.png", role: "Presidente", fullname: "Hélder Branco", github: "", linkedin: "https://www.linkedin.com/in/h%C3%A9lder-branco/" },
       { photo: "logo.png", role: "Vice-Presidente", fullname: "Daniel Teixeira", github: "https://github.com/8200378", linkedin: "https://www.linkedin.com/in/daniel-fr-teixeira/" },
-      { photo: "logo.png", role: "Vice-Presidente", fullname: "Emanuel Rego", github: "https://github.com/RegoJunior09", linkedin: "https://www.google.com/" },
+      { photo: "logo.png", role: "Vice-Presidente", fullname: "Emanuel Rego", github: "https://github.com/RegoJunior09", linkedin: "" },
       { photo: "logo.png", role: "Tesoureiro", fullname: "João Oliveira", github: "https://github.com/joaopsoliveira2003", linkedin: "https://www.linkedin.com/in/joaopsoliveira2003/" },
       { photo: "logo.png", role: "Secretário", fullname: "Hélder Carneiro", github: "https://github.com/zyeinn", linkedin: "https://www.linkedin.com/in/heldercarneir0/" },
       { photo: "logo.png", role: "Vogal", fullname: "Mariana Martins", github: "", linkedin: "https://www.linkedin.com/in/mariana-silva-a757a3221/" },
       { photo: "logo.png", role: "Vogal", fullname: "Orlando Pires", github: "https://github.com/duarte-pires", linkedin: "https://www.linkedin.com/in/duartespires/" },
       { photo: "logo.png", role: "Vogal", fullname: "Eduardo Dias", github: "", linkedin: "https://www.linkedin.com/in/eduardo-dias-287b1a260/" },
       { photo: "logo.png", role: "Vogal", fullname: "Guilherme Castro", github: "", linkedin: "https://www.linkedin.com/in/guilherme-castro-957002273/" },
-    ],
-  },
-  {
-    year: "2024/2025",
-    team: [
-      { photo: "logo.png", role: "Presidente", fullname: "Hélder Branco", github: "https://www.google.com/", linkedin: "https://www.google.com/" },
     ],
   },
 ];
@@ -139,18 +139,19 @@ export default function AboutFAQPage() {
           }} 
         >Direção</Typography>
 
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="scrollable"
-        scrollButtons="auto"
-        aria-label="scrollable auto tabs example"
-        sx={{marginBottom: '20px'}}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example">
           
-        {direcao.map((member, index) => (
-          <Tab label={member.year} key={index} />
-        ))}
-      </Tabs>
+          {direcao.map((member, index) => (
+            <Tab label={member.year} key={index} />
+          ))}
+        </Tabs>
+      </Box>
 
       
       {/* Conteudo de cada tab (cada ano) */}
