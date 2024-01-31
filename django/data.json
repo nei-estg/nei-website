@@ -696,21 +696,20 @@
     }
   ],
   "MaterialTags": [
-    "Teste",
-    "Exame",
-    "Trabalho",
-    "Ficha",
-    "Teoria",
-    "Prática",
+    "Teste Modelo",
+    "Teste AC",
+    "Exame Modelo",
+    "Exame EN",
+    "Exame ER",
+    "Exame EE",
+    "Trabalho Prático",
+    "Ficha Prática",
     "Resumo",
-    "Apontamentos"
   ],
   "BlogTopics": [
-    "Geral",
     "Notícias",
     "Eventos",
     "Dicas",
-    "Tutoriais",
-    "Palestras"
+    "Tutoriais"
   ]
 }
