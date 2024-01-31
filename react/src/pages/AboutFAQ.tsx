@@ -1,3 +1,4 @@
+import { GitHub, LinkedIn } from "@mui/icons-material";
 import { Avatar, Grid, Paper, Tab, Tabs, Typography, styled } from "@mui/material";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -11,6 +12,8 @@ interface TeamItem {
   photo: string;
   role: string;
   fullname: string;
+  github: string;
+  linkedin: string;
 }
 
 interface DirecaoItem {
@@ -23,21 +26,21 @@ const direcao: DirecaoItem[] =
   {
     year: "2023/2024",
     team: [
-      { photo: "https://images.unsplash.com/photo-1581382575275-97901c2635b7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", role: "Presidente", fullname: "Hélder Branco" },
-      { photo: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFufGVufDB8MXwwfHx8MA%3D%3D", role: "Vice-Presidente", fullname: "Daniel Teixeira" },
-      { photo: "https://images.unsplash.com/photo-1590086782957-93c06ef21604?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", role: "Vice-Presidente", fullname: "Emanuel Rego" },
-      { photo: "logo.png", role: "Tesoureiro", fullname: "João Oliveira" },
-      { photo: "logo.png", role: "Secretário", fullname: "Hélder Carneiro" },
-      { photo: "logo.png", role: "Vogal", fullname: "Mariana Martins" },
-      { photo: "logo.png", role: "Vogal", fullname: "Orlando Pires" },  
-      { photo: "logo.png", role: "Vogal", fullname: "Eduardo Dias" },
-      { photo: "logo.png", role: "Vogal", fullname: "Guilherme Castro" },
+      { photo: "logo.png", role: "Presidente", fullname: "Hélder Branco", github: "https://www.google.com/", linkedin: "https://www.google.com/" },
+      { photo: "logo.png", role: "Vice-Presidente", fullname: "Daniel Teixeira", github: "https://www.google.pt/", linkedin: "" },
+      { photo: "logo.png", role: "Vice-Presidente", fullname: "Emanuel Rego", github: "", linkedin: "https://www.google.com/" },
+      { photo: "logo.png", role: "Tesoureiro", fullname: "João Oliveira", github: "", linkedin: "" },
+      { photo: "logo.png", role: "Secretário", fullname: "Hélder Carneiro", github: "", linkedin: "" },
+      { photo: "logo.png", role: "Vogal", fullname: "Mariana Martins", github: "", linkedin: "" },
+      { photo: "logo.png", role: "Vogal", fullname: "Orlando Pires", github: "", linkedin: "" },
+      { photo: "logo.png", role: "Vogal", fullname: "Eduardo Dias", github: "", linkedin: "" },
+      { photo: "logo.png", role: "Vogal", fullname: "Guilherme Castro", github: "", linkedin: "" },
     ],
   },
   {
     year: "2024/2025",
     team: [
-      { photo: "logo.png", role: "Presidente", fullname: "Hélder Branco" },
+      { photo: "logo.png", role: "Presidente", fullname: "Hélder Branco", github: "https://www.google.com/", linkedin: "https://www.google.com/" },
     ],
   },
 ];
@@ -103,6 +106,8 @@ export default function AboutFAQPage() {
     setValue(newValue);
   };
 
+  const [hoveredIcons, setHoveredIcons] = useState({});
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -152,17 +157,39 @@ export default function AboutFAQPage() {
       {direcao.map((member, index) => (
         <div key={index} style={{ display: value === index ? 'block' : 'none' }}>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          
           {member.team.map((teamMember, teamIndex) => (
             <Grid item xs={3} sm={2} md={2} key={teamIndex} display="flex" alignItems="center">
               <Grid container direction="column" display="flex" alignItems="center" spacing={1} sx={{marginBottom: '5px'}}>
                 <Item>
                   <Avatar src={teamMember.photo} sx={{ width: '128px', height: '128px', marginBottom: '10px' }} variant="rounded"/>
+                  
                   <Typography variant="subtitle1" color="primary">{teamMember.role}</Typography>
                   <Typography variant="body1">{teamMember.fullname}</Typography>
+
+                  {teamMember.github && (
+                    <GitHub
+                      sx={{ color: hoveredIcons[`github-${teamIndex}`] ? '#054496' : '#969696', fontSize: 30, cursor: 'pointer', marginTop: '5px' }}
+                      onClick={() => window.open(teamMember.github, '_blank')}
+                      onMouseEnter={() => setHoveredIcons(prevState => ({ ...prevState, [`github-${teamIndex}`]: true }))}
+                      onMouseLeave={() => setHoveredIcons(prevState => ({ ...prevState, [`github-${teamIndex}`]: false }))}
+                    />
+                  )}
+
+                {teamMember.linkedin && (
+                  <LinkedIn
+                    sx={{ color: hoveredIcons[`linkedin-${teamIndex}`] ? '#054496' : '#969696', fontSize: 30, cursor: 'pointer', marginTop: '5px' }}
+                    onClick={() => window.open(teamMember.linkedin, '_blank')}
+                    onMouseEnter={() => setHoveredIcons(prevState => ({ ...prevState, [`linkedin-${teamIndex}`]: true }))}
+                      onMouseLeave={() => setHoveredIcons(prevState => ({ ...prevState, [`linkedin-${teamIndex}`]: false }))}
+                  />
+                )}
+
                 </Item>
               </Grid>
             </Grid>
           ))}
+
           </Grid>
         </div>
       ))}
