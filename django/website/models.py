@@ -3,7 +3,6 @@ from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django_prometheus.models import ExportModelOperationsMixin
-import datetime
 
 class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
   name = models.TextField()
