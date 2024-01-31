@@ -14,15 +14,16 @@ import MenuItem from '@mui/material/MenuItem';
 import PersonIcon from '@mui/icons-material/Person';
 import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
+import isLoggedIn from '@src/api/utils/LoginStatus';
 
 
 const navbar = {
   pages: [
-    { name: 'Blog', URL: '/blog' },
-    { name: 'Calendário', URL: '/calendar' },
-    { name: 'Mentoria', URL: '/mentoring' },
-    { name: 'Materiais', URL: '/materials' },
-    { name: 'Sobre Nós', URL: '/about' },
+    { name: 'Sobre Nós', URL: '/about', requiredLogin: false },
+    { name: 'Blog', URL: '/blog', requiredLogin: false },
+    { name: 'Calendário', URL: '/calendar', requiredLogin: false },
+    { name: 'Mentoria', URL: '/mentoring', requiredLogin: true },
+    { name: 'Materiais', URL: '/materials', requiredLogin: false },
   ],
 };
 
@@ -44,7 +45,6 @@ function NavBar() {
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  const [isLogged, setIsLogged] = React.useState(false);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -76,7 +76,11 @@ function NavBar() {
             <Menu id="menu-appbar" anchorEl={anchorElNav} anchorOrigin={{ vertical: 'bottom', horizontal: 'left', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'left', }}
               open={Boolean(anchorElNav)} onClose={handleCloseNavMenu} sx={{ display: { xs: 'block', md: 'none' }, }}>
               {navbar.pages.map((page) => (
-                <MenuItem key={page.name} onClick={() =>  { handleCloseNavMenu(); navigate(page.URL);}}>{page.name}</MenuItem>
+                <MenuItem key={page.name}
+                  onClick={() => { handleCloseNavMenu(); navigate(page.URL); }}
+                  disabled={!isLoggedIn() && page.requiredLogin}>
+                  <Button onClick={() => navigate(page.URL)} sx={{ color: 'inherit', textTransform: 'none' }}>{page.name}</Button>
+                </MenuItem>
               ))}
             </Menu>
           </Box>
@@ -102,12 +106,20 @@ function NavBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {navbar.pages.map((page) => (
-              <Button key={page.name} onClick={() =>  { handleCloseNavMenu(); navigate(page.URL);}} sx={{ my: 2, color: 'white', display: 'block' }}>{page.name}</Button>
+              <Button key={page.name} 
+                onClick={() => { handleCloseNavMenu(); navigate(page.URL);}} 
+                style={{
+                  my: 2,
+                  color: !isLoggedIn() && page.requiredLogin ? '#969696' : 'white',
+                  display: 'block',
+                }}
+                disabled={!isLoggedIn() && page.requiredLogin}
+                >{page.name}</Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {isLogged ?
+            {isLoggedIn() ?
               <Tooltip title="Abrir Definições">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar sx={{ backgroundColor: "#054496" }}><PersonIcon /></Avatar>
@@ -122,7 +134,7 @@ function NavBar() {
 
             {/* icon user */}
             <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right', }} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>
-              {isLogged
+              {isLoggedIn()
                 ? settings.logged.map((setting) => (
                   <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
                     <Link href={setting.URL} component="a" underline="none" color="inherit">{setting.name}</Link>

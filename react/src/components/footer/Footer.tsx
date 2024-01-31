@@ -65,7 +65,7 @@ export const Footer = () => {
               <Link color="inherit" href="/">
                 NEI
               </Link>{" "}
-              {new Date().getFullYear()}
+              2023 - {new Date().getFullYear()}
               {"."}
             </Typography>
           </Box>
