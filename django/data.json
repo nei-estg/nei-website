@@ -6,14 +6,106 @@
       "curricularUnits": {
         "1": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "MÉTODOS E TÉCNICAS DE SUPORTE AO DESENVOLVIMENTO DE SOFTWARE",
+            "abbreviation": "MTSDS"
+          },
+          {
+            "name": "TÓPICOS AVANÇADOS DE ARMAZENAMENTO DE DADOS",
+            "abbreviation": "TAAD"
+          },
+          {
+            "name": "COMPUTAÇÃO DISTRIBUÍDA E EM NÚVEM",
+            "abbreviation": "CDN"
+          },
+          {
+            "name": "NOÇÕES FUNDAMENTAIS DE MACHINE LEARNING",
+            "abbreviation": "NFML"
+          },
+          {
+            "name": "REALIDADE VIRTUAL AUMENTADA",
+            "abbreviation": "RVA"
+          },
+          {
+            "name": "DADOS E PRIVACIDADE",
+            "abbreviation": "DP"
+          },
+          {
+            "name": "DESIGN DE INTERAÇÃO",
+            "abbreviation": "DI"
+          },
+          {
+            "name": "MACHINE LEARNING",
+            "abbreviation": "ML"
+          },
+          {
+            "name": "PROJETO DE SISTEMAS DE INFORMAÇÃO",
+            "abbreviation": "PSI"
+          },
+          {
+            "name": "SIMULAÇÃO E OTIMIZAÇÃO",
+            "abbreviation": "SO"
+          },
+          {
+            "name": "TECNOLOGIAS ESCALÁVEIS PARA ANÁLISE DE DADOS",
+            "abbreviation": "TEAD"
+          },
+          {
+            "name": "CIBERINTELIGÊNCIA",
+            "abbreviation": "CI"
+          },
+          {
+            "name": "INFORMÁTICA FORENSE E CIBERCRIME",
+            "abbreviation": "IFC"
+          },
+          {
+            "name": "PARADIGMAS EMERGENTES PARA O DESENVOLVIMENTO WEB E MOBILE",
+            "abbreviation": "PEDWM"
+          },
+          {
+            "name": "GESTÃO DA IDENTIDADE",
+            "abbreviation": "GI"
+          },
+          {
+            "name": "INDÚSTRIA",
+            "abbreviation": "I"
           }
         ],
         "2": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "SEMINÁRIO DE PROJETO",
+            "abbreviation": "SP"
+          },
+          {
+            "name": "COMPORTAMENTO ORGANIZACIONAL",
+            "abbreviation": "CO"
+          },
+          {
+            "name": "GESTÃO DA CADEIA DE ABASTECIMENTO INTERNACIONAL",
+            "abbreviation": "GCAI"
+          },
+          {
+            "name": "GESTÃO DA IDI",
+            "abbreviation": "GIDI"
+          },
+          {
+            "name": "LIDERANÇA E GESTÃO DE EQUIPAS",
+            "abbreviation": "LGE"
+          },
+          {
+            "name": "NOÇÕES FUNDAMENTAIS DE DIREITO",
+            "abbreviation": "NFD"
+          },
+          {
+            "name": "ORGANIZAÇÃO E GESTÃO DE EMPRESAS",
+            "abbreviation": "OGE"
+          },
+          {
+            "name": "RECURSOS HUMANOS",
+            "abbreviation": "RH"
+          },
+          {
+            "name": "ESTUDOS PREPARATÓRIOS E ELABORAÇÃO DA DISSERTAÇÃO/PROJETO/ESTÁGIO",
+            "abbreviation": "EPEDPE"
           }
         ]
       }
@@ -156,20 +248,124 @@
       "curricularUnits": {
         "1": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Álgebra Linear e Geometria Analítica",
+            "abbreviation": "ALGA"
+          },
+          {
+            "name": "Física Aplicada",
+            "abbreviation": "FA"
+          },
+          {
+            "name": "Fundamentos de Programação",
+            "abbreviation": "FP"
+          },
+          {
+            "name": "Introdução aos Sistemas Computacionais",
+            "abbreviation": "ISC"
+          },
+          {
+            "name": "Laboratório de Programação",
+            "abbreviation": "LP"
+          },
+          {
+            "name": "Engenharia de Software I",
+            "abbreviation": "ES1"
+          },
+          {
+            "name": "Matemática Computacional I",
+            "abbreviation": "MC1"
+          },
+          {
+            "name": "Matemática Discreta",
+            "abbreviation": "MD"
+          },
+          {
+            "name": "Paradigmas de Programação",
+            "abbreviation": "PP"
+          },
+          {
+            "name": "Sistemas Digitais e Arquitetura de Computadores",
+            "abbreviation": "SDAC"
           }
         ],
         "2": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Engenharia de Software II",
+            "abbreviation": "ES2"
+          },
+          {
+            "name": "Estruturas de Dados",
+            "abbreviation": "ED"
+          },
+          {
+            "name": "Matemática Computacional II",
+            "abbreviation": "MC2"
+          },
+          {
+            "name": "Processamento Estruturado de Informação",
+            "abbreviation": "PEI"
+          },
+          {
+            "name": "Sistemas Operativos",
+            "abbreviation": "SO"
+          },
+          {
+            "name": "Análise Algorítmica e Otimização",
+            "abbreviation": "AAO"
+          },
+          {
+            "name": "Bases de Dados",
+            "abbreviation": "BD"
+          },
+          {
+            "name": "Gestão de Projetos Informáticos",
+            "abbreviation": "GPI"
+          },
+          {
+            "name": "Programação em Ambiente Web",
+            "abbreviation": "PAW"
+          },
+          {
+            "name": "Redes de Computadores",
+            "abbreviation": "RC"
           }
         ],
         "3": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Administração de Sistemas Informáticos",
+            "abbreviation": "ASI"
+          },
+          {
+            "name": "Computação Móvel e Ubíqua",
+            "abbreviation": "CMU"
+          },
+          {
+            "name": "Laboratório de Desenvolvimento de Software",
+            "abbreviation": "LDS"
+          },
+          {
+            "name": "Sistemas Distribuídos",
+            "abbreviation": "SD"
+          },
+          {
+            "name": "Sistemas de Informação",
+            "abbreviation": "SI"
+          },
+          {
+            "name": "Inteligência Artificial",
+            "abbreviation": "IA"
+          },
+          {
+            "name": "Projeto Final",
+            "abbreviation": "PF"
+          },
+          {
+            "name": "Sistemas de Informação Organizacionais",
+            "abbreviation": "SIO"
+          },
+          {
+            "name": "Noções de Gestão",
+            "abbreviation": "NG"
           }
         ]
       }
@@ -180,21 +376,133 @@
       "curricularUnits": {
         "1": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Análise de Sistemas de Informação",
+            "abbreviation": "ASI"
+          },
+          {
+            "name": "Gestão e Contabilidade Empresarial",
+            "abbreviation": "GCE"
+          },
+          {
+            "name": "Inglês Técnico",
+            "abbreviation": "IT"
+          },
+          {
+            "name": "Introdução à Programação",
+            "abbreviation": "IP"
+          },
+          {
+            "name": "Noções de Gestão e de Sistemas de Informação",
+            "abbreviation": "NGSI"
+          },
+          {
+            "name": "Sociologia do Trabalho e dos Processos de Gestão",
+            "abbreviation": "STPG"
+          },
+          {
+            "name": "Direito para os Negócios",
+            "abbreviation": "DN"
+          },
+          {
+            "name": "Gestão das Operações",
+            "abbreviation": "GO"
+          },
+          {
+            "name": "Matemática Computacional",
+            "abbreviation": "MC"
+          },
+          {
+            "name": "Noções de Redes e Comunicação de Dados",
+            "abbreviation": "NRCD"
+          },
+          {
+            "name": "Programação Orientada a Objetos",
+            "abbreviation": "POO"
+          },
+          {
+            "name": "Sistemas de Gestão de Bases de Dados I",
+            "abbreviation": "SGBD1"
           }
         ],
         "2": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "Estruturação e Organização da Informação",
+            "abbreviation": "EOI"
+          },
+          {
+            "name": "Gestão de Processos de Negócio",
+            "abbreviation": "GPN"
+          },
+          {
+            "name": "Investigação Operacional",
+            "abbreviation": "IO"
+          },
+          {
+            "name": "Logística",
+            "abbreviation": "L"
+          },
+          {
+            "name": "Qualidade de Softwareca",
+            "abbreviation": "QS"
+          },
+          {
+            "name": "Sistemas de Gestão de Bases de Dados II",
+            "abbreviation": "SGBD2"
+          },
+          {
+            "name": "Gestão de Projetos de Sistemas de Informação",
+            "abbreviation": "GPSI"
+          },
+          {
+            "name": "Interação Homem-Computador",
+            "abbreviation": "IHC"
+          },
+          {
+            "name": "Marketing Empresarial",
+            "abbreviation": "ME"
+          },
+          {
+            "name": "Projeto de Desenvolvimento de Software",
+            "abbreviation": "PDS"
+          },
+          {
+            "name": "Projeto Integrado",
+            "abbreviation": "PI"
+          },
+          {
+            "name": "Técnicas de Extração de Informação",
+            "abbreviation": "TEI"
           }
         ],
         "3": [
           {
-            "name": "",
-            "abbreviation": ""
-          }
+            "name": "Arquitetura de Sistemas de Informação",
+            "abbreviation": "ASI"
+          },
+          {
+            "name": "Desenvolvimento de Competências Pessoais e Organizacionais",
+            "abbreviation": "DCPO"
+          },
+          {
+            "name": "Gestão e Técnicas Comerciais",
+            "abbreviation": "GTC"
+          },
+          {
+            "name": "Inovação e Estratégia Empresarial",
+            "abbreviation": "IEE"
+          },
+          {
+            "name": "Métodos e Técnicas de Análise de Dados",
+            "abbreviation": "MTAD"
+          },
+          {
+            "name": "Sistemas de Informação para Gestão Empresarial",
+            "abbreviation": "SIGE"
+          },
+          {
+            "name": "Estágio/Projeto",
+            "abbreviation": "EP"
+          },
         ]
       }
     },
