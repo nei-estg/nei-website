@@ -502,7 +502,7 @@
           {
             "name": "Estágio/Projeto",
             "abbreviation": "EP"
-          },
+          }
         ]
       }
     },
@@ -512,14 +512,82 @@
       "curricularUnits": {
         "1": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "ANÁLISE E ARQUITETURA DE SISTEMAS",
+            "abbreviation": "AAS"
+          },
+          {
+            "name": "ELEMENTOS DE ÁLGEBRA LINEAR",
+            "abbreviation": "EAL"
+          },
+          {
+            "name": "FUNDAMENTOS DE PROGRAMAÇÃO ORIENTADA A OBJETOSR",
+            "abbreviation": "FPOO"
+          },
+          {
+            "name": "FUNDAMENTOS DE SISTEMAS OPERATIVOS",
+            "abbreviation": "FSO"
+          },
+          {
+            "name": "INTRODUÇÃO À SEGURANÇA E LEGISLAÇÃO",
+            "abbreviation": "ISL"
+          },
+          {
+            "name": "OFICINA DA LÍNGUA PORTUGUESA",
+            "abbreviation": "OLP"
+          },
+          {
+            "name": "ADMINISTRAÇÃO DE SISTEMAS I",
+            "abbreviation": "AS1"
+          },
+          {
+            "name": "BASES DE DADOS",
+            "abbreviation": "BD"
+          },
+          {
+            "name": "FERRAMENTAS DE SEGURANÇA INFORMÁTICA",
+            "abbreviation": "FSI"
+          },
+          {
+            "name": "INGLÊS",
+            "abbreviation": "I"
+          },
+          {
+            "name": "PROGRAMAÇÃO PARA A WEB",
+            "abbreviation": "PW"
+          },
+          {
+            "name": "REDES E COMUNICAÇÃO DE DADOS",
+            "abbreviation": "RCD"
           }
         ],
         "2": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "ADMINISTRAÇÃO DE SISTEMAS II",
+            "abbreviation": "AS2"
+          },
+          {
+            "name": "ANÁLISE FORENSE DIGITAL",
+            "abbreviation": "AFD"
+          },
+          {
+            "name": "LABORATÓRIO DE PROJETO",
+            "abbreviation": "LP"
+          },
+          {
+            "name": "OFICINA DE ESTATÍSTICA",
+            "abbreviation": "OE"
+          },
+          {
+            "name": "SEGURANÇA EM APLICAÇÕES WEB",
+            "abbreviation": "SAW"
+          },
+          {
+            "name": "TÓPICOS AVANÇADOS DE REDES",
+            "abbreviation": "TAR"
+          },
+          {
+            "name": "ESTÁGIO",
+            "abbreviation": "E"
           }
         ]
       }
@@ -530,15 +598,83 @@
       "curricularUnits": {
         "1": [
           {
-            "name": "",
-            "abbreviation": ""
+            "name": "ANÁLISE E ARQUITETURA DE SISTEMAS",
+            "abbreviation": "AAS"
+          },
+          {
+            "name": "CONCEÇÃO DE INTERFACES GRÁFICOS",
+            "abbreviation": "CIG"
+          },
+          {
+            "name": "ELEMENTOS DE ÁLGEBRA LINEAR",
+            "abbreviation": "EAL"
+          },
+          {
+            "name": "FUNDAMENTOS DE PROGRAMAÇÃO ORIENTADA A OBJETOS",
+            "abbreviation": "FPOO"
+          },
+          {
+            "name": "FUNDAMENTOS DE SISTEMAS OPERATIVOS",
+            "abbreviation": "FSO"
+          },
+          {
+            "name": "OFICINA DA LÍNGUA PORTUGUESA",
+            "abbreviation": "OLP"
+          },
+          {
+            "name": "BASES DE DADOS",
+            "abbreviation": "BD"
+          },
+          {
+            "name": "INGLÊS",
+            "abbreviation": "I"
+          },
+          {
+            "name": "PROGRAMAÇÃO PARA A WEB",
+            "abbreviation": "PW"
+          },
+          {
+            "name": "PROGRAMAÇÃO PARA DISPOSITIVOS MÓVEIS I",
+            "abbreviation": "PDM1"
+          },
+          {
+            "name": "REDES E COMUNICAÇÃO DE DADOS",
+            "abbreviation": "RCD"
+          },
+          {
+            "name": "TECNOLOGIAS PARA A WEB E APLICAÇÕES MÓVEIS",
+            "abbreviation": "TWAM"
           }
         ],
         "2": [
           {
-            "name": "",
-            "abbreviation": ""
-          }
+            "name": "LABORATÓRIO DE PROJETO",
+            "abbreviation": "LP"
+          },
+          {
+            "name": "OFICINA DE ESTATÍSTICA",
+            "abbreviation": "OE"
+          },
+          {
+            "name": "PROCESSO, ESTRUTURAÇÃO E INTEGRAÇÃO DE DADOS",
+            "abbreviation": "PEID"
+          },
+          {
+            "name": "PROGRAMAÇÃO PARA A WEB AVANÇADA",
+            "abbreviation": "PWA"
+          },
+          {
+            "name": "PROGRAMAÇÃO PARA DISPOSITIVOS MÓVEIS II",
+            "abbreviation": "PDM2"
+          },
+          {
+            "name": "SEGURANÇA EM APLICAÇÕES WEB",
+            "abbreviation": "SAW"
+          },
+          {
+            "name": "ESTÁGIO",
+            "abbreviation": "E"
+          },
         ]
       }
     }
