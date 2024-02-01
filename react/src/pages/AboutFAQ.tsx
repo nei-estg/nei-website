@@ -144,6 +144,16 @@ export default function AboutFAQPage() {
             flexDirection: 'column',
             alignItems: 'left',
             marginBottom: '15px',
+
+            '@media (max-width: 600px)': {
+              fontSize: '1rem',  // Tamanho menor para xs
+            },
+            '@media (min-width: 600px) and (max-width: 960px)': {
+              fontSize: '1.2rem',  // Tamanho maior que xs, menor que md (sm)
+            },
+            '@media (min-width: 960px)': {
+              fontSize: '1.4rem',  // Tamanho md (h6)
+            },
           }}
         >Somos o Núcleo de Estudantes de Informática da ESTG - IPP, e a nossa história é daquelas que começam com um grupo de amigos cheios de vontade de fazer acontecer. Juntámos as nossas paixões pela tecnologia e decidimos criar algo à maneira.
         </Typography>
@@ -157,6 +167,16 @@ export default function AboutFAQPage() {
             flexDirection: 'column',
             alignItems: 'left',
             marginBottom: '15px',
+
+            '@media (max-width: 600px)': {
+              fontSize: '1rem',  // Tamanho menor para xs
+            },
+            '@media (min-width: 600px) and (max-width: 960px)': {
+              fontSize: '1.2rem',  // Tamanho maior que xs, menor que md (sm)
+            },
+            '@media (min-width: 960px)': {
+              fontSize: '1.4rem',  // Tamanho md (h6)
+            },
           }}
         >No nosso Discord, estamos a bombar nos cursos de Informática da nossa universidade. É como um ponto de encontro para quem quer elevar os conhecimentos e fazer parte de uma comunidade que se apoia. Seja para trocar ideias, pedir dicas de programação ou só para descontrair, estamos sempre na boa.</Typography>
 
@@ -169,6 +189,16 @@ export default function AboutFAQPage() {
             flexDirection: 'column',
             alignItems: 'left',
             marginBottom: '60px',
+
+            '@media (max-width: 600px)': {
+              fontSize: '1rem',  // Tamanho menor para xs
+            },
+            '@media (min-width: 600px) and (max-width: 960px)': {
+              fontSize: '1.2rem',  // Tamanho maior que xs, menor que md (sm)
+            },
+            '@media (min-width: 960px)': {
+              fontSize: '1.4rem',  // Tamanho md (h6)
+            },
           }}
         >Por isso, se estiveres interessado em explorar o universo da Informática na ESTG - IPP, junta-te a nós nesta aventura!! 🚀💻</Typography>
 
