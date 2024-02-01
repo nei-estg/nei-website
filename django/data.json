@@ -674,7 +674,7 @@
           {
             "name": "ESTÁGIO",
             "abbreviation": "E"
-          },
+          }
         ]
       }
     }
@@ -704,7 +704,7 @@
     "Exame EE",
     "Trabalho Prático",
     "Ficha Prática",
-    "Resumo",
+    "Resumo"
   ],
   "BlogTopics": [
     "Notícias",
