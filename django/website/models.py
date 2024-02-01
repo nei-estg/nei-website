@@ -20,10 +20,20 @@ class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
   def __str__(self):
     return self.name
 
+class FAQCategoryModel(ExportModelOperationsMixin('FAQCategoryModel'), models.Model):
+  name = models.TextField()
+
+  class Meta:
+    verbose_name = "Categoria de FAQ"
+    verbose_name_plural = "Categorias de FAQ"
+
+  def __str__(self):
+    return self.name
 
 class FAQModel(ExportModelOperationsMixin('FAQModel'), models.Model):
   question = models.TextField()
   answer = models.TextField()
+  category = models.ForeignKey(FAQCategoryModel, on_delete=models.CASCADE)
 
   class Meta:
     verbose_name = "FAQ"
@@ -120,7 +130,7 @@ class CalendarModel(ExportModelOperationsMixin('CalendarModel'), models.Model):
     return self.name
 
 
-class MentorshipRequestModel(ExportModelOperationsMixin('MentorshipRequestModel'), models.Model):
+class MentoringRequestModel(ExportModelOperationsMixin('MentoringRequestModel'), models.Model):
   mentee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mentorship_request_mentee')
   curricular_unit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE)
   date = models.DateTimeField(auto_now_add=True)
@@ -133,7 +143,7 @@ class MentorshipRequestModel(ExportModelOperationsMixin('MentorshipRequestModel'
     return self.mentee.username + " - " + self.curricular_unit.name
 
 
-class MentorshipModel(ExportModelOperationsMixin('MentorshipModel'), models.Model):
+class MentoringModel(ExportModelOperationsMixin('MentoringModel'), models.Model):
   mentor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mentor')
   mentee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mentee')
   curricular_unit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE)
@@ -146,7 +156,7 @@ class MentorshipModel(ExportModelOperationsMixin('MentorshipModel'), models.Mode
   def __str__(self):
     return self.mentor.username + " -> " + self.mentee.username + ": " + self.curricular_unit.name
 
-class MentorshipReviewModel(ExportModelOperationsMixin('MentorshipReviewModel'), models.Model):
+class MentoringReviewModel(ExportModelOperationsMixin('MentoringReviewModel'), models.Model):
   mentee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mentorship_review_mentee')
   mentor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mentorship_review_mentor')
   curricular_unit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE)
