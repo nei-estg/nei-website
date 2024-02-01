@@ -94,6 +94,19 @@ export const Footer = () => {
                   Sobre Nós
                 </Button>
               </Box>
+
+              <Box
+                display="flex"
+                justifyContent={isSmallScreen ? "center" : "flex-start"}
+              >
+                <Button
+                  component={RouterLink}
+                  sx={{ marginLeft: "-15px", color: "#ffffff" }}
+                  to={routes.blogpage.path}
+                >
+                  BLOG
+                </Button>
+              </Box>
             </Grid>
             <Grid item xs={12} sm={2}>
               <Typography
@@ -124,12 +137,7 @@ export const Footer = () => {
           </Grid>
           <Box mt={5}>
             <Typography variant="body2" align="center">
-              {"Copyright © "}
-              <Link color="inherit" href="/">
-                NEI
-              </Link>{" "}
-              {new Date().getFullYear()}
-              {"."}
+              Made with ❤️ and ☕ by NEI's Web Development Team
             </Typography>
           </Box>
         </Container>
