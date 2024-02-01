@@ -28,9 +28,20 @@ client.interceptors.response.use(
     if (error.response) {
       if (error.response.status === 401) {
         window.location.href = "/login";
+        toast.error("You're not logged in!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
       if (error.response.status === 403) {
-        toast("You don't have permission to do this!", {
+        toast.error("You don't have permission to do this!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -43,7 +54,7 @@ client.interceptors.response.use(
         });
       }
       if (error.response.status === 500) {
-        toast('Server Returned a Bad Error!', {
+        toast.error('Server Returned a Bad Error!', {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

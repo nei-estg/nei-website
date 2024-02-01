@@ -24,16 +24,19 @@ export const loginUser = async (login : ILogin) => {
         return "";
       }
     }
-    return "Invalid credentials";
+    return "Invalid credentials!";
   } catch (error) {
     if (error instanceof AxiosError) {
       if (error.response) {
         if (error.response.status === 401) {
-          return "Invalid credentials";
+          return "Invalid credentials!";
+        }
+        if (error.response.status === 500) {
+          return "Server Error!";
         }
       }
     }
-    return "Something went wrong";
+    return "Something went wrong!";
   }
 };
 
