@@ -240,7 +240,7 @@ export default function AboutFAQPage() {
                 <Grid item xs={4} sm={2} md={2} key={teamIndex} display="flex" alignItems="center">
                   <Grid container direction="column" display="flex" alignItems="center" sx={{ marginBottom: '5px' }}>
                     <Item>
-                      <Avatar src={teamMember.photo} sx={{ width: '128px', height: '128px', marginBottom: '10px' }} variant="rounded" />
+                      <Avatar src={teamMember.photo} sx={{ width: '115px', height: '128px', marginBottom: '10px' }} variant="rounded" />
 
                       <Typography variant="subtitle1" color="primary">{teamMember.role}</Typography>
                       <Typography variant="body1">{teamMember.fullname}</Typography>
