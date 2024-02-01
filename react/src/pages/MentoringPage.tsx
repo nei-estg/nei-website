@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom"
 import { getMentoring } from "@src/api/MentoringRoutes"
+import { useEffect } from "react";
 
 export default function MentoringPage() {
 
-  getMentoring().then((res) => {
-    console.log(res);
-  });
+  useEffect(() => {
+    getMentoring().then((res) => {
+      console.log(res.data);
+    }).catch();
+  }, []);
   
   return (
     <div>

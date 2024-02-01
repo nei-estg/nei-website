@@ -8,11 +8,23 @@ class ContactSerializer(serializers.ModelSerializer):
   class Meta:
     model = ContactModel
     fields = ['id', 'name', 'email', 'subject', 'message']
+    
+class FAQCategorySerializer(serializers.ModelSerializer):
+  class Meta:
+    model = FAQCategoryModel
+    fields = '__all__'
 
 class FAQSerializer(serializers.ModelSerializer):
+  category = FAQCategorySerializer()
   class Meta:
     model = FAQModel
     fields = '__all__'
+    
+  def create(self, validated_data):
+    category_data = validated_data.pop('category')
+    category = FAQCategoryModel.objects.get_or_create(**category_data)[0]
+    faq = FAQModel.objects.create(category=category, **validated_data)
+    return faq
 
 class CourseSerializer(serializers.ModelSerializer):
   class Meta:
@@ -46,17 +58,17 @@ class CalendarSerializer(serializers.ModelSerializer):
 
 class MentorshipRequestSerializer(serializers.ModelSerializer):
   class Meta:
-    model = MentorshipRequestModel
+    model = MentoringRequestModel
     fields = ['mentee', 'curricular_unit']
 
 class MentoringSerializer(serializers.ModelSerializer):
   class Meta:
-    model = MentorshipModel
+    model = MentoringModel
     fields = '__all__'
 
 class MentoringReviewSerializer(serializers.ModelSerializer):
   class Meta:
-    model = MentorshipReviewModel
+    model = MentoringReviewModel
     fields = ['mentee', 'mentor', 'curricular_unit', 'rating', 'comment']
 
 class BlogTopicSerializer(serializers.ModelSerializer):
@@ -75,15 +87,17 @@ class BlogPostSerializer(serializers.ModelSerializer):
     fields = '__all__'
 
 class ProfileSerializer(serializers.ModelSerializer):
+  course = CourseSerializer()
+  
   class Meta:
     model = ProfileModel
     fields = ['course', 'year', 'image', 'bio']
 
 class UserSerializer(serializers.ModelSerializer):
-  profilemodel = ProfileSerializer(required=False)
+  
   class Meta:
     model = User
-    fields = '__all__'
+    fields = ['id', 'username', 'email', 'password', 'first_name', 'last_name', 'last_login', 'is_superuser', 'is_staff', 'is_active', 'date_joined', 'groups', 'user_permissions', 'profilemodel']
     extra_kwargs = {
       'password': {'write_only': True},
       'last_login': {'read_only': True},

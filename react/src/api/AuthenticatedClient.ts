@@ -39,8 +39,7 @@ client.interceptors.response.use(
           theme: "light",
           transition: Bounce,
         });
-      }
-      if (error.response.status === 403) {
+      } else if (error.response.status === 403) {
         toast.error("You don't have permission to do this!", {
           position: "top-right",
           autoClose: 5000,
@@ -52,9 +51,32 @@ client.interceptors.response.use(
           theme: "light",
           transition: Bounce,
         });
-      }
-      if (error.response.status === 500) {
+      } else if (error.response.status === 429) {
+        toast.error("You're sending way to much requests! Wait one hour!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      } else if (error.response.status === 500) {
         toast.error('Server Returned a Bad Error!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      } else if (error.response.status === 502) {
+        toast.error('The API is down! Please contact NEI!', {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
