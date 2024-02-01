@@ -63,7 +63,7 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#002454'}}>
+    <AppBar position="static" sx={{ backgroundColor: '#002454' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* screen > 899 x 877 */}
@@ -86,7 +86,7 @@ function NavBar() {
           </Box>
 
           {/* screen <= 899 x 877 */}
-          <Avatar alt="NEI" src="/public/logo.png" sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} component="a" href="/"/>
+          <Avatar alt="NEI" src="/public/logo.png" sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} component="a" href="/" />
 
           <Typography
             variant="h5"
@@ -106,15 +106,15 @@ function NavBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {navbar.pages.map((page) => (
-              <Button key={page.name} 
-                onClick={() => { handleCloseNavMenu(); navigate(page.URL);}} 
+              <Button key={page.name}
+                onClick={() => { handleCloseNavMenu(); navigate(page.URL); }}
                 style={{
                   my: 2,
                   color: !isLoggedIn() && page.requiredLogin ? '#969696' : 'white',
                   display: 'block',
                 }}
                 disabled={!isLoggedIn() && page.requiredLogin}
-                >{page.name}</Button>
+              >{page.name}</Button>
             ))}
           </Box>
 
@@ -136,14 +136,14 @@ function NavBar() {
             <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right', }} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>
               {isLoggedIn()
                 ? settings.logged.map((setting) => (
-                  <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                    <Link href={setting.URL} component="a" underline="none" color="inherit">{setting.name}</Link>
-                  </MenuItem>
+                  <Link href={setting.URL} component="a" underline="none" color="inherit">
+                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>{setting.name}</MenuItem>
+                  </Link>
                 ))
                 : settings.guest.map((setting) => (
-                  <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                    <Link href={setting.URL} component="a" underline="none" color="inherit">{setting.name}</Link>
-                  </MenuItem>
+                  <Link href={setting.URL} component="a" underline="none" color="inherit">
+                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>{setting.name}</MenuItem>
+                  </Link>
                 ))}
             </Menu>
           </Box>
