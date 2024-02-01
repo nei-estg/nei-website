@@ -107,7 +107,7 @@ export default function AboutFAQPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container maxWidth="xl" sx={{marginBottom: '60px'}}>
+      <Container maxWidth="lg" sx={{marginBottom: '60px'}}>
       
       {/*About Us*/}
       <Typography variant="h3"
