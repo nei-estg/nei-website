@@ -246,7 +246,7 @@ export default function AboutFAQPage() {
                       <Avatar src={teamMember.photo} sx={{ width: '115px', height: '128px', marginBottom: '10px' }} variant="rounded" />
 
                       <Typography variant="subtitle1" color="primary">{teamMember.role}</Typography>
-                      <Typography variant="body1">{teamMember.fullname}</Typography>
+                      <Typography variant="subtitle2">{teamMember.fullname}</Typography>
 
                       {teamMember.github && (
                         <GitHub
