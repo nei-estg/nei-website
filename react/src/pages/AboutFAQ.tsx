@@ -237,11 +237,11 @@ export default function AboutFAQPage() {
         {/* Conteudo de cada tab (cada ano) */}
         {direcao.map((member, index) => (
           <div key={index} style={{ display: value === index ? 'block' : 'none' }}>
-            <Grid container spacing={{ xs: 0, sm: 0, md: 0 }} columns={{ xs: 4, sm: 6, md: 18 }}>
+            <Grid container spacing={1}>
 
               {member.team.map((teamMember, teamIndex) => (
-                <Grid item xs={4} sm={2} md={2} key={teamIndex} display="flex" alignItems="center">
-                  <Grid container direction="column" display="flex" alignItems="center" sx={{ marginBottom: '5px' }}>
+                <Grid item xs={12} sm={4} md={3} lg={2} xl={1} key={teamIndex} display="flex" alignItems="center" sx={{ marginBottom: '1px', [defaultTheme.breakpoints.up('xl')]: { marginRight: '41px', }, }}>
+                  <Grid container direction="column" display="flex" alignItems="center">
                     <Item>
                       <Avatar src={teamMember.photo} sx={{ width: '115px', height: '128px', marginBottom: '10px' }} variant="rounded" />
 
@@ -274,7 +274,6 @@ export default function AboutFAQPage() {
             </Grid>
           </div>
         ))}
-
 
 
 
