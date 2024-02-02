@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { ILogin } from "@src/api/utils/ILogin";
+import { ILogin } from "@src/interfaces/ILogin";
 import { loginUser } from "@src/api/UserRoutes";
 import { toast, Bounce } from "react-toastify";
 

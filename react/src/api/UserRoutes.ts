@@ -2,8 +2,8 @@ import client from './Client';
 import AuthenticatedClient from './AuthenticatedClient';
 import { AxiosError } from 'axios';
 
-import { ILogin } from './utils/ILogin';
-import { IRegister } from './utils/IRegister';
+import { ILogin } from '../interfaces/ILogin';
+import { IRegister } from '../interfaces/IRegister';
 
 export const loginUser = async (login : ILogin) => {
   try {

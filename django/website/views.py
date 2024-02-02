@@ -84,7 +84,7 @@ class MentoringRequestViewSet(viewsets.ModelViewSet):
   """
   API endpoint that allows mentorship requests to be viewed or edited.
   """
-  queryset = MentorshipRequestModel.objects.all()
+  queryset = MentoringRequestModel.objects.all()
   serializer_class = MentorshipRequestSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
   filterset_fields = MentorshipRequestSerializer.Meta.fields
@@ -104,7 +104,7 @@ class MentoringViewSet(viewsets.ModelViewSet):
   """
   API endpoint that allows mentorships to be viewed or edited.
   """
-  queryset = MentorshipModel.objects.all()
+  queryset = MentoringModel.objects.all()
   serializer_class = MentoringSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
   filterset_fields = MentoringSerializer.Meta.fields
@@ -113,7 +113,7 @@ class MentoringReviewViewSet(viewsets.ModelViewSet):
   """
   API endpoint that allows mentorship reviews to be viewed or edited.
   """
-  queryset = MentorshipReviewModel.objects.all()
+  queryset = MentoringReviewModel.objects.all()
   serializer_class = MentoringReviewSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
   filterset_fields = MentoringReviewSerializer.Meta.fields

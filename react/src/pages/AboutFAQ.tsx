@@ -3,10 +3,11 @@ import { Avatar, Box, Grid, Paper, Tab, Tabs, Typography, styled } from "@mui/ma
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AccordionUsage from "@src/components/aboutFAQ/Accordion";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { getFAQ } from "@src/api/AboutRoutes";
+import { IFAQ } from "@src/interfaces/IFAQ";
 
 const defaultTheme = createTheme();
-
 
 interface TeamItem {
   photo: string;
@@ -45,7 +46,6 @@ const direcao: DirecaoItem[] =
     }
   ];
 
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -64,35 +64,30 @@ interface FaqSection {
   qa: QaItem[];
 }
 
-const faq: FaqSection[] =
-  [
-    {
-      section: "Básicos",
-      qa: [
-        {
-          question: "Can I purchase a gift certificate?",
-          answer: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-        },
-        {
-          question: "Can I purchase a gift certificate?",
-          answer: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-        },
-      ],
-    },
-    {
-      section: "Contas e Definições",
-      qa: [
-        {
-          question: "Can I purchase a gift certificate?",
-          answer: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-        },
-        {
-          question: "Can I purchase a gift certificate?",
-          answer: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-        },
-      ],
-    },
-  ];
+const transformData = (originalData: IFAQ[]): FaqSection[] => {
+  const transformedData: FaqSection[] = [];
+
+  originalData.forEach((qa) => {
+    const sectionName = qa.category.name;
+    const existingSection = transformedData.find((section) => section.section === sectionName);
+
+    const transformedQA: QaItem = {
+      question: qa.question,
+      answer: qa.answer
+    };
+
+    if (existingSection) {
+      existingSection.qa.push(transformedQA);
+    } else {
+      transformedData.push({
+        section: sectionName,
+        qa: [transformedQA]
+      });
+    }
+  });
+
+  return transformedData;
+};
 
 export default function AboutFAQPage() {
 
@@ -104,6 +99,16 @@ export default function AboutFAQPage() {
 
   const [hoveredIcons, setHoveredIcons] = useState({});
 
+  const [faq, setFaq] = useState<FaqSection[]>([]);
+
+  useEffect(() => {
+    getFAQ().then((result) => {
+      const faq: FaqSection[] = transformData(result.results);
+      setFaq(faq);
+    }).catch(() => {
+      console.log("There was an error fetching FAQ data!");
+    });
+  }, [])
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -122,7 +127,6 @@ export default function AboutFAQPage() {
           }}
         >Sobre Nós</Typography>
 
-
         {/*Quem somos*/}
         <Typography variant="subtitle1"
           sx={{
@@ -137,7 +141,6 @@ export default function AboutFAQPage() {
 
         {/*Texto de apresentacao*/}
         <Container maxWidth="lg">
-
           <Typography variant="h6"
             sx={{
               color: '#1E2022',
@@ -205,8 +208,6 @@ export default function AboutFAQPage() {
           >Por isso, se estiveres interessado em explorar o universo da Informática na ESTG - IPP, junta-te a nós nesta aventura!! 🚀💻</Typography>
         </Container>
 
-
-
         {/*Direcao*/}
         <Typography variant="subtitle1"
           sx={{
@@ -232,7 +233,6 @@ export default function AboutFAQPage() {
             ))}
           </Tabs>
         </Box>
-
 
         {/* Conteudo de cada tab (cada ano) */}
         {direcao.map((member, index) => (
@@ -301,7 +301,6 @@ export default function AboutFAQPage() {
             marginBottom: '20px',
           }}
         >Pesquisa no nosso F.A.Q. para obteres as respostas para qualquer coisa que possas perguntar.</Typography>
-
 
         {/* QA */}
         {faq.map((faq, index) => (

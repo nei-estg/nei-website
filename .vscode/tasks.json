@@ -81,6 +81,15 @@
         "kind": "build",
         "isDefault": false
       }
+    },
+    {
+      "label": "React npm install",
+      "type": "shell",
+      "command": "docker-compose exec react npm install",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
     }
   ]
 }
