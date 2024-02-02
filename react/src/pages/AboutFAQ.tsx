@@ -139,69 +139,74 @@ export default function AboutFAQPage() {
           }}
         >Quem somos</Typography>
 
-        <Typography variant="h6"
-          sx={{
-            color: '#1E2022',
-            display: 'flex',
-            fontWeight: 500,
-            flexDirection: 'column',
-            alignItems: 'left',
-            marginBottom: '15px',
+        {/*Texto de apresentacao*/}
+        <Container maxWidth="lg">
+          <Typography variant="h6"
+            sx={{
+              color: '#1E2022',
+              display: 'flex',
+              fontWeight: 500,
+              flexDirection: 'column',
+              alignItems: 'left',
+              marginBottom: '15px',
 
-            '@media (max-width: 600px)': {
-              fontSize: '1rem',  // Tamanho menor para xs
-            },
-            '@media (min-width: 600px) and (max-width: 960px)': {
-              fontSize: '1.2rem',  // Tamanho maior que xs, menor que md (sm)
-            },
-            '@media (min-width: 960px)': {
-              fontSize: '1.4rem',  // Tamanho md (h6)
-            },
-          }}
-        >Somos o Núcleo de Estudantes de Informática da ESTG - IPP, e a nossa história é daquelas que começam com um grupo de amigos cheios de vontade de fazer acontecer. Juntámos as nossas paixões pela tecnologia e decidimos criar algo à maneira.
-        </Typography>
+              '@media (max-width: 600px)': {
+                fontSize: '1rem',  // Tamanho menor para xs
+              },
+              '@media (min-width: 600px) and (max-width: 960px)': {
+                fontSize: '1.2rem',  // Tamanho maior que xs, menor que md (sm)
+              },
+              '@media (min-width: 960px)': {
+                fontSize: '1.4rem',  // Tamanho md (h6)
+              },
+            }}
+          >Somos o Núcleo de Estudantes de Informática da ESTG - IPP, e a nossa história é daquelas que começam com um grupo de amigos cheios de vontade de fazer acontecer. Juntámos as nossas paixões pela tecnologia e decidimos criar algo à maneira.
+          </Typography>
 
-        <Typography variant="h6"
-          sx={{
-            color: '#1E2022',
-            display: 'flex',
-            fontWeight: 500,
-            flexDirection: 'column',
-            alignItems: 'left',
-            marginBottom: '15px',
 
-            '@media (max-width: 600px)': {
-              fontSize: '1rem',  // Tamanho menor para xs
-            },
-            '@media (min-width: 600px) and (max-width: 960px)': {
-              fontSize: '1.2rem',  // Tamanho maior que xs, menor que md (sm)
-            },
-            '@media (min-width: 960px)': {
-              fontSize: '1.4rem',  // Tamanho md (h6)
-            },
-          }}
-        >No nosso Discord, estamos a bombar nos cursos de Informática da nossa universidade. É como um ponto de encontro para quem quer elevar os conhecimentos e fazer parte de uma comunidade que se apoia. Seja para trocar ideias, pedir dicas de programação ou só para descontrair, estamos sempre na boa.</Typography>
+          <Typography variant="h6"
+            sx={{
+              color: '#1E2022',
+              display: 'flex',
+              fontWeight: 500,
+              flexDirection: 'column',
+              alignItems: 'left',
+              marginBottom: '15px',
 
-        <Typography variant="h6"
-          sx={{
-            color: '#1E2022',
-            display: 'flex',
-            fontWeight: 500,
-            flexDirection: 'column',
-            alignItems: 'left',
-            marginBottom: '60px',
+              '@media (max-width: 600px)': {
+                fontSize: '1rem',  // Tamanho menor para xs
+              },
+              '@media (min-width: 600px) and (max-width: 960px)': {
+                fontSize: '1.2rem',  // Tamanho maior que xs, menor que md (sm)
+              },
+              '@media (min-width: 960px)': {
+                fontSize: '1.4rem',  // Tamanho md (h6)
+              },
+            }}
+          >No nosso Discord, estamos a bombar nos cursos de Informática da nossa universidade. É como um ponto de encontro para quem quer elevar os conhecimentos e fazer parte de uma comunidade que se apoia. Seja para trocar ideias, pedir dicas de programação ou só para descontrair, estamos sempre na boa.</Typography>
 
-            '@media (max-width: 600px)': {
-              fontSize: '1rem',  // Tamanho menor para xs
-            },
-            '@media (min-width: 600px) and (max-width: 960px)': {
-              fontSize: '1.2rem',  // Tamanho maior que xs, menor que md (sm)
-            },
-            '@media (min-width: 960px)': {
-              fontSize: '1.4rem',  // Tamanho md (h6)
-            },
-          }}
-        >Por isso, se estiveres interessado em explorar o universo da Informática na ESTG - IPP, junta-te a nós nesta aventura!! 🚀💻</Typography>
+
+          <Typography variant="h6"
+            sx={{
+              color: '#1E2022',
+              display: 'flex',
+              fontWeight: 500,
+              flexDirection: 'column',
+              alignItems: 'left',
+              marginBottom: '60px',
+
+              '@media (max-width: 600px)': {
+                fontSize: '1rem',  // Tamanho menor para xs
+              },
+              '@media (min-width: 600px) and (max-width: 960px)': {
+                fontSize: '1.2rem',  // Tamanho maior que xs, menor que md (sm)
+              },
+              '@media (min-width: 960px)': {
+                fontSize: '1.4rem',  // Tamanho md (h6)
+              },
+            }}
+          >Por isso, se estiveres interessado em explorar o universo da Informática na ESTG - IPP, junta-te a nós nesta aventura!! 🚀💻</Typography>
+        </Container>
 
         {/*Direcao*/}
         <Typography variant="subtitle1"
@@ -232,16 +237,16 @@ export default function AboutFAQPage() {
         {/* Conteudo de cada tab (cada ano) */}
         {direcao.map((member, index) => (
           <div key={index} style={{ display: value === index ? 'block' : 'none' }}>
-            <Grid container spacing={{ xs: 0, sm: 0, md: 0 }} columns={{ xs: 4, sm: 6, md: 18 }}>
+            <Grid container spacing={1}>
 
               {member.team.map((teamMember, teamIndex) => (
-                <Grid item xs={4} sm={2} md={2} key={teamIndex} display="flex" alignItems="center">
-                  <Grid container direction="column" display="flex" alignItems="center" sx={{ marginBottom: '5px' }}>
+                <Grid item xs={12} sm={4} md={3} lg={2} xl={1} key={teamIndex} display="flex" alignItems="center" sx={{ marginBottom: '1px', [defaultTheme.breakpoints.up('xl')]: { marginRight: '41px', }, }}>
+                  <Grid container direction="column" display="flex" alignItems="center">
                     <Item>
                       <Avatar src={teamMember.photo} sx={{ width: '115px', height: '128px', marginBottom: '10px' }} variant="rounded" />
 
                       <Typography variant="subtitle1" color="primary">{teamMember.role}</Typography>
-                      <Typography variant="body1">{teamMember.fullname}</Typography>
+                      <Typography variant="subtitle2">{teamMember.fullname}</Typography>
 
                       {teamMember.github && (
                         <GitHub
@@ -269,6 +274,9 @@ export default function AboutFAQPage() {
             </Grid>
           </div>
         ))}
+
+
+
 
         {/*F.A.Q.*/}
         <Typography variant="h4"
