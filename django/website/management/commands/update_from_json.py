@@ -10,7 +10,7 @@ class Command(BaseCommand):
             data = json.load(file)
 
         # Update CourseModel and CurricularUnitModel
-        self.update_courses(data.get('courses', []))
+        self.update_courses(data.get('Courses', []))
 
         # Update MaterialTagModel
         self.update_material_tags(data.get('MaterialTags', []))

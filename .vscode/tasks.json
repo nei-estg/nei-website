@@ -83,9 +83,9 @@
       }
     },
     {
-      "label": "React npm install",
+      "label": "Django Add Static Data",
       "type": "shell",
-      "command": "docker-compose exec react npm install",
+      "command": "docker-compose exec django python manage.py update_from_json",
       "group": {
         "kind": "build",
         "isDefault": false

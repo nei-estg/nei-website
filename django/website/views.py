@@ -71,15 +71,6 @@ class MaterialViewSet(viewsets.ModelViewSet):
   permission_classes = [permissions.DjangoObjectPermissions]
   filterset_fields = ['name', 'tags', 'curricular_unit']
 
-class MaterialLinkViewSet(viewsets.ModelViewSet):
-  """
-  API endpoint that allows material links to be viewed or edited.
-  """
-  queryset = MaterialLinkModel.objects.all()
-  serializer_class = MaterialLinkSerializer
-  permission_classes = [permissions.DjangoObjectPermissions]
-  filterset_fields = MaterialLinkSerializer.Meta.fields
-
 class MentoringRequestViewSet(viewsets.ModelViewSet):
   """
   API endpoint that allows mentorship requests to be viewed or edited.

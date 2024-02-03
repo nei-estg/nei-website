@@ -3,22 +3,55 @@ from .models import *
 
 class ContactAdmin(admin.ModelAdmin):
   list_display = ('name', 'email', 'subject', 'message', 'open')
-  list_filter = ('name', 'email', 'subject', 'message', 'open')
+  list_filter = list_display
 
 admin.site.register(ContactModel, ContactAdmin)
 
+class FAQAdmin(admin.ModelAdmin):
+  list_display = ('category', 'question', 'answer')
+  list_filter = list_display
+
 admin.site.register(FAQCategoryModel)
-admin.site.register(FAQModel)
+admin.site.register(FAQModel, FAQAdmin)
+
+class CurricularUnitAdmin(admin.ModelAdmin):
+  list_display = ('abbreviation', 'name') #TODO: Add Course
+  list_filter = list_display
+
 admin.site.register(CourseModel)
-admin.site.register(CurricularUnitModel)
+admin.site.register(CurricularUnitModel, CurricularUnitAdmin)
+
+class MaterialAdmin(admin.ModelAdmin):
+  list_display = ('name', 'file', 'link', 'curricular_unit', 'visible') #TODO: Add Course
+  list_filter = list_display
+
 admin.site.register(MaterialTagModel)
-admin.site.register(MaterialModel)
-admin.site.register(MaterialLinkModel)
-admin.site.register(CalendarModel)
-admin.site.register(MentoringRequestModel)
-admin.site.register(MentoringModel)
-admin.site.register(MentoringReviewModel)
+admin.site.register(MaterialModel, MaterialAdmin)
+
+class MentoringRequestAdmin(admin.ModelAdmin):
+  list_display = ('mentee', 'curricular_unit', 'date') #TODO: Add Course
+  list_filter = list_display
+
+admin.site.register(MentoringRequestModel, MentoringRequestAdmin)
+
+class MentoringAdmin(admin.ModelAdmin):
+  list_display = ('mentee', 'mentor', 'curricular_unit', 'date') #TODO: Add Course
+  list_filter = list_display
+
+admin.site.register(MentoringModel, MentoringAdmin)
+
+class MentoringReviewAdmin(admin.ModelAdmin):
+  list_display = ('mentoring', 'comment', 'rating', 'date')
+  list_filter = list_display
+
+admin.site.register(MentoringReviewModel, MentoringReviewAdmin)
+
 admin.site.register(BlogTopicModel)
 admin.site.register(BlogImageModel)
-admin.site.register(BlogPostModel)
+
+class BlogPostAdmin(admin.ModelAdmin):
+  list_display = ('title', 'author', 'date')
+  list_filter = list_display
+
+admin.site.register(BlogPostModel, BlogPostAdmin)
 admin.site.register(ProfileModel)
