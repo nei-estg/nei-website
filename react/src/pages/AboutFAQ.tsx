@@ -46,6 +46,8 @@ const direcao: DirecaoItem[] =
     }
   ];
 
+
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -91,10 +93,16 @@ const transformData = (originalData: IFAQ[]): FaqSection[] => {
 
 export default function AboutFAQPage() {
 
-  const [value, setValue] = useState(0);
+  const [valueDirecao, setValueDirecao] = useState(0);
 
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const handleChangeDirecao = (event: SyntheticEvent, newValue: number) => {
+    setValueDirecao(newValue);
+  };
+
+  const [valueCourse, setValueCourse] = useState(0);
+
+  const handleChangeCourse = (event: SyntheticEvent, newValue: number) => {
+    setValueCourse(newValue);
   };
 
   const [hoveredIcons, setHoveredIcons] = useState({});
@@ -220,10 +228,11 @@ export default function AboutFAQPage() {
           }}
         >Direção</Typography>
 
+        {/*Tabs Direcao*/}
         <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
           <Tabs
-            value={value}
-            onChange={handleChange}
+            value={valueDirecao}
+            onChange={handleChangeDirecao}
             variant="scrollable"
             scrollButtons="auto"
             aria-label="scrollable auto tabs example">
@@ -236,7 +245,7 @@ export default function AboutFAQPage() {
 
         {/* Conteudo de cada tab (cada ano) */}
         {direcao.map((member, index) => (
-          <div key={index} style={{ display: value === index ? 'block' : 'none' }}>
+          <div key={index} style={{ display: valueDirecao === index ? 'block' : 'none' }}>
             <Grid container spacing={1}>
 
               {member.team.map((teamMember, teamIndex) => (
@@ -274,6 +283,7 @@ export default function AboutFAQPage() {
             </Grid>
           </div>
         ))}
+
 
 
 
