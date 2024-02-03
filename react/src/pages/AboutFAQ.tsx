@@ -16,12 +16,10 @@ interface TeamItem {
   github: string;
   linkedin: string;
 }
-
 interface DirecaoItem {
   year: string;
   team: TeamItem[];
 }
-
 const direcao: DirecaoItem[] =
   [
     /* {
@@ -47,7 +45,6 @@ const direcao: DirecaoItem[] =
   ];
 
 
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -60,13 +57,50 @@ interface QaItem {
   question: string;
   answer: string;
 }
-
 interface FaqSection {
   section: string;
   qa: QaItem[];
 }
+const faq: FaqSection[] = 
+[
+  {
+    section: "Básicos",
+    qa: [
+      {
+        question: "Can I purchase a gift certificate?",
+        answer: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      },
+      {
+        question: "Can I purchase a gift certificate?",
+        answer: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      },
+      {
+        question: "Can I purchase a gift certificate?",
+        answer: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      },
+    ],
+  },
+  {
+    section: "Contas e Definições",
+    qa: [
+      {
+        question: "Can I purchase a gift certificate?",
+        answer: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      },
+      {
+        question: "Can I purchase a gift certificate?",
+        answer: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      },
+      {
+        question: "Can I purchase a gift certificate?",
+        answer: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      },
+    ],
+  },
+];
 
-const transformData = (originalData: IFAQ[]): FaqSection[] => {
+
+/* const transformData = (originalData: IFAQ[]): FaqSection[] => {
   const transformedData: FaqSection[] = [];
 
   originalData.forEach((qa) => {
@@ -89,7 +123,7 @@ const transformData = (originalData: IFAQ[]): FaqSection[] => {
   });
 
   return transformedData;
-};
+}; */
 
 export default function AboutFAQPage() {
 
@@ -107,16 +141,16 @@ export default function AboutFAQPage() {
 
   const [hoveredIcons, setHoveredIcons] = useState({});
 
-  const [faq, setFaq] = useState<FaqSection[]>([]);
+ /*  const [faq, setFaq] = useState<FaqSection[]>([]); */
 
-  useEffect(() => {
+ /*  useEffect(() => {
     getFAQ().then((result) => {
       const faq: FaqSection[] = transformData(result.results);
       setFaq(faq);
     }).catch(() => {
       console.log("There was an error fetching FAQ data!");
     });
-  }, [])
+  }, []) */
 
   return (
     <ThemeProvider theme={defaultTheme}>
