@@ -30,10 +30,16 @@ class CalendarViewSet(viewsets.ModelViewSet):
   """
   API endpoint that allows calendars to be viewed or edited.
   """
-  queryset = CalendarModel.objects.all()
+  queryset = CalendarModel.objects.filter(visible=True)
   serializer_class = CalendarSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
   filterset_fields = CalendarSerializer.Meta.fields
+  
+  def create(self, request, *args, **kwargs):
+    if isinstance(self.request.data, dict):
+      self.request.data._mutable = True
+    self.request.data['visible'] = False
+    return super().create(request, *args, **kwargs)
 
 class CourseViewSet(viewsets.ModelViewSet):
   """

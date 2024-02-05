@@ -90,7 +90,7 @@ class MaterialModel(ExportModelOperationsMixin('MaterialModel'), models.Model):
   file = models.FileField(null=True, blank=True)
   link = models.URLField(null=True, blank=True)
   tags = models.ManyToManyField(MaterialTagModel, blank=True)
-  curricular_unit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE)
+  curricularUnit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE)
   date = models.DateTimeField(auto_now_add=True)
   visible = models.BooleanField(default=False)
 
@@ -104,10 +104,12 @@ class MaterialModel(ExportModelOperationsMixin('MaterialModel'), models.Model):
 
 class CalendarModel(ExportModelOperationsMixin('CalendarModel'), models.Model):
   name = models.TextField()
-  date = models.DateTimeField()
+  startDate = models.DateTimeField()
+  endDate = models.DateTimeField()
   description = models.TextField()
-  curricular_unit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE, null=True, blank=True)
+  curricularUnit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE, null=True, blank=True)
   place = models.TextField(null=True, blank=True)
+  visible = models.BooleanField(default=False)
   
   class Meta:
     verbose_name = "Evento de Calendário"
@@ -119,7 +121,7 @@ class CalendarModel(ExportModelOperationsMixin('CalendarModel'), models.Model):
 
 class MentoringRequestModel(ExportModelOperationsMixin('MentoringRequestModel'), models.Model):
   mentee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mentorship_request_mentee')
-  curricular_unit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE)
+  curricularUnit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE)
   date = models.DateTimeField(auto_now_add=True)
 
   class Meta:
@@ -133,7 +135,7 @@ class MentoringRequestModel(ExportModelOperationsMixin('MentoringRequestModel'),
 class MentoringModel(ExportModelOperationsMixin('MentoringModel'), models.Model):
   mentor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mentor')
   mentee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mentee')
-  curricular_unit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE)
+  curricularUnit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE)
   date = models.DateTimeField(auto_now_add=True)
 
   class Meta:

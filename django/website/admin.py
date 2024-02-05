@@ -22,20 +22,26 @@ admin.site.register(CourseModel)
 admin.site.register(CurricularUnitModel, CurricularUnitAdmin)
 
 class MaterialAdmin(admin.ModelAdmin):
-  list_display = ('name', 'file', 'link', 'curricular_unit', 'visible') #TODO: Add Course
+  list_display = ('name', 'file', 'link', 'curricularUnit', 'visible') #TODO: Add Course
   list_filter = list_display
 
 admin.site.register(MaterialTagModel)
 admin.site.register(MaterialModel, MaterialAdmin)
 
+class CalendarAdmin(admin.ModelAdmin):
+  list_display = ('name', 'startDate', 'endDate', 'description')
+  list_filter = list_display
+
+admin.site.register(CalendarModel, CalendarAdmin)
+
 class MentoringRequestAdmin(admin.ModelAdmin):
-  list_display = ('mentee', 'curricular_unit', 'date') #TODO: Add Course
+  list_display = ('mentee', 'curricularUnit', 'date') #TODO: Add Course
   list_filter = list_display
 
 admin.site.register(MentoringRequestModel, MentoringRequestAdmin)
 
 class MentoringAdmin(admin.ModelAdmin):
-  list_display = ('mentee', 'mentor', 'curricular_unit', 'date') #TODO: Add Course
+  list_display = ('mentee', 'mentor', 'curricularUnit', 'date') #TODO: Add Course
   list_filter = list_display
 
 admin.site.register(MentoringModel, MentoringAdmin)

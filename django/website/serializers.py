@@ -108,25 +108,25 @@ class MaterialSerializer(serializers.ModelSerializer):
   tags = MaterialTagSerializer
   class Meta:
     model = MaterialModel
-    fields = ['name', 'file', 'link', 'tags', 'curricular_unit']
+    fields = ['name', 'file', 'link', 'tags', 'curricularUnit']
 
 class CalendarSerializer(serializers.ModelSerializer):
-  curricular_unit = CurricularUnitSerializer()
+  curricularUnit = CurricularUnitSerializer()
   class Meta:
     model = CalendarModel
     fields = '__all__'
 
 class MentorshipRequestSerializer(serializers.ModelSerializer):
   mentee = UserSerializer()
-  curricular_unit = CurricularUnitSerializer()
+  curricularUnit = CurricularUnitSerializer()
   class Meta:
     model = MentoringRequestModel
-    fields = ['mentee', 'curricular_unit']
+    fields = ['mentee', 'curricularUnit']
 
 class MentoringSerializer(serializers.ModelSerializer):
   mentor = UserSerializer()
   mentee = UserSerializer()
-  curricular_unit = CurricularUnitSerializer()
+  curricularUnit = CurricularUnitSerializer()
   class Meta:
     model = MentoringModel
     fields = '__all__'

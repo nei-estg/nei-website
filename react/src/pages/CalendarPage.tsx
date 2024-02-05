@@ -1,14 +1,16 @@
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import events from "../components/calendar/events";
+//import events from "../components/calendar/events";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ICalendar } from "@src/interfaces/ICalendar";
 import "../components/calendar/calendar.css";
+import { getCalendar } from "@src/api/CalendarRoutes";
 
 moment.locale("pt-BR"); // Set the locale to Portuguese
 const localizer = momentLocalizer(moment);
 
-const customMessages = {
+const customLabels = {
   day: "Dia",
   agenda: "Agenda",
   work_week: "Semana",
@@ -19,7 +21,14 @@ const customMessages = {
 };
 
 export default function CalendarPage() {
-  const [eventsData, setEventsData] = useState(events);
+  const [eventsData, setEventsData] = useState<ICalendar[]>([]);
+
+  useEffect(() => {
+    getCalendar().then((result) => {
+      const calendar: ICalendar[] = result.results;
+      setEventsData(calendar);
+    }).catch();
+  }, [])
 
   const handleSelect = () => {
     const title = window.prompt("New Event name");
@@ -28,9 +37,9 @@ export default function CalendarPage() {
   // Map eventsData to the format expected by react-big-calendar
   const calendarEvents = eventsData.map((event) => ({
     title: event.name,
-    start: new Date(event.date),
-    end: new Date(event.date),
-    allDay: true, // assuming all events are all-day events
+    start: new Date(event.startDate),
+    end: new Date(event.endDate),
+    //allDay: true, // assuming all events are all-day events
   }));
 
   return (
@@ -46,7 +55,7 @@ export default function CalendarPage() {
           style={{ height: "80vh", width: "80%", margin: "0 auto" }}
           onSelectEvent={(event) => alert(event.title)}
           onSelectSlot={handleSelect}
-          messages={customMessages}
+          messages={customLabels}
         />
       </div>
     </div>

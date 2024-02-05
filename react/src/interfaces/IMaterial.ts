@@ -7,5 +7,5 @@ export interface IMaterial {
   file?: string;
   link?: string;
   tags: IMaterialTag[];
-  curricular_unit: ICurricularUnit
+  curricularUnit: ICurricularUnit
 }

@@ -5,5 +5,5 @@ export interface ICurricularUnit {
   name: string;
   abbreviation: string;
   year: number;
-  course: ICourse[];
+  course: ICourse[] | number[]; //TODO: Fix django so it allows ICourse[] only
 }
