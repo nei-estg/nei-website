@@ -29,7 +29,7 @@ admin.site.register(MaterialTagModel)
 admin.site.register(MaterialModel, MaterialAdmin)
 
 class CalendarAdmin(admin.ModelAdmin):
-  list_display = ('name', 'startDate', 'endDate', 'description')
+  list_display = ('name', 'startDate', 'endDate', 'description', 'visible')
   list_filter = list_display
 
 admin.site.register(CalendarModel, CalendarAdmin)

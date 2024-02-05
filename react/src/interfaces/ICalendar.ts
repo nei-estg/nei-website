@@ -7,6 +7,6 @@ export interface ICalendar {
   endDate: Date,
   description: string,
   curricularUnit?: ICurricularUnit
-  place?: string
+  place?: string,
   visible?: boolean
 }

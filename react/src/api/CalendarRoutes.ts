@@ -1,13 +1,12 @@
 import client from "./Client";
 import AuthenticatedClient from "./AuthenticatedClient";
-import { IPaginatedResponse as IPaginatedResponse } from "@src/interfaces/IPaginatedResponse";
 import { ICalendar } from "@src/interfaces/ICalendar";
 
 export const getCalendar = async () => {
   try {
     const response = await client.get('/api/calendar/');
     if (response.status !== 200) throw new Error();
-    return response.data as IPaginatedResponse<ICalendar>;
+    return response.data as ICalendar[];
   } catch (error) {
     throw new Error("There was an error fetching the calendar.");
   }

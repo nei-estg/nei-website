@@ -25,6 +25,7 @@ class FAQViewSet(viewsets.ModelViewSet):
   serializer_class = FAQSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
   filterset_fields = FAQSerializer.Meta.fields
+  pagination_class = None
 
 class CalendarViewSet(viewsets.ModelViewSet):
   """
@@ -34,6 +35,7 @@ class CalendarViewSet(viewsets.ModelViewSet):
   serializer_class = CalendarSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
   filterset_fields = CalendarSerializer.Meta.fields
+  pagination_class = None
   
   def create(self, request, *args, **kwargs):
     if isinstance(self.request.data, dict):

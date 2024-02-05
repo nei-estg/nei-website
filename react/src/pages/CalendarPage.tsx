@@ -25,7 +25,7 @@ export default function CalendarPage() {
 
   useEffect(() => {
     getCalendar().then((result) => {
-      const calendar: ICalendar[] = result.results;
+      const calendar: ICalendar[] = result;
       setEventsData(calendar);
     }).catch();
   }, [])

@@ -58,7 +58,8 @@ export const logoutUser = async (allDevices: boolean) => {
     }
   } catch (error) {
     console.log(error);
+  } finally {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiry');
   }
-  localStorage.removeItem('token');
-  localStorage.removeItem('expiry');
 };

@@ -103,7 +103,7 @@ export default function AboutFAQPage() {
 
   useEffect(() => {
     getFAQ().then((result) => {
-      const faq: FaqSection[] = transformData(result.results);
+      const faq: FaqSection[] = transformData(result);
       setFaq(faq);
     }).catch(() => {
       console.log("There was an error fetching FAQ data!");
