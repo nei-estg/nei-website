@@ -15,14 +15,14 @@ admin.site.register(FAQCategoryModel)
 admin.site.register(FAQModel, FAQAdmin)
 
 class CurricularUnitAdmin(admin.ModelAdmin):
-  list_display = ('abbreviation', 'name') #TODO: Add Course
-  list_filter = list_display
+  list_display = ('abbreviation', 'name')
+  list_filter = list_display + ('course',)
 
 admin.site.register(CourseModel)
 admin.site.register(CurricularUnitModel, CurricularUnitAdmin)
 
 class MaterialAdmin(admin.ModelAdmin):
-  list_display = ('name', 'file', 'link', 'curricularUnit', 'visible') #TODO: Add Course
+  list_display = ('name', 'file', 'link', 'curricularUnit', 'visible')
   list_filter = list_display
 
 admin.site.register(MaterialTagModel)
@@ -35,13 +35,13 @@ class CalendarAdmin(admin.ModelAdmin):
 admin.site.register(CalendarModel, CalendarAdmin)
 
 class MentoringRequestAdmin(admin.ModelAdmin):
-  list_display = ('mentee', 'curricularUnit', 'date') #TODO: Add Course
+  list_display = ('mentee', 'curricularUnit', 'date')
   list_filter = list_display
 
 admin.site.register(MentoringRequestModel, MentoringRequestAdmin)
 
 class MentoringAdmin(admin.ModelAdmin):
-  list_display = ('mentee', 'mentor', 'curricularUnit', 'date') #TODO: Add Course
+  list_display = ('mentee', 'mentor', 'curricularUnit', 'date')
   list_filter = list_display
 
 admin.site.register(MentoringModel, MentoringAdmin)

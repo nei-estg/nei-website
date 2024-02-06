@@ -120,7 +120,7 @@ class CalendarModel(ExportModelOperationsMixin('CalendarModel'), models.Model):
 
 
 class MentoringRequestModel(ExportModelOperationsMixin('MentoringRequestModel'), models.Model):
-  mentee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mentorship_request_mentee')
+  mentee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mentoring_request_mentee')
   curricularUnit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE)
   date = models.DateTimeField(auto_now_add=True)
 

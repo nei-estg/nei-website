@@ -1,8 +1,8 @@
-import { IUser } from "./IUser";
 import { ICurricularUnit } from "./ICurricularUnit";
+import { IUser } from "./IUser";
 
-export interface IMentoringRequest {
-  id?: number,
+export interface IMentoring {
+  mentor: IUser,
   mentee?: IUser,
   curricularUnit: ICurricularUnit,
   date?: Date,

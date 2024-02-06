@@ -8,4 +8,6 @@ export interface IMaterial {
   link?: string;
   tags: IMaterialTag[];
   curricularUnit: ICurricularUnit
+  date?: Date,
+  visible?: boolean
 }
