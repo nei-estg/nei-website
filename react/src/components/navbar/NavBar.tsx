@@ -67,7 +67,7 @@ function NavBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* screen > 899 x 877 */}
-          <Avatar alt="NEI" src="/public/logo.png" component="a" href="/" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }} />
+          <Avatar alt="NEI" src="/logo.png" component="a" href="/" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }} />
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton size="large" aria-label="nei menu" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
@@ -86,7 +86,7 @@ function NavBar() {
           </Box>
 
           {/* screen <= 899 x 877 */}
-          <Avatar alt="NEI" src="/public/logo.png" sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} component="a" href="/" />
+          <Avatar alt="NEI" src="/logo.png" sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} component="a" href="/" />
 
           <Typography
             variant="h5"

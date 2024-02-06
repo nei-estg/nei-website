@@ -90,6 +90,15 @@
         "kind": "build",
         "isDefault": false
       }
+    },
+    {
+      "label": "Django Collect Static Files",
+      "type": "shell",
+      "command": "docker-compose exec django python manage.py collectstatic --noinput",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
     }
   ]
 }

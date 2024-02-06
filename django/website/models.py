@@ -14,7 +14,7 @@ class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
 
   class Meta:
     verbose_name = "Formulário de Contacto"
-    verbose_name_plural = "1. Formulário de Contactos"
+    verbose_name_plural = "Formulário de Contactos"
 
   def __str__(self):
     return self.name
@@ -24,7 +24,7 @@ class FAQCategoryModel(ExportModelOperationsMixin('FAQCategoryModel'), models.Mo
 
   class Meta:
     verbose_name = "Categoria de FAQ"
-    verbose_name_plural = "2.1. Categorias de FAQ"
+    verbose_name_plural = "Categorias de FAQ"
 
   def __str__(self):
     return self.name
@@ -36,7 +36,7 @@ class FAQModel(ExportModelOperationsMixin('FAQModel'), models.Model):
 
   class Meta:
     verbose_name = "FAQ"
-    verbose_name_plural = "2.2. FAQs"
+    verbose_name_plural = "FAQs"
 
   def __str__(self):
     return self.question
@@ -48,7 +48,7 @@ class CourseModel(ExportModelOperationsMixin('CourseModel'), models.Model):
 
   class Meta:
     verbose_name = "Curso"
-    verbose_name_plural = "3.1. Cursos"
+    verbose_name_plural = "Cursos"
 
   def __str__(self):
     return self.abbreviation
@@ -68,7 +68,7 @@ class CurricularUnitModel(ExportModelOperationsMixin('CurricularUnitModel'), mod
 
   class Meta:
     verbose_name = "Unidade Curricular"
-    verbose_name_plural = "3.2. Unidades Curriculares"
+    verbose_name_plural = "Unidades Curriculares"
 
   def __str__(self):
     return self.abbreviation
@@ -79,7 +79,7 @@ class MaterialTagModel(ExportModelOperationsMixin('MaterialTagModel'), models.Mo
 
   class Meta:
     verbose_name = "Tag de Material"
-    verbose_name_plural = "4.1. Tags de Material"
+    verbose_name_plural = "Tags de Material"
 
   def __str__(self):
     return self.name
@@ -96,7 +96,7 @@ class MaterialModel(ExportModelOperationsMixin('MaterialModel'), models.Model):
 
   class Meta:
     verbose_name = "Material de Unidade Curricular"
-    verbose_name_plural = "4.2. Materiais das Unidades Curriculares"
+    verbose_name_plural = "Materiais das Unidades Curriculares"
 
   def __str__(self):
     return self.name
@@ -113,7 +113,7 @@ class CalendarModel(ExportModelOperationsMixin('CalendarModel'), models.Model):
   
   class Meta:
     verbose_name = "Evento de Calendário"
-    verbose_name_plural = "5. Eventos de Calendário"
+    verbose_name_plural = "Eventos de Calendário"
     
   def __str__(self):
     return self.name
@@ -126,7 +126,7 @@ class MentoringRequestModel(ExportModelOperationsMixin('MentoringRequestModel'),
 
   class Meta:
     verbose_name = "Pedido de Mentoria"
-    verbose_name_plural = "6.1. Pedidos de Mentoria"
+    verbose_name_plural = "Pedidos de Mentoria"
 
   def __str__(self):
     return self.mentee.username + " - " + self.curricular_unit.name
@@ -140,39 +140,17 @@ class MentoringModel(ExportModelOperationsMixin('MentoringModel'), models.Model)
 
   class Meta:
     verbose_name = "Mentoria"
-    verbose_name_plural = "6.2. Mentorias"
+    verbose_name_plural = "Mentorias"
 
   def __str__(self):
     return self.mentor.username + " -> " + self.mentee.username + ": " + self.curricular_unit.name
-
-class MentoringReviewModel(ExportModelOperationsMixin('MentoringReviewModel'), models.Model):
-  mentoring = models.ForeignKey(MentoringModel, on_delete=models.CASCADE, related_name='mentoring')
-  comment = models.TextField()
-  rating = models.IntegerField(
-    choices=[
-      (0, '0'),
-      (1, '1'),
-      (2, '2'),
-      (3, '3'),
-      (4, '4'),
-      (5, '5')
-    ]
-  )
-  date = models.DateTimeField(auto_now_add=True)
-
-  class Meta:
-    verbose_name = "Review de Mentoria"
-    verbose_name_plural = "6.3. Reviews de Mentoria"
-    
-  def __str__(self):
-    return self.mentee.username + " -> " + self.mentor.username + ": " + self.curricular_unit.name
 
 class BlogTopicModel(ExportModelOperationsMixin('BlogTopicModel'), models.Model):
   name = models.TextField()
 
   class Meta:
     verbose_name = "Tópico de Blog"
-    verbose_name_plural = "7.1. Tópicos de Blog"
+    verbose_name_plural = "Tópicos de Blog"
 
   def __str__(self):
     return self.name
@@ -184,7 +162,7 @@ class BlogImageModel(ExportModelOperationsMixin('BlogImageModel'), models.Model)
 
   class Meta:
     verbose_name = "Imagem de Blog"
-    verbose_name_plural = "7.2. Imagens de Blog"
+    verbose_name_plural = "Imagens de Blog"
 
   def __str__(self):
     return self.name
@@ -201,7 +179,7 @@ class BlogPostModel(ExportModelOperationsMixin('BlogPostModel'), models.Model):
 
   class Meta:
     verbose_name = "Post de Blog"
-    verbose_name_plural = "7.3. Posts de Blog"
+    verbose_name_plural = "Posts de Blog"
 
   def __str__(self):
     return self.title
@@ -211,12 +189,12 @@ class ProfileModel(ExportModelOperationsMixin('ProfileModel'), models.Model):
   course = models.ManyToManyField(CourseModel, blank=True)
   year = models.IntegerField(
     choices=[
-      (1, '1º'),
-      (2, '2º'),
-      (3, '3º'),
+      (1, '1st'),
+      (2, '2nd'),
+      (3, '3rd'),
       (4, 'Erasmus'),
       (5, 'Alumni')
-    ], null=True
+    ], null=True, blank=True
   )
   image = models.ImageField(null=True, blank=True)
   bio = models.TextField(null=True, blank=True)
@@ -224,7 +202,7 @@ class ProfileModel(ExportModelOperationsMixin('ProfileModel'), models.Model):
   class Meta:
     ordering = ['user']
     verbose_name = "Perfil de Utilizador"
-    verbose_name_plural = "8. Perfis de Utilizadores"  
+    verbose_name_plural = "Perfis de Utilizadores"  
 
   def __str__(self):
     return self.user.username

@@ -46,12 +46,6 @@ class MentoringAdmin(admin.ModelAdmin):
 
 admin.site.register(MentoringModel, MentoringAdmin)
 
-class MentoringReviewAdmin(admin.ModelAdmin):
-  list_display = ('mentoring', 'comment', 'rating', 'date')
-  list_filter = list_display
-
-admin.site.register(MentoringReviewModel, MentoringReviewAdmin)
-
 admin.site.register(BlogTopicModel)
 admin.site.register(BlogImageModel)
 

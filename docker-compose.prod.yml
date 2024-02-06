@@ -108,9 +108,9 @@ services:
     networks:
       - nei
     ports:
-      - "0.0.0.0:80:80"
+      - "0.0.0.0:80:8000"
     healthcheck:
-      test: ["CMD-SHELL", "curl --fail http://localhost:80/hello/ || exit 1"]
+      test: ["CMD-SHELL", "curl --fail http://localhost:8000/hello/ || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -151,9 +151,6 @@ services:
     volumes:
       - ./grafana:/etc/grafana/provisioning/datasources
       - grafana_data:/var/lib/grafana
-    environment:
-      - GF_SECURITY_ADMIN_USER=$GRAFANA_USER
-      - GF_SECURITY_ADMIN_PASSWORD=$GRAFANA_PASSWORD
     networks:
       - nei
     depends_on:
