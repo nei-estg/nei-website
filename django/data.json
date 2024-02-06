@@ -681,16 +681,16 @@
   ],
   "FAQs": [
     {
-      "Section 1": [
+      "NEI": [
         {
-          "question": "",
-          "answer": ""
+          "question": "Como surgiu o NEI?",
+          "answer": "O NEI surgiu em 2023, quando um grupo de amigos decidiu criar um Núcleo de Estudantes de Informática. O objetivo era criar um espaço onde os estudantes pudessem partilhar conhecimentos e experiências."
         }
       ],
-      "Section 2": [
+      "ESTG": [
         {
-          "question": "",
-          "answer": ""
+          "question": "Já existiu algum NEI na ESTG?",
+          "answer": "Pelo que sabemos já, mas não temos informações sobre o mesmo. Uma coisa temos a certeza, desta vez é para ficar!"
         }
       ]
     }

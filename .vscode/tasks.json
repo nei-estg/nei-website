@@ -85,7 +85,7 @@
     {
       "label": "Django Add Static Data",
       "type": "shell",
-      "command": "docker-compose exec django python manage.py update_from_json",
+      "command": "docker-compose exec django python manage.py add_from_json",
       "group": {
         "kind": "build",
         "isDefault": false
