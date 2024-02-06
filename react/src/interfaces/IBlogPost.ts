@@ -2,7 +2,7 @@ import { IBlogImage } from "./IBlogImage";
 import { IBlogTopic } from "./IBlogTopic";
 import { IUser } from "./IUser";
 
-export interface IBogPost {
+export interface IBlogPost {
   id?: number;
   title: string;
   description: string;

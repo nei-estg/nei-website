@@ -5,7 +5,8 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useEffect, useState } from "react";
 import { ICalendar } from "@src/interfaces/ICalendar";
 import "../components/calendar/calendar.css";
-import { getCalendar } from "@src/api/CalendarRoutes";
+import { createCalendarEvent, getCalendarEvents } from "@src/api/CalendarRoutes";
+import { toast, Bounce } from "react-toastify";
 
 moment.locale("pt-BR"); // Set the locale to Portuguese
 const localizer = momentLocalizer(moment);
@@ -24,14 +25,36 @@ export default function CalendarPage() {
   const [eventsData, setEventsData] = useState<ICalendar[]>([]);
 
   useEffect(() => {
-    getCalendar().then((result) => {
+    getCalendarEvents().then((result) => {
       const calendar: ICalendar[] = result;
       setEventsData(calendar);
     }).catch();
   }, [])
 
   const handleSelect = () => {
-    const title = window.prompt("New Event name");
+    //TODO: Get Data from User
+    const newCalendar: ICalendar = {
+      name: "Test Event Creation",
+      startDate: new Date(),
+      endDate: new Date(),
+      description: "Lorem Ipsim ...",
+      place: "Sala P7"
+      //! Acho que nao vale a pena escolher a unidade curricular
+    }
+    createCalendarEvent(newCalendar).then((result: ICalendar) => {
+      toast.success("Evento criado com sucesso! O NEI irá rever o teu evento!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      setEventsData([...eventsData, result]);
+    }).catch();
   };
 
   // Map eventsData to the format expected by react-big-calendar

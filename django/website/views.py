@@ -36,13 +36,13 @@ class CalendarViewSet(CreateAndViewModelViewSet):
   """
   queryset = CalendarModel.objects.filter(visible=True)
   serializer_class = CalendarSerializer
-  permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
+  permission_classes = [permissions.IsAuthenticated]
   filterset_fields = CalendarSerializer.Meta.fields
   pagination_class = None
   
   def create(self, request, *args, **kwargs):
-    if isinstance(self.request.data, dict):
-      self.request.data._mutable = True
+    #if isinstance(self.request.data, dict):
+      #self.request.data._mutable = True
     self.request.data['visible'] = False
     return super().create(request, *args, **kwargs)
 
@@ -99,8 +99,8 @@ class MentoringRequestViewSet(viewsets.ModelViewSet):
   #TODO: Test this methods and limit access to this ViewSet
 
   def create(self, request, *args, **kwargs):
-    if isinstance(self.request.data, dict):
-      self.request.data._mutable = True
+    #if isinstance(self.request.data, dict):
+      #self.request.data._mutable = True
     self.request.data['mentee'] = request.user.id
     return super().create(request, *args, **kwargs)
 
@@ -157,6 +157,7 @@ class UserViewSet(CreateAndViewModelViewSet):
   serializer_class = UserSerializer
   permission_classes = []
   filterset_fields = ['id', 'username', 'first_name', 'last_name', 'email']
+  pagination_class = None
   
   #TODO: Add more limit access to this ViewSet
   

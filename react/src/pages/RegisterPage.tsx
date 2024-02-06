@@ -10,15 +10,16 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { IRegister } from "@src/interfaces/IRegister";
 import { registerUser } from "@src/api/UserRoutes";
+import { toast, Bounce } from "react-toastify";
+import { IUser } from "@src/interfaces/IUser";
 
 const defaultTheme = createTheme();
 
 export default function Register() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const signUp: IRegister = {
+    const signUp: IUser = {
       username: event.currentTarget.username.value,
       password: event.currentTarget.password.value,
       first_name: event.currentTarget.firstName.value,
@@ -29,12 +30,22 @@ export default function Register() {
         year: event.currentTarget.year.value,
       },
     };
-    const result = await registerUser(signUp);
-    if (result != "") {
-      alert(result);
-      return;
+    try {
+      await registerUser(signUp);
+      window.location.href = "/login";
+    } catch (error) {
+      toast.error("There was an error with your registration!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
-    window.location.href = "/login";
   };
 
   return (
