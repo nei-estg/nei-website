@@ -40,7 +40,7 @@ const settings =
   ],
 };
 
-function NavBar() {
+function NavBarMain() {
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -64,7 +64,7 @@ function NavBar() {
 
   return (
     <div style={{ zIndex: 9999, position: 'relative' }}>
-    <AppBar position="static" sx={{ backgroundColor: '#002454' }}>
+    <AppBar position="static" elevation={0} sx={{ backgroundColor: "transparent" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* screen > 899 x 877 */}
@@ -154,4 +154,4 @@ function NavBar() {
     </div>
   );
 }
-export default NavBar;
+export default NavBarMain;

@@ -3,8 +3,9 @@ import Router from "./router/Router";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
-import {Footer} from "./components/footer/Footer";
+import FooterWrapper from "./components/footer/FooterWrapper";
 import NavBar from "./components/navbar/NavBar";
+import NavBarWrapper from "./components/navbar/NavBarWrapper";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { createTheme } from '@mui/material/styles';
@@ -30,11 +31,11 @@ function App() {
             color: "text.primary",
           }}
         >
-          <NavBar/>
+          <NavBarWrapper/>
           <Container maxWidth={false} disableGutters={true} sx={{ flexGrow: 1 }}>
             <Router />
           </Container>
-          <Footer />
+          <FooterWrapper />
           <ToastContainer />
         </Box>
       </BrowserRouter>

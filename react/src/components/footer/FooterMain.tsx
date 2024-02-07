@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import logo from "../../assets/logo.png";
 
-export const Footer = () => {
+export const FooterMain = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -19,7 +19,7 @@ export const Footer = () => {
     <div style={{ zIndex: 9999, position: 'relative' }}>
       <Box
         component="footer"
-        style={{ backgroundColor: "#002855", color: "#ffffff" }}
+        style={{ color: "#ffffff" }}
         sx={{
           p: 6,
         }}
