@@ -44,5 +44,7 @@ jobs:
 
       - name: Push Docker Images
         run: |
-          docker push nei-website-django
-          docker push nei-website-nginx
+          docker tag nei-website-django joaopsoliveira2003/nei-website:django
+          docker push joaopsoliveira2003/nei-website:django
+          docker tag nei-website-react joaopsoliveira2003/nei-website:react
+          docker push joaopsoliveira2003/nei-website:react
