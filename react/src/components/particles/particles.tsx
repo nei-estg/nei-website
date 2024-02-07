@@ -39,10 +39,10 @@ export const Particle = () => {
                   },
                   modes: {
                       push: {
-                          quantity: 4,
+                          quantity: 8,
                       },
                       repulse: {
-                          distance: 100,
+                          distance: 120,
                           duration: 0.4,
                       },
                   },
@@ -59,10 +59,10 @@ export const Particle = () => {
                       width: 1,
                   },
                   move: {
-                      direction: "none",
+                      direction: "none", // "none", "top", "top-right", "right", "bottom-right", "bottom", "bottom-left", "left", "top-left"
                       enable: true,
                       outModes: {
-                          default: "out",
+                          default: "bounce", // "bounce" | "none" | OutMode | "bounceHorizontal" | "bounceVertical" | "out" | "destroy" | "split"
                       },
                       random: false,
                       speed: 1,
@@ -71,15 +71,15 @@ export const Particle = () => {
                   number: {
                       density: {
                           enable: true,
-                          area: 800,
+                          area: 800, // Here, we can change the area of particles. Lower number = more particles
                       },
-                      value: 50,
+                      value: 50, // Here, we can change the number of particles
                   },
                   opacity: {
                       value: 0.5,
                   },
                   shape: {
-                      type: "rectangle",
+                      type: "circle", // "circle", "square", "triangle", "polygon", "star", "image"
                   },
                   size: {
                       value: { min: 1, max: 5 },

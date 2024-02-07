@@ -49,7 +49,7 @@ export default function FrontPage() {
       });
   };
   return (
-    <div style={{ height: '150vh' }}>
+    <div style={{ height: '60vh' }}>
       <div style={{ zIndex: 2, position: 'relative', textAlign: "center" }}>
         <Typography style={{ color: 'white' }}>FrontPage</Typography>
         <Button onClick={handleSubmit}>
