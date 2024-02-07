@@ -37,13 +37,9 @@ export const loginUser = async (login : IUser) => {
 };
 
 export const registerUser = async (register : IUser) => {
-  try {
-    const response = await client.post('/api/user/', register);
-    if (response.status !== 201) throw new Error(response.data);
-    return response.data as IUser;
-  } catch (error) {
-    throw new Error("There was an error creating a user.");
-  }
+  const response = await client.post('/api/user/', register);
+  if (response.status !== 201) throw new Error(response.data);
+  return response.data as IUser;
 };
 
 export const logoutUser = async (allDevices: boolean) => {
@@ -62,11 +58,7 @@ export const logoutUser = async (allDevices: boolean) => {
 };
 
 export const getUser = async () => {
-  try {
-    const response = await AuthenticatedClient.get('/api/user/');
-    if (response.status !== 200) throw new Error(response.data);
-    return response.data[0] as IUser;
-  } catch (error) {
-    throw new Error("There was an error fetching the user.");
-  }
+  const response = await AuthenticatedClient.get('/api/user/');
+  if (response.status !== 200) throw new Error(response.data);
+  return response.data[0] as IUser;
 }

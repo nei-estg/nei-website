@@ -106,7 +106,7 @@ export default function AboutFAQPage() {
       const faq: FaqSection[] = transformData(result);
       setFaq(faq);
     }).catch(() => {
-      console.log("There was an error fetching FAQ data!");
+      //console.log("There was an error fetching FAQ data!");
     });
   }, [])
 

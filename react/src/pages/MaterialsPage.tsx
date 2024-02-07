@@ -47,7 +47,7 @@ export default function MaterialsPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "dark",
         transition: Bounce,
       });
     }).catch(() => {
@@ -59,7 +59,7 @@ export default function MaterialsPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "dark",
         transition: Bounce,
       });
     });

@@ -17,7 +17,7 @@ export default function FrontPage() {
     sendContactForm(newContact)
       .then(() => {
         toast.success(
-          'Contacto criado com sucesso! O NEI irá responder os mais rápido possível!',
+          'Contacto criado com sucesso! O NEI irá responder o mais rápido possível!',
           {
             position: 'top-right',
             autoClose: 5000,
@@ -26,7 +26,7 @@ export default function FrontPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: 'light',
+            theme: 'dark',
             transition: Bounce,
           }
         );
@@ -42,7 +42,7 @@ export default function FrontPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: 'light',
+            theme: 'dark',
             transition: Bounce,
           }
         );

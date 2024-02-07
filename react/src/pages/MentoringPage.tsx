@@ -48,7 +48,7 @@ export default function MentoringPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "dark",
         transition: Bounce,
       });
     }).catch(() => {
@@ -60,7 +60,7 @@ export default function MentoringPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "dark",
         transition: Bounce,
       });
     });
@@ -87,7 +87,7 @@ export default function MentoringPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "dark",
         transition: Bounce,
       });
     }).catch(() => {
@@ -99,7 +99,7 @@ export default function MentoringPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "dark",
         transition: Bounce,
       });
     });
