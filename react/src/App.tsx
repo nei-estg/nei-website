@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     const handler = () => {
       console.log('Developer console is open!');
-      // You can replace the above log with any action you want to take when the console is opened
+
       alert('Developer console is open!');
     };
 
