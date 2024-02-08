@@ -45,6 +45,44 @@ const direcao: DirecaoItem[] =
   ];
 
 
+interface CourseItem {
+  name: string;
+  sigla: string;
+  photo: string;
+  URL: string;
+}
+interface CoursesItem {
+  type: string;
+  course: CourseItem[];
+}
+const courses: CoursesItem[] =
+  [
+    {
+      type: "CTESP",
+      course: [
+        { name: "Curso Técnico Superior Profissional em Cibersegurança, Redes e Sistemas Informáticos", sigla: "CRSI", photo: "", URL: "https://www.estg.ipp.pt/cursos/ctesp/810" },
+        { name: "Curso Técnico Superior Profissional em Desenvolvimento para a Web e Dispositivos Móveis", sigla: "DWDM", photo: "", URL: "https://www.estg.ipp.pt/cursos/ctesp/809" },
+      ]
+    },
+
+    {
+      type: "Licenciatura",
+      course: [
+        { name: "Licenciatura em Segurança Informática em Redes de Computadores", sigla: "LSRIC", photo: "", URL: "https://www.estg.ipp.pt/cursos/licenciatura/557" },
+        { name: "Licenciatura em Engenharia Informática", sigla: "LEI", photo: "", URL: "https://www.estg.ipp.pt/cursos/licenciatura/551" },
+        { name: "Licenciatura em Sistemas de Informação para a Gestão", sigla: "LSIG", photo: "", URL: "https://www.estg.ipp.pt/cursos/licenciatura/630" },
+      ]
+    },
+
+    {
+      type: "Mestrado",
+      course: [
+        { name: "Mestrado em Engenharia Informática", sigla: "MEI", photo: "", URL: "https://www.estg.ipp.pt/cursos/mestrado/807" },
+      ]
+    },
+  ];
+
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -281,6 +319,53 @@ export default function AboutFAQPage() {
           </div>
         ))}
 
+
+
+        {/*Cursos*/}
+        <Typography variant="subtitle1"
+          sx={{
+            color: '#969696',
+            display: 'flex',
+            fontWeight: 600,
+            flexDirection: 'column',
+            alignItems: 'center',
+            marginTop: '60px',
+          }}
+        >Cursos representados pela NEI</Typography>
+
+        {/*Tabs Cursos*/}
+        <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+          <Tabs
+            value={valueCourse}
+            onChange={handleChangeCourse}
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs example">
+
+            {courses.map((course, index) => (
+              <Tab label={course.type} key={index} />
+            ))}
+          </Tabs>
+        </Box>
+
+        {/* Conteudo de cada curso */}
+        {courses.map((courses, index) => (
+          <div key={index} style={{ display: valueCourse === index ? 'block' : 'none' }}>
+            <Grid container spacing={1} justifyContent="center">
+              {courses.course.map((course, courseIndex) => (
+                <Grid item xs={12} sm={4} md={3} lg={2} xl={1} key={courseIndex} display="flex" sx={{ marginBottom: '1px', [defaultTheme.breakpoints.up('xl')]: { marginRight: '41px', }, }}>
+                  <Grid container direction="column" display="flex">
+                    <Item>
+                      <Avatar src={course.photo} sx={{ width: '115px', height: '128px', marginBottom: '10px' }} variant="rounded" />
+                      <Typography variant="subtitle1" color="primary">{course.sigla}</Typography>
+                      <Typography variant="subtitle2">{course.name}</Typography>
+                    </Item>
+                  </Grid>
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        ))}
 
 
 
