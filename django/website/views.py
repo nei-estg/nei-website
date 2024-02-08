@@ -8,6 +8,9 @@ from .serializers import *
 class CreateOnlyModelViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
   pass
 
+class CreateAndViewModelViewSet(mixins.CreateModelMixin, viewsets.ReadOnlyModelViewSet):
+  pass
+
 class ContactViewSet(CreateOnlyModelViewSet):
   """
   API endpoint that allows people to contact us.
@@ -17,72 +20,87 @@ class ContactViewSet(CreateOnlyModelViewSet):
   permission_classes = []
   filterset_fields = ContactSerializer.Meta.fields
 
-class FAQViewSet(viewsets.ModelViewSet):
+class FAQViewSet(viewsets.ReadOnlyModelViewSet):
   """
   API endpoint that allows FAQs to be viewed.
   """
   queryset = FAQModel.objects.all()
   serializer_class = FAQSerializer
-  permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
+  permission_classes = []
   filterset_fields = FAQSerializer.Meta.fields
+  pagination_class = None
 
-class CalendarViewSet(viewsets.ModelViewSet):
+class CalendarViewSet(CreateAndViewModelViewSet):
   """
-  API endpoint that allows calendars to be viewed or edited.
+  API endpoint that allows calendar events to be viewed or created.
   """
-  queryset = CalendarModel.objects.all()
+  queryset = CalendarModel.objects.filter(visible=True)
   serializer_class = CalendarSerializer
-  permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
+  permission_classes = [permissions.IsAuthenticated]
   filterset_fields = CalendarSerializer.Meta.fields
+  pagination_class = None
+  
+  def create(self, request, *args, **kwargs):
+    #if isinstance(self.request.data, dict):
+      #self.request.data._mutable = True
+    self.request.data['visible'] = False
+    return super().create(request, *args, **kwargs)
 
-class CourseViewSet(viewsets.ModelViewSet):
+class CourseViewSet(viewsets.ReadOnlyModelViewSet):
   """
   API endpoint that allows courses to be viewed.
   """
   queryset = CourseModel.objects.all()
   serializer_class = CourseSerializer
-  permission_classes = [permissions.DjangoObjectPermissions]
+  permission_classes = []
   filterset_fields = CourseSerializer.Meta.fields
+  pagination_class = None
 
-class CurricularUnitViewSet(viewsets.ModelViewSet):
+class CurricularUnitViewSet(viewsets.ReadOnlyModelViewSet):
   """
   API endpoint that allows curricular units to be viewed.
   """
   queryset = CurricularUnitModel.objects.all()
   serializer_class = CurricularUnitSerializer
-  permission_classes = [permissions.DjangoObjectPermissions]
+  permission_classes = []
   filterset_fields = CurricularUnitSerializer.Meta.fields
+  pagination_class = None
 
-class MaterialTagViewSet(viewsets.ModelViewSet):
+class MaterialTagViewSet(viewsets.ReadOnlyModelViewSet):
   """
   API endpoint that allows material tags to be viewed.
   """
   queryset = MaterialTagModel.objects.all()
   serializer_class = MaterialTagSerializer
-  permission_classes = [permissions.DjangoObjectPermissions]
+  permission_classes = []
   filterset_fields = MaterialTagSerializer.Meta.fields
+  pagination_class = None
 
-class MaterialViewSet(viewsets.ModelViewSet):
+class MaterialViewSet(CreateAndViewModelViewSet):
   """
   API endpoint that allows materials to be viewed or edited.
   """
   queryset = MaterialModel.objects.all()
   serializer_class = MaterialSerializer
-  permission_classes = [permissions.DjangoObjectPermissions]
-  filterset_fields = ['name', 'tags', 'curricular_unit']
+  permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
+  filterset_fields = ['name', 'tags', 'curricularUnit']
+  
+  #TODO: Add Create method
 
 class MentoringRequestViewSet(viewsets.ModelViewSet):
   """
   API endpoint that allows mentorship requests to be viewed or edited.
   """
   queryset = MentoringRequestModel.objects.all()
-  serializer_class = MentorshipRequestSerializer
+  serializer_class = MentoringRequestSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
-  filterset_fields = MentorshipRequestSerializer.Meta.fields
+  filterset_fields = MentoringRequestSerializer.Meta.fields
+
+  #TODO: Test this methods and limit access to this ViewSet
 
   def create(self, request, *args, **kwargs):
-    if isinstance(self.request.data, dict):
-      self.request.data._mutable = True
+    #if isinstance(self.request.data, dict):
+      #self.request.data._mutable = True
     self.request.data['mentee'] = request.user.id
     return super().create(request, *args, **kwargs)
 
@@ -99,44 +117,39 @@ class MentoringViewSet(viewsets.ModelViewSet):
   serializer_class = MentoringSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
   filterset_fields = MentoringSerializer.Meta.fields
+  
+  #TODO: Add methods and limit access to this ViewSet
 
-class MentoringReviewViewSet(viewsets.ModelViewSet):
+class BlogTopicViewSet(viewsets.ReadOnlyModelViewSet):
   """
-  API endpoint that allows mentorship reviews to be viewed or edited.
-  """
-  queryset = MentoringReviewModel.objects.all()
-  serializer_class = MentoringReviewSerializer
-  permission_classes = [permissions.DjangoObjectPermissions]
-  filterset_fields = MentoringReviewSerializer.Meta.fields
-
-class BlogTopicViewSet(viewsets.ModelViewSet):
-  """
-  API endpoint that allows blog topics to be viewed or edited.
+  API endpoint that allows blog topics to be viewed.
   """
   queryset = BlogTopicModel.objects.all()
   serializer_class = BlogTopicSerializer
-  permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
+  permission_classes = []
   filterset_fields = BlogTopicSerializer.Meta.fields
+  pagination_class = None
 
-class BlogImageViewSet(viewsets.ModelViewSet):
+class BlogImageViewSet(viewsets.ReadOnlyModelViewSet):
   """
-  API endpoint that allows blog images to be viewed or edited.
+  API endpoint that allows blog images to be viewed.
   """
   queryset = BlogImageModel.objects.all()
   serializer_class = BlogImageSerializer
-  permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
+  permission_classes = []
   filterset_fields = ['id', 'name']
+  pagination_class = None
 
-class BlogPostViewSet(viewsets.ModelViewSet):
+class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
   """
-  API endpoint that allows blog posts to be viewed or edited.
+  API endpoint that allows blog posts to be viewed.
   """
   queryset = BlogPostModel.objects.all()
   serializer_class = BlogPostSerializer
-  permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
+  permission_classes = []
   filterset_fields = BlogPostSerializer.Meta.fields
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(CreateAndViewModelViewSet):
   """
   API endpoint that allows users to be viewed or edited.
   """
@@ -144,5 +157,12 @@ class UserViewSet(viewsets.ModelViewSet):
   serializer_class = UserSerializer
   permission_classes = []
   filterset_fields = ['id', 'username', 'first_name', 'last_name', 'email']
+  pagination_class = None
   
-  #TODO: Limit access to this ViewSet
+  #TODO: Add more limit access to this ViewSet
+  
+  #! Limit so that is only possible to see the same user
+  def get_queryset(self):
+    if self.request.user.is_superuser:
+      return User.objects.all()
+    return User.objects.filter(id=self.request.user.id)

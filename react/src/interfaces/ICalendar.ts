@@ -3,8 +3,10 @@ import { ICurricularUnit } from "./ICurricularUnit";
 export interface ICalendar {
   id?: number,
   name: string,
-  date: Date,
+  startDate: Date,
+  endDate: Date,
   description: string,
-  curricular_unit?: ICurricularUnit
-  place?: string
+  curricularUnit?: ICurricularUnit
+  place?: string,
+  visible?: boolean
 }

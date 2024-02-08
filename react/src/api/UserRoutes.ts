@@ -2,10 +2,9 @@ import client from './Client';
 import AuthenticatedClient from './AuthenticatedClient';
 import { AxiosError } from 'axios';
 
-import { ILogin } from '../interfaces/ILogin';
-import { IRegister } from '../interfaces/IRegister';
+import { IUser } from '@src/interfaces/IUser';
 
-export const loginUser = async (login : ILogin) => {
+export const loginUser = async (login : IUser) => {
   try {
     const base64Credentials = btoa(`${login.username}:${login.password}`);
     const response = await client.post(
@@ -31,22 +30,16 @@ export const loginUser = async (login : ILogin) => {
         if (error.response.status === 401) {
           return "Invalid credentials!";
         }
-        if (error.response.status === 500) {
-          return "Server Error!";
-        }
       }
     }
     return "Something went wrong!";
   }
 };
 
-export const registerUser = async (register : IRegister) => {
-  try {
-    const response = await client.post('/api/user/', register);
-    return response;
-  } catch (error) {
-    return error;
-  }
+export const registerUser = async (register : IUser) => {
+  const response = await client.post('/api/user/', register);
+  if (response.status !== 201) throw new Error(response.data);
+  return response.data as IUser;
 };
 
 export const logoutUser = async (allDevices: boolean) => {
@@ -57,8 +50,15 @@ export const logoutUser = async (allDevices: boolean) => {
       await AuthenticatedClient.post('/api/auth/logout/');
     }
   } catch (error) {
-    console.log(error);
+    // Do nothing
+  } finally {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiry');
   }
-  localStorage.removeItem('token');
-  localStorage.removeItem('expiry');
 };
+
+export const getUser = async () => {
+  const response = await AuthenticatedClient.get('/api/user/');
+  if (response.status !== 200) throw new Error(response.data);
+  return response.data[0] as IUser;
+}

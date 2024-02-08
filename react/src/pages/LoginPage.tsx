@@ -10,16 +10,16 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { ILogin } from "@src/interfaces/ILogin";
 import { loginUser } from "@src/api/UserRoutes";
 import { toast, Bounce } from "react-toastify";
+import { IUser } from "@src/interfaces/IUser";
 
 const defaultTheme = createTheme();
 
 export default function LoginPage() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const signIn: ILogin = {
+    const signIn: IUser = {
       username: event.currentTarget.username.value,
       password: event.currentTarget.password.value,
     };
@@ -33,7 +33,7 @@ export default function LoginPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "dark",
         transition: Bounce,
       });
       return;

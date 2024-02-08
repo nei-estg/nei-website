@@ -15,36 +15,36 @@ admin.site.register(FAQCategoryModel)
 admin.site.register(FAQModel, FAQAdmin)
 
 class CurricularUnitAdmin(admin.ModelAdmin):
-  list_display = ('abbreviation', 'name') #TODO: Add Course
-  list_filter = list_display
+  list_display = ('abbreviation', 'name')
+  list_filter = list_display + ('course',)
 
 admin.site.register(CourseModel)
 admin.site.register(CurricularUnitModel, CurricularUnitAdmin)
 
 class MaterialAdmin(admin.ModelAdmin):
-  list_display = ('name', 'file', 'link', 'curricular_unit', 'visible') #TODO: Add Course
+  list_display = ('name', 'file', 'link', 'curricularUnit', 'visible')
   list_filter = list_display
 
 admin.site.register(MaterialTagModel)
 admin.site.register(MaterialModel, MaterialAdmin)
 
+class CalendarAdmin(admin.ModelAdmin):
+  list_display = ('name', 'startDate', 'endDate', 'description', 'visible')
+  list_filter = list_display
+
+admin.site.register(CalendarModel, CalendarAdmin)
+
 class MentoringRequestAdmin(admin.ModelAdmin):
-  list_display = ('mentee', 'curricular_unit', 'date') #TODO: Add Course
+  list_display = ('mentee', 'curricularUnit', 'date')
   list_filter = list_display
 
 admin.site.register(MentoringRequestModel, MentoringRequestAdmin)
 
 class MentoringAdmin(admin.ModelAdmin):
-  list_display = ('mentee', 'mentor', 'curricular_unit', 'date') #TODO: Add Course
+  list_display = ('mentee', 'mentor', 'curricularUnit', 'date')
   list_filter = list_display
 
 admin.site.register(MentoringModel, MentoringAdmin)
-
-class MentoringReviewAdmin(admin.ModelAdmin):
-  list_display = ('mentoring', 'comment', 'rating', 'date')
-  list_filter = list_display
-
-admin.site.register(MentoringReviewModel, MentoringReviewAdmin)
 
 admin.site.register(BlogTopicModel)
 admin.site.register(BlogImageModel)

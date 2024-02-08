@@ -19,28 +19,28 @@ import isLoggedIn from '@src/api/utils/LoginStatus';
 
 const navbar = {
   pages: [
-    { id: 1, name: 'Sobre Nós', URL: '/about', requiredLogin: false },
-    { id: 2, name: 'Blog', URL: '/blog', requiredLogin: false },
-    { id: 3, name: 'Calendário', URL: '/calendar', requiredLogin: false },
-    { id: 4, name: 'Mentoria', URL: '/mentoring', requiredLogin: true },
-    { id: 5, name: 'Materiais', URL: '/materials', requiredLogin: false },
+    { name: 'Sobre Nós', URL: '/about', requiredLogin: false },
+    { name: 'Blog', URL: '/blog', requiredLogin: false },
+    { name: 'Calendário', URL: '/calendar', requiredLogin: false },
+    { name: 'Mentoria', URL: '/mentoring', requiredLogin: true },
+    { name: 'Materiais', URL: '/materials', requiredLogin: false },
   ],
 };
 
 const settings =
 {
   guest: [
-    { id: 1, name: "Iniciar Sessão", URL: "/login" },
-    { id: 2, name: "Criar Conta", URL: "/register" },
+    { name: "Iniciar Sessão", URL: "/login" },
+    { name: "Criar Conta", URL: "/register" },
   ],
   logged: [
-    { id: 3, name: 'Perfil', URL: "/profile" },
+    { name: 'Perfil', URL: "/profile" },
     //{ name: "Definições", URL: "" },
-    { id: 4, name: "Terminar Sessão", URL: "/logout" },
+    { name: "Terminar Sessão", URL: "/logout" },
   ],
 };
 
-function NavBar() {
+function NavBarMain() {
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -64,7 +64,7 @@ function NavBar() {
 
   return (
     <div style={{ zIndex: 9999, position: 'relative' }}>
-    <AppBar position="static" sx={{ backgroundColor: '#002454' }}>
+    <AppBar position="static" elevation={0} sx={{ backgroundColor: "transparent" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* screen > 899 x 877 */}
@@ -77,7 +77,7 @@ function NavBar() {
             <Menu id="menu-appbar" anchorEl={anchorElNav} anchorOrigin={{ vertical: 'bottom', horizontal: 'left', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'left', }}
               open={Boolean(anchorElNav)} onClose={handleCloseNavMenu} sx={{ display: { xs: 'block', md: 'none' }, }}>
               {navbar.pages.map((page) => (
-                <MenuItem key={page.id}
+                <MenuItem key={page.name}
                   onClick={() => { handleCloseNavMenu(); navigate(page.URL); }}
                   disabled={!isLoggedIn() && page.requiredLogin}>
                   <Button onClick={() => navigate(page.URL)} sx={{ color: 'inherit', textTransform: 'none' }}>{page.name}</Button>
@@ -107,7 +107,7 @@ function NavBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {navbar.pages.map((page) => (
-              <Button key={page.id}
+              <Button key={page.name}
                 onClick={() => { handleCloseNavMenu(); navigate(page.URL); }}
                 style={{
                   my: 2,
@@ -137,13 +137,13 @@ function NavBar() {
             <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right', }} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>
               {isLoggedIn()
                 ? settings.logged.map((setting) => (
-                  <Link key={setting.id} href={setting.URL} component="a" underline="none" color="inherit">
-                    <MenuItem onClick={handleCloseUserMenu}>{setting.name}</MenuItem>
+                  <Link href={setting.URL} component="a" underline="none" color="inherit">
+                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>{setting.name}</MenuItem>
                   </Link>
                 ))
                 : settings.guest.map((setting) => (
-                  <Link key={setting.id} href={setting.URL} component="a" underline="none" color="inherit">
-                    <MenuItem onClick={handleCloseUserMenu}>{setting.name}</MenuItem>
+                  <Link href={setting.URL} component="a" underline="none" color="inherit">
+                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>{setting.name}</MenuItem>
                   </Link>
                 ))}
             </Menu>
@@ -154,4 +154,4 @@ function NavBar() {
     </div>
   );
 }
-export default NavBar;
+export default NavBarMain;

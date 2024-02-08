@@ -3,12 +3,13 @@ import Router from "./router/Router";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
-import {Footer} from "./components/footer/Footer";
-import NavBar from "./components/navbar/NavBar";
+import FooterWrapper from "./components/footer/FooterWrapper";
+import NavBarWrapper from "./components/navbar/NavBarWrapper";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
+import { useEffect } from "react";
 
 function App() {
   const theme = createTheme({
@@ -16,6 +17,20 @@ function App() {
       fontFamily: 'Cabin, sans-serif',
     },
   });
+
+  useEffect(() => {
+    const handler = () => {
+      console.log('Developer console is open!');
+
+      alert('Developer console is open!');
+    };
+
+    window.addEventListener('devtoolschange', handler);
+
+    return () => {
+      window.removeEventListener('devtoolschange', handler);
+    };
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -30,11 +45,11 @@ function App() {
             color: "text.primary",
           }}
         >
-          <NavBar/>
+          <NavBarWrapper/>
           <Container maxWidth={false} disableGutters={true} sx={{ flexGrow: 1 }}>
             <Router />
           </Container>
-          <Footer />
+          <FooterWrapper />
           <ToastContainer />
         </Box>
       </BrowserRouter>

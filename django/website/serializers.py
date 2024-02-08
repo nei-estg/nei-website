@@ -10,8 +10,8 @@ class CourseSerializer(serializers.ModelSerializer):
     fields = ['id', 'name', 'abbreviation']
 
 class ProfileSerializer(serializers.ModelSerializer):
-  #course = CourseSerializer()
-  
+  course = CourseSerializer(many=True)
+
   class Meta:
     model = ProfileModel
     fields = ['course', 'year', 'image', 'bio']
@@ -20,20 +20,17 @@ class UserSerializer(serializers.ModelSerializer):
   profilemodel = ProfileSerializer()
   class Meta:
     model = User
-    fields = ['id', 'username', 'email', 'password', 'first_name', 'last_name', 'last_login', 'is_superuser', 'is_staff', 'is_active', 'date_joined', 'groups', 'user_permissions', 'profilemodel']
+    fields = ['id', 'username', 'email', 'password', 'first_name', 'last_name', 'last_login', 'is_staff', 'is_active', 'date_joined', 'profilemodel']
     extra_kwargs = {
       'password': {'write_only': True},
       'last_login': {'read_only': True},
-      'is_superuser': {'read_only': True},
       'is_staff': {'read_only': True},
       'is_active': {'read_only': True},
       'date_joined': {'read_only': True},
-      'groups': {'read_only': True},
-      'user_permissions': {'read_only': True}
     }
 
   @transaction.atomic
-  def create(self, validated_data):
+  def create(self, validated_data): #TODO: Test this
     validated_data['password'] = make_password(validated_data.get('password'))
     profile_data = validated_data.pop('profilemodel', None)
     course_data = profile_data.pop('course', None) if profile_data else None
@@ -74,27 +71,21 @@ class UserSerializer(serializers.ModelSerializer):
 class ContactSerializer(serializers.ModelSerializer):
   class Meta:
     model = ContactModel
-    fields = ['id', 'name', 'email', 'subject', 'message']
-    
+    fields = ['name', 'email', 'subject', 'message']
+
 class FAQCategorySerializer(serializers.ModelSerializer):
   class Meta:
     model = FAQCategoryModel
-    fields = '__all__'
+    fields = ['name']
 
 class FAQSerializer(serializers.ModelSerializer):
   category = FAQCategorySerializer()
   class Meta:
     model = FAQModel
-    fields = '__all__'
-    
-  def create(self, validated_data):
-    category_data = validated_data.pop('category')
-    category = FAQCategoryModel.objects.get_or_create(**category_data)[0]
-    faq = FAQModel.objects.create(category=category, **validated_data)
-    return faq
+    fields = ['question', 'answer', 'category']
 
 class CurricularUnitSerializer(serializers.ModelSerializer):
-  #course = CourseSerializer()
+  course = CourseSerializer(many=True)
   class Meta:
     model = CurricularUnitModel
     fields = '__all__'
@@ -102,55 +93,50 @@ class CurricularUnitSerializer(serializers.ModelSerializer):
 class MaterialTagSerializer(serializers.ModelSerializer):
   class Meta:
     model = MaterialTagModel
-    fields = '__all__'
+    fields = ['name']
 
 class MaterialSerializer(serializers.ModelSerializer):
-  tags = MaterialTagSerializer
+  tags = MaterialTagSerializer(many=True)
+  curricularUnit = CurricularUnitSerializer()
   class Meta:
     model = MaterialModel
-    fields = ['name', 'file', 'link', 'tags', 'curricular_unit']
+    fields = ['name', 'file', 'link', 'tags', 'curricularUnit', 'date']
 
 class CalendarSerializer(serializers.ModelSerializer):
-  curricular_unit = CurricularUnitSerializer()
+  curricularUnit = CurricularUnitSerializer(required=False)
   class Meta:
     model = CalendarModel
-    fields = '__all__'
+    fields = ['name', 'startDate', 'endDate', 'description', 'curricularUnit', 'place']
 
-class MentorshipRequestSerializer(serializers.ModelSerializer):
-  mentee = UserSerializer()
-  curricular_unit = CurricularUnitSerializer()
+class MentoringRequestSerializer(serializers.ModelSerializer):
+  mentee = UserSerializer(read_only=True)
+  curricularUnit = CurricularUnitSerializer(read_only=True)
   class Meta:
     model = MentoringRequestModel
-    fields = ['mentee', 'curricular_unit']
+    fields = ['mentee', 'curricularUnit', 'date']
 
 class MentoringSerializer(serializers.ModelSerializer):
-  mentor = UserSerializer()
-  mentee = UserSerializer()
-  curricular_unit = CurricularUnitSerializer()
+  mentor = UserSerializer(read_only=True)
+  mentee = UserSerializer(read_only=True)
+  curricularUnit = CurricularUnitSerializer(read_only=True)
   class Meta:
     model = MentoringModel
     fields = '__all__'
 
-class MentoringReviewSerializer(serializers.ModelSerializer):
-  mentoring = MentoringSerializer()
-  class Meta:
-    model = MentoringReviewModel
-    fields = ['mentoring', 'rating', 'comment']
-
 class BlogTopicSerializer(serializers.ModelSerializer):
   class Meta:
     model = BlogTopicModel
-    fields = '__all__'
+    fields = ['name']
 
 class BlogImageSerializer(serializers.ModelSerializer):
   class Meta:
     model = BlogImageModel
-    fields = '__all__'
+    fields = ['name', 'image']
 
 class BlogPostSerializer(serializers.ModelSerializer):
-  images = BlogImageSerializer()
-  topics = BlogTopicSerializer()
-  author = UserSerializer()
+  images = BlogImageSerializer(many=True, read_only=True)
+  topics = BlogTopicSerializer(many=True, read_only=True)
+  author = UserSerializer(read_only=True)
   class Meta:
     model = BlogPostModel
-    fields = '__all__'
+    fields = ['title', 'description', 'content', 'images', 'topics', 'author', 'date']

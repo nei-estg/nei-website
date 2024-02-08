@@ -7,6 +7,8 @@ networks:
 volumes:
   postgres_data:
   redis_data:
+  django_static_data:
+  django_media_data:
 
 services:
   postgres:
@@ -61,6 +63,8 @@ services:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     volumes:
       - ./django:/app
+      - django_static_data:/shared/static
+      - django_media_data:/shared/media
     networks:
       - nei
     ports:
@@ -100,6 +104,8 @@ services:
           cpus: "2"
     volumes:
       - ./nginx/nginx-dev.conf:/etc/nginx/nginx.conf
+      - django_static_data:/shared/static
+      - django_media_data:/shared/media
     networks:
       - nei
     ports:
