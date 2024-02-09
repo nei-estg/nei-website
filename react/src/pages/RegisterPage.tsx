@@ -195,7 +195,7 @@ export default function Register() {
                     value={selectedCourses} //? Ignore this error
                     onChange={handleChangeCourses}
                     input={<OutlinedInput label="Course" />}
-                    renderValue={(selected) => selected}
+                    renderValue={(selected) => selected + " "}
                     MenuProps={MenuProps}
                   >
                     {courses.map((course) => (
