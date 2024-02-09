@@ -13,11 +13,67 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { registerUser } from "@src/api/UserRoutes";
 import { toast, Bounce } from "react-toastify";
 import { IUser } from "@src/interfaces/IUser";
+import { ICourse } from "@src/interfaces/ICourse";
+import { useEffect } from "react";
+import { getCourses } from "@src/api/CourseRoutes";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+  Checkbox,
+  ListItemText,
+  OutlinedInput,
+} from "@mui/material";
 
 const defaultTheme = createTheme();
 
 export default function Register() {
+  const [courses, setCourses] = React.useState<ICourse[]>([]);
+
+  const [selectedCourses, setSelectedCourses] = React.useState<string[]>([]);
+
+  useEffect(() => {
+    getCourses()
+      .then((courses) => setCourses(courses))
+      .catch(() => {
+        toast.error("There was an error getting the courses!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+      });
+  }, []);
+
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
+  const handleChange = (event: SelectChangeEvent) => {
+    const {
+      target: { value },
+    } = event;
+    setSelectedCourses(
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const selectedCourses: ICourse[] = courses.filter((course) => selectedCourses.includes(course.id));
     event.preventDefault();
     const signUp: IUser = {
       username: event.currentTarget.username.value,
@@ -26,7 +82,7 @@ export default function Register() {
       last_name: event.currentTarget.lastName.value,
       email: event.currentTarget.email.value,
       profilemodel: {
-        course: event.currentTarget.course.value,
+        course: selectedCourses,
         year: event.currentTarget.year.value,
       },
     };
@@ -116,25 +172,37 @@ export default function Register() {
                 />
               </Grid>
               <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
-                  />
-              </Grid>
-              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  id="course"
-                  label="Course"
-                  name="course"
-                  autoComplete="course"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl fullWidth>
+                  <InputLabel id="course-label">Course</InputLabel>
+                  <Select
+                    labelId="course-label"
+                    id="course"
+                    multiple
+                    value={selectedCourses}
+                    onChange={handleChange}
+                    input={<OutlinedInput label="Course" />}
+                    renderValue={(selected) => (selected as unknown as string[]).join(", ")}
+                    MenuProps={MenuProps}
+                  >
+                    {courses.map((course) => (
+                      <MenuItem key={course.id} value={course.abbreviation}>
+                        <Checkbox checked={selectedCourses.indexOf(course.abbreviation) > -1} />
+                        <ListItemText primary={course.abbreviation} />
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
                 <TextField
