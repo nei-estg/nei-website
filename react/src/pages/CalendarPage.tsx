@@ -25,6 +25,7 @@ export default function CalendarPage() {
   const [eventsData, setEventsData] = useState<ICalendar[]>([]);
 
   useEffect(() => {
+    document.title = "Calendar - NEI"
     getCalendarEvents().then((result) => {
       const calendar: ICalendar[] = result;
       setEventsData(calendar);

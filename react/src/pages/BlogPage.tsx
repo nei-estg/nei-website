@@ -6,6 +6,7 @@ export default function BlogPage() {
   const [blogList, setBlogList] = useState<IBlogPost[]>([]);
 
   useEffect(() => {
+    document.title = "Blog - NEI";
     //TODO: Implement Pagination
     getBlogList().then((response) =>{
       setBlogList(response.results)

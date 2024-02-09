@@ -147,6 +147,7 @@ export default function AboutFAQPage() {
   const [faq, setFaq] = useState<FaqSection[]>([]);
 
   useEffect(() => {
+    document.title = "About - NEI";
     getFAQ().then((result) => {
       const faq: FaqSection[] = transformData(result);
       setFaq(faq);

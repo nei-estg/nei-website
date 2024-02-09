@@ -13,10 +13,16 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { loginUser } from "@src/api/UserRoutes";
 import { toast, Bounce } from "react-toastify";
 import { IUser } from "@src/interfaces/IUser";
+import { useEffect } from "react";
 
 const defaultTheme = createTheme();
 
 export default function LoginPage() {
+
+  useEffect(() => {
+    document.title = "Login - NEI";
+  }, []);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const signIn: IUser = {

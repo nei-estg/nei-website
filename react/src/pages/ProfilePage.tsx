@@ -6,6 +6,7 @@ export default function ProfilePage() {
   const [user, setUser] = useState<IUser>({} as IUser)
 
   useEffect(() => {
+    document.title = "Profile - NEI"
     getUser().then((response) => {
       setUser(response)
     }).catch()

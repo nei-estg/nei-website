@@ -54,4 +54,8 @@ class BlogPostAdmin(admin.ModelAdmin):
   list_filter = list_display
 
 admin.site.register(BlogPostModel, BlogPostAdmin)
-admin.site.register(ProfileModel)
+
+class ProfileAdmin(admin.ModelAdmin):
+  exclude = ('resetCode',)
+
+admin.site.register(ProfileModel, ProfileAdmin)

@@ -9,6 +9,7 @@ export default function MaterialsPage() {
   const [materialsList, setMaterialsList] = useState<IMaterial[]>([]);
 
   useEffect(() => {
+    document.title = "Materials - NEI"
     getMaterialsList().then((response) => {
       setMaterialsList(response)
     }).catch();

@@ -4,8 +4,14 @@ import { IContact } from '@src/interfaces/IContact';
 import { toast, Bounce } from 'react-toastify';
 import { Particle } from '@src/components/particles/particles';
 import { Typography } from '@mui/material';
+import { useEffect } from 'react';
 
 export default function FrontPage() {
+
+  useEffect(() => {
+    document.title = "Home - NEI";
+  } , []);
+
   const handleSubmit = () => {
     //TODO: Get Data from form
     const newContact: IContact = {

@@ -47,6 +47,7 @@ export default function Register() {
   const [selectedYear, setSelectedYear] = React.useState<string>("");
 
   useEffect(() => {
+    document.title = "Register - NEI";
     getCourses()
       .then((courses) => setCourses(courses))
       .catch(() => {
@@ -127,7 +128,7 @@ export default function Register() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up (falta ajustar backend)
+            Sign up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -170,7 +171,6 @@ export default function Register() {
                   fullWidth
                   id="username"
                   label="Username"
-                  autoFocus
                 />
               </Grid>
               <Grid item xs={12}>

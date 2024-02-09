@@ -10,6 +10,7 @@ export default function MentoringPage() {
   const [mentoringList, setMentoringList] = useState<IMentoring[]>([]);
 
   useEffect(() => {
+    document.title = "Mentoring - NEI"
     //TODO: Implement Pagination
     getMentoringRequestList().then((response) => {
       setMentoringRequestList(response.results)
