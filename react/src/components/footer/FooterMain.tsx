@@ -15,6 +15,13 @@ export const FooterMain = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const socialNetworks = [
+    {id: 1, name: "email", URL: "mailto:nei@estg.ipp.pt"},
+    {id: 2, name: "linkedin", URL: "https://www.linkedin.com/company/estg-nei"},
+    {id: 3, name: "instagram", URL: "https://www.instagram.com/nei_estg/"},
+    {id: 4, name: "discord", URL: "https://discord.gg/xbD38MS2e8"},
+  ];
+
   return (
     <div style={{ zIndex: 9999, position: 'relative' }}>
       <Box
@@ -26,18 +33,19 @@ export const FooterMain = () => {
       >
         <Container maxWidth="lg">
           <Grid container spacing={5}>
-            <Grid item xs={12} sm={5}>
+            <Grid item xs={12} sm={6}>
               <Grid
                 container
                 direction="row"
                 alignItems="center"
-                justifyContent={isSmallScreen ? "center" : "flex-start"}
+                justifyContent={isSmallScreen ? "center" : "center"}
               >
                 <img
                   src={logo}
                   alt="logo"
                   style={{
                     marginRight: "10px",
+                    marginBottom: '10px',
                     height: "100px",
                     width: "100px",
                   }}
@@ -45,13 +53,13 @@ export const FooterMain = () => {
                 <div>
                   <Typography
                     sx={{
-                      textAlign: { xs: "center", sm: "center", md: "left" },
+                      textAlign: { xs: "center", sm: "center", md: "center" },
                     }}
                     variant="body2"
                   >
                     NEI
                   </Typography>
-                  <Typography variant="body2">
+                  <Typography variant="body2" sx={{textAlign: "center"}}>
                     Núcleo de Estudantes de Informática da ESTG
                   </Typography>
                 </div>
@@ -61,77 +69,65 @@ export const FooterMain = () => {
               <Typography
                 variant="h6"
                 gutterBottom
-                align={isSmallScreen ? "center" : "inherit"}
-              >
-                Contacto
-              </Typography>
-
-              <Typography
-                variant="body2"
-                align={isSmallScreen ? "center" : "inherit"}
-              >
-                Email: nei@estg.ipp.pt
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={2}>
-              <Typography
-                variant="h6"
-                gutterBottom
-                align={isSmallScreen ? "center" : "inherit"}
+                align={isSmallScreen ? "center" : "center"}
               >
                 Links
               </Typography>
               <Box
                 display="flex"
-                justifyContent={isSmallScreen ? "center" : "flex-start"}
+                justifyContent={isSmallScreen ? "center" : "center"}
               >
                 <Button
                   component={RouterLink}
-                  sx={{ marginLeft: "-10px", color: "#ffffff" }}
+                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
                   to={routes.aboutFAQpage.path}
                 >
-                  Sobre Nós
+                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
+                    {routes.aboutFAQpage.name}
+                  </Typography>
                 </Button>
               </Box>
 
               <Box
                 display="flex"
-                justifyContent={isSmallScreen ? "center" : "flex-start"}
+                justifyContent={isSmallScreen ? "center" : "center"}
               >
                 <Button
                   component={RouterLink}
-                  sx={{ marginLeft: "-15px", color: "#ffffff" }}
+                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
                   to={routes.blogpage.path}
                 >
-                  BLOG
+                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
+                    {routes.blogpage.name}
+                  </Typography>
                 </Button>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={2}>
+            <Grid item xs={12} sm={3}>
               <Typography
                 variant="h6"
                 gutterBottom
-                align={isSmallScreen ? "center" : "inherit"}
+                align={isSmallScreen ? "center" : "center"}
               >
                 Redes Sociais
               </Typography>
-              <Box
+
+              {socialNetworks.map((sn, index) => (
+                <Box
                 display="flex"
-                justifyContent={{ xs: "center", md: "flex-start" }}
+                justifyContent={isSmallScreen ? "center" : "center"}
               >
-                <a
-                  href="https://linktr.ee/nei.estg?fbclid=PAAaYh9fNTvpGLUa4_QOyGW3EhAatawD5xQ7XXIVufpv1WlJCF3jsy48RWjGA"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                 <Button key={sn.id}
+                  component={RouterLink}
+                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
+                  to={sn.URL}
                 >
-                  <img
-                    width="48"
-                    height="48"
-                    src="https://img.icons8.com/pulsar-line/48/linktree.png"
-                    alt="linktree"
-                  />
-                </a>
-              </Box>
+                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
+                    {sn.name}
+                  </Typography>
+                  </Button>
+                </Box>
+              ))}
             </Grid>
           </Grid>
           <Box mt={5}>

@@ -12,6 +12,7 @@ import BlogPage from "@src/pages/BlogPage";
 
 interface IRoutes {
   [key: string]: {
+    name: string,
     path: string,
     element: JSX.Element,
   }
@@ -19,50 +20,62 @@ interface IRoutes {
 
 const routes: IRoutes = {
   frontpage: {
+    name: 'Página Inicial',
     path: '/',
     element: <FrontPage />,
   },
   loginpage: {
+    name: 'Iniciar Sessão',
     path: '/login',
     element: <LoginPage />,
   },
   registerpage: {
+    name: 'Criar Conta',
     path: '/register',
     element: <RegisterPage />,
   },
   resetpasswordpage: {
+    name: 'Redefinir Palavra Passe',
     path: '/reset-password',
     element: <ResetPasswordPage />,
   },
   logoutpage: {
+    name: 'Terminar Sessão',
     path: '/logout',
     element: <LogoutPage />,
   },
   logoutallpage: {
+    name: 'Terminar Sessão',
     path: '/logout-all',
     element: <LogoutPage />,
   },
   profilepage: {
+    name: 'Perfil',
     path: '/profile',
     element: <ProfilePage />,
   },
   mentoringpage: {
+    name: 'Mentoria',
     path: '/mentoring',
     element: <MentoringPage />,
   },
   calendarpage: {
+    name: 'Calendario',
     path: '/calendar',
     element: <CalendarPage />,
   },
   aboutFAQpage: {
+    name: 'Sobre Nós',
     path: '/about',
     element: <AboutFAQPage />,
   },
   materialspage: {
+    name: 'Materiais',
     path: '/materials',
     element: <MaterialsPage />,
   },
   blogpage: {
+    name: 'Blog',
     path: '/blog',
     element: <BlogPage />,
   }
