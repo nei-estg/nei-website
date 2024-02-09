@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django_prometheus.models import ExportModelOperationsMixin
+import uuid
 
 class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
   name = models.TextField()
@@ -198,7 +199,8 @@ class ProfileModel(ExportModelOperationsMixin('ProfileModel'), models.Model):
   )
   image = models.ImageField(null=True, blank=True)
   bio = models.TextField(null=True, blank=True)
-  
+  resetCode = models.UUIDField(default=uuid.uuid4) #TODO: Check if this generates "true" random UUIDs
+
   class Meta:
     ordering = ['user']
     verbose_name = "Perfil de Utilizador"

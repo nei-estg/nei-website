@@ -9,9 +9,22 @@ export default function MaterialsPage() {
   const [materialsList, setMaterialsList] = useState<IMaterial[]>([]);
 
   useEffect(() => {
+    document.title = "Materials - NEI"
     getMaterialsList().then((response) => {
       setMaterialsList(response)
-    }).catch();
+    }).catch(() => {
+      toast.error("Ocorreu um erro ao aceder aos Materiais! Por favor tenta novamente!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    });
   }, [])
 
   const handleCreateMaterial = () => {

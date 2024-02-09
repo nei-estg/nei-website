@@ -47,10 +47,11 @@ export default function Register() {
   const [selectedYear, setSelectedYear] = React.useState<string>("");
 
   useEffect(() => {
+    document.title = "Register - NEI";
     getCourses()
       .then((courses) => setCourses(courses))
       .catch(() => {
-        toast.error("There was an error getting the courses!", {
+        toast.error("Ocorreu um erro ao aceder aos Cursos! Por favor tenta novamente!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -127,7 +128,7 @@ export default function Register() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up (falta ajustar backend)
+            Sign up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -170,7 +171,6 @@ export default function Register() {
                   fullWidth
                   id="username"
                   label="Username"
-                  autoFocus
                 />
               </Grid>
               <Grid item xs={12}>
@@ -195,7 +195,7 @@ export default function Register() {
                     value={selectedCourses} //? Ignore this error
                     onChange={handleChangeCourses}
                     input={<OutlinedInput label="Course" />}
-                    renderValue={(selected) => selected}
+                    renderValue={(selected) => selected + " "}
                     MenuProps={MenuProps}
                   >
                     {courses.map((course) => (

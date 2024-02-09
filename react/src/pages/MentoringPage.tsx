@@ -10,13 +10,38 @@ export default function MentoringPage() {
   const [mentoringList, setMentoringList] = useState<IMentoring[]>([]);
 
   useEffect(() => {
+    document.title = "Mentoring - NEI"
     //TODO: Implement Pagination
     getMentoringRequestList().then((response) => {
       setMentoringRequestList(response.results)
-    }).catch();
+    }).catch(() => {
+      toast.error("Ocorreu um erro ao aceder aos Pedidos de Mentoria! Por favor tenta novamente!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    });
     getMentoringList().then((response) => {
       setMentoringList(response.results)
-    }).catch();
+    }).catch(() => {
+      toast.error("Ocorreu um erro ao aceder às Mentorias! Por favor tenta novamente!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    });
   }, []);
 
   const handleCreateMentoringRequest = () => {

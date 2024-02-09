@@ -10,7 +10,7 @@ class CourseSerializer(serializers.ModelSerializer):
     fields = ['id', 'name', 'abbreviation']
 
 class ProfileSerializer(serializers.ModelSerializer):
-  course = CourseSerializer(many=True)
+  course = CourseSerializer(many=True, read_only=True)
 
   class Meta:
     model = ProfileModel
@@ -60,6 +60,22 @@ class UserSerializer(serializers.ModelSerializer):
     user.email = validated_data.get('email', user.email)
     user.first_name = validated_data.get('first_name', user.first_name)
     user.last_name = validated_data.get('last_name', user.last_name)
+    
+    #check if password is being updated
+    if 'password' in validated_data:
+      #check if a reset code is being sent or oldPassword
+      if 'resetCode' in validated_data:
+        #check if resetCode matches the user's resetCode
+        if user.profilemodel.resetCode == validated_data.get('resetCode'):
+          user.set_password(validated_data.get('password'))
+        else:
+          raise serializers.ValidationError({'resetCode': 'The reset code is incorrect'})
+      elif 'oldPassword' in validated_data:
+        if user.check_password(validated_data.get('oldPassword')):
+          user.set_password(validated_data.get('password'))
+        else:
+          raise serializers.ValidationError({'oldPassword': 'The old password is incorrect'})
+    
     user.save()
     
     if profile_data:
@@ -76,6 +92,8 @@ class UserSerializer(serializers.ModelSerializer):
           profile.course.add(course)
       
       profile.save()
+      
+    return user
 
 
 class ContactSerializer(serializers.ModelSerializer):
@@ -89,13 +107,13 @@ class FAQCategorySerializer(serializers.ModelSerializer):
     fields = ['name']
 
 class FAQSerializer(serializers.ModelSerializer):
-  category = FAQCategorySerializer()
+  category = FAQCategorySerializer(read_only=True)
   class Meta:
     model = FAQModel
     fields = ['question', 'answer', 'category']
 
 class CurricularUnitSerializer(serializers.ModelSerializer):
-  course = CourseSerializer(many=True)
+  course = CourseSerializer(many=True, read_only=True)
   class Meta:
     model = CurricularUnitModel
     fields = '__all__'
@@ -106,14 +124,14 @@ class MaterialTagSerializer(serializers.ModelSerializer):
     fields = ['name']
 
 class MaterialSerializer(serializers.ModelSerializer):
-  tags = MaterialTagSerializer(many=True)
-  curricularUnit = CurricularUnitSerializer()
+  tags = MaterialTagSerializer(many=True, read_only=True)
+  curricularUnit = CurricularUnitSerializer(read_only=True)
   class Meta:
     model = MaterialModel
     fields = ['name', 'file', 'link', 'tags', 'curricularUnit', 'date']
 
 class CalendarSerializer(serializers.ModelSerializer):
-  curricularUnit = CurricularUnitSerializer(required=False)
+  curricularUnit = CurricularUnitSerializer(required=False, read_only=True)
   class Meta:
     model = CalendarModel
     fields = ['name', 'startDate', 'endDate', 'description', 'curricularUnit', 'place']

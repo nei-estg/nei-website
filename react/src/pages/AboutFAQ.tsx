@@ -6,6 +6,7 @@ import AccordionUsage from "@src/components/aboutFAQ/Accordion";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { getFAQ } from "@src/api/AboutRoutes";
 import { IFAQ } from "@src/interfaces/IFAQ";
+import { toast, Bounce } from "react-toastify";
 
 const defaultTheme = createTheme();
 
@@ -147,11 +148,22 @@ export default function AboutFAQPage() {
   const [faq, setFaq] = useState<FaqSection[]>([]);
 
   useEffect(() => {
+    document.title = "About - NEI";
     getFAQ().then((result) => {
       const faq: FaqSection[] = transformData(result);
       setFaq(faq);
     }).catch(() => {
-      console.log("There was an error fetching FAQ data!");
+      toast.error("Ocorreu um erro ao aceder às FAQs! Por favor tenta novamente!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     });
   }, [])
 
