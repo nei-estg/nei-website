@@ -128,7 +128,7 @@ class MaterialSerializer(serializers.ModelSerializer):
   curricularUnit = CurricularUnitSerializer(read_only=True)
   class Meta:
     model = MaterialModel
-    fields = ['name', 'file', 'link', 'tags', 'curricularUnit', 'date']
+    fields = ['id', 'name', 'file', 'link', 'tags', 'curricularUnit', 'date']
 
 class CalendarSerializer(serializers.ModelSerializer):
   curricularUnit = CurricularUnitSerializer(required=False, read_only=True)

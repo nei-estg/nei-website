@@ -1,5 +1,7 @@
 import { Button } from "@mui/material";
-import { createMaterial, getMaterialsList } from "@src/api/MaterialsRoutes";
+import { getCurricularUnits } from "@src/api/CourseRoutes";
+import { createMaterial, getMaterialTagList, getMaterialsList } from "@src/api/MaterialsRoutes";
+import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
 import { IMaterial } from "@src/interfaces/IMaterial";
 import { useEffect, useState } from "react"
 import { toast, Bounce } from "react-toastify";
@@ -7,6 +9,8 @@ import { toast, Bounce } from "react-toastify";
 
 export default function MaterialsPage() {
   const [materialsList, setMaterialsList] = useState<IMaterial[]>([]);
+  const [curricularUnits, setCurricularUnits] = useState<ICurricularUnit[]>([]);
+  const [materialTagList, setMaterialTagList] = useState<IMaterial[]>([]);
 
   useEffect(() => {
     document.title = "Materials - NEI"
@@ -25,31 +29,46 @@ export default function MaterialsPage() {
         transition: Bounce,
       });
     });
+
+    getCurricularUnits().then((response) => {
+      setCurricularUnits(response)
+    }).catch(() => {
+      toast.error("Ocorreu um erro ao aceder às Unidades Curriculares! Por favor tenta novamente!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    });
+
+    getMaterialTagList().then((response) => {
+      setMaterialTagList(response)
+    }).catch(() => {
+      toast.error("Ocorreu um erro ao aceder às Tags de Materiais! Por favor tenta novamente!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    });
   }, [])
 
   const handleCreateMaterial = () => {
     const newMaterial: IMaterial = {
       name: "Material de Exemplo",
       link: "https://www.google.com",
-      tags: [
-        {
-          id: 1,
-          name: "Exemplo",
-        }
-      ],
-      curricularUnit: {
-        id: 1,
-        name: "MÉTODOS E TÉCNICAS DE SUPORTE AO DESENVOLVIMENTO DE SOFTWARE",
-        abbreviation: "MTSDS",
-        year: 1,
-        course: [
-          {
-            id: 1,
-            name: "Mestrado em Engenharia Informática",
-            abbreviation: "MEI",
-          }
-        ]
-      }
+      tags: materialTagList,
+      curricularUnit: curricularUnits[0]
     }
     createMaterial(newMaterial).then(() => {
       toast.success("Material adicionado com sucesso! Após aprovado o mesmo ficará visível! :)", {

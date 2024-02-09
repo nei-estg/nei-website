@@ -6,3 +6,9 @@ export const getCourses = async () => {
   if (response.status !== 200) throw new Error(response.data);
   return response.data as ICourse[];
 }
+
+export const getCurricularUnits = async () => {
+  const response = await client.get('/api/curricularUnit/');
+  if (response.status !== 200) throw new Error(response.data);
+  return response.data;
+}

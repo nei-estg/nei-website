@@ -13,3 +13,9 @@ export const createMaterial = async (material: IMaterial) => {
   if (response.status !== 201) throw new Error(response.data);
   return response.data as IMaterial;
 }
+
+export const getMaterialTagList = async () => {
+  const response = await client.get("/api/materialTag/");
+  if (response.status !== 200) throw new Error(response.data);
+  return response.data;
+}
