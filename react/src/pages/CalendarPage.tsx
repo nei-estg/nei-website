@@ -29,7 +29,19 @@ export default function CalendarPage() {
     getCalendarEvents().then((result) => {
       const calendar: ICalendar[] = result;
       setEventsData(calendar);
-    }).catch();
+    }).catch(() => {
+      toast.error("Ocorreu um erro ao aceder ao Calendário! Por favor tenta novamente!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    });
   }, [])
 
   const handleSelect = () => {
@@ -55,7 +67,9 @@ export default function CalendarPage() {
         transition: Bounce,
       });
       setEventsData([...eventsData, result]);
-    }).catch();
+    }).catch(() => {
+
+    });
   };
 
   // Map eventsData to the format expected by react-big-calendar

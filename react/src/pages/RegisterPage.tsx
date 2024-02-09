@@ -51,7 +51,7 @@ export default function Register() {
     getCourses()
       .then((courses) => setCourses(courses))
       .catch(() => {
-        toast.error("There was an error getting the courses!", {
+        toast.error("Ocorreu um erro ao aceder aos Cursos! Por favor tenta novamente!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

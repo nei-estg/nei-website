@@ -10,7 +10,7 @@ class CourseSerializer(serializers.ModelSerializer):
     fields = ['id', 'name', 'abbreviation']
 
 class ProfileSerializer(serializers.ModelSerializer):
-  course = CourseSerializer(many=True)
+  course = CourseSerializer(many=True, read_only=True)
 
   class Meta:
     model = ProfileModel
@@ -107,13 +107,13 @@ class FAQCategorySerializer(serializers.ModelSerializer):
     fields = ['name']
 
 class FAQSerializer(serializers.ModelSerializer):
-  category = FAQCategorySerializer()
+  category = FAQCategorySerializer(read_only=True)
   class Meta:
     model = FAQModel
     fields = ['question', 'answer', 'category']
 
 class CurricularUnitSerializer(serializers.ModelSerializer):
-  course = CourseSerializer(many=True)
+  course = CourseSerializer(many=True, read_only=True)
   class Meta:
     model = CurricularUnitModel
     fields = '__all__'
@@ -124,14 +124,14 @@ class MaterialTagSerializer(serializers.ModelSerializer):
     fields = ['name']
 
 class MaterialSerializer(serializers.ModelSerializer):
-  tags = MaterialTagSerializer(many=True)
-  curricularUnit = CurricularUnitSerializer()
+  tags = MaterialTagSerializer(many=True, read_only=True)
+  curricularUnit = CurricularUnitSerializer(read_only=True)
   class Meta:
     model = MaterialModel
     fields = ['name', 'file', 'link', 'tags', 'curricularUnit', 'date']
 
 class CalendarSerializer(serializers.ModelSerializer):
-  curricularUnit = CurricularUnitSerializer(required=False)
+  curricularUnit = CurricularUnitSerializer(required=False, read_only=True)
   class Meta:
     model = CalendarModel
     fields = ['name', 'startDate', 'endDate', 'description', 'curricularUnit', 'place']

@@ -22,7 +22,7 @@ export default function ResetPasswordPage() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+    //TODO: Implement Reset Password
   };
 
   return (

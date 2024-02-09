@@ -9,6 +9,7 @@ import CalendarPage from "@src/pages/CalendarPage";
 import AboutFAQPage from "@src/pages/AboutFAQ";
 import MaterialsPage from "@src/pages/MaterialsPage";
 import BlogPage from "@src/pages/BlogPage";
+import NotFoundPage from "@src/pages/NotFoundPage";
 
 interface IRoutes {
   [key: string]: {
@@ -65,6 +66,10 @@ const routes: IRoutes = {
   blogpage: {
     path: '/blog',
     element: <BlogPage />,
+  },
+  notfoundpage: {
+    path: '*',
+    element: <NotFoundPage/>,
   }
 }
 
