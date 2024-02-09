@@ -210,9 +210,10 @@ class ProfileModel(ExportModelOperationsMixin('ProfileModel'), models.Model):
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
-  if created:
+  if created and instance.is_superuser:
     ProfileModel.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-  instance.profilemodel.save()
+  if instance.is_superuser:
+    instance.profilemodel.save()

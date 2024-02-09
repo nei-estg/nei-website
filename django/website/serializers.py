@@ -30,42 +30,52 @@ class UserSerializer(serializers.ModelSerializer):
     }
 
   @transaction.atomic
-  def create(self, validated_data): #TODO: Test this
-    validated_data['password'] = make_password(validated_data.get('password'))
+  def create(self, validated_data):
     profile_data = validated_data.pop('profilemodel', None)
-    course_data = profile_data.pop('course', None) if profile_data else None
-
-    user = super().create(validated_data)
-
+    course_data = profile_data.pop('course', None)
+    
+    user = User.objects.create_user(**validated_data)
+    user.set_password(validated_data.get('password'))
+    user.save()
+    
     if profile_data:
-      profile = ProfileModel.objects.get(user=user)
-      profile_serializer = ProfileSerializer(profile, data=profile_data)
-      profile_serializer.is_valid(raise_exception=True)
-      profile_serializer.save()
+      profile = ProfileModel.objects.create(user=user, **profile_data)
 
       if course_data:
-        profile.course.set(course_data)
-
+        print(course_data) # [OrderedDict({'name': 'Mestrado em Engenharia Informática', 'abbreviation': 'MEI'}), OrderedDict({'name': 'Licenciatura em Segurança Informática em Redes de Computadores', 'abbreviation': 'LSIRC'})]
+        for course in course_data:
+          course = CourseModel.objects.get(name=course['name'])
+          profile.course.add(course)
+      
+      profile.save()
+    
     return user
 
   @transaction.atomic
   def update(self, user, validated_data): #TODO: Test this
-    validated_data['password'] = make_password(validated_data.get('password'))
     profile_data = validated_data.pop('profilemodel', None)
-    course_data = profile_data.pop('course', None) if profile_data else None
-
-    user = super(UserSerializer, self).update(user, validated_data)
-
+    course_data = profile_data.pop('course', None)
+    
+    user.username = validated_data.get('username', user.username)
+    user.email = validated_data.get('email', user.email)
+    user.first_name = validated_data.get('first_name', user.first_name)
+    user.last_name = validated_data.get('last_name', user.last_name)
+    user.save()
+    
     if profile_data:
-      profile = ProfileModel.objects.get(user=user)
-      profile_serializer = ProfileSerializer(profile, data=profile_data)
-      profile_serializer.is_valid(raise_exception=True)
-      profile_serializer.save()
+      profile = user.profilemodel
+      profile.year = profile_data.get('year', profile.year)
+      profile.image = profile_data.get('image', profile.image)
+      profile.bio = profile_data.get('bio', profile.bio)
+      profile.save()
 
       if course_data:
-        profile.course.set(course_data)
-
-    return user
+        profile.course.clear()
+        for course in course_data:
+          course = CourseModel.objects.get(name=course['name'])
+          profile.course.add(course)
+      
+      profile.save()
 
 
 class ContactSerializer(serializers.ModelSerializer):

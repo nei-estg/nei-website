@@ -29,10 +29,22 @@ import {
 
 const defaultTheme = createTheme();
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
 export default function Register() {
   const [courses, setCourses] = React.useState<ICourse[]>([]);
 
   const [selectedCourses, setSelectedCourses] = React.useState<string[]>([]);
+  const [selectedYear, setSelectedYear] = React.useState<string>("");
 
   useEffect(() => {
     getCourses()
@@ -52,29 +64,24 @@ export default function Register() {
       });
   }, []);
 
-  const ITEM_HEIGHT = 48;
-  const ITEM_PADDING_TOP = 8;
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250,
-      },
-    },
-  };
-
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChangeCourses = (event: SelectChangeEvent) => {
+    console.log(event.target.value);
     const {
       target: { value },
     } = event;
     setSelectedCourses(
-      typeof value === "string" ? value.split(",") : value
+      typeof value === 'string' ? value.split(',') : value,
     );
-  };
+  }
+
+  const handleChangeYear = (event: SelectChangeEvent) => {
+    setSelectedYear(event.target.value as string);
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    const selectedCourses: ICourse[] = courses.filter((course) => selectedCourses.includes(course.id));
     event.preventDefault();
+    const selectedCoursesObj = courses.filter((course) => selectedCourses.includes(course.abbreviation));
+
     const signUp: IUser = {
       username: event.currentTarget.username.value,
       password: event.currentTarget.password.value,
@@ -82,8 +89,8 @@ export default function Register() {
       last_name: event.currentTarget.lastName.value,
       email: event.currentTarget.email.value,
       profilemodel: {
-        course: selectedCourses,
-        year: event.currentTarget.year.value,
+        course: selectedCoursesObj,
+        year: parseInt(selectedYear),
       },
     };
     try {
@@ -122,11 +129,7 @@ export default function Register() {
           <Typography component="h1" variant="h5">
             Sign up (falta ajustar backend)
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -189,15 +192,19 @@ export default function Register() {
                     id="course"
                     multiple
                     required
-                    value={selectedCourses}
-                    onChange={handleChange}
+                    value={selectedCourses} //? Ignore this error
+                    onChange={handleChangeCourses}
                     input={<OutlinedInput label="Course" />}
-                    renderValue={(selected) => (selected as unknown as string[]).join(", ")}
+                    renderValue={(selected) => selected}
                     MenuProps={MenuProps}
                   >
                     {courses.map((course) => (
-                      <MenuItem key={course.id} value={course.abbreviation}>
-                        <Checkbox checked={selectedCourses.indexOf(course.abbreviation) > -1} />
+                      <MenuItem key={course.abbreviation} value={course.abbreviation}>
+                        <Checkbox
+                          checked={
+                            selectedCourses.indexOf(course.abbreviation) > -1
+                          }
+                        />
                         <ListItemText primary={course.abbreviation} />
                       </MenuItem>
                     ))}
@@ -205,14 +212,23 @@ export default function Register() {
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="year"
-                  label="Year"
-                  name="year"
-                  autoComplete="year"
-                />
+                <FormControl fullWidth>
+                  <InputLabel id="year-label">Year</InputLabel>
+                  <Select
+                    labelId="year-label"
+                    id="year"
+                    value={selectedYear}
+                    label="Age"
+                    required
+                    onChange={handleChangeYear}
+                  >
+                    <MenuItem value={1}>1st</MenuItem>
+                    <MenuItem value={2}>2nd</MenuItem>
+                    <MenuItem value={3}>3rd</MenuItem>
+                    <MenuItem value={4}>Erasmus</MenuItem>
+                    <MenuItem value={5}>Alumni</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
             </Grid>
             <Button
