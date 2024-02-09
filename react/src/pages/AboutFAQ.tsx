@@ -58,26 +58,28 @@ interface CoursesItem {
 const courses: CoursesItem[] =
   [
     {
-      type: "CTESP",
+      type: "CTeSP",
       course: [
-        { name: "Curso Técnico Superior Profissional em Cibersegurança, Redes e Sistemas Informáticos", sigla: "CRSI", photo: "", URL: "https://www.estg.ipp.pt/cursos/ctesp/810" },
-        { name: "Curso Técnico Superior Profissional em Desenvolvimento para a Web e Dispositivos Móveis", sigla: "DWDM", photo: "", URL: "https://www.estg.ipp.pt/cursos/ctesp/809" },
+        { name: "CTeSP Desenvolvimento para a Web e Dispositivos Móveis", sigla: "DWDM", photo: "../../public/logos/DWDM.png", URL: "https://www.estg.ipp.pt/cursos/ctesp/809" },
+        { name: "CTeSP Cibersegurança, Redes e Sistemas Informáticos", sigla: "CRSI", photo: "../../public/logos/CRSI.png", URL: "https://www.estg.ipp.pt/cursos/ctesp/810" },
+        { name: "CTeSP Tecnologias de Dados e Visualização de Informação", sigla: "TDVI", photo: "../../public/logos/TDVI.png", URL: "https://www.estg.ipp.pt/cursos/ctesp/840" },
+
       ]
     },
 
     {
       type: "Licenciatura",
       course: [
-        { name: "Licenciatura em Segurança Informática em Redes de Computadores", sigla: "LSRIC", photo: "", URL: "https://www.estg.ipp.pt/cursos/licenciatura/557" },
-        { name: "Licenciatura em Engenharia Informática", sigla: "LEI", photo: "", URL: "https://www.estg.ipp.pt/cursos/licenciatura/551" },
-        { name: "Licenciatura em Sistemas de Informação para a Gestão", sigla: "LSIG", photo: "", URL: "https://www.estg.ipp.pt/cursos/licenciatura/630" },
+        { name: "Segurança Informática em Redes de Computadores", sigla: "LSIRC", photo: "../../public/logos/LSIRC.png", URL: "https://www.estg.ipp.pt/cursos/licenciatura/557" },
+        { name: "Engenharia Informática", sigla: "LEI", photo: "../../public/logos/LEI.png", URL: "https://www.estg.ipp.pt/cursos/licenciatura/551" },
+        { name: "Sistemas de Informação para a Gestão", sigla: "LSIG", photo: "../../public/logos/LSIG.png", URL: "https://www.estg.ipp.pt/cursos/licenciatura/630" },
       ]
     },
 
     {
       type: "Mestrado",
       course: [
-        { name: "Mestrado em Engenharia Informática", sigla: "MEI", photo: "", URL: "https://www.estg.ipp.pt/cursos/mestrado/807" },
+        { name: "Mestrado Engenharia Informática", sigla: "MEI", photo: "../../public/logos/MEI.png", URL: "https://www.estg.ipp.pt/cursos/mestrado/807" },
       ]
     },
   ];
@@ -352,17 +354,19 @@ export default function AboutFAQPage() {
         {courses.map((courses, index) => (
           <div key={index} style={{ display: valueCourse === index ? 'block' : 'none' }}>
             <Grid container spacing={1} justifyContent="center">
+
               {courses.course.map((course, courseIndex) => (
                 <Grid item xs={12} sm={4} md={3} lg={2} xl={1} key={courseIndex} display="flex" sx={{ marginBottom: '1px', [defaultTheme.breakpoints.up('xl')]: { marginRight: '41px', }, }}>
                   <Grid container direction="column" display="flex">
-                    <Item>
-                      <Avatar src={course.photo} sx={{ width: '115px', height: '128px', marginBottom: '10px' }} variant="rounded" />
+                    <Item onClick={() => window.open(course.URL, '_blank')} style={{ cursor: 'pointer', textAlign: 'center' }}>
+                      <Avatar src={course.photo} sx={{ width: '115px', height: 'auto', objectFit: 'cover', marginBottom: '10px', display: 'block', margin: '0 auto' }} variant="rounded" />
                       <Typography variant="subtitle1" color="primary">{course.sigla}</Typography>
                       <Typography variant="subtitle2">{course.name}</Typography>
                     </Item>
                   </Grid>
                 </Grid>
               ))}
+
             </Grid>
           </div>
         ))}
