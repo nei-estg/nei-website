@@ -62,7 +62,6 @@ export default function LoginPage() {
           <Box
             component="form"
             onSubmit={handleSubmit}
-            noValidate
             sx={{ mt: 1 }}
           >
             <TextField

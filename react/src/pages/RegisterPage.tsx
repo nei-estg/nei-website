@@ -124,7 +124,6 @@ export default function Register() {
           </Typography>
           <Box
             component="form"
-            noValidate
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
@@ -189,6 +188,7 @@ export default function Register() {
                     labelId="course-label"
                     id="course"
                     multiple
+                    required
                     value={selectedCourses}
                     onChange={handleChange}
                     input={<OutlinedInput label="Course" />}
