@@ -4,6 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import *
 from .serializers import *
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+import base64
 
 class CreateOnlyModelViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
   pass
@@ -80,12 +83,49 @@ class MaterialViewSet(CreateAndViewModelViewSet):
   """
   API endpoint that allows materials to be viewed or edited.
   """
-  queryset = MaterialModel.objects.all()
+  queryset = MaterialModel.objects.filter(visible=True)
   serializer_class = MaterialSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
   filterset_fields = ['name', 'tags', 'curricularUnit']
+  pagination_class = None
   
   #TODO: Add Create method
+  
+  def create(self, request, *args, **kwargs):
+    fileJson = request.data.get('file', None)
+    curricularUnitJson = request.data.get('curricularUnit', None)
+    
+    if not curricularUnitJson:
+      return Response({'detail': 'Curricular Unit JSON not found.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    curricularUnit = CurricularUnitModel.objects.get(id=curricularUnitJson.get('id', None))
+    
+    if not curricularUnit:
+      return Response({'detail': 'Curricular Unit not found.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    courses = curricularUnit.course.all()
+
+    if fileJson:
+      decodedFile = base64.b64decode(fileJson)
+      
+      course = ""
+      
+      #if the curricular unit has more than one course it should be Abbreviation + Abbreviation + ...
+      if len(courses) > 1:
+        course = " + ".join([course.abbreviation for course in courses])
+      else:
+        course = courses[0].abbreviation
+      
+      filePath = f"{course}/{curricularUnit.abbreviation}/{request.user.username}/{request.data.get('name', 'file')}"
+      
+      default_storage.save(filePath, ContentFile(decodedFile))
+      
+      MaterialModel.objects.create(name=request.data.get('name', ''), file=filePath, curricularUnit=curricularUnit)
+    else:
+      MaterialModel.objects.create(name=request.data.get('name', ''), link=request.data.get('link', ''), curricularUnit=curricularUnit)
+      
+    return Response({'detail': 'Material created.'}, status=status.HTTP_201_CREATED)
+
 
 class MentoringRequestViewSet(viewsets.ModelViewSet):
   """

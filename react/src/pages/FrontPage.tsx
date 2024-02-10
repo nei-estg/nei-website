@@ -111,7 +111,7 @@ export default function FrontPage() {
                     required
                     fullWidth
                     name="message"
-                    label="message"
+                    label="Message"
                     id="message"
                     autoComplete="message"
                   />
