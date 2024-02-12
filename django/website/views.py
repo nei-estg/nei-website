@@ -39,7 +39,7 @@ class CalendarViewSet(CreateAndViewModelViewSet):
   """
   queryset = CalendarModel.objects.filter(visible=True)
   serializer_class = CalendarSerializer
-  permission_classes = [permissions.IsAuthenticated]
+  permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
   filterset_fields = CalendarSerializer.Meta.fields
   pagination_class = None
   

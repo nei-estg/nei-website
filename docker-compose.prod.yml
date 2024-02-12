@@ -34,7 +34,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-      start_interval: 15s
+      #start_interval: 15s
     restart: always
 
   redis:
@@ -54,7 +54,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-      start_interval: 15s
+      #start_interval: 15s
     restart: always
 
   django:
@@ -83,7 +83,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-      start_interval: 60s
+      #start_interval: 60s
     depends_on:
       postgres:
         condition: service_healthy
@@ -114,7 +114,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-      start_interval: 15s
+      #start_interval: 15s
     depends_on:
       django:
         condition: service_healthy
