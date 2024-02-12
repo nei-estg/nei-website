@@ -28,7 +28,9 @@ export default function BlogPage() {
   return (
     <>
       <h1>BlogPage</h1>
-      <p>{JSON.stringify(blogList)}</p>
+      {blogList && (
+        <p>{JSON.stringify(blogList)}</p>
+      )}
     </>
   )
 }

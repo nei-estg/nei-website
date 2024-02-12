@@ -28,7 +28,9 @@ export default function ProfilePage() {
   return (
     <div>
       <h1>Profile</h1>
-      <p>{JSON.stringify(user)}</p>
+      {user && (
+        <p>{JSON.stringify(user)}</p>
+      )}
     </div>
   )
 }

@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import PersonIcon from '@mui/icons-material/Person';
 import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
-import isLoggedIn from '@src/api/utils/LoginStatus';
+import { isLoggedIn } from '@src/api/utils/LoginStatus';
 
 
 const navbar = {

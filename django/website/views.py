@@ -104,6 +104,8 @@ class MaterialViewSet(CreateAndViewModelViewSet):
       return Response({'detail': 'Curricular Unit not found.'}, status=status.HTTP_400_BAD_REQUEST)
     
     courses = curricularUnit.course.all()
+    
+    material = None
 
     if fileJson:
       decodedFile = base64.b64decode(fileJson)
@@ -120,11 +122,11 @@ class MaterialViewSet(CreateAndViewModelViewSet):
       
       default_storage.save(filePath, ContentFile(decodedFile))
       
-      MaterialModel.objects.create(name=request.data.get('name', ''), file=filePath, curricularUnit=curricularUnit)
+      material = MaterialModel.objects.create(name=request.data.get('name', ''), file=filePath, curricularUnit=curricularUnit)
     else:
-      MaterialModel.objects.create(name=request.data.get('name', ''), link=request.data.get('link', ''), curricularUnit=curricularUnit)
+      material = MaterialModel.objects.create(name=request.data.get('name', ''), link=request.data.get('link', ''), curricularUnit=curricularUnit)
       
-    return Response({'detail': 'Material created.'}, status=status.HTTP_201_CREATED)
+    return Response(material, status=status.HTTP_201_CREATED)
 
 
 class MentoringRequestViewSet(viewsets.ModelViewSet):

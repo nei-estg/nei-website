@@ -3,6 +3,7 @@ import AuthenticatedClient from './AuthenticatedClient';
 import { AxiosError } from 'axios';
 
 import { IUser } from '@src/interfaces/IUser';
+import { toast, Bounce } from 'react-toastify';
 
 export const loginUser = async (login : IUser) => {
   try {
@@ -50,7 +51,17 @@ export const logoutUser = async (allDevices: boolean) => {
       await AuthenticatedClient.post('/api/auth/logout/');
     }
   } catch (error) {
-    // Do nothing
+    toast.error('There was an error when logging out! Still logged out locally!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
   } finally {
     localStorage.removeItem('token');
     localStorage.removeItem('expiry');

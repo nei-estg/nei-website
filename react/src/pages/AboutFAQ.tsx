@@ -345,7 +345,7 @@ export default function AboutFAQPage() {
             alignItems: 'center',
             marginTop: '60px',
           }}
-        >Cursos representados pela NEI</Typography>
+        >Cursos representados pelo NEI</Typography>
 
         {/*Tabs Cursos*/}
         <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>

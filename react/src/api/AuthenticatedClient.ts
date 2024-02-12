@@ -1,5 +1,5 @@
 import axios from "axios";
-import isLoggedIn from "./utils/LoginStatus";
+import { isLoggedIn } from "./utils/LoginStatus";
 import { toast, Bounce } from 'react-toastify';
 
 const client = axios.create({
@@ -27,6 +27,8 @@ client.interceptors.response.use(
   (error) => {
     if (error.response) {
       if (error.response.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("expiry")
         window.location.href = "/login";
         toast.error("You're not logged in!", {
           position: "top-right",
@@ -52,7 +54,7 @@ client.interceptors.response.use(
           transition: Bounce,
         });
       } else if (error.response.status === 429) {
-        toast.error("You're sending way to much requests! Wait one hour!", {
+        toast.error("You're sending way too much requests! Wait one hour!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

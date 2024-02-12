@@ -4,6 +4,12 @@ from .models import *
 class ContactAdmin(admin.ModelAdmin):
   list_display = ('name', 'email', 'subject', 'message', 'open')
   list_filter = list_display
+  
+  def make_closed(self, request, queryset):
+    queryset.update(open=False)
+  make_closed.short_description = "Set selected rows as closed"
+  
+  actions = [make_closed]
 
 admin.site.register(ContactModel, ContactAdmin)
 
@@ -24,6 +30,12 @@ admin.site.register(CurricularUnitModel, CurricularUnitAdmin)
 class MaterialAdmin(admin.ModelAdmin):
   list_display = ('name', 'file', 'link', 'curricularUnit', 'visible')
   list_filter = list_display
+  
+  def make_visible(self, request, queryset):
+    queryset.update(visible=True)
+  make_visible.short_description = "Set selected rows as visible"
+
+  actions = [make_visible]
 
 admin.site.register(MaterialTagModel)
 admin.site.register(MaterialModel, MaterialAdmin)
@@ -31,6 +43,12 @@ admin.site.register(MaterialModel, MaterialAdmin)
 class CalendarAdmin(admin.ModelAdmin):
   list_display = ('name', 'startDate', 'endDate', 'description', 'visible')
   list_filter = list_display
+
+  def make_visible(self, request, queryset):
+    queryset.update(visible=True)
+  make_visible.short_description = "Set selected rows as visible"
+
+  actions = [make_visible]
 
 admin.site.register(CalendarModel, CalendarAdmin)
 
