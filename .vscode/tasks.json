@@ -92,6 +92,15 @@
       }
     },
     {
+      "label": "Django Add Roles",
+      "type": "shell",
+      "command": "docker-compose exec django python manage.py add_roles",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
       "label": "Django Collect Static Files",
       "type": "shell",
       "command": "docker-compose exec django python manage.py collectstatic --noinput",

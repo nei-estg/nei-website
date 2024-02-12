@@ -5,10 +5,6 @@ from django.dispatch import receiver
 from django_prometheus.models import ExportModelOperationsMixin
 import uuid
 
-Group.objects.get_or_create(name='NEI')
-student = Group.objects.get_or_create(name='Student')
-#TODO: Add permissions to groups
-
 class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
   name = models.TextField()
   email = models.EmailField()
