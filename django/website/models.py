@@ -219,3 +219,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
   if instance.is_superuser:
     instance.profilemodel.save()
+
+@receiver(post_save, sender=User)
+def create_student_group(sender, instance, created, **kwargs):
+  if created:
+    group, _ = Group.objects.get_or_create(name='Student')
+    instance.groups.add(group)
