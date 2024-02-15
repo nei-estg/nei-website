@@ -23,7 +23,7 @@ export const Footer = () => {
   ];
 
   return (
-    <div style={{ zIndex: 9999, position: 'relative' }}>
+    <div style={{ position: 'relative' }}>
       <Box
         component="footer"
         style={{ backgroundColor: "#002855", color: "#ffffff" }}
