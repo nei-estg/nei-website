@@ -10,6 +10,7 @@ import AboutFAQPage from "@src/pages/AboutFAQ";
 import MaterialsPage from "@src/pages/MaterialsPage";
 import BlogPage from "@src/pages/BlogPage";
 import NotFoundPage from "@src/pages/NotFoundPage";
+import { TerminalApp } from "@src/pages/terminal";
 
 interface IRoutes {
   [key: string]: {
@@ -83,6 +84,11 @@ const routes: IRoutes = {
   notfoundpage: {
     path: '*',
     element: <NotFoundPage/>,
+  },
+  terminal: {
+    name: "terminal",
+    path: "/terminal",
+    element: <TerminalApp/>
   }
 }
 

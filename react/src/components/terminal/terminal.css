@@ -1,0 +1,80 @@
+.laptop-bezel {
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 700px;
+  margin: 30px auto 0; 
+}
+
+.title-bar {
+  background-color: #c0c0c0;
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.macbook-buttons {
+  display: flex;
+}
+
+.macbook-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+.macbook-button.red {
+  background-color: #ff5f56;
+}
+
+.macbook-button.yellow {
+  background-color: #ffbd2e;
+}
+
+.macbook-button.green {
+  background-color: #27c93f;
+}
+
+.screen {
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+}
+
+.terminal {
+  min-height: 300px; /* Adjust height as needed */
+}
+
+.terminal-input {
+  display: flex;
+}
+
+.terminal-input span {
+  color: #00ff00;
+  margin-right: 5px;
+}
+
+.terminal-input input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+}
+
+.typing-animation {
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #00ff00;
+  }
+}
