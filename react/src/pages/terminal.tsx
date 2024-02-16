@@ -1,5 +1,6 @@
-import React from 'react'
+
 import  Terminal  from '@src/components/terminal/terminal'
+
 
 export const TerminalApp= () => {
   return (

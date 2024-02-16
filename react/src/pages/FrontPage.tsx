@@ -13,6 +13,8 @@ import { IContact } from "@src/interfaces/IContact";
 import { toast, Bounce } from "react-toastify";
 import { Particle } from "@src/components/particles/particles";
 import { useEffect, useState } from "react";
+import { relative } from "path";
+import { Scroll } from "@src/components/button/scroll";
 
 const defaultTheme = createTheme();
 
@@ -68,6 +70,8 @@ export default function FrontPage() {
   };
   return (
     <ThemeProvider theme={defaultTheme}>
+      <img src="/public/estg.png" alt="Banner Image" style={{ width: '100%', position: "relative", zIndex: "2"}}></img>
+      <Scroll />
       <Container component="main" maxWidth="md">
         <CssBaseline />
         <div style={{ height: "60vh" }}>
