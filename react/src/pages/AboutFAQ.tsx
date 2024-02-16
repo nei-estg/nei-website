@@ -61,9 +61,9 @@ const courses: CoursesItem[] =
     {
       type: "CTeSP",
       course: [
-        { name: "CTeSP Desenvolvimento para a Web e Dispositivos Móveis", sigla: "DWDM", photo: "../../public/logos/DWDM.png", URL: "https://www.estg.ipp.pt/cursos/ctesp/809" },
-        { name: "CTeSP Cibersegurança, Redes e Sistemas Informáticos", sigla: "CRSI", photo: "../../public/logos/CRSI.png", URL: "https://www.estg.ipp.pt/cursos/ctesp/810" },
-        { name: "CTeSP Tecnologias de Dados e Visualização de Informação", sigla: "TDVI", photo: "../../public/logos/TDVI.png", URL: "https://www.estg.ipp.pt/cursos/ctesp/840" },
+        { name: "CTeSP Desenvolvimento para a Web e Dispositivos Móveis", sigla: "DWDM", photo: "/logos/DWDM.png", URL: "https://www.estg.ipp.pt/cursos/ctesp/809" },
+        { name: "CTeSP Cibersegurança, Redes e Sistemas Informáticos", sigla: "CRSI", photo: "/logos/CRSI.png", URL: "https://www.estg.ipp.pt/cursos/ctesp/810" },
+        { name: "CTeSP Tecnologias de Dados e Visualização de Informação", sigla: "TDVI", photo: "/logos/TDVI.png", URL: "https://www.estg.ipp.pt/cursos/ctesp/840" },
 
       ]
     },
@@ -71,16 +71,16 @@ const courses: CoursesItem[] =
     {
       type: "Licenciatura",
       course: [
-        { name: "Segurança Informática em Redes de Computadores", sigla: "LSIRC", photo: "../../public/logos/LSIRC.png", URL: "https://www.estg.ipp.pt/cursos/licenciatura/557" },
-        { name: "Engenharia Informática", sigla: "LEI", photo: "../../public/logos/LEI.png", URL: "https://www.estg.ipp.pt/cursos/licenciatura/551" },
-        { name: "Sistemas de Informação para a Gestão", sigla: "LSIG", photo: "../../public/logos/LSIG.png", URL: "https://www.estg.ipp.pt/cursos/licenciatura/630" },
+        { name: "Segurança Informática em Redes de Computadores", sigla: "LSIRC", photo: "/logos/LSIRC.png", URL: "https://www.estg.ipp.pt/cursos/licenciatura/557" },
+        { name: "Engenharia Informática", sigla: "LEI", photo: "/logos/LEI.png", URL: "https://www.estg.ipp.pt/cursos/licenciatura/551" },
+        { name: "Sistemas de Informação para a Gestão", sigla: "LSIG", photo: "/logos/LSIG.png", URL: "https://www.estg.ipp.pt/cursos/licenciatura/630" },
       ]
     },
 
     {
       type: "Mestrado",
       course: [
-        { name: "Mestrado Engenharia Informática", sigla: "MEI", photo: "../../public/logos/MEI.png", URL: "https://www.estg.ipp.pt/cursos/mestrado/807" },
+        { name: "Mestrado Engenharia Informática", sigla: "MEI", photo: "/logos/MEI.png", URL: "https://www.estg.ipp.pt/cursos/mestrado/807" },
       ]
     },
   ];

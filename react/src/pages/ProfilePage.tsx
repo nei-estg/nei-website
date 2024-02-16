@@ -26,11 +26,11 @@ export default function ProfilePage() {
   }, [])
 
   return (
-    <div>
+    <>
       <h1>Profile</h1>
       {user && (
         <p>{JSON.stringify(user)}</p>
       )}
-    </div>
+    </>
   )
 }
