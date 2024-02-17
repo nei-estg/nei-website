@@ -3,7 +3,7 @@ WORKDIR /app
 COPY ./react /app
 RUN npm install -g typescript vite && npm install && npm run build
 
-FROM nginx:1.25.3-alpine
+FROM nginx:1.25.4-alpine
 COPY --from=build /app/dist /build/react
 COPY ./nginx/nginx-prod.conf /etc/nginx/nginx.conf
 EXPOSE 8000
