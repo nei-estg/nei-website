@@ -9,8 +9,8 @@ section {
 
 a#scroll-btn {
   position: absolute;
-  height: 8em;
-  width: 5em;
+  height: 6em;
+  width: 3.5em;
   border: 0.5em solid #ffffff;
   margin: auto;
   left: 0;
@@ -36,7 +36,7 @@ a#scroll-btn:before {
     opacity: 0.5;
   }
   100% {
-    transform: translateY(3.3em);
+    transform: translateY(2.3em);
     opacity: 0;
   }
 }
