@@ -71,7 +71,7 @@ export default function FrontPage() {
     <ThemeProvider theme={defaultTheme}>
       <div>
         <img
-          src="/public/estg.png"
+          src="estg.png"
           alt="Banner Image"
           style={{ width: '100%', position: 'relative', zIndex: '2' }}
         ></img>
@@ -87,7 +87,7 @@ export default function FrontPage() {
             <div id="div1" style={{ margin: '20px' }}>
               <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
               <img
-                src="public/logo.png"
+                src="logo.png"
                 alt="Descrição da imagem"
                 style={{ height: '150px', width: '150px' }}
               />
