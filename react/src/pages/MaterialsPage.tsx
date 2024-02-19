@@ -7,7 +7,9 @@ import {
   MenuItem,
   InputLabel,
   Box,
+  Container,
 } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DataGrid, GridColDef} from "@mui/x-data-grid";
 import { getCurricularUnits } from "@src/api/CourseRoutes";
 import { createMaterial, getMaterialTagList, getMaterialsList } from "@src/api/MaterialsRoutes";
@@ -16,6 +18,8 @@ import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
 import { IMaterial } from "@src/interfaces/IMaterial";
 import { useEffect, useState } from "react";
 import { toast, Bounce } from "react-toastify";
+
+const defaultTheme = createTheme();
 
 export default function MaterialsPage() {
   const [materialsList, setMaterialsList] = useState<IMaterial[]>([]);
@@ -169,8 +173,21 @@ export default function MaterialsPage() {
   ];
 
   return (
-    <div className="App">
-      <h1>Materiais de Unidades Curriculares</h1>
+    <ThemeProvider theme={defaultTheme}>
+      <Container maxWidth="xl" sx={{ marginBottom: '60px' }}>
+
+      <Typography variant="h4"
+          sx={{
+            color: '#1E2022',
+            display: 'flex',
+            fontWeight: 700,
+            flexDirection: 'column',
+            alignItems: 'center',
+            marginTop: '30px',
+            marginBottom: '15px',
+          }}
+        >Materiais de Unidades Curriculares</Typography>
+
       <Modal open={openCreateMaterialModal} onClose={handleCloseCreateMaterialModal}>
         <Box
           component="form"
@@ -253,6 +270,7 @@ export default function MaterialsPage() {
         />
       </div>
       <Button onClick={handleOpen}>Adicionar Material</Button>
-    </div>
+      </Container>
+    </ThemeProvider>
   );
 }
