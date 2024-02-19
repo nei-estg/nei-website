@@ -1,4 +1,4 @@
-FROM node:21.4-bullseye-slim
+FROM node:21.6.2-bullseye-slim
 WORKDIR /app
 COPY . /app
 RUN npm install -g npm@latest typescript vite && npm install
