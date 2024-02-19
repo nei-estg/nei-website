@@ -1,26 +1,27 @@
 import {
   Box,
   Button,
-  Container,
   CssBaseline,
   Grid,
   TextField,
   ThemeProvider,
   createTheme,
-} from "@mui/material";
-import { sendContactForm } from "@src/api/ContactRoutes";
-import { IContact } from "@src/interfaces/IContact";
-import { toast, Bounce } from "react-toastify";
-import { Particle } from "@src/components/particles/particles";
-import { useEffect, useState } from "react";
+} from '@mui/material';
+import { sendContactForm } from '@src/api/ContactRoutes';
+import { IContact } from '@src/interfaces/IContact';
+import { toast, Bounce } from 'react-toastify';
+import { Particle } from '@src/components/particles/particles';
+import { useEffect, useState } from 'react';
+import { Scroll } from '@src/components/button/scroll';
+import './css/FrontPage.css';
 
 const defaultTheme = createTheme();
 
 export default function FrontPage() {
   const [showForm, setShowForm] = useState(true);
-  
+
   useEffect(() => {
-    document.title = "Home - NEI";
+    document.title = 'Home - NEI';
   }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -35,45 +36,93 @@ export default function FrontPage() {
       .then(() => {
         setShowForm(false);
         toast.success(
-          "Contacto criado com sucesso! O NEI irá responder o mais rápido possível!",
+          'Contacto criado com sucesso! O NEI irá responder o mais rápido possível!',
           {
-            position: "top-right",
+            position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: 'dark',
             transition: Bounce,
           }
         );
       })
       .catch(() => {
         toast.error(
-          "Ocorreu um erro ao criar o pedido de contacto! Por favor tenta novamente!",
+          'Ocorreu um erro ao criar o pedido de contacto! Por favor tenta novamente!',
           {
-            position: "top-right",
+            position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: 'dark',
             transition: Bounce,
           }
         );
-      })
+      });
   };
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="md">
-        <CssBaseline />
-        <div style={{ height: "60vh" }}>
-          <div style={{ zIndex: 2, position: "relative", textAlign: "center" }}>
-            {showForm && (
+      <div>
+        <img
+          src="/public/estg.png"
+          alt="Banner Image"
+          style={{ width: '100%', position: 'relative', zIndex: '2' }}
+        ></img>
+        <Scroll />
+        <div style={{ position: 'relative', zIndex: '2', marginTop: "80px", marginBottom: "80px" }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              textAlign: 'center',
+            }}
+          >
+            <div id="div1" style={{ margin: '20px' }}>
+              <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
+              <img
+                src="public/logo.png"
+                alt="Descrição da imagem"
+                style={{ height: '150px', width: '150px' }}
+              />
+              <p style={{ color: 'white' }}>Descrição pequena</p>
+            </div>
+            <div id="div2" style={{ textAlign: 'center', margin: '20px' }}>
+              <h1 style={{ color: 'white' }}>Atividades</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <CssBaseline />
+      <div
+        style={{
+          zIndex: 2,
+          position: 'relative',
+          height: '60vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'white',
+        }}
+      >
+        <div
+          style={{
+            zIndex: 2,
+            position: 'relative',
+            textAlign: 'center',
+            width: '50%',
+          }}
+        >
+          {showForm && (
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              <h1>Dúvidas? Envia-nos uma mensagem! :)</h1>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -82,7 +131,7 @@ export default function FrontPage() {
                     required
                     fullWidth
                     id="uName"
-                    label="Name"
+                    label="Nome"
                     autoFocus
                   />
                 </Grid>
@@ -91,7 +140,7 @@ export default function FrontPage() {
                     required
                     fullWidth
                     id="email"
-                    label="Email Address"
+                    label="Email"
                     name="email"
                     autoComplete="email"
                   />
@@ -103,7 +152,7 @@ export default function FrontPage() {
                     required
                     fullWidth
                     id="subject"
-                    label="Subject"
+                    label="Tema"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -111,7 +160,7 @@ export default function FrontPage() {
                     required
                     fullWidth
                     name="message"
-                    label="Message"
+                    label="Mensagem"
                     id="message"
                     autoComplete="message"
                   />
@@ -119,21 +168,19 @@ export default function FrontPage() {
               </Grid>
               <Button
                 type="submit"
-                fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, width: '50%', borderRadius: '8px' }}
               >
-                Send Contact
+                Enviar Mensagem
               </Button>
             </Box>
-            )}
-            {!showForm && <div>Thank you for your submission!</div>}
-          </div>
-          <div style={{ zIndex: 1, position: "absolute" }}>
-            <Particle />
-          </div>
+          )}
+          {!showForm && <div>Obrigado, até breve!</div>}
         </div>
-      </Container>
+      </div>
+      <div style={{ zIndex: 1, position: 'absolute' }}>
+        <Particle />
+      </div>
     </ThemeProvider>
   );
 }
