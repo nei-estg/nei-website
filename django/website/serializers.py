@@ -113,7 +113,7 @@ class FAQSerializer(serializers.ModelSerializer):
     fields = ['question', 'answer', 'category']
 
 class CurricularUnitSerializer(serializers.ModelSerializer):
-  course = CourseSerializer(many=True, read_only=True)
+  #course = CourseSerializer(many=True, read_only=True)
   class Meta:
     model = CurricularUnitModel
     fields = '__all__'
@@ -134,7 +134,7 @@ class CalendarSerializer(serializers.ModelSerializer):
   curricularUnit = CurricularUnitSerializer(required=False, read_only=True)
   class Meta:
     model = CalendarModel
-    fields = ['name', 'startDate', 'endDate', 'description', 'curricularUnit', 'place']
+    fields = ['id', 'name', 'startDate', 'endDate', 'description', 'curricularUnit', 'place']
 
 class MentoringRequestSerializer(serializers.ModelSerializer):
   mentee = UserSerializer(read_only=True)

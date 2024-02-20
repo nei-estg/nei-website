@@ -7,9 +7,13 @@ import { ICalendar } from "@src/interfaces/ICalendar";
 import "../components/calendar/calendar.css";
 import { createCalendarEvent, getCalendarEvents } from "@src/api/CalendarRoutes";
 import { toast, Bounce } from "react-toastify";
-import { Box, Button, ListSubheader, MenuItem, Modal, Select, TextField } from "@mui/material";
+import { Box, Button, FormControl, InputLabel, MenuItem, Modal, Select, SelectChangeEvent, TextField } from "@mui/material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from "dayjs";
+import { ICourse } from "@src/interfaces/ICourse";
+import { getCourses } from "@src/api/CourseRoutes";
+import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
 
 moment.locale("pt-BR"); // Set the locale to Portuguese
 const localizer = momentLocalizer(moment);
@@ -26,27 +30,36 @@ const customLabels = {
 
 export default function CalendarPage() {
   const [eventsData, setEventsData] = useState<ICalendar[]>([]);
+  const [coursesData, setCoursesData] = useState<ICourse[]>([]);
   const [openAddEventModal, setOpenAddEventModal] = useState(false);
   const [openViewEventModal, setOpenViewEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({} as ICalendar);
   const [selectedSlot, setSelectedSlot] = useState({} as SlotInfo);
-
-
-  const handleCloseViewEventModal = () => {
-    setOpenViewEventModal(false);
-  }
-
-  const handleCloseAddEventModal = () => {
-    setOpenAddEventModal(false);
-  }
+  const [selectedCourse, setSelectedCourse] = useState({} as ICourse);
+  const [curricularUnitsData, setCurricularUnitsData] = useState<ICurricularUnit[]>([]);
+  const [selectedCurricularUnit, setSelectedCurricularUnit] = useState({} as ICurricularUnit);
 
   useEffect(() => {
     document.title = "Calendar - NEI"
     getCalendarEvents().then((result) => {
-      const calendar: ICalendar[] = result;
-      setEventsData(calendar);
+      setEventsData(result);
     }).catch(() => {
       toast.error("Ocorreu um erro ao aceder ao Calendário! Por favor tenta novamente!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    });
+    getCourses().then((result) => {
+      setCoursesData(result);
+    }).catch(() => {
+      toast.error("Ocorreu um erro ao aceder aos Cursos! Por favor tenta novamente!", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -78,16 +91,32 @@ export default function CalendarPage() {
       return;
     }
 
+    //if course is selected check if curricular unit is selected
+    if (selectedCourse.abbreviation && !selectedCurricularUnit.abbreviation) {
+      toast.error("Por favor seleciona uma Unidade Curricular!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      return;
+    }
+
     const newCalendar: ICalendar = {
       name: event.currentTarget.eventName.value,
       description: event.currentTarget.description.value,
       startDate: new Date(event.currentTarget.startDate.value),
       endDate: new Date(event.currentTarget.endDate.value),
-      //curricularUnit: 
+      curricularUnit: selectedCurricularUnit,
       place: event.currentTarget.place.value,
     }
     createCalendarEvent(newCalendar).then((result: ICalendar) => {
-      toast.success("Evento criado com sucesso! O NEI irá rever o teu evento para que seja mostrado!", {
+      toast.success("Evento criado com sucesso! O NEI irá rever o teu evento para que seja mostrado! (ao dar refresh ele desaparece!)", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -117,10 +146,25 @@ export default function CalendarPage() {
 
   // Map eventsData to the format expected by react-big-calendar
   const calendarEvents = eventsData.map((event) => ({
+    id: event.id,
     title: event.name,
     start: event.startDate,
     end: event.endDate,
   }));
+
+  const handleSelectCourse = (event: SelectChangeEvent) => {
+    setSelectedCourse(coursesData.filter((c) => c.abbreviation === event.target.value)[0]);
+    setCurricularUnitsData(coursesData.filter((c) => c.abbreviation === event.target.value)[0].curricularUnits);
+  }
+
+  const handleSelectCurricularUnit = (event: SelectChangeEvent) => {
+    setSelectedCurricularUnit(curricularUnitsData.filter((c) => c.abbreviation === event.target.value)[0]);
+  }
+
+  const handleSelectEvent = (event: { id: number | undefined; }) => {
+    setSelectedEvent(eventsData.filter((e) => {e.id === event.id})[0]);
+    setOpenViewEventModal(true)
+  }
 
   return (
     <div className="App">
@@ -133,12 +177,12 @@ export default function CalendarPage() {
           defaultView="month"
           events={calendarEvents}
           style={{ height: "80vh", width: "80%", margin: "0 auto" }}
-          onSelectEvent={(event) => {setSelectedEvent(eventsData.filter((e) => {e.name === event.title && e.startDate === event.start && e.endDate === event.end})[0]); setOpenViewEventModal(true)}}
+          onSelectEvent={handleSelectEvent}
           onSelectSlot={(slotInfo) => {setSelectedSlot(slotInfo); setOpenAddEventModal(true)}}
           messages={customLabels}
         />
       </div>
-      <Modal open={openViewEventModal} onClose={handleCloseViewEventModal}>
+      <Modal open={openViewEventModal} onClose={() => setOpenViewEventModal(false)}>
         <Box
           sx={{
             position: "absolute",
@@ -161,7 +205,7 @@ export default function CalendarPage() {
           )}
         </Box>
       </Modal>
-      <Modal open={openAddEventModal} onClose={handleCloseAddEventModal}>
+      <Modal open={openAddEventModal} onClose={() => setOpenAddEventModal(false)}>
         <Box
           component="form"
           onSubmit={handleSubmit}
@@ -196,33 +240,28 @@ export default function CalendarPage() {
               label="Description"
               id="description"
             />
-            //TODO: Add Required Date and Time fields, Course Select that filters Curricular Units and Styling
             {selectedSlot && (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateTimePicker
+                  sx={{
+                    width: "100%",
+                    mt: 2,
+                  }}
                   name="startDate"
                   label="Start Date"
-                  //value={selectedSlot.start}
+                  value={dayjs(selectedSlot.start)}
                 />
                 <DateTimePicker
+                  sx={{
+                    width: "100%",
+                    mt: 2,
+                  }}
                   name="endDate"
                   label="End Date"
-                  //value={selectedSlot.end}
+                  value={dayjs(selectedSlot.end)}
                 />
               </LocalizationProvider>
             )}
-            <Select
-              id="curricularUnit"
-              //value={}
-              //onChange={}
-            >
-              <ListSubheader>Group 1</ListSubheader>
-              <MenuItem>Item 1</MenuItem>
-              <MenuItem>Item 2</MenuItem>
-              <ListSubheader>Group 2</ListSubheader>
-              <MenuItem>Item 3</MenuItem>
-              <MenuItem>Item 4</MenuItem>
-            </Select>
             <TextField
               margin="normal"
               fullWidth
@@ -230,6 +269,38 @@ export default function CalendarPage() {
               label="Place"
               id="place"
             />
+            <FormControl fullWidth sx={{ mt: 2 }}>
+              <InputLabel id="course-label">Course</InputLabel>
+              <Select
+                labelId="course-label"
+                id="course"
+                label="Course"
+                value={selectedCourse.abbreviation}
+                onChange={handleSelectCourse}
+              >
+                {coursesData.map((option) => (
+                  <MenuItem key={option.abbreviation} value={option.abbreviation}>
+                    {option.abbreviation}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl fullWidth sx={{ mt: 2 }}>
+              <InputLabel id="curricular-unit-label">Curricular Unit</InputLabel>
+              <Select
+                labelId="curricular-unit-label"
+                id="curricularUnit"
+                label="Curricular Unit"
+                value={selectedCurricularUnit.abbreviation}
+                onChange={handleSelectCurricularUnit}
+              >
+              {selectedCourse?.curricularUnits?.map((unit) => (
+                <MenuItem key={unit.abbreviation} value={unit.abbreviation}>
+                  {unit.abbreviation}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
             <Button
               type="submit"
               fullWidth
