@@ -1,4 +1,12 @@
-import { Box, Button, CssBaseline, Grid, TextField, ThemeProvider,createTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  CssBaseline,
+  Grid,
+  TextField,
+  ThemeProvider,
+  createTheme,
+} from '@mui/material';
 import { sendContactForm } from '@src/api/ContactRoutes';
 import { IContact } from '@src/interfaces/IContact';
 import { toast, Bounce } from 'react-toastify';
@@ -8,6 +16,11 @@ import { Scroll } from '@src/components/button/scroll';
 import './css/FrontPage.css';
 import Terminal from '@src/components/terminal/terminal';
 import routes from '@src/router/Routes';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import CardActionArea from '@mui/material/CardActionArea';
 
 const defaultTheme = createTheme();
 
@@ -84,7 +97,7 @@ export default function FrontPage() {
               justifyContent: 'center',
             }}
           >
-            <h1 style={{ color: 'white' }}>Bem-vindo ao nosso Núcleo!</h1>
+            <h1 style={{ color: 'white' }}>Bem-vindo ao NEI!</h1>
             <p style={{ color: 'white' }}>add a description here maybe?</p>
           </div>
           <div
@@ -102,11 +115,20 @@ export default function FrontPage() {
           alt="Banner Image"
           style={{ width: '100%', position: 'relative', zIndex: '2' }}
         ></img>
-        <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', zIndex: "3" }}>
-          <button onClick={() => {
-            const element = document.getElementById('scrollDiv');
-            element.scrollIntoView({ behavior: 'smooth' });
-          }}>
+        <div
+          style={{
+            position: 'absolute',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: '3',
+          }}
+        >
+          <button
+            onClick={() => {
+              const element = document.getElementById('scrollDiv');
+              element.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
             <Scroll />
           </button>
         </div>
@@ -118,38 +140,60 @@ export default function FrontPage() {
             marginBottom: '80px',
           }}
         >
-          <div id='scrollDiv'
+          {/* <div
+            id="scrollDiv"
             style={{
               display: 'flex',
               justifyContent: 'space-between',
               textAlign: 'center',
             }}
           >
-            
-              <div id="div1" style={{ margin: '20px' }}>
-                <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
-                <a href={routes.aboutFAQpage.path} target="_blank">
-                <img
-                  src="logo.png"
-                  alt="Descrição da imagem"
-                  style={{ height: '150px', width: '150px' }}
-                />
-                </a>
-                <p style={{ color: 'white', fontWeight: 'bold' }}>Direção, Cursos, entre outros.</p>
-              </div>
-            
-            <a href="https://your-other-url.com" target="_blank">
-              <div id="div1" style={{ margin: '20px' }}>
-                <h1 style={{ color: 'white' }}>Atividades</h1>
-                <img
-                  src="/icon/laptop.png"
-                  alt="Descrição da imagem"
-                  style={{ height: '150px', width: '150px' }}
-                />
-                <p style={{ color: 'white', fontWeight: 'bold' }}>Eventos e Atividades mais recentes.</p>
-              </div>
-            </a>
-          </div>
+            <Card sx={{ maxWidth: 345, margin: '20px' }}>
+              <CardMedia
+                component="img"
+                height="150"
+                image="logo.png"
+                alt="Descrição da imagem"
+              />
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  color="white"
+                >
+                  Sobre o Nosso Núcleo
+                </Typography>
+                <Typography variant="body2" color="white" fontWeight="bold">
+                  Direção, Cursos, entre outros.
+                </Typography>
+              </CardContent>
+              
+            </Card>
+
+            <Card sx={{ maxWidth: 345, margin: '20px' }}>
+              <CardMedia
+                component="img"
+                height="150"
+                image="/icon/laptop.png"
+                alt="Descrição da imagem"
+              />
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  color="white"
+                >
+                  Atividades
+                </Typography>
+                <Typography variant="body2" color="white" fontWeight="bold">
+                  Eventos, Atividades mais recentes.
+                </Typography>
+              </CardContent>
+            </Card>
+          </div> */}
+          
         </div>
       </div>
 
