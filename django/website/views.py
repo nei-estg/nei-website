@@ -42,10 +42,8 @@ class CalendarViewSet(CreateAndViewModelViewSet):
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
   filterset_fields = CalendarSerializer.Meta.fields
   pagination_class = None
-  
+
   def create(self, request, *args, **kwargs):
-    #if isinstance(self.request.data, dict):
-      #self.request.data._mutable = True
     self.request.data['visible'] = False
     return super().create(request, *args, **kwargs)
 

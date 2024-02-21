@@ -129,6 +129,8 @@ export default function CalendarPage() {
       });
       setEventsData([...eventsData, result]);
       setOpenAddEventModal(false);
+      setSelectedCurricularUnit({} as ICurricularUnit);
+      setSelectedCourse({} as ICourse);
     }).catch(() => {
       toast.error("Ocorreu um erro ao criar o Evento! Por favor tenta novamente!", {
         position: "top-right",

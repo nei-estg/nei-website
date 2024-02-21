@@ -113,7 +113,7 @@ class FAQSerializer(serializers.ModelSerializer):
     fields = ['question', 'answer', 'category']
 
 class CurricularUnitSerializer(serializers.ModelSerializer):
-  #course = CourseSerializer(many=True, read_only=True)
+  course = CourseSerializer(many=True, read_only=True)
   class Meta:
     model = CurricularUnitModel
     fields = '__all__'

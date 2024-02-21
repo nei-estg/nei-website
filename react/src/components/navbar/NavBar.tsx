@@ -63,7 +63,7 @@ function NavBar() {
   };
 
   return (
-    <div style={{ zIndex: 9999, position: 'relative' }}>
+    <div style={{ position: 'relative' }}>
     <AppBar position="static" sx={{ backgroundColor: '#002454' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
