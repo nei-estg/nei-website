@@ -16,16 +16,16 @@ import { Scroll } from '@src/components/button/scroll';
 import './css/FrontPage.css';
 import Terminal from '@src/components/terminal/terminal';
 import routes from '@src/router/Routes';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import CardActionArea from '@mui/material/CardActionArea';
 
 const defaultTheme = createTheme();
 
 export default function FrontPage() {
   const [showForm, setShowForm] = useState(true);
+
+  //APAGAR - APENAS PARA TESTAR BREAKPOINTS
+  window.onresize = function() {
+    location.reload();
+  };
 
   useEffect(() => {
     document.title = 'Home - NEI';
@@ -78,8 +78,11 @@ export default function FrontPage() {
     <ThemeProvider theme={defaultTheme}>
       <div>
         <div
+          id="bgnr"
           style={{
-            position: 'absolute',
+            position: window.innerWidth <= 1000 ? 'relative' : 'absolute',
+            marginTop: window.innerWidth <= 1000 ? '300px' : '0',
+            marginBottom: window.innerWidth <= 1000 ? '-300px' : '0',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
@@ -87,6 +90,7 @@ export default function FrontPage() {
             justifyContent: 'space-between',
             width: '80%',
             zIndex: '3',
+            flexDirection: window.innerWidth <= 1000 ? 'column' : 'row',
           }}
         >
           <div
@@ -111,11 +115,14 @@ export default function FrontPage() {
           </div>
         </div>
         <img
+          className="hide-on-small"
           src="estg2.png"
           alt="Banner Image"
           style={{ width: '100%', position: 'relative', zIndex: '2' }}
         ></img>
         <div
+          id='scrollButton'
+          className="hide-on-small"
           style={{
             position: 'absolute',
             left: '50%',
@@ -144,25 +151,29 @@ export default function FrontPage() {
             id="scrollDiv"
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'center', // Align items along the horizontal axis
+              alignItems: 'center', // Align items along the vertical axis
               textAlign: 'center',
+              flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
             }}
           >
-           <div id="div1" style={{ margin: '20px' }}>
-           <a href={routes.aboutFAQpage.path}>
+            <div id="div1" style={{ margin: '20px' }}>
+              <a href={routes.aboutFAQpage.path}>
                 <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
-                
+
                 <img
                   src="logo.png"
                   alt="Descrição da imagem"
                   style={{ height: '150px', width: '150px' }}
                 />
-                
-                <p style={{ color: 'white', fontWeight: 'bold' }}>Direção, Cursos, entre outros.</p>
-                </a>
-              </div>
 
-              <div id="div1" style={{ margin: '20px' }}>
+                <p style={{ color: 'white', fontWeight: 'bold' }}>
+                  Direção, Cursos, entre outros.
+                </p>
+              </a>
+            </div>
+
+            <div id="div1" style={{ margin: '20px' }}>
               <a href={routes.blogpage.path} target="_blank">
                 <h1 style={{ color: 'white' }}>Atividades</h1>
                 <img
@@ -170,12 +181,12 @@ export default function FrontPage() {
                   alt="Descrição da imagem"
                   style={{ height: '150px', width: '150px' }}
                 />
-                <p style={{ color: 'white', fontWeight: 'bold' }}>Eventos e Atividades mais recentes.</p>
-                </a>
-              </div>
-   
+                <p style={{ color: 'white', fontWeight: 'bold' }}>
+                  Eventos e Atividades mais recentes.
+                </p>
+              </a>
+            </div>
           </div>
-          
         </div>
       </div>
 
