@@ -162,12 +162,12 @@ export default function CalendarPage() {
   }
 
   const handleSelectEvent = (event: { id: number | undefined; }) => {
-    setSelectedEvent(eventsData.filter((e) => {e.id === event.id})[0]);
+    setSelectedEvent(eventsData.filter((e) => e.id === event.id)[0]);
     setOpenViewEventModal(true)
   }
 
   return (
-    <div className="App">
+    <>
       <div style={{ padding: "20px" }}>
         <Calendar
           views={["day", "work_week", "month"]}
@@ -192,17 +192,18 @@ export default function CalendarPage() {
             width: 400,
             bgcolor: "background.paper",
             border: "2px solid #000",
+            textAlign: "center",
             boxShadow: 24,
             p: 4,
           }}
         >
-          {selectedEvent && (
-            <div>
-              <h1>{selectedEvent.name}</h1>
-              <p>{selectedEvent.description}</p>
-              <p>{selectedEvent.place}</p>
-            </div>
-          )}
+          <h1>Ver Evento</h1>
+          <p>Titulo: {selectedEvent?.name}</p>
+          <p>Descrição: {selectedEvent?.description}</p>
+          <p>Inicio: {selectedEvent?.startDate}</p>
+          <p>Fim: {selectedEvent?.endDate}</p>
+          {selectedEvent?.place && <p>Local: {selectedEvent.place}</p>}
+          {selectedEvent?.curricularUnit && <p>Unidade Curricular: {selectedEvent.curricularUnit.abbreviation}</p>}
         </Box>
       </Modal>
       <Modal open={openAddEventModal} onClose={() => setOpenAddEventModal(false)}>
@@ -240,28 +241,26 @@ export default function CalendarPage() {
               label="Description"
               id="description"
             />
-            {selectedSlot && (
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateTimePicker
-                  sx={{
-                    width: "100%",
-                    mt: 2,
-                  }}
-                  name="startDate"
-                  label="Start Date"
-                  value={dayjs(selectedSlot.start)}
-                />
-                <DateTimePicker
-                  sx={{
-                    width: "100%",
-                    mt: 2,
-                  }}
-                  name="endDate"
-                  label="End Date"
-                  value={dayjs(selectedSlot.end)}
-                />
-              </LocalizationProvider>
-            )}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker
+                sx={{
+                  width: "100%",
+                  mt: 2,
+                }}
+                name="startDate"
+                label="Start Date"
+                value={dayjs(selectedSlot?.start)}
+              />
+              <DateTimePicker
+                sx={{
+                  width: "100%",
+                  mt: 2,
+                }}
+                name="endDate"
+                label="End Date"
+                value={dayjs(selectedSlot?.end)}
+              />
+            </LocalizationProvider>
             <TextField
               margin="normal"
               fullWidth
@@ -311,6 +310,6 @@ export default function CalendarPage() {
             </Button>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
