@@ -140,7 +140,7 @@ export default function FrontPage() {
             marginBottom: '80px',
           }}
         >
-          {/* <div
+          <div
             id="scrollDiv"
             style={{
               display: 'flex',
@@ -148,51 +148,33 @@ export default function FrontPage() {
               textAlign: 'center',
             }}
           >
-            <Card sx={{ maxWidth: 345, margin: '20px' }}>
-              <CardMedia
-                component="img"
-                height="150"
-                image="logo.png"
-                alt="Descrição da imagem"
-              />
-              <CardContent>
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="div"
-                  color="white"
-                >
-                  Sobre o Nosso Núcleo
-                </Typography>
-                <Typography variant="body2" color="white" fontWeight="bold">
-                  Direção, Cursos, entre outros.
-                </Typography>
-              </CardContent>
-              
-            </Card>
+           <div id="div1" style={{ margin: '20px' }}>
+           <a href={routes.aboutFAQpage.path}>
+                <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
+                
+                <img
+                  src="logo.png"
+                  alt="Descrição da imagem"
+                  style={{ height: '150px', width: '150px' }}
+                />
+                
+                <p style={{ color: 'white', fontWeight: 'bold' }}>Direção, Cursos, entre outros.</p>
+                </a>
+              </div>
 
-            <Card sx={{ maxWidth: 345, margin: '20px' }}>
-              <CardMedia
-                component="img"
-                height="150"
-                image="/icon/laptop.png"
-                alt="Descrição da imagem"
-              />
-              <CardContent>
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="div"
-                  color="white"
-                >
-                  Atividades
-                </Typography>
-                <Typography variant="body2" color="white" fontWeight="bold">
-                  Eventos, Atividades mais recentes.
-                </Typography>
-              </CardContent>
-            </Card>
-          </div> */}
+              <div id="div1" style={{ margin: '20px' }}>
+              <a href={routes.blogpage.path} target="_blank">
+                <h1 style={{ color: 'white' }}>Atividades</h1>
+                <img
+                  src="/icon/laptop.png"
+                  alt="Descrição da imagem"
+                  style={{ height: '150px', width: '150px' }}
+                />
+                <p style={{ color: 'white', fontWeight: 'bold' }}>Eventos e Atividades mais recentes.</p>
+                </a>
+              </div>
+   
+          </div>
           
         </div>
       </div>
