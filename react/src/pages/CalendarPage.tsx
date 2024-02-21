@@ -14,9 +14,11 @@ import dayjs from "dayjs";
 import { ICourse } from "@src/interfaces/ICourse";
 import { getCourses } from "@src/api/CourseRoutes";
 import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
+import Holidays from "date-holidays";
 
 moment.locale("pt-BR"); // Set the locale to Portuguese
 const localizer = momentLocalizer(moment);
+const hd = new Holidays('PT');
 
 const customLabels = {
   day: "Dia",
@@ -41,8 +43,21 @@ export default function CalendarPage() {
 
   useEffect(() => {
     document.title = "Calendar - NEI"
+
+    //! Add Holidays to Calendar
+    const holidays = hd.getHolidays();
+    const holidayEvents = holidays.map((holiday, index) => ({
+      id: -(index + 1),
+      name: holiday.name,
+      description: "Evento Automático",
+      startDate: new Date(holiday.start),
+      endDate: new Date(holiday.end),
+    }));
+    setEventsData((prevEventsData) => [...prevEventsData, ...holidayEvents]);
+    
+    //! Get Calendar Events
     getCalendarEvents().then((result) => {
-      setEventsData(result);
+      setEventsData((prevEventsData) => [...prevEventsData, ...result]);
     }).catch(() => {
       toast.error("Ocorreu um erro ao aceder ao Calendário! Por favor tenta novamente!", {
         position: "top-right",
@@ -56,6 +71,8 @@ export default function CalendarPage() {
         transition: Bounce,
       });
     });
+
+    //! Get Courses
     getCourses().then((result) => {
       setCoursesData(result);
     }).catch(() => {
@@ -72,6 +89,7 @@ export default function CalendarPage() {
       });
     });
   }, [])
+
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -202,10 +220,16 @@ export default function CalendarPage() {
           <h1>Ver Evento</h1>
           <p>Titulo: {selectedEvent?.name}</p>
           <p>Descrição: {selectedEvent?.description}</p>
-          <p>Inicio: {selectedEvent?.startDate}</p>
-          <p>Fim: {selectedEvent?.endDate}</p>
+          <p>Inicio: {new Date(selectedEvent?.startDate).toLocaleString("pt-PT")}</p>
+          <p>Fim: {new Date(selectedEvent?.endDate).toLocaleString("pt-PT")}</p>
           {selectedEvent?.place && <p>Local: {selectedEvent.place}</p>}
-          {selectedEvent?.curricularUnit && <p>Unidade Curricular: {selectedEvent.curricularUnit.abbreviation}</p>}
+          {selectedEvent?.curricularUnit && (
+            <>
+              <p>Unidade Curricular: {selectedEvent.curricularUnit.abbreviation}</p>
+              <p>Curso: {selectedEvent.curricularUnit?.course?.map((course) => course.abbreviation).join(', ')}</p>
+            </>
+          )}
+
         </Box>
       </Modal>
       <Modal open={openAddEventModal} onClose={() => setOpenAddEventModal(false)}>

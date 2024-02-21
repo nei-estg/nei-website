@@ -22,8 +22,8 @@ const navbar = {
     { id: 1, name: 'Sobre Nós', URL: '/about', requiredLogin: false },
     { id: 2, name: 'Blog', URL: '/blog', requiredLogin: false },
     { id: 3, name: 'Calendário', URL: '/calendar', requiredLogin: false },
-    { id: 4, name: 'Mentoria', URL: '/mentoring', requiredLogin: true },
-    { id: 5, name: 'Materiais', URL: '/materials', requiredLogin: false },
+    { id: 4, name: 'Materiais', URL: '/materials', requiredLogin: false },
+    { id: 5, name: 'Mentoria', URL: '/mentoring', requiredLogin: true },
   ],
 };
 

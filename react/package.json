@@ -19,6 +19,7 @@
     "@tsparticles/react": "^3.0.0",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.7",
+    "date-holidays": "^3.23.8",
     "dayjs": "^1.11.10",
     "fullcalendar": "^6.1.10",
     "moment": "^2.30.1",

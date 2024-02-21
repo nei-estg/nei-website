@@ -5,5 +5,5 @@ export interface ICurricularUnit {
   name?: string;
   abbreviation?: string;
   year?: number;
-  course?: ICourse[] | number[];
+  course?: ICourse[];
 }
