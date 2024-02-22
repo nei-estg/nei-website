@@ -10,7 +10,7 @@ import { toast, Bounce } from "react-toastify";
 
 const defaultTheme = createTheme();
 
-interface TeamItem {
+ interface TeamItem {
   photo: string;
   role: string;
   fullname: string;

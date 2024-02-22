@@ -4,6 +4,7 @@ import { IBlogPost } from "@src/interfaces/IBlogPost";
 import { toast, Bounce } from "react-toastify";
 import { Avatar, Container, Grid, Paper, ThemeProvider, Typography, createTheme, styled, useMediaQuery } from "@mui/material";
 import { ICourse } from "@src/interfaces/ICourse";
+import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
@@ -16,6 +17,8 @@ export default function BlogPage() {
   const isXl = useMediaQuery(defaultTheme.breakpoints.only('xl'));
 
   const [blogList, setBlogList] = useState<IBlogPost[]>([]);
+
+  const navigate = useNavigate(); // Hook para navegar
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -125,12 +128,12 @@ export default function BlogPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container maxWidth="xl" sx={{ marginBottom: '60px' }}>
+      <Container maxWidth="xl" sx={{ marginTop: '30px' , marginBottom: '60px' }}>
       
       <div>
         <Grid container spacing={1}>
           {blogList.map((blogItem, index) => (
-            <Grid item key={index} xs={12} sm={6} md={4} lg={4} xl={4}>
+            <Grid item key={index} xs={12} sm={6} md={4} lg={4} xl={4} sx={{cursor: 'pointer'}} onClick={() => navigate(`/blog/post/${blogItem.slug}`)}>
               <Grid container direction="column">
                 <Item>
                   {/* Usando um div para o avatar com imagem de fundo */}
