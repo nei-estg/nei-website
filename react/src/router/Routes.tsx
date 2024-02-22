@@ -84,10 +84,11 @@ const routes: IRoutes = {
   },
   postpage: {
     name: 'Post',
-    path: '/blog/post/1',
+    path: '/blog/post/:slug',
     element: <PostPage />,
   },
   notfoundpage: {
+    name: 'Not Found',
     path: '*',
     element: <NotFoundPage/>,
   },
