@@ -4,6 +4,7 @@ import { IUser } from "./IUser";
 
 export interface IBlogPost {
   id?: number;
+  slug: string;
   title: string;
   description: string;
   content: string,

@@ -212,6 +212,4 @@ class UserViewSet(CreateAndViewModelViewSet):
   
   #! Limit so that is only possible to see the same user
   def get_queryset(self):
-    if self.request.user.is_superuser:
-      return User.objects.all()
     return User.objects.filter(id=self.request.user.id)

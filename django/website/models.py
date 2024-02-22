@@ -170,6 +170,7 @@ class BlogImageModel(ExportModelOperationsMixin('BlogImageModel'), models.Model)
 
 
 class BlogPostModel(ExportModelOperationsMixin('BlogPostModel'), models.Model):
+  slug = models.SlugField(unique=True)
   title = models.TextField()
   description = models.TextField()
   content = models.TextField()
