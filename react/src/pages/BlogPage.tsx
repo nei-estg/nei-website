@@ -2,12 +2,18 @@ import { getBlogList } from "@src/api/BlogRoutes"
 import { useEffect, useState } from "react"
 import { IBlogPost } from "@src/interfaces/IBlogPost";
 import { toast, Bounce } from "react-toastify";
-import { Avatar, Container, Grid, Paper, ThemeProvider, Typography, createTheme, styled } from "@mui/material";
+import { Avatar, Container, Grid, Paper, ThemeProvider, Typography, createTheme, styled, useMediaQuery } from "@mui/material";
 
 const defaultTheme = createTheme();
 
 
 export default function BlogPage() {
+  const isXs = useMediaQuery(defaultTheme.breakpoints.only('xs'));
+  const isSm = useMediaQuery(defaultTheme.breakpoints.only('sm'));
+  const isMd = useMediaQuery(defaultTheme.breakpoints.only('md'));
+  const isLg = useMediaQuery(defaultTheme.breakpoints.only('lg'));
+  const isXl = useMediaQuery(defaultTheme.breakpoints.only('xl'));
+
   const [blogList, setBlogList] = useState<IBlogPost[]>([]);
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -39,7 +45,11 @@ export default function BlogPage() {
   }, [])
 
 
-  // Função para formatar a data (dd mm aaaa)
+  /** formatar a data (dd mm aaaa)
+   * 
+   * @param dateString 
+   * @returns data formatada
+   */
   function formatDate(dateString: string): string 
   {
     const date = new Date(dateString);
@@ -55,6 +65,84 @@ export default function BlogPage() {
     
     return `${day} ${month} ${year}`;
   }
+
+
+  /** limitar palavras do titulo
+   * 
+   * @param title titulo
+   */
+  function limitTitle(title: string): string
+  {
+    let wordLimit;
+
+    if (isXl)
+    {
+      wordLimit = 6;
+    } 
+    else if (isLg) 
+    {
+      wordLimit = 4;
+    } 
+    else if (isMd)
+    {
+      wordLimit = 3;
+    } 
+    else if (isSm)
+    {
+      wordLimit = 3;
+    }
+
+    return limitWords(title, wordLimit);
+  }
+
+  /** limitar palavras da descrição
+   * 
+   * @param description descricao
+   */
+  function limitDescription(description: string): string
+  {
+    let wordLimit;
+
+    if (isXl)
+    {
+      wordLimit = 9;
+    } 
+    else if (isLg) 
+    {
+      wordLimit = 7;
+    } 
+    else if (isMd)
+    {
+      wordLimit = 5;
+    } 
+    else if (isSm)
+    {
+      wordLimit = 5;
+    }
+
+    return limitWords(description, wordLimit);
+  }
+
+
+  /** truncar com base no limite de palavras
+   * 
+   * @param sentence frase
+   * @param limit limite de palavras
+   * @returns descricao
+   */
+  function limitWords(sentence: string, limit): string
+  {
+    const words = sentence.split(' '); // Divide a descrição em palavras
+
+    if (words.length > limit) 
+    {
+      return words.slice(0, limit).join(' ') + '...'; // Retorna as primeiras 'limit' palavras
+    }
+
+
+    return sentence; // Retorna a descrição completa se estiver dentro do limite
+  }
+  
 
 
   return (
@@ -79,7 +167,7 @@ export default function BlogPage() {
                   }} alt={blogItem.images[0].name} />
                   
                   {/*categorias e data*/}
-                  <Grid container>
+                  <Grid container sx={{marginBottom: '10px'}}>
                     <Grid item>
                       <Grid container direction="row">
                         {/*categorias*/}
@@ -93,8 +181,10 @@ export default function BlogPage() {
                     </Grid>
                   </Grid>
                   
-                  <Typography variant="subtitle1" color="primary">{blogItem.title}</Typography>
-                  <Typography variant="subtitle2">{blogItem.description}</Typography>
+                  <Typography variant="h5" color="#002454" sx={{marginBottom: '10px', textAlign: 'start'}}>{limitTitle(blogItem.title)}</Typography>
+                  
+                  {/*TODO: mostrar apenas a primeira linha e depois coloca ...*/}
+                  <Typography variant="subtitle2" color="#969696" sx={{textAlign: 'start'}}>{limitDescription(blogItem.description)}</Typography>
 
                   {/*nome autor e curso*/}
                 </Item>
@@ -102,7 +192,7 @@ export default function BlogPage() {
             </Grid>
           ))}
         </Grid>
-</div>
+      </div>
 
 
       </Container>
