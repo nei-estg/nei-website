@@ -203,14 +203,6 @@ export default function MaterialsPage() {
       },
     },
     {
-      field: "year",
-      headerName: "Year",
-      width: 200,
-      valueGetter: (params) => {
-        return params.row.curricularUnit.year;
-      },
-    },
-    {
       field: "tags",
       headerName: "Tags",
       width: 200,
