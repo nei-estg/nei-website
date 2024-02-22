@@ -128,7 +128,7 @@ export default function FrontPage() {
             
               <div id="div1" style={{ margin: '20px' }}>
                 <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
-                <a href={routes.aboutFAQpage.path} target="_blank">
+                <a href="/about" target="_blank">
                 <img
                   src="logo.png"
                   alt="Descrição da imagem"
