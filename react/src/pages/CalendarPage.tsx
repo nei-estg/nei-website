@@ -55,9 +55,7 @@ export default function CalendarPage() {
   const [curricularUnitsData, setCurricularUnitsData] = useState<
     ICurricularUnit[]
   >([]);
-  const [selectedCurricularUnit, setSelectedCurricularUnit] = useState(
-    {} as ICurricularUnit
-  );
+  const [selectedCurricularUnit, setSelectedCurricularUnit] = useState({} as ICurricularUnit);
 
   useEffect(() => {
     document.title = "Calendar - NEI";
@@ -314,7 +312,7 @@ export default function CalendarPage() {
             p: 4,
           }}
         >
-          <h1>Novo Evento</h1>
+          <h1>Adicionar Evento</h1>
           {!isLoggedIn() ? (
             <h2>Para adicionar um evento é necessário iniciar sessão!</h2>
           ) : (

@@ -66,7 +66,6 @@ export default function Register() {
   }, []);
 
   const handleChangeCourses = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
     const {
       target: { value },
     } = event;
