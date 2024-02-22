@@ -83,9 +83,12 @@ export default function BlogPage() {
                     <Grid item>
                       <Grid container direction="row">
                         {/*categorias*/}
-                        <Typography variant="subtitle1" color="primary">{blogItem.topics[0].name}</Typography>
-                        <Typography variant="subtitle1" color="primary" sx={{marginLeft: '10px', marginRight: '10px'}}>•</Typography>
-                        <Typography variant="subtitle1" color="primary">{formatDate(blogItem.date)}</Typography>
+                        {blogItem.topics.map((blogItemTopic, indexTopic) => (
+                          <Typography variant="subtitle2" color="#636F80" sx={{marginRight: '5px'}}>{blogItemTopic.name}</Typography>
+                        ))}
+
+                        <Typography variant="subtitle2" color="#969696" sx={{marginLeft: '5px', marginRight: '10px'}}>•</Typography>
+                        <Typography variant="subtitle2" color="#969696">{formatDate(blogItem.date)}</Typography>
                       </Grid>
                     </Grid>
                   </Grid>
