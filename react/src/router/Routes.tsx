@@ -6,11 +6,12 @@ import LogoutPage from "@src/pages/LogoutPage";
 import ProfilePage from "@src/pages/ProfilePage";
 import MentoringPage from "@src/pages/MentoringPage";
 import CalendarPage from "@src/pages/CalendarPage";
-import AboutFAQPage from "@src/pages/AboutFAQ";
+import AboutFAQPage from "@src/pages/AboutFAQPage";
 import MaterialsPage from "@src/pages/MaterialsPage";
 import BlogPage from "@src/pages/BlogPage";
 import NotFoundPage from "@src/pages/NotFoundPage";
 import { TerminalApp } from "@src/pages/terminal";
+import PostPage from "@src/pages/PostPage";
 
 interface IRoutes {
   [key: string]: {
@@ -80,6 +81,11 @@ const routes: IRoutes = {
     name: 'Blog',
     path: '/blog',
     element: <BlogPage />,
+  },
+  postpage: {
+    name: 'Post',
+    path: '/blog/post/1',
+    element: <PostPage />,
   },
   notfoundpage: {
     path: '*',
