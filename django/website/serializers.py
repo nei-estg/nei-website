@@ -134,7 +134,7 @@ class CalendarSerializer(serializers.ModelSerializer):
   curricularUnit = CurricularUnitSerializer(required=False, read_only=True)
   class Meta:
     model = CalendarModel
-    fields = ['name', 'startDate', 'endDate', 'description', 'curricularUnit', 'place']
+    fields = ['id', 'name', 'startDate', 'endDate', 'description', 'curricularUnit', 'place']
 
 class MentoringRequestSerializer(serializers.ModelSerializer):
   mentee = UserSerializer(read_only=True)

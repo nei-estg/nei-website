@@ -22,8 +22,8 @@ const navbar = {
     { id: 1, name: 'Sobre Nós', URL: '/about', requiredLogin: false },
     { id: 2, name: 'Blog', URL: '/blog', requiredLogin: false },
     { id: 3, name: 'Calendário', URL: '/calendar', requiredLogin: false },
-    { id: 4, name: 'Mentoria', URL: '/mentoring', requiredLogin: true },
-    { id: 5, name: 'Materiais', URL: '/materials', requiredLogin: false },
+    { id: 4, name: 'Materiais', URL: '/materials', requiredLogin: false },
+    { id: 5, name: 'Mentoria', URL: '/mentoring', requiredLogin: true },
   ],
 };
 
@@ -63,7 +63,7 @@ function NavBar() {
   };
 
   return (
-    <div style={{ zIndex: 9999, position: 'relative' }}>
+    <div style={{ position: 'relative' }}>
     <AppBar position="static" sx={{ backgroundColor: '#002454' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>

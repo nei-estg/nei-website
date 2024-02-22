@@ -135,6 +135,8 @@ services:
       - prometheus_data:/prometheus
     networks:
       - nei
+    ports:
+      - '127.0.0.1:9090:9090'
     depends_on:
       django:
         condition: service_healthy
@@ -153,6 +155,8 @@ services:
       - grafana_data:/var/lib/grafana
     networks:
       - nei
+    ports:
+      - '127.0.0.1:3000:3000'
     depends_on:
       - prometheus
     restart: always

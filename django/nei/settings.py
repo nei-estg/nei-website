@@ -157,7 +157,8 @@ REST_FRAMEWORK = {
     'user': '2000/hour'
   },
   'DEFAULT_AUTHENTICATION_CLASSES': [
-    'knox.auth.TokenAuthentication'
+    'knox.auth.TokenAuthentication',
+    'rest_framework.authentication.BasicAuthentication'
   ],
   'DEFAULT_RENDERER_CLASSES': [
     'rest_framework.renderers.JSONRenderer',
@@ -169,7 +170,6 @@ REST_FRAMEWORK = {
 
 if DEBUG:
   REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] += ['rest_framework.renderers.BrowsableAPIRenderer']
-  REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] += ['rest_framework.authentication.BasicAuthentication']
   REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] += ['rest_framework.authentication.SessionAuthentication']
 
 LOGIN_REDIRECT_URL = '/api'

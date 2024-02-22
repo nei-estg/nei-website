@@ -42,10 +42,8 @@ class CalendarViewSet(CreateAndViewModelViewSet):
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
   filterset_fields = CalendarSerializer.Meta.fields
   pagination_class = None
-  
+
   def create(self, request, *args, **kwargs):
-    #if isinstance(self.request.data, dict):
-      #self.request.data._mutable = True
     self.request.data['visible'] = False
     return super().create(request, *args, **kwargs)
 
@@ -58,6 +56,15 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
   permission_classes = []
   filterset_fields = CourseSerializer.Meta.fields
   pagination_class = None
+  
+  #append the curricular units to each course
+  def list(self, request, *args, **kwargs):
+    queryset = self.get_queryset()
+    serializer = CourseSerializer(queryset, many=True)
+    data = serializer.data
+    for i in range(len(data)):
+      data[i]['curricularUnits'] = CurricularUnitSerializer(CurricularUnitModel.objects.filter(course=data[i]['id']), many=True).data
+    return Response(data)
 
 class CurricularUnitViewSet(viewsets.ReadOnlyModelViewSet):
   """

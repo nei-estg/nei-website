@@ -4,10 +4,14 @@ import { toast, Bounce } from "react-toastify";
 import { IMentoringRequest } from "@src/interfaces/IMentoringRequest";
 import { IMentoring } from "@src/interfaces/IMentoring";
 import { Button } from "@mui/material";
+import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
+import { getCurricularUnits } from "@src/api/CourseRoutes";
+import { ICourse } from "@src/interfaces/ICourse";
 
 export default function MentoringPage() {
   const [mentoringRequestList, setMentoringRequestList] = useState<IMentoringRequest[]>([]);
   const [mentoringList, setMentoringList] = useState<IMentoring[]>([]);
+  const [curricularUnitList, setCurricularUnitList] = useState<ICurricularUnit[]>([]);
 
   useEffect(() => {
     document.title = "Mentoring - NEI"
@@ -42,6 +46,21 @@ export default function MentoringPage() {
         transition: Bounce,
       });
     });
+    getCurricularUnits().then((response) => {
+      setCurricularUnitList(response.results)
+    }).catch(() => {
+      toast.error("Ocorreu um erro ao aceder às Unidades Curriculares! Por favor tenta novamente!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    })
   }, []);
 
   const handleCreateMentoringRequest = () => {
@@ -56,7 +75,7 @@ export default function MentoringPage() {
             id: 1,
             name: "Mestrado em Engenharia Informática",
             abbreviation: "MEI",
-          }
+          } as ICourse
         ]
       },
       mentee: {
