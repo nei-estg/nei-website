@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { IBlogPost } from "@src/interfaces/IBlogPost";
 import { toast, Bounce } from "react-toastify";
 import { Avatar, Container, Grid, Paper, ThemeProvider, Typography, createTheme, styled, useMediaQuery } from "@mui/material";
+import { ICourse } from "@src/interfaces/ICourse";
 
 const defaultTheme = createTheme();
 
@@ -44,29 +45,6 @@ export default function BlogPage() {
     });
   }, [])
 
-
-  /** formatar a data (dd mm aaaa)
-   * 
-   * @param dateString 
-   * @returns data formatada
-   */
-  function formatDate(dateString: string): string 
-  {
-    const date = new Date(dateString);
-    const months = [
-      'Jan', 'Fev', 'Mar',
-      'Abr', 'Mai', 'Jun',
-      'Jul', 'Ago', 'Set',
-      'Out', 'Nov', 'Dez'
-    ];
-    const day = date.getDate();
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    
-    return `${day} ${month} ${year}`;
-  }
-
-
   /** limitar palavras do titulo
    * 
    * @param title titulo
@@ -92,7 +70,7 @@ export default function BlogPage() {
       wordLimit = 3;
     }
 
-    return limitWords(title, wordLimit);
+    return limitWords(title, wordLimit || 3);
   }
 
   /** limitar palavras da descrição
@@ -120,7 +98,7 @@ export default function BlogPage() {
       wordLimit = 5;
     }
 
-    return limitWords(description, wordLimit);
+    return limitWords(description, wordLimit || 5);
   }
 
 
@@ -130,7 +108,7 @@ export default function BlogPage() {
    * @param limit limite de palavras
    * @returns descricao
    */
-  function limitWords(sentence: string, limit): string
+  function limitWords(sentence: string, limit: number): string
   {
     const words = sentence.split(' '); // Divide a descrição em palavras
 
@@ -164,19 +142,19 @@ export default function BlogPage() {
                     backgroundPosition: 'top',
                     backgroundSize: 'cover',
                     backgroundImage: `url(${blogItem.images[0].image})`
-                  }} alt={blogItem.images[0].name} />
+                  }} />
                   
                   {/*categorias e data*/}
                   <Grid container sx={{marginBottom: '10px'}}>
                     <Grid item>
                       <Grid container direction="row">
                         {/*categorias*/}
-                        {blogItem.topics.map((blogItemTopic, indexTopic) => (
+                        {blogItem.topics.map((blogItemTopic) => (
                           <Typography variant="subtitle2" color="#636F80" sx={{marginRight: '5px'}}>{blogItemTopic.name}</Typography>
                         ))}
 
                         <Typography variant="subtitle2" color="#969696" sx={{marginLeft: '5px', marginRight: '10px'}}>•</Typography>
-                        <Typography variant="subtitle2" color="#969696">{formatDate(blogItem.date)}</Typography>
+                        <Typography variant="subtitle2" color="#969696">{new Date(blogItem.date).toLocaleDateString('PT')}</Typography>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -192,7 +170,7 @@ export default function BlogPage() {
                         
                         <div>
                           <Typography variant="subtitle2" color="#636F80" sx={{marginLeft: '10px', textAlign: 'start'}}>{blogItem.author.first_name} {blogItem.author.last_name}</Typography>
-                          <Typography variant="subtitle2" color="#969696" sx={{marginLeft: '10px', textAlign: 'start'}}>{blogItem.author.profilemodel?.course[0].abbreviation}</Typography>
+                          <Typography variant="subtitle2" color="#969696" sx={{marginLeft: '10px', textAlign: 'start'}}>{blogItem.author.profilemodel?.course?.map((course: ICourse) => course.abbreviation).join(", ")}</Typography>
                         </div>
                       </Grid>
                     </Grid>

@@ -11,5 +11,5 @@ export interface IBlogPost {
   author: IUser,
   images: IBlogImage[],
   topics: IBlogTopic[],
-  date?: Date
+  date: Date
 }
