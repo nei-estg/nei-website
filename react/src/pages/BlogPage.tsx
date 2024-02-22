@@ -182,11 +182,21 @@ export default function BlogPage() {
                   </Grid>
                   
                   <Typography variant="h5" color="#002454" sx={{marginBottom: '10px', textAlign: 'start'}}>{limitTitle(blogItem.title)}</Typography>
-                  
-                  {/*TODO: mostrar apenas a primeira linha e depois coloca ...*/}
                   <Typography variant="subtitle2" color="#969696" sx={{textAlign: 'start'}}>{limitDescription(blogItem.description)}</Typography>
 
                   {/*nome autor e curso*/}
+                  <Grid container sx={{marginTop: '20px'}}>
+                    <Grid item>
+                      <Grid container direction="row">
+                        <Avatar src={blogItem.author.profilemodel?.image}/>
+                        
+                        <div>
+                          <Typography variant="subtitle2" color="#636F80" sx={{marginLeft: '10px', textAlign: 'start'}}>{blogItem.author.first_name} {blogItem.author.last_name}</Typography>
+                          <Typography variant="subtitle2" color="#969696" sx={{marginLeft: '10px', textAlign: 'start'}}>{blogItem.author.profilemodel?.course[0].abbreviation}</Typography>
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </Grid>
                 </Item>
               </Grid>
             </Grid>
