@@ -21,7 +21,6 @@ class ContactViewSet(CreateOnlyModelViewSet):
   queryset = ContactModel.objects.all()
   serializer_class = ContactSerializer
   permission_classes = []
-  filterset_fields = ContactSerializer.Meta.fields
 
 class FAQViewSet(viewsets.ReadOnlyModelViewSet):
   """
@@ -43,10 +42,6 @@ class CalendarViewSet(CreateAndViewModelViewSet):
   filterset_fields = CalendarSerializer.Meta.fields
   pagination_class = None
 
-  def create(self, request, *args, **kwargs):
-    self.request.data['visible'] = False
-    return super().create(request, *args, **kwargs)
-
 class CourseViewSet(viewsets.ReadOnlyModelViewSet):
   """
   API endpoint that allows courses to be viewed.
@@ -57,13 +52,13 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
   filterset_fields = CourseSerializer.Meta.fields
   pagination_class = None
   
-  #append the curricular units to each course
+  #* Append the curricular units to each course in the list
   def list(self, request, *args, **kwargs):
     queryset = self.get_queryset()
     serializer = CourseSerializer(queryset, many=True)
     data = serializer.data
     for i in range(len(data)):
-      data[i]['curricularUnits'] = CurricularUnitSerializer(CurricularUnitModel.objects.filter(course=data[i]['id']), many=True).data
+      data[i]['curricularUnits'] = CurricularUnitSerializer(CurricularUnitModel.objects.filter(course__abbreviation=data[i]['abbreviation']), many=True).data
     return Response(data)
 
 class CurricularUnitViewSet(viewsets.ReadOnlyModelViewSet):
@@ -95,10 +90,8 @@ class MaterialViewSet(CreateAndViewModelViewSet):
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
   filterset_fields = ['name', 'tags', 'curricularUnit']
   pagination_class = None
-  
-  #TODO: Add Create method
-  
-  def create(self, request, *args, **kwargs):
+
+  def create(self, request, *args, **kwargs): #TODO: Improve this method
     fileJson = request.data.get('file', None)
     curricularUnitJson = request.data.get('curricularUnit', None)
     
@@ -136,7 +129,7 @@ class MaterialViewSet(CreateAndViewModelViewSet):
     return Response(material, status=status.HTTP_201_CREATED)
 
 
-class MentoringRequestViewSet(viewsets.ModelViewSet):
+class MentoringRequestViewSet(CreateAndViewModelViewSet):
   """
   API endpoint that allows mentorship requests to be viewed or edited.
   """
@@ -144,21 +137,32 @@ class MentoringRequestViewSet(viewsets.ModelViewSet):
   serializer_class = MentoringRequestSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
   filterset_fields = MentoringRequestSerializer.Meta.fields
-
-  #TODO: Test this methods and limit access to this ViewSet
+  
+  #* Hide users from requests
+  def retrieve(self, request, *args, **kwargs):
+    queryset = self.get_queryset()
+    serializer = MentoringRequestSerializer(queryset, many=True)
+    data = serializer.data
+    for i in range(len(data)):
+      if data[i]['mentee']['id'] != request.user.id:
+        data[i]['mentee'] = None
+    return Response(data)
+  
+  #* Hide users from requests
+  def list(self, request, *args, **kwargs):
+    queryset = self.get_queryset()
+    serializer = MentoringRequestSerializer(queryset, many=True)
+    data = serializer.data
+    for i in range(len(data)):
+      if data[i]['mentee']['id'] != request.user.id:
+        data[i]['mentee'] = None
+    return Response(data)
 
   def create(self, request, *args, **kwargs):
-    #if isinstance(self.request.data, dict):
-      #self.request.data._mutable = True
-    self.request.data['mentee'] = request.user.id
+    self.request.data['mentee'] = request.user
     return super().create(request, *args, **kwargs)
 
-  def destroy(self, request, *args, **kwargs):
-    if request.user.is_superuser or request.user == self.get_object().mentee:
-      return super().destroy(request, *args, **kwargs)
-    return Response({'detail': 'Deletion is not allowed for this resource.'}, status=status.HTTP_403_FORBIDDEN)
-
-class MentoringViewSet(viewsets.ModelViewSet):
+class MentoringViewSet(CreateAndViewModelViewSet):
   """
   API endpoint that allows mentorships to be viewed or edited.
   """
@@ -167,7 +171,31 @@ class MentoringViewSet(viewsets.ModelViewSet):
   permission_classes = [permissions.DjangoObjectPermissions]
   filterset_fields = MentoringSerializer.Meta.fields
   
-  #TODO: Add methods and limit access to this ViewSet
+  #* Hide users from requests
+  def retrieve(self, request, *args, **kwargs):
+    queryset = self.get_queryset()
+    serializer = MentoringSerializer(queryset, many=True)
+    data = serializer.data
+    for i in range(len(data)):
+      if data[i]['mentee']['id'] != request.user.id and data[i]['mentor']['id'] != request.user.id:
+        data[i]['mentee'] = None
+        data[i]['mentor'] = None
+    return Response(data)
+  
+  #* Hide users from requests
+  def list(self, request, *args, **kwargs):
+    queryset = self.get_queryset()
+    serializer = MentoringSerializer(queryset, many=True)
+    data = serializer.data
+    for i in range(len(data)):
+      if data[i]['mentee']['id'] != request.user.id and data[i]['mentor']['id'] != request.user.id:
+        data[i]['mentee'] = None
+        data[i]['mentor'] = None
+    return Response(data)
+
+  def create(self, request, *args, **kwargs): #TODO: Complete this method
+    self.request.data['mentor'] = request.user
+    return super().create(request, *args, **kwargs)
 
 class BlogTopicViewSet(viewsets.ReadOnlyModelViewSet):
   """
@@ -186,7 +214,7 @@ class BlogImageViewSet(viewsets.ReadOnlyModelViewSet):
   queryset = BlogImageModel.objects.all()
   serializer_class = BlogImageSerializer
   permission_classes = []
-  filterset_fields = ['id', 'name']
+  filterset_fields = ['name']
   pagination_class = None
 
 class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
@@ -208,8 +236,6 @@ class UserViewSet(CreateAndViewModelViewSet):
   filterset_fields = ['id', 'username', 'first_name', 'last_name', 'email']
   pagination_class = None
   
-  #TODO: Add more limit access to this ViewSet
-  
-  #! Limit so that is only possible to see the same user
+  #* Limit so that is only possible to see the same user
   def get_queryset(self):
     return User.objects.filter(id=self.request.user.id)

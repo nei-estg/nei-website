@@ -3,7 +3,6 @@ from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django_prometheus.models import ExportModelOperationsMixin
-import uuid
 
 class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
   name = models.TextField()
@@ -14,6 +13,10 @@ class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
   open = models.BooleanField(default=True)
 
   class Meta:
+    # check for duplicates
+    constraints = [
+      models.UniqueConstraint(fields=['name', 'email', 'subject', 'message'], name='unique_contact')
+    ]
     verbose_name = "Formulário de Contacto"
     verbose_name_plural = "Formulário de Contactos"
 
@@ -21,7 +24,7 @@ class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
     return self.name
 
 class FAQCategoryModel(ExportModelOperationsMixin('FAQCategoryModel'), models.Model):
-  name = models.TextField()
+  name = models.TextField(primary_key=True)
 
   class Meta:
     verbose_name = "Categoria de FAQ"
@@ -36,6 +39,9 @@ class FAQModel(ExportModelOperationsMixin('FAQModel'), models.Model):
   category = models.ForeignKey(FAQCategoryModel, on_delete=models.CASCADE)
 
   class Meta:
+    constraints = [
+      models.UniqueConstraint(fields=['question', 'category'], name='unique_faq')
+    ]
     verbose_name = "FAQ"
     verbose_name_plural = "FAQs"
 
@@ -44,8 +50,8 @@ class FAQModel(ExportModelOperationsMixin('FAQModel'), models.Model):
 
 
 class CourseModel(ExportModelOperationsMixin('CourseModel'), models.Model):
+  abbreviation = models.TextField(primary_key=True)
   name = models.TextField()
-  abbreviation = models.TextField()
 
   class Meta:
     verbose_name = "Curso"
@@ -76,7 +82,7 @@ class CurricularUnitModel(ExportModelOperationsMixin('CurricularUnitModel'), mod
 
 
 class MaterialTagModel(ExportModelOperationsMixin('MaterialTagModel'), models.Model):
-  name = models.TextField()
+  name = models.TextField(primary_key=True)
 
   class Meta:
     verbose_name = "Tag de Material"
@@ -96,6 +102,13 @@ class MaterialModel(ExportModelOperationsMixin('MaterialModel'), models.Model):
   visible = models.BooleanField(default=False)
 
   class Meta:
+    #constraint to have either file or link filled
+    constraints = [
+      models.CheckConstraint(
+        check=models.Q(file__isnull=False) | models.Q(link__isnull=False),
+        name='file_or_link'
+      )
+    ]
     verbose_name = "Material de Unidade Curricular"
     verbose_name_plural = "Materiais das Unidades Curriculares"
 
@@ -113,6 +126,13 @@ class CalendarModel(ExportModelOperationsMixin('CalendarModel'), models.Model):
   visible = models.BooleanField(default=False)
   
   class Meta:
+    constraints = [
+      models.CheckConstraint(
+        check=models.Q(startDate__lt=models.F('endDate')),
+        name='start_date_before_end_date'
+      ),
+      models.UniqueConstraint(fields=['name', 'startDate', 'endDate', 'curricularUnit'], name='unique_calendar')
+    ]
     verbose_name = "Evento de Calendário"
     verbose_name_plural = "Eventos de Calendário"
     
@@ -126,11 +146,14 @@ class MentoringRequestModel(ExportModelOperationsMixin('MentoringRequestModel'),
   date = models.DateTimeField(auto_now_add=True)
 
   class Meta:
+    constraints = [
+      models.UniqueConstraint(fields=['mentee', 'curricularUnit'], name='unique_mentoring_request')
+    ]
     verbose_name = "Pedido de Mentoria"
     verbose_name_plural = "Pedidos de Mentoria"
 
   def __str__(self):
-    return self.mentee.username + " - " + self.curricular_unit.name
+    return self.mentee.username + " - " + self.curricularUnit.name
 
 
 class MentoringModel(ExportModelOperationsMixin('MentoringModel'), models.Model):
@@ -140,6 +163,9 @@ class MentoringModel(ExportModelOperationsMixin('MentoringModel'), models.Model)
   date = models.DateTimeField(auto_now_add=True)
 
   class Meta:
+    constraints = [
+      models.UniqueConstraint(fields=['mentor', 'mentee', 'curricularUnit'], name='unique_mentoring')
+    ]
     verbose_name = "Mentoria"
     verbose_name_plural = "Mentorias"
 
@@ -147,7 +173,7 @@ class MentoringModel(ExportModelOperationsMixin('MentoringModel'), models.Model)
     return self.mentor.username + " -> " + self.mentee.username + ": " + self.curricular_unit.name
 
 class BlogTopicModel(ExportModelOperationsMixin('BlogTopicModel'), models.Model):
-  name = models.TextField()
+  name = models.TextField(primary_key=True)
 
   class Meta:
     verbose_name = "Tópico de Blog"
@@ -158,8 +184,8 @@ class BlogTopicModel(ExportModelOperationsMixin('BlogTopicModel'), models.Model)
 
 
 class BlogImageModel(ExportModelOperationsMixin('BlogImageModel'), models.Model):
-  name = models.TextField()
-  image = models.ImageField()
+  name = models.TextField(primary_key=True)
+  image = models.ImageField(upload_to='blog')
 
   class Meta:
     verbose_name = "Imagem de Blog"
@@ -170,7 +196,7 @@ class BlogImageModel(ExportModelOperationsMixin('BlogImageModel'), models.Model)
 
 
 class BlogPostModel(ExportModelOperationsMixin('BlogPostModel'), models.Model):
-  slug = models.SlugField(unique=True)
+  slug = models.SlugField(primary_key=True)
   title = models.TextField()
   description = models.TextField()
   content = models.TextField()
@@ -188,7 +214,7 @@ class BlogPostModel(ExportModelOperationsMixin('BlogPostModel'), models.Model):
 
 class ProfileModel(ExportModelOperationsMixin('ProfileModel'), models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
-  course = models.ManyToManyField(CourseModel, blank=True)
+  course = models.ManyToManyField(CourseModel)
   year = models.IntegerField(
     choices=[
       (1, '1st'),
@@ -196,11 +222,9 @@ class ProfileModel(ExportModelOperationsMixin('ProfileModel'), models.Model):
       (3, '3rd'),
       (4, 'Erasmus'),
       (5, 'Alumni')
-    ], null=True, blank=True
+    ], null = True
   )
-  image = models.ImageField(null=True, blank=True)
-  bio = models.TextField(null=True, blank=True)
-  resetCode = models.UUIDField(default=uuid.uuid4) #TODO: Check if this generates "true" random UUIDs
+  image = models.ImageField(null=True, blank=True, upload_to='profile')
 
   class Meta:
     ordering = ['user']
@@ -209,7 +233,6 @@ class ProfileModel(ExportModelOperationsMixin('ProfileModel'), models.Model):
 
   def __str__(self):
     return self.user.username
-
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
