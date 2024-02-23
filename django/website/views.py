@@ -226,7 +226,7 @@ class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
   permission_classes = []
   filterset_fields = BlogPostSerializer.Meta.fields
 
-class UserViewSet(CreateAndViewModelViewSet):
+class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
   """
   API endpoint that allows users to be viewed or edited.
   """
@@ -239,3 +239,33 @@ class UserViewSet(CreateAndViewModelViewSet):
   #* Limit so that is only possible to see the same user
   def get_queryset(self):
     return User.objects.filter(id=self.request.user.id)
+  
+  #TODO: Adjust and test this method
+  def update(self, request, *args, **kwargs):
+    user = User.objects.get(id=request.user.id)
+    user.first_name = request.data.get('first_name', user.first_name)
+    user.last_name = request.data.get('last_name', user.last_namee)
+    user.email = request.data.get('email', user.email)
+    user.save()
+    profilemodel = request.data.get('profilemodel', None)
+    if profilemodel:
+      user.profilemodel.course = profilemodel.get('course', user.profilemodel.course)
+      user.profilemodel.year = profilemodel.get('year', user.profilemodel.year)
+      user.profilemodel.image = profilemodel.get('image', user.profilemodel.image)
+      user.profilemodel.save()
+    return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+  
+  #TODO: Adjust and test this method
+  def partial_update(self, request, *args, **kwargs):
+    user = User.objects.get(id=request.user.id)
+    user.first_name = request.data.get('first_name', user.first_name)
+    user.last_name = request.data.get('last_name', user.last_name)
+    user.email = request.data.get('email', user.email)
+    profilemodel = request.data.get('profilemodel', None)
+    user.save()
+    if profilemodel:
+      user.profilemodel.course = profilemodel.get('course', user.profilemodel.course)
+      user.profilemodel.year = profilemodel.get('year', user.profilemodel.year)
+      user.profilemodel.image = profilemodel.get('image', user.profilemodel.image)
+      user.profilemodel.save()
+    return Response(UserSerializer(user).data, status=status.HTTP_200_OK)

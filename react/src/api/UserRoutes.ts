@@ -73,3 +73,9 @@ export const getUser = async () => {
   if (response.status !== 200) throw new Error(response.data);
   return response.data[0] as IUser;
 }
+
+export const updateUser = async (user : IUser) => {
+  const response = await AuthenticatedClient.patch('/api/user/', user);
+  if (response.status !== 200) throw new Error(response.data);
+  return response.data as IUser;
+}
