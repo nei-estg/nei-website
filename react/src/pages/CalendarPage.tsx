@@ -390,6 +390,7 @@ export default function CalendarPage() {
                   label="Curricular Unit"
                   value={selectedCurricularUnit.abbreviation}
                   onChange={handleSelectCurricularUnit}
+                  disabled={!selectedCourse.abbreviation}
                 >
                   {selectedCourse?.curricularUnits?.map((unit) => (
                     <MenuItem key={unit.abbreviation} value={unit.abbreviation}>

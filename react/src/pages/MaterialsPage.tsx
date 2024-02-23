@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { getCourses, getCurricularUnits } from "@src/api/CourseRoutes";
+import { getCourses } from "@src/api/CourseRoutes";
 import {
   createMaterial,
   getMaterialTagList,
@@ -336,6 +336,7 @@ export default function MaterialsPage() {
                     label="Curricular Unit"
                     value={selectedCurricularUnit.abbreviation}
                     onChange={handleSelectCurricularUnit}
+                    disabled={!selectedCourse}
                   >
                     {selectedCourse?.curricularUnits?.map((unit) => (
                       <MenuItem
