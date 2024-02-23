@@ -10,8 +10,8 @@ import AboutFAQPage from "@src/pages/AboutFAQPage";
 import MaterialsPage from "@src/pages/MaterialsPage";
 import BlogPage from "@src/pages/BlogPage";
 import NotFoundPage from "@src/pages/NotFoundPage";
-import { TerminalApp } from "@src/pages/terminal";
 import PostPage from "@src/pages/PostPage";
+import ChangePasswordPage from "@src/pages/ChangePasswordPage";
 
 interface IRoutes {
   [key: string]: {
@@ -41,6 +41,11 @@ const routes: IRoutes = {
     name: 'Redefinir Palavra Passe',
     path: '/reset-password',
     element: <ResetPasswordPage />,
+  },
+  changepasswordpage: {
+    name: 'Mudar Palavra Passe',
+    path: '/change-password',
+    element: <ChangePasswordPage />,
   },
   logoutpage: {
     name: 'Terminar Sessão',
@@ -91,11 +96,6 @@ const routes: IRoutes = {
     name: 'Not Found',
     path: '*',
     element: <NotFoundPage/>,
-  },
-  terminal: {
-    name: "terminal",
-    path: "/terminal",
-    element: <TerminalApp/>
   }
 }
 
