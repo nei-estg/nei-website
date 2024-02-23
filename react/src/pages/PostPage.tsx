@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { IBlogPost } from "@src/interfaces/IBlogPost";
 import { toast, Bounce } from "react-toastify";
 import { Avatar, Button, Container, Grid, Paper, ThemeProvider, Typography, createTheme, styled, useMediaQuery } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getBlog } from "@src/api/BlogRoutes";
 import { ICourse } from "@src/interfaces/ICourse";
 import Carousel from "@src/components/post/Carousel";
@@ -18,16 +18,26 @@ export default function PostPage() {
   const isXl = useMediaQuery(defaultTheme.breakpoints.only('xl'));
 
   const [post, setPost] = useState<IBlogPost[]>([]);
+  const navigate = useNavigate();
 
   const { slug } = useParams();
 
 
   useEffect(() => {
     document.title = "Blog - NEI";
-    //TODO: Implement Pagination
     getBlog(slug).then((response) =>{
-      setPost(response.results)
+      
+      if(response.results.length == 0)
+      {
+        navigate("/404");
+      }
+      else 
+      {
+        setPost(response.results)
+      }
+      
     }).catch(() => {
+      // Exibe a mensagem de erro
       toast.error("Ocorreu um erro ao aceder ao Post! Por favor tenta novamente!", {
         position: "top-right",
         autoClose: 5000,
