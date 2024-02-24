@@ -128,7 +128,7 @@ export default function BlogPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container maxWidth="xl" sx={{ marginTop: '30px' , marginBottom: '60px' }}>
+      <Container maxWidth="xl" sx={{ marginTop: '30px' , marginBottom: '10px' }}>
       
       <div>
         <Grid container spacing={1}>
@@ -169,7 +169,7 @@ export default function BlogPage() {
                   <Grid container sx={{marginTop: '20px'}}>
                     <Grid item>
                       <Grid container direction="row">
-                        <Avatar src={blogItem.author.profilemodel?.image}/>
+                        <Avatar src={blogItem.author.profilemodel?.image} sx={{alignSelf: "center"}}/>
                         
                         <div>
                           <Typography variant="subtitle2" color="#636F80" sx={{marginLeft: '10px', textAlign: 'start'}}>{blogItem.author.first_name} {blogItem.author.last_name}</Typography>
