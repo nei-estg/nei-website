@@ -21,6 +21,14 @@ export const loginUser = async (login : IUser) => {
       if (response.data.token && response.data.expiry) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('expiry', response.data.expiry);
+        try {
+          const user = await getUser();
+          if (user.profilemodel?.image) {
+            localStorage.setItem('profile', user.profilemodel?.image);
+          }
+        } catch (error) {
+          // Do nothing
+        }
         return "";
       }
     }
@@ -46,9 +54,9 @@ export const registerUser = async (register : IUser) => {
 export const logoutUser = async (allDevices: boolean) => {
   try {
     if (allDevices) {
-      await AuthenticatedClient.post('/api/auth/logoutall/');
+      AuthenticatedClient.post('/api/auth/logoutall/');
     } else {
-      await AuthenticatedClient.post('/api/auth/logout/');
+      AuthenticatedClient.post('/api/auth/logout/');
     }
   } catch (error) {
     toast.error('There was an error when logging out! Still logged out locally!', {
@@ -65,6 +73,7 @@ export const logoutUser = async (allDevices: boolean) => {
   } finally {
     localStorage.removeItem('token');
     localStorage.removeItem('expiry');
+    localStorage.removeItem('profile');
   }
 };
 
