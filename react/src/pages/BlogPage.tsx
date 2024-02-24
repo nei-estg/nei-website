@@ -184,8 +184,6 @@ export default function BlogPage() {
           ))}
         </Grid>
       </div>
-
-
       </Container>
     </ThemeProvider>
   )
