@@ -41,3 +41,14 @@
     zIndex: '3';
   }
 }
+
+.responsive-header {
+  font-size: 2em; 
+}
+
+
+@media screen and (max-width: 600px) {
+  .responsive-header {
+    font-size: 1.5em;
+  }
+}

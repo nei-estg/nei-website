@@ -23,7 +23,7 @@ export default function FrontPage() {
   const [showForm, setShowForm] = useState(true);
 
   //APAGAR - APENAS PARA TESTAR BREAKPOINTS
-  window.onresize = function() {
+  window.onresize = function () {
     location.reload();
   };
 
@@ -121,7 +121,7 @@ export default function FrontPage() {
           style={{ width: '100%', position: 'relative', zIndex: '2' }}
         ></img>
         <div
-          id='scrollButton'
+          id="scrollButton"
           className="hide-on-small"
           style={{
             position: 'absolute',
@@ -158,20 +158,20 @@ export default function FrontPage() {
             }}
           >
             <div id="div1" style={{ margin: '20px' }}>
-                <a href={routes.aboutFAQpage.path}>
-                  <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
-                  <a href="/about" target="_blank">
-                    <img
-                      src="logo.png"
-                      alt="Descrição da imagem"
-                      style={{ height: '150px', width: '150px' }}
-                    />
-                  </a>
-                  <p style={{ color: 'white', fontWeight: 'bold' }}>
-                    Direção, Cursos, entre outros.
-                  </p>
+              <a href={routes.aboutFAQpage.path}>
+                <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
+                <a href="/about" target="_blank">
+                  <img
+                    src="logo.png"
+                    alt="Descrição da imagem"
+                    style={{ height: '150px', width: '150px' }}
+                  />
                 </a>
-              </div>
+                <p style={{ color: 'white', fontWeight: 'bold' }}>
+                  Direção, Cursos, entre outros.
+                </p>
+              </a>
+            </div>
 
             <div id="div1" style={{ margin: '20px' }}>
               <a href={routes.blogpage.path} target="_blank">
@@ -212,7 +212,7 @@ export default function FrontPage() {
         >
           {showForm && (
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <h1>Dúvidas? Envia-nos uma mensagem! :)</h1>
+              <h1 className="responsive-header">Dúvidas? Envia-nos uma mensagem! :)</h1>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -252,14 +252,21 @@ export default function FrontPage() {
                     name="message"
                     label="Mensagem"
                     id="message"
-                    autoComplete="message"
+                    autoComplete=""
+                    multiline
+                    variant="outlined"
                   />
                 </Grid>
               </Grid>
               <Button
                 type="submit"
                 variant="contained"
-                sx={{ mt: 3, mb: 2, width: '50%', borderRadius: '8px' }}
+                sx={{ 
+                  mt: 3, 
+                  mb: 2, 
+                  width: { xs: '100%', sm: '50%' }, 
+                  borderRadius: '8px' 
+                }}
               >
                 Enviar Mensagem
               </Button>
