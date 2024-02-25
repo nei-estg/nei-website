@@ -1,8 +1,8 @@
-import { ICategory } from "./ICategory";
-
 export interface IFAQ {
   id?: number;
-  category: ICategory;
+  category: {
+    name: string;
+  };
   question: string;
   answer: string;
 }

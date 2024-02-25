@@ -133,7 +133,7 @@ export default function FrontPage() {
           <button
             onClick={() => {
               const element = document.getElementById('scrollDiv');
-              element.scrollIntoView({ behavior: 'smooth' });
+              element?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
             <Scroll />
@@ -158,20 +158,20 @@ export default function FrontPage() {
             }}
           >
             <div id="div1" style={{ margin: '20px' }}>
-              <a href={routes.aboutFAQpage.path}>
-                <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
-
-                <img
-                  src="logo.png"
-                  alt="Descrição da imagem"
-                  style={{ height: '150px', width: '150px' }}
-                />
-
-                <p style={{ color: 'white', fontWeight: 'bold' }}>
-                  Direção, Cursos, entre outros.
-                </p>
-              </a>
-            </div>
+                <a href={routes.aboutFAQpage.path}>
+                  <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
+                  <a href="/about" target="_blank">
+                    <img
+                      src="logo.png"
+                      alt="Descrição da imagem"
+                      style={{ height: '150px', width: '150px' }}
+                    />
+                  </a>
+                  <p style={{ color: 'white', fontWeight: 'bold' }}>
+                    Direção, Cursos, entre outros.
+                  </p>
+                </a>
+              </div>
 
             <div id="div1" style={{ margin: '20px' }}>
               <a href={routes.blogpage.path} target="_blank">

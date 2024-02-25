@@ -3,7 +3,7 @@ import { ICurricularUnit } from "./ICurricularUnit";
 
 export interface IMentoringRequest {
   id?: number,
-  mentee?: IUser,
+  mentee?: IUser | null,
   curricularUnit: ICurricularUnit,
   date?: Date,
 }

@@ -22,8 +22,8 @@ const navbar = {
     { id: 1, name: 'Sobre Nós', URL: '/about', requiredLogin: false },
     { id: 2, name: 'Blog', URL: '/blog', requiredLogin: false },
     { id: 3, name: 'Calendário', URL: '/calendar', requiredLogin: false },
-    { id: 4, name: 'Mentoria', URL: '/mentoring', requiredLogin: true },
-    { id: 5, name: 'Materiais', URL: '/materials', requiredLogin: false },
+    { id: 4, name: 'Materiais', URL: '/materials', requiredLogin: false },
+    { id: 5, name: 'Mentoria', URL: '/mentoring', requiredLogin: true },
   ],
 };
 
@@ -64,7 +64,7 @@ function NavBarMain() {
   };
 
   return (
-    <div style={{ zIndex: 9999, position: 'relative' }}>
+    <div style={{ zIndex: 2, position: 'relative' }}>
     <AppBar position="static" elevation={0} sx={{ backgroundColor: "transparent" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -124,7 +124,7 @@ function NavBarMain() {
             {isLoggedIn() ?
               <Tooltip title="Abrir Definições">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar sx={{ backgroundColor: "#054496" }}><PersonIcon /></Avatar>
+                  <Avatar sx={{ backgroundColor: "#054496" }} src={localStorage.getItem('profile') ?? 'logo.png'}></Avatar>
                 </IconButton>
               </Tooltip>
               : <Tooltip title="Iniciar Sessão">

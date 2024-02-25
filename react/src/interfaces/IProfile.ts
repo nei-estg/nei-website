@@ -5,5 +5,4 @@ export interface IProfile {
   course?: ICourse[];
   year?: number;
   image?: string;
-  bio?: string;
 }

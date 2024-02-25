@@ -3,18 +3,19 @@ from .models import *
 from rest_framework import serializers
 from django.db import transaction
 from django.contrib.auth.hashers import make_password
+import re
 
 class CourseSerializer(serializers.ModelSerializer):
   class Meta:
     model = CourseModel
-    fields = ['id', 'name', 'abbreviation']
+    fields = ['name', 'abbreviation']
 
 class ProfileSerializer(serializers.ModelSerializer):
   course = CourseSerializer(many=True, read_only=True)
 
   class Meta:
     model = ProfileModel
-    fields = ['course', 'year', 'image', 'bio']
+    fields = ['course', 'year', 'image']
 
 class UserSerializer(serializers.ModelSerializer):
   profilemodel = ProfileSerializer()
@@ -34,20 +35,29 @@ class UserSerializer(serializers.ModelSerializer):
     profile_data = validated_data.pop('profilemodel', None)
     course_data = profile_data.pop('course', None)
     
+    # check if email already exists
+    if User.objects.filter(email=validated_data.get('email')).exists():
+      raise serializers.ValidationError({'email': 'A user with this email address is already registered.'})
+    
     user = User.objects.create_user(**validated_data)
     user.set_password(validated_data.get('password'))
+    user.is_active = False
     user.save()
     
     if profile_data:
       profile = ProfileModel.objects.create(user=user, **profile_data)
 
       if course_data:
-        print(course_data) # [OrderedDict({'name': 'Mestrado em Engenharia Informática', 'abbreviation': 'MEI'}), OrderedDict({'name': 'Licenciatura em Segurança Informática em Redes de Computadores', 'abbreviation': 'LSIRC'})]
         for course in course_data:
           course = CourseModel.objects.get(name=course['name'])
           profile.course.add(course)
       
       profile.save()
+    
+    # if user email is 8dddddd@estg.ipp.pt
+    if re.match(r'^8[0-9]{6}@estg\.ipp\.pt$', user.email):
+      #TODO: send email with activation link
+      pass
     
     return user
 
@@ -63,14 +73,8 @@ class UserSerializer(serializers.ModelSerializer):
     
     #check if password is being updated
     if 'password' in validated_data:
-      #check if a reset code is being sent or oldPassword
-      if 'resetCode' in validated_data:
-        #check if resetCode matches the user's resetCode
-        if user.profilemodel.resetCode == validated_data.get('resetCode'):
-          user.set_password(validated_data.get('password'))
-        else:
-          raise serializers.ValidationError({'resetCode': 'The reset code is incorrect'})
-      elif 'oldPassword' in validated_data:
+      #check if oldPassword is present
+      if 'oldPassword' in validated_data:
         if user.check_password(validated_data.get('oldPassword')):
           user.set_password(validated_data.get('password'))
         else:
@@ -134,7 +138,11 @@ class CalendarSerializer(serializers.ModelSerializer):
   curricularUnit = CurricularUnitSerializer(required=False, read_only=True)
   class Meta:
     model = CalendarModel
-    fields = ['name', 'startDate', 'endDate', 'description', 'curricularUnit', 'place']
+    fields = ['id', 'name', 'startDate', 'endDate', 'description', 'curricularUnit', 'place']
+  
+  def create(self, validated_data):
+    validated_data['visible'] = False
+    return super().create(validated_data)
 
 class MentoringRequestSerializer(serializers.ModelSerializer):
   mentee = UserSerializer(read_only=True)
@@ -167,4 +175,4 @@ class BlogPostSerializer(serializers.ModelSerializer):
   author = UserSerializer(read_only=True)
   class Meta:
     model = BlogPostModel
-    fields = ['title', 'description', 'content', 'images', 'topics', 'author', 'date']
+    fields = ['slug', 'title', 'description', 'content', 'images', 'topics', 'author', 'date']

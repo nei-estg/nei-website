@@ -68,7 +68,7 @@ admin.site.register(BlogTopicModel)
 admin.site.register(BlogImageModel)
 
 class BlogPostAdmin(admin.ModelAdmin):
-  list_display = ('title', 'author', 'date')
+  list_display = ('slug', 'title', 'author', 'date')
   list_filter = list_display
 
 admin.site.register(BlogPostModel, BlogPostAdmin)

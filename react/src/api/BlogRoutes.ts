@@ -7,3 +7,15 @@ export const getBlogList = async () => {
   if (response.status !== 200) throw new Error(response.data);
   return response.data as IPaginatedResponse<IBlogPost>
 }
+
+export const getBlog = async (slug: string) => {
+  const response = await client.get(`/api/blogPost/?slug=${slug}`)
+  if (response.status !== 200) throw new Error(response.data);
+  return response.data as IPaginatedResponse<IBlogPost>
+}
+
+export const getBlogPaginated = async (url: string) => {
+  const response = await client.get(url)
+  if (response.status !== 200) throw new Error(response.data);
+  return response.data as IPaginatedResponse<IBlogPost>
+}

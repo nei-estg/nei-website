@@ -29,6 +29,7 @@ client.interceptors.response.use(
       if (error.response.status === 401) {
         localStorage.removeItem("token");
         localStorage.removeItem("expiry")
+        localStorage.removeItem("profile")
         window.location.href = "/login";
         toast.error("You're not logged in!", {
           position: "top-right",
