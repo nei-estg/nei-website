@@ -10,8 +10,8 @@ section {
 a#scroll-btn {
   position: absolute;
   height: 6em;
-  width: 3.5em;
-  border: 0.5em solid #ffffff;
+  width: 3em;
+  border: 0.3em solid #ffffff;
   margin: auto;
   left: 0;
   right: 0;
@@ -69,3 +69,4 @@ a#scroll-btn:after {
     font-size: 12px;
   }
 }
+

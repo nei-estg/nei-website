@@ -7,3 +7,48 @@
 #div1:hover, #div2:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
+@media (max-width: 1000px) {
+  .hide-on-small {
+    display: none;
+  }
+}
+
+@media (max-width: 1300px) {
+  #scrollButton {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  #scrollDiv {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  #bgnr {
+    position: relative;
+    top: '50%';
+    left: '50%';
+    transform: 'translate(-50%, -50%)';
+    display: 'flex';
+    flex-direction: column;
+    margin-top: 50px;
+    justifyContent: 'space-between';
+    width: '80%';
+    zIndex: '3';
+  }
+}
+
+.responsive-header {
+  font-size: 2em; 
+}
+
+
+@media screen and (max-width: 600px) {
+  .responsive-header {
+    font-size: 1.5em;
+  }
+}

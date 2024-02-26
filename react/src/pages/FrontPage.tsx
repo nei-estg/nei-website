@@ -1,4 +1,12 @@
-import { Box, Button, CssBaseline, Grid, TextField, ThemeProvider,createTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  CssBaseline,
+  Grid,
+  TextField,
+  ThemeProvider,
+  createTheme,
+} from '@mui/material';
 import { sendContactForm } from '@src/api/ContactRoutes';
 import { IContact } from '@src/interfaces/IContact';
 import { toast, Bounce } from 'react-toastify';
@@ -13,6 +21,11 @@ const defaultTheme = createTheme();
 
 export default function FrontPage() {
   const [showForm, setShowForm] = useState(true);
+
+  //APAGAR - APENAS PARA TESTAR BREAKPOINTS
+  window.onresize = function () {
+    location.reload();
+  };
 
   useEffect(() => {
     document.title = 'Home - NEI';
@@ -65,8 +78,11 @@ export default function FrontPage() {
     <ThemeProvider theme={defaultTheme}>
       <div>
         <div
+          id="bgnr"
           style={{
-            position: 'absolute',
+            position: window.innerWidth <= 1000 ? 'relative' : 'absolute',
+            marginTop: window.innerWidth <= 1000 ? '300px' : '0',
+            marginBottom: window.innerWidth <= 1000 ? '-300px' : '0',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
@@ -74,6 +90,7 @@ export default function FrontPage() {
             justifyContent: 'space-between',
             width: '80%',
             zIndex: '3',
+            flexDirection: window.innerWidth <= 1000 ? 'column' : 'row',
           }}
         >
           <div
@@ -84,7 +101,7 @@ export default function FrontPage() {
               justifyContent: 'center',
             }}
           >
-            <h1 style={{ color: 'white' }}>Bem-vindo ao nosso Núcleo!</h1>
+            <h1 style={{ color: 'white' }}>Bem-vindo ao NEI!</h1>
             <p style={{ color: 'white' }}>add a description here maybe?</p>
           </div>
           <div
@@ -98,15 +115,27 @@ export default function FrontPage() {
           </div>
         </div>
         <img
+          className="hide-on-small"
           src="estg2.png"
           alt="Banner Image"
           style={{ width: '100%', position: 'relative', zIndex: '2' }}
         ></img>
-        <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', zIndex: "3" }}>
-          <button onClick={() => {
-            const element = document.getElementById('scrollDiv');
-            element.scrollIntoView({ behavior: 'smooth' });
-          }}>
+        <div
+          id="scrollButton"
+          className="hide-on-small"
+          style={{
+            position: 'absolute',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: '3',
+          }}
+        >
+          <button
+            onClick={() => {
+              const element = document.getElementById('scrollDiv');
+              element?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
             <Scroll />
           </button>
         </div>
@@ -118,37 +147,45 @@ export default function FrontPage() {
             marginBottom: '80px',
           }}
         >
-          <div id='scrollDiv'
+          <div
+            id="scrollDiv"
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'center', // Align items along the horizontal axis
+              alignItems: 'center', // Align items along the vertical axis
               textAlign: 'center',
+              flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
             }}
           >
-            
-              <div id="div1" style={{ margin: '20px' }}>
+            <div id="div1" style={{ margin: '20px' }}>
+              <a href={routes.aboutFAQpage.path}>
                 <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
                 <a href="/about" target="_blank">
-                <img
-                  src="logo.png"
-                  alt="Descrição da imagem"
-                  style={{ height: '150px', width: '150px' }}
-                />
+                  <img
+                    src="logo.png"
+                    alt="Descrição da imagem"
+                    style={{ height: '150px', width: '150px' }}
+                  />
                 </a>
-                <p style={{ color: 'white', fontWeight: 'bold' }}>Direção, Cursos, entre outros.</p>
-              </div>
-            
-            <a href="https://your-other-url.com" target="_blank">
-              <div id="div1" style={{ margin: '20px' }}>
+                <p style={{ color: 'white', fontWeight: 'bold' }}>
+                  Direção, Cursos, entre outros.
+                </p>
+              </a>
+            </div>
+
+            <div id="div1" style={{ margin: '20px' }}>
+              <a href={routes.blogpage.path} target="_blank">
                 <h1 style={{ color: 'white' }}>Atividades</h1>
                 <img
                   src="/icon/laptop.png"
                   alt="Descrição da imagem"
                   style={{ height: '150px', width: '150px' }}
                 />
-                <p style={{ color: 'white', fontWeight: 'bold' }}>Eventos e Atividades mais recentes.</p>
-              </div>
-            </a>
+                <p style={{ color: 'white', fontWeight: 'bold' }}>
+                  Eventos e Atividades mais recentes.
+                </p>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -175,7 +212,7 @@ export default function FrontPage() {
         >
           {showForm && (
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <h1>Dúvidas? Envia-nos uma mensagem! :)</h1>
+              <h1 className="responsive-header">Dúvidas? Envia-nos uma mensagem! :)</h1>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -215,14 +252,21 @@ export default function FrontPage() {
                     name="message"
                     label="Mensagem"
                     id="message"
-                    autoComplete="message"
+                    autoComplete=""
+                    multiline
+                    variant="outlined"
                   />
                 </Grid>
               </Grid>
               <Button
                 type="submit"
                 variant="contained"
-                sx={{ mt: 3, mb: 2, width: '50%', borderRadius: '8px' }}
+                sx={{ 
+                  mt: 3, 
+                  mb: 2, 
+                  width: { xs: '100%', sm: '50%' }, 
+                  borderRadius: '8px' 
+                }}
               >
                 Enviar Mensagem
               </Button>
