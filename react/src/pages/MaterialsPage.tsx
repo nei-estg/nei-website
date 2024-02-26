@@ -294,7 +294,7 @@ export default function MaterialsPage() {
           >
             <h1>Adicionar Material</h1>
             {!isLoggedIn() ? (
-              <h2>Para adicionar um evento é necessário iniciar sessão!</h2>
+              <h2>Para adicionar um material é necessário iniciar sessão!</h2>
             ) : (
               <>
                 <TextField

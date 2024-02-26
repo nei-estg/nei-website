@@ -41,6 +41,18 @@ class CalendarViewSet(CreateAndViewModelViewSet):
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
   filterset_fields = CalendarSerializer.Meta.fields
   pagination_class = None
+  
+  def create(self, request, *args, **kwargs):
+    curricularUnitJson = request.data.get('curricularUnit', None)
+    if curricularUnitJson:
+      curricularUnit = CurricularUnitModel.objects.get(id=curricularUnitJson.get('id', None))
+      if curricularUnit:
+        serializer = CalendarSerializer(data=request.data)
+        if serializer.is_valid():
+          serializer.save(curricularUnit=curricularUnit)
+          return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return super().create(request, *args, **kwargs)
 
 class CourseViewSet(viewsets.ReadOnlyModelViewSet):
   """
@@ -221,7 +233,7 @@ class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
   """
   API endpoint that allows blog posts to be viewed.
   """
-  queryset = BlogPostModel.objects.all()
+  queryset = BlogPostModel.objects.all().order_by('-date')
   serializer_class = BlogPostSerializer
   permission_classes = []
   filterset_fields = BlogPostSerializer.Meta.fields
@@ -243,11 +255,11 @@ class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
   #TODO: Adjust and test this method
   def update(self, request, *args, **kwargs):
     user = User.objects.get(id=request.user.id)
+    profilemodel = request.data.pop('profilemodel', None)
     user.first_name = request.data.get('first_name', user.first_name)
     user.last_name = request.data.get('last_name', user.last_namee)
     user.email = request.data.get('email', user.email)
     user.save()
-    profilemodel = request.data.get('profilemodel', None)
     if profilemodel:
       user.profilemodel.course = profilemodel.get('course', user.profilemodel.course)
       user.profilemodel.year = profilemodel.get('year', user.profilemodel.year)
