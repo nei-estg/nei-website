@@ -10,7 +10,7 @@ import { toast, Bounce } from "react-toastify";
 
 const defaultTheme = createTheme();
 
- interface TeamItem {
+interface TeamItem {
   photo: string;
   role: string;
   fullname: string;
@@ -384,51 +384,53 @@ export default function AboutFAQPage() {
         ))}
 
 
-
-
         {/*F.A.Q.*/}
-        <Typography variant="h4"
-          sx={{
-            color: '#1E2022',
-            display: 'flex',
-            fontWeight: 700,
-            flexDirection: 'column',
-            alignItems: 'center',
-            marginTop: '60px',
-            marginBottom: '15px',
-          }}
-        >Tens alguma questão?</Typography>
-
-        <Typography variant="h6"
-          sx={{
-            color: '#969696',
-            display: 'flex',
-            fontWeight: 600,
-            flexDirection: 'column',
-            alignItems: 'center',
-            marginBottom: '20px',
-          }}
-        >Pesquisa no nosso F.A.Q. para obteres as respostas para qualquer coisa que possas perguntar.</Typography>
-
-        {/* QA */}
-        {faq.map((faq, index) => (
-          <div key={index}>
-            <Typography variant="h5"
+        {faq.length > 0 && (
+          <div>
+            <Typography variant="h4"
               sx={{
                 color: '#1E2022',
                 display: 'flex',
                 fontWeight: 700,
                 flexDirection: 'column',
-                alignItems: 'left',
-                marginTop: '55px',
-                marginBottom: '10px',
-              }}>{faq.section}</Typography>
+                alignItems: 'center',
+                marginTop: '60px',
+                marginBottom: '15px',
+              }}
+            >Tens alguma questão?</Typography>
 
-            {faq.qa.map((qa, qaIndex) => (
-              <AccordionUsage key={qaIndex} question={qa.question} answer={qa.answer} />
+            <Typography variant="h6"
+              sx={{
+                color: '#969696',
+                display: 'flex',
+                fontWeight: 600,
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginBottom: '20px',
+              }}
+            >Pesquisa no nosso F.A.Q. para obteres as respostas para qualquer coisa que possas perguntar.</Typography>
+
+            {/* QA */}
+            {faq.map((faq, index) => (
+              <div key={index}>
+                <Typography variant="h5"
+                  sx={{
+                    color: '#1E2022',
+                    display: 'flex',
+                    fontWeight: 700,
+                    flexDirection: 'column',
+                    alignItems: 'left',
+                    marginTop: '55px',
+                    marginBottom: '10px',
+                  }}>{faq.section}</Typography>
+
+                {faq.qa.map((qa, qaIndex) => (
+                  <AccordionUsage key={qaIndex} question={qa.question} answer={qa.answer} />
+                ))}
+              </div>
             ))}
           </div>
-        ))}
+        )}
 
       </Container>
     </ThemeProvider>
