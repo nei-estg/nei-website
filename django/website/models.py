@@ -153,7 +153,7 @@ class MentoringRequestModel(ExportModelOperationsMixin('MentoringRequestModel'),
     verbose_name_plural = "Pedidos de Mentoria"
 
   def __str__(self):
-    return self.mentee.username + " - " + self.curricularUnit.name
+    return self.mentee.username + " - " + self.curricularUnit.abbreviation
 
 
 class MentoringModel(ExportModelOperationsMixin('MentoringModel'), models.Model):
@@ -170,7 +170,7 @@ class MentoringModel(ExportModelOperationsMixin('MentoringModel'), models.Model)
     verbose_name_plural = "Mentorias"
 
   def __str__(self):
-    return self.mentor.username + " -> " + self.mentee.username + ": " + self.curricular_unit.name
+    return self.mentor.username + " -> " + self.mentee.username + ": " + self.curricularUnit.abbreviation
 
 class BlogTopicModel(ExportModelOperationsMixin('BlogTopicModel'), models.Model):
   name = models.TextField(primary_key=True)

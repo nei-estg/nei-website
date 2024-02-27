@@ -149,30 +149,45 @@ class MentoringRequestViewSet(CreateAndViewModelViewSet):
   serializer_class = MentoringRequestSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
   filterset_fields = MentoringRequestSerializer.Meta.fields
-  
+  pagination_class = None
+
   #* Hide users from requests
   def retrieve(self, request, *args, **kwargs):
     queryset = self.get_queryset()
     serializer = MentoringRequestSerializer(queryset, many=True)
     data = serializer.data
+    newData = []
     for i in range(len(data)):
       if data[i]['mentee']['id'] != request.user.id:
         data[i]['mentee'] = None
-    return Response(data)
+        newData.append(data[i])
+    return Response(newData)
   
   #* Hide users from requests
   def list(self, request, *args, **kwargs):
     queryset = self.get_queryset()
     serializer = MentoringRequestSerializer(queryset, many=True)
     data = serializer.data
+    newData = []
     for i in range(len(data)):
       if data[i]['mentee']['id'] != request.user.id:
         data[i]['mentee'] = None
-    return Response(data)
+        newData.append(data[i])
+    return Response(newData)
 
+  #* Create Mentoring Request
   def create(self, request, *args, **kwargs):
-    self.request.data['mentee'] = request.user
-    return super().create(request, *args, **kwargs)
+    curricularUnitJson = request.data.get('curricularUnit', None)
+    if curricularUnitJson:
+      curricularUnit = CurricularUnitModel.objects.get(id=curricularUnitJson.get('id', None))
+      if curricularUnit:
+        serializer = MentoringRequestSerializer(data=request.data)
+        if serializer.is_valid():
+          serializer.save(mentee=request.user, curricularUnit=curricularUnit)
+          return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+          return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response({'detail': 'Curricular Unit JSON not found.'}, status=status.HTTP_400_BAD_REQUEST)
 
 class MentoringViewSet(CreateAndViewModelViewSet):
   """
@@ -182,32 +197,31 @@ class MentoringViewSet(CreateAndViewModelViewSet):
   serializer_class = MentoringSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
   filterset_fields = MentoringSerializer.Meta.fields
+  pagination_class = None
   
-  #* Hide users from requests
-  def retrieve(self, request, *args, **kwargs):
-    queryset = self.get_queryset()
-    serializer = MentoringSerializer(queryset, many=True)
-    data = serializer.data
-    for i in range(len(data)):
-      if data[i]['mentee']['id'] != request.user.id and data[i]['mentor']['id'] != request.user.id:
-        data[i]['mentee'] = None
-        data[i]['mentor'] = None
-    return Response(data)
-  
-  #* Hide users from requests
-  def list(self, request, *args, **kwargs):
-    queryset = self.get_queryset()
-    serializer = MentoringSerializer(queryset, many=True)
-    data = serializer.data
-    for i in range(len(data)):
-      if data[i]['mentee']['id'] != request.user.id and data[i]['mentor']['id'] != request.user.id:
-        data[i]['mentee'] = None
-        data[i]['mentor'] = None
-    return Response(data)
+  #* Limit so that is only possible to see the same user
+  def get_queryset(self):
+    return MentoringModel.objects.filter(mentor=self.request.user) | MentoringModel.objects.filter(mentee=self.request.user)
 
-  def create(self, request, *args, **kwargs): #TODO: Complete this method
-    self.request.data['mentor'] = request.user
-    return super().create(request, *args, **kwargs)
+  #* Create Mentoring
+  @transaction.atomic
+  def create(self, request, *args, **kwargs):
+    if 'requestId' not in self.request.data:
+      return Response({'detail': 'Request ID not found.'}, status=status.HTTP_400_BAD_REQUEST)
+    mentoringRequest = MentoringRequestModel.objects.get(id=self.request.data.get('requestId', None))
+    
+    if not mentoringRequest:
+      return Response({'detail': 'Request not found.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    if mentoringRequest.mentee == request.user:
+      return Response({'detail': 'You cannot mentor yourself.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    #TODO: check if the courses of the curricular unit matches one course of the user
+    
+    mentoring = MentoringModel.objects.create(mentee=mentoringRequest.mentee, mentor=request.user, curricularUnit=mentoringRequest.curricularUnit)
+    mentoringRequest.delete()
+    
+    return Response(MentoringSerializer(mentoring).data, status=status.HTTP_201_CREATED)
 
 class BlogTopicViewSet(viewsets.ReadOnlyModelViewSet):
   """

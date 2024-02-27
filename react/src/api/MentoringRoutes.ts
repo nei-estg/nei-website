@@ -1,12 +1,11 @@
 import AuthenticatedClient from './AuthenticatedClient';
-import { IPaginatedResponse } from '@src/interfaces/IPaginatedResponse';
 import { IMentoringRequest } from '@src/interfaces/IMentoringRequest';
 import { IMentoring } from '@src/interfaces/IMentoring';
 
 export const getMentoringRequestList = async () => {
   const response = await AuthenticatedClient.get('/api/mentoringRequest/');
   if (response.status !== 200) throw new Error(response.data);
-  return response.data as IPaginatedResponse<IMentoringRequest>;
+  return response.data as IMentoringRequest[];
 };
 
 export const createMentoringRequest = async (mentoringRequest: IMentoringRequest) => {
@@ -18,7 +17,7 @@ export const createMentoringRequest = async (mentoringRequest: IMentoringRequest
 export const getMentoringList = async () => {
   const response = await AuthenticatedClient.get('/api/mentoring/');
   if (response.status !== 200) throw new Error(response.data);
-  return response.data as IPaginatedResponse<IMentoring>;
+  return response.data as IMentoring[];
 }
 
 export const createMentoring = async (mentoring: IMentoring) => {
