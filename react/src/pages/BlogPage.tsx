@@ -118,7 +118,7 @@ export default function BlogPage() {
     <ThemeProvider theme={defaultTheme}>
       <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
         {blogList.length === 0 ? (
-          <Typography variant="h4" color="#1E2022" fontWeight="700" align="center">
+          <Typography variant="h5" color="#1E2022" fontWeight="700" align="center">
             Não há posts disponíveis no momento.
           </Typography>
         ) : (
