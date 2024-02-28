@@ -202,7 +202,7 @@ export default function ProfilePage() {
                 
                     {/*username Discord*/}
                     <div style={{ marginTop: "20px", width: '70%' }}>
-                      <TextField id="tf-usernameDiscord" label="Discord Username" defaultValue={user.profilemodel.discord} sx={{ width: '100%' }} InputProps={{ startAdornment: <InputAdornment position="start">@</InputAdornment>, }} />
+                      <TextField id="tf-usernameDiscord" label="Discord Username" defaultValue={user.profilemodel?.discord} sx={{ width: '100%' }} InputProps={{ startAdornment: <InputAdornment position="start">@</InputAdornment>, }} />
                     </div>
                 
                     {/*ano*/}
