@@ -1,3 +1,4 @@
+import InfoIcon from '@mui/icons-material/Info';
 import EditIcon from '@mui/icons-material/Edit';
 import SecurityIcon from '@mui/icons-material/Security';
 import { Avatar, Button, Container, Grid, ThemeProvider, Tooltip, Typography, createTheme } from "@mui/material"
@@ -86,7 +87,13 @@ export default function ProfilePage() {
                     <Typography variant="subtitle2" color="#636F80" sx={{fontSize: {xs: "24px", sm: "24px", md: "24px", lg: "24px", xl: "24px"}, textAlign: 'center', marginTop: "-8px"}}>@{user.username}</Typography>
                                       
                     {/*ano*/}
-                    <Typography variant="subtitle2" color="#969696" sx={{fontSize: "16px", textAlign: 'start', marginTop: "10px"}}>{getUserYearText(user.profilemodel?.year)}</Typography>
+                    <div>
+                      <Tooltip title="Todos os anos tens que atualizar, não te esqueças!" placement="left-start">
+                        <Typography variant="subtitle2" color="#969696" sx={{fontSize: "16px", textAlign: 'start', marginTop: "10px"}}>
+                          <InfoIcon sx={{fontSize: 20, marginBottom: "-3px"}}/> {getUserYearText(user.profilemodel?.year)}
+                        </Typography>
+                      </Tooltip>
+                    </div>
 
                     {/*cursos*/}
                     <Typography variant="subtitle2" color="#969696" sx={{fontSize: "16px", textAlign: 'center', marginTop: "0px"}}>{user.profilemodel?.course?.map((course: ICourse) => course.abbreviation).join(", ")}</Typography>

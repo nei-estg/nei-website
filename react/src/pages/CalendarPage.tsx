@@ -1,6 +1,6 @@
+import InfoIcon from '@mui/icons-material/Info';
 import { Calendar, SlotInfo, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-//import events from "../components/calendar/events";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useEffect, useState } from "react";
 import { ICalendar } from "@src/interfaces/ICalendar";
@@ -13,6 +13,7 @@ import { toast, Bounce } from "react-toastify";
 import {
   Box,
   Button,
+  Container,
   FormControl,
   InputLabel,
   MenuItem,
@@ -20,6 +21,9 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
+  ThemeProvider,
+  Typography,
+  createTheme,
 } from "@mui/material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -43,6 +47,8 @@ const customLabels = {
   previous: "<",
   next: ">",
 };
+
+const defaultTheme = createTheme();
 
 export default function CalendarPage() {
   const [eventsData, setEventsData] = useState<ICalendar[]>([]);
@@ -233,184 +239,193 @@ export default function CalendarPage() {
   };
 
   return (
-    <>
-      <div style={{ padding: "20px" }}>
-        <Calendar
-          views={["day", "work_week", "month"]}
-          selectable
-          localizer={localizer}
-          defaultDate={new Date()}
-          defaultView="month"
-          events={calendarEvents}
-          style={{ height: "80vh", width: "80%", margin: "0 auto" }}
-          onSelectEvent={handleSelectEvent}
-          onSelectSlot={(slotInfo) => {
-            setSelectedSlot(slotInfo);
-            setOpenAddEventModal(true);
-          }}
-          messages={customLabels}
-        />
-      </div>
-      <Modal
-        open={openViewEventModal}
-        onClose={() => setOpenViewEventModal(false)}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            border: "2px solid #000",
-            textAlign: "center",
-            boxShadow: 24,
-            p: 4,
-          }}
+    <ThemeProvider theme={defaultTheme}>
+      <Container maxWidth="xl" sx={{ marginBottom: '60px' }}>
+        <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
+          <InfoIcon sx={{marginRight: '5px', color: "#054496", marginBottom: "-3px"}}/>
+          Podes ver eventos adicionados pela comunidade e verificados pelo NEI. 
+          Também mostramos feriados, e tu, com a tua sessão iniciada, podes criar eventos. 
+          Quando crias um evento, ele fica visível para ti até que atualizes a página.
+        </Typography>
+
+        <div>
+          <Calendar
+            views={["day", "work_week", "month"]}
+            selectable
+            localizer={localizer}
+            defaultDate={new Date()}
+            defaultView="month"
+            events={calendarEvents}
+            style={{ height: "80vh", width: "100%", margin: "0 auto" }}
+            onSelectEvent={handleSelectEvent}
+            onSelectSlot={(slotInfo) => {
+              setSelectedSlot(slotInfo);
+              setOpenAddEventModal(true);
+            }}
+            messages={customLabels}
+          />
+        </div>
+        <Modal
+          open={openViewEventModal}
+          onClose={() => setOpenViewEventModal(false)}
         >
-          <h1>Ver Evento</h1>
-          <p>Titulo: {selectedEvent?.name}</p>
-          <p>Descrição: {selectedEvent?.description}</p>
-          <p>
-            Inicio: {new Date(selectedEvent?.startDate).toLocaleString("pt-PT")}
-          </p>
-          <p>Fim: {new Date(selectedEvent?.endDate).toLocaleString("pt-PT")}</p>
-          {selectedEvent?.place && <p>Local: {selectedEvent.place}</p>}
-          {selectedEvent?.curricularUnit && (
-            <>
-              <p>
-                Unidade Curricular: {selectedEvent.curricularUnit.abbreviation}
-              </p>
-              <p>
-                Curso:{" "}
-                {selectedEvent.curricularUnit?.course
-                  ?.map((course) => course.abbreviation)
-                  .join(", ")}
-              </p>
-            </>
-          )}
-        </Box>
-      </Modal>
-      <Modal
-        open={openAddEventModal}
-        onClose={() => setOpenAddEventModal(false)}
-      >
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            border: "2px solid #000",
-            textAlign: "center",
-            boxShadow: 24,
-            p: 4,
-          }}
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 400,
+              bgcolor: "background.paper",
+              border: "2px solid #000",
+              textAlign: "center",
+              boxShadow: 24,
+              p: 4,
+            }}
+          >
+            <h1>Ver Evento</h1>
+            <p>Titulo: {selectedEvent?.name}</p>
+            <p>Descrição: {selectedEvent?.description}</p>
+            <p>
+              Inicio: {new Date(selectedEvent?.startDate).toLocaleString("pt-PT")}
+            </p>
+            <p>Fim: {new Date(selectedEvent?.endDate).toLocaleString("pt-PT")}</p>
+            {selectedEvent?.place && <p>Local: {selectedEvent.place}</p>}
+            {selectedEvent?.curricularUnit && (
+              <>
+                <p>
+                  Unidade Curricular: {selectedEvent.curricularUnit.abbreviation}
+                </p>
+                <p>
+                  Curso:{" "}
+                  {selectedEvent.curricularUnit?.course
+                    ?.map((course) => course.abbreviation)
+                    .join(", ")}
+                </p>
+              </>
+            )}
+          </Box>
+        </Modal>
+        <Modal
+          open={openAddEventModal}
+          onClose={() => setOpenAddEventModal(false)}
         >
-          <h1>Adicionar Evento</h1>
-          {!isLoggedIn() ? (
-            <h2>Para adicionar um evento é necessário iniciar sessão!</h2>
-          ) : (
-            <>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="eventName"
-                label="Name"
-                name="eventName"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="description"
-                label="Description"
-                id="description"
-              />
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateTimePicker
-                  sx={{
-                    width: "100%",
-                    mt: 2,
-                  }}
-                  name="startDate"
-                  label="Start Date"
-                  value={dayjs(selectedSlot?.start)}
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 400,
+              bgcolor: "background.paper",
+              border: "2px solid #000",
+              textAlign: "center",
+              boxShadow: 24,
+              p: 4,
+            }}
+          >
+            <h1>Adicionar Evento</h1>
+            {!isLoggedIn() ? (
+              <h2>Para adicionar um evento é necessário iniciar sessão!</h2>
+            ) : (
+              <>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="eventName"
+                  label="Name"
+                  name="eventName"
+                  autoFocus
                 />
-                <DateTimePicker
-                  sx={{
-                    width: "100%",
-                    mt: 2,
-                  }}
-                  name="endDate"
-                  label="End Date"
-                  value={dayjs(selectedSlot?.end)}
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="description"
+                  label="Description"
+                  id="description"
                 />
-              </LocalizationProvider>
-              <TextField
-                margin="normal"
-                fullWidth
-                name="place"
-                label="Place"
-                id="place"
-              />
-              <FormControl fullWidth sx={{ mt: 2 }}>
-                <InputLabel id="course-label">Course</InputLabel>
-                <Select
-                  labelId="course-label"
-                  id="course"
-                  label="Course"
-                  value={selectedCourse.abbreviation}
-                  onChange={handleSelectCourse}
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DateTimePicker
+                    sx={{
+                      width: "100%",
+                      mt: 2,
+                    }}
+                    name="startDate"
+                    label="Start Date"
+                    value={dayjs(selectedSlot?.start)}
+                  />
+                  <DateTimePicker
+                    sx={{
+                      width: "100%",
+                      mt: 2,
+                    }}
+                    name="endDate"
+                    label="End Date"
+                    value={dayjs(selectedSlot?.end)}
+                  />
+                </LocalizationProvider>
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  name="place"
+                  label="Place"
+                  id="place"
+                />
+                <FormControl fullWidth sx={{ mt: 2 }}>
+                  <InputLabel id="course-label">Course</InputLabel>
+                  <Select
+                    labelId="course-label"
+                    id="course"
+                    label="Course"
+                    value={selectedCourse.abbreviation}
+                    onChange={handleSelectCourse}
+                  >
+                    {coursesData.map((option) => (
+                      <MenuItem
+                        key={option.abbreviation}
+                        value={option.abbreviation}
+                      >
+                        {option.abbreviation}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl fullWidth sx={{ mt: 2 }}>
+                  <InputLabel id="curricular-unit-label">
+                    Curricular Unit
+                  </InputLabel>
+                  <Select
+                    labelId="curricular-unit-label"
+                    id="curricularUnit"
+                    label="Curricular Unit"
+                    value={selectedCurricularUnit.abbreviation}
+                    onChange={handleSelectCurricularUnit}
+                    disabled={!selectedCourse.abbreviation}
+                  >
+                    {selectedCourse?.curricularUnits?.map((unit) => (
+                      <MenuItem key={unit.abbreviation} value={unit.abbreviation}>
+                        {unit.abbreviation}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
                 >
-                  {coursesData.map((option) => (
-                    <MenuItem
-                      key={option.abbreviation}
-                      value={option.abbreviation}
-                    >
-                      {option.abbreviation}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl fullWidth sx={{ mt: 2 }}>
-                <InputLabel id="curricular-unit-label">
-                  Curricular Unit
-                </InputLabel>
-                <Select
-                  labelId="curricular-unit-label"
-                  id="curricularUnit"
-                  label="Curricular Unit"
-                  value={selectedCurricularUnit.abbreviation}
-                  onChange={handleSelectCurricularUnit}
-                  disabled={!selectedCourse.abbreviation}
-                >
-                  {selectedCourse?.curricularUnits?.map((unit) => (
-                    <MenuItem key={unit.abbreviation} value={unit.abbreviation}>
-                      {unit.abbreviation}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Adicionar Evento
-              </Button>
-            </>
-          )}
-        </Box>
-      </Modal>
-    </>
+                  Adicionar Evento
+                </Button>
+              </>
+            )}
+          </Box>
+        </Modal>
+      </Container>
+    </ThemeProvider>
   );
 }

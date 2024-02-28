@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import { toast, Bounce } from "react-toastify";
 import { IMentoringRequest } from "@src/interfaces/IMentoringRequest";
 import { IMentoring } from "@src/interfaces/IMentoring";
-import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, ThemeProvider, createTheme } from "@mui/material";
+import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, ThemeProvider, Typography, createTheme } from "@mui/material";
 import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
 import { getCurricularUnits } from "@src/api/CourseRoutes";
+import InfoIcon from '@mui/icons-material/Info';
 
 const defaultTheme = createTheme();
 
 export default function MentoringPage() {
+  const defaultTheme = createTheme();
   const [mentoringRequestList, setMentoringRequestList] = useState<IMentoringRequest[]>([]);
   const [mentoringList, setMentoringList] = useState<IMentoring[]>([]);
   const [curricularUnitList, setCurricularUnitList] = useState<ICurricularUnit[]>([]);
@@ -158,8 +160,21 @@ export default function MentoringPage() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
-        <h1>Mentoria</h1>
-        <h4>Lista de Pedidos de Mentoria</h4>
+        <Typography variant="h3" align="left" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
+          Mentoria
+        </Typography>
+
+        <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "0px", marginBottom: "30px" }}>
+          <InfoIcon sx={{marginRight: '5px', color: "#054496", marginBottom: "-3px"}}/>
+          A tua privacidade é uma prioridade. 
+          Por isso, não vais saber quem é a outra pessoa até aceitares a mentoria. 
+          Depois, terão de combinar como falar, usando Discord, Teams, ou o que preferirem, para realizar a mentoria. 
+          É simples e seguro, garantindo que escolhes com quem queres partilhar informações.
+        </Typography>
+
+        <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
+          Lista de Pedidos de Mentoria
+        </Typography>
         {mentoringRequestList.map((mentoringRequest) => (
           <Box
             component="form"
@@ -181,11 +196,17 @@ export default function MentoringPage() {
             </Button>
           </Box>
         ))}
-        <h4>Lista de Mentorias</h4>
+
+        <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
+          Lista de Mentorias
+        </Typography>
         {mentoringList.map((mentoring) => (
           <p key={mentoring.id}>{mentoring.curricularUnit?.abbreviation} - {mentoring.mentor?.username} - {mentoring.mentee?.username}</p>
         ))}
-        <h4>Criar Pedido de Mentoria</h4>
+       
+        <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: "30px", marginBottom: "0px" }}>
+          Criar Pedido de Mentoria
+        </Typography>
         <Box
           component="form"
           onSubmit={handleCreateMentoringRequest}

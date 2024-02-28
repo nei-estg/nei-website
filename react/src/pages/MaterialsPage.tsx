@@ -29,6 +29,9 @@ import { IMaterial } from "@src/interfaces/IMaterial";
 import { IMaterialTag } from "@src/interfaces/IMaterialTag";
 import { useEffect, useState } from "react";
 import { toast, Bounce } from "react-toastify";
+import InfoIcon from '@mui/icons-material/Info';
+
+
 
 const defaultTheme = createTheme();
 
@@ -321,6 +324,12 @@ export default function MaterialsPage() {
           }}
         >
           Materiais de Unidades Curriculares
+        </Typography>
+
+        <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "0px", marginBottom: "30px" }}>
+          <InfoIcon sx={{marginRight: '5px', color: "#054496", marginBottom: "-3px"}}/>
+          Podes ver materiais adicionados pela comunidade e verificados pelo NEI. 
+          E tu, com a tua sessão iniciada, podes adicionar também.
         </Typography>
 
         <Modal
