@@ -149,7 +149,7 @@ class MentoringRequestSerializer(serializers.ModelSerializer):
   curricularUnit = CurricularUnitSerializer(read_only=True)
   class Meta:
     model = MentoringRequestModel
-    fields = ['mentee', 'curricularUnit', 'date']
+    fields = ['id', 'mentee', 'curricularUnit', 'date']
 
 class MentoringSerializer(serializers.ModelSerializer):
   mentor = UserSerializer(read_only=True)
