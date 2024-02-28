@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import { toast, Bounce } from "react-toastify";
 import { IMentoringRequest } from "@src/interfaces/IMentoringRequest";
 import { IMentoring } from "@src/interfaces/IMentoring";
-import { Button } from "@mui/material";
+import { Button, Container, ThemeProvider, Typography, createTheme } from "@mui/material";
 import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
 import { getCurricularUnits } from "@src/api/CourseRoutes";
 import { ICourse } from "@src/interfaces/ICourse";
+import InfoIcon from '@mui/icons-material/Info';
+
 
 export default function MentoringPage() {
+  const defaultTheme = createTheme();
   const [mentoringRequestList, setMentoringRequestList] = useState<IMentoringRequest[]>([]);
   const [mentoringList, setMentoringList] = useState<IMentoring[]>([]);
   const [curricularUnitList, setCurricularUnitList] = useState<ICurricularUnit[]>([]);
@@ -150,14 +153,24 @@ export default function MentoringPage() {
   }
   
   return (
-    <div>
-      <h1>Mentoring (ainda nao funciona)</h1>
-      <p>Mentoring Request List</p>
-      <p>{JSON.stringify(mentoringRequestList)}</p>
-      <p>Mentoring List</p>
-      <p>{JSON.stringify(mentoringList)}</p>
-      <Button onClick={handleCreateMentoringRequest}>Test Button For Mentoring Request</Button>
-      <Button onClick={handleCreateMentoring}>Test Button For Mentoring</Button>
-    </div>
+    <ThemeProvider theme={defaultTheme}>
+      <Container maxWidth="xl" sx={{ marginBottom: '60px' }}>
+        <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
+          <InfoIcon sx={{marginRight: '5px', color: "#054496"}}/>
+          A tua privacidade é prioritária. 
+          Por isso, a identidade de quem pede ou oferece mentoria fica oculta até que aceites o pedido. 
+          Assim, só saberás quem é a outra pessoa após a tua aceitação. 
+          Esta medida garante a tua segurança e conforto, permitindo um ambiente de troca seguro e confiável.
+        </Typography>
+
+        <h1>Mentoring (ainda nao funciona)</h1>
+        <p>Mentoring Request List</p>
+        <p>{JSON.stringify(mentoringRequestList)}</p>
+        <p>Mentoring List</p>
+        <p>{JSON.stringify(mentoringList)}</p>
+        <Button onClick={handleCreateMentoringRequest}>Test Button For Mentoring Request</Button>
+        <Button onClick={handleCreateMentoring}>Test Button For Mentoring</Button>
+      </Container>
+    </ThemeProvider>
   )
 }
