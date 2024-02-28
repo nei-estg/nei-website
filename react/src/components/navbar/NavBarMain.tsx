@@ -124,7 +124,9 @@ function NavBarMain() {
             {isLoggedIn() ?
               <Tooltip title="Abrir Definições">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar sx={{ backgroundColor: "#054496" }} src={localStorage.getItem('profile') ?? 'logo.png'}></Avatar>
+                  <Avatar sx={{ backgroundColor: "#054496" }}>
+                    {localStorage.getItem('profile') ? <img src={localStorage.getItem('profile')} alt="Perfil" /> : <PersonIcon />}
+                  </Avatar>
                 </IconButton>
               </Tooltip>
               : <Tooltip title="Iniciar Sessão">
