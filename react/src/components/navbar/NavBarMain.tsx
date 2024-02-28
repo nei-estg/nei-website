@@ -121,20 +121,20 @@ function NavBarMain() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {isLoggedIn() ?
+            {isLoggedIn() ? (
               <Tooltip title="Abrir Definições">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar sx={{ backgroundColor: "#054496" }}>
-                    {localStorage.getItem('profile') ? <img src={localStorage.getItem('profile')} alt="Perfil" /> : <PersonIcon />}
-                  </Avatar>
+                  <Avatar sx={{ backgroundColor: "#054496" }} alt="Perfil" src={localStorage.getItem('profile') || undefined} />
                 </IconButton>
               </Tooltip>
-              : <Tooltip title="Iniciar Sessão">
+            ) : (
+              <Tooltip title="Iniciar Sessão">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar sx={{ backgroundColor: "#054496" }}><PersonIcon /></Avatar>
                 </IconButton>
               </Tooltip>
-            }
+            )}
+
 
             {/* icon user */}
             <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right', }} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>
