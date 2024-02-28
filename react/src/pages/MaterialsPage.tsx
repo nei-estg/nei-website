@@ -68,28 +68,78 @@ export default function MaterialsPage() {
     event.preventDefault();
 
     //check if course and curricular unit was selected
+    if (!selectedCourse || !selectedCurricularUnit) {
+      toast.error("Por favor selecione um Curso e uma Unidade Curricular!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      return;
+    }
 
     //check if material tag was selected
+    if (selectedMaterialTag.length === 0) {
+      toast.error("Por favor selecione pelo menos uma Tag para o Material!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      return;
+    }
 
-    //check if we have either a link or a file and also check if we have the validation on the backend
+    //check if we have either a link or a file
+    if (
+      event.currentTarget.link.value === "" &&
+      event.currentTarget.file.files.length === 0
+    ) {
+      toast.error("Por favor adicione um link ou um ficheiro!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      return;
+    }
 
-    //map the selected curricular tags to the actual tags
-
-    const file = new File(["your_base64_encoded_data"], "filename.txt", {
-      type: "text/plain",
-    });
+    
     const newMaterial: IMaterial = {
       name: event.currentTarget.fileName.value,
       link: event.currentTarget.link.value,
-      tags: materialTagList,
-      file: btoa(await file.text()),
+      tags: materialTagList.filter((tag) => selectedMaterialTag.includes(tag.name)),
       curricularUnit: selectedCurricularUnit,
     };
+    
+    //if there is a file
+    if (event.currentTarget.file.files.length > 0) {
+      const file = new File([event.currentTarget.file.files[0]], event.currentTarget.file.files[0].name, { type: event.currentTarget.file.files[0].type })
+      const buffer = await file.arrayBuffer();
+      const fileData = new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), '');
+      const encodedFileData = btoa(fileData);
+
+      newMaterial.file = await file.name + ":" + encodedFileData;
+    }
 
     createMaterial(newMaterial)
-      .then(() => {
+      .then((result) => {
         toast.success(
-          "Material adicionado com sucesso! Após aprovado o mesmo ficará visível! :)",
+          "Material adicionado com sucesso! Após aprovado o mesmo ficará visível para todos! :)",
           {
             position: "top-right",
             autoClose: 5000,
@@ -103,6 +153,7 @@ export default function MaterialsPage() {
           }
         );
         handleCloseCreateMaterialModal();
+        setMaterialsList([...materialsList, result])
       })
       .catch(() => {
         toast.error("Ocorreu um erro ao tentar criar o material :(", {
