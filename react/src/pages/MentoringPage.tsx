@@ -166,10 +166,10 @@ export default function MentoringPage() {
 
         <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "0px", marginBottom: "30px" }}>
           <InfoIcon sx={{marginRight: '5px', color: "#054496"}}/>
-          A tua privacidade é prioritária. 
-          Por isso, a identidade de quem pede ou oferece mentoria fica oculta até que aceites o pedido. 
-          Assim, só saberás quem é a outra pessoa após a tua aceitação. 
-          Esta medida garante a tua segurança e conforto, permitindo um ambiente de troca seguro e confiável.
+          A tua privacidade é uma prioridade. 
+          Por isso, não vais saber quem é a outra pessoa até aceitares a mentoria. 
+          Depois, terão de combinar como falar, usando Discord, Teams, ou o que preferirem, para realizar a mentoria. 
+          É simples e seguro, garantindo que escolhes com quem queres partilhar informações.
         </Typography>
 
         <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
