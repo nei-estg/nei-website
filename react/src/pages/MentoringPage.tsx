@@ -10,6 +10,7 @@ import { getCurricularUnitsCourseUser } from "@src/api/CourseRoutes";
 import InfoIcon from '@mui/icons-material/Info';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import AddIcon from '@mui/icons-material/Add';
 
 
 export default function MentoringPage() {
@@ -189,9 +190,10 @@ export default function MentoringPage() {
 
         <Box
           component="form"
-          onSubmit={handleCreateMentoringRequest} sx={{width: '70%', justifyContent: 'center', alignContent: 'center'}}
+          onSubmit={handleCreateMentoringRequest}
+          sx={{ width: '50%', margin: 'auto' }} // Adiciona margin auto para centralizar horizontalmente
         >
-          <FormControl fullWidth sx={{ mt: 2 }}>
+          <FormControl fullWidth sx={{ mt: 2, textAlign: 'center' }} > {/* Adiciona textAlign center para centralizar o FormControl */}
             <InputLabel id="curricular-unit-label">
               Curricular Unit
             </InputLabel>
@@ -213,12 +215,11 @@ export default function MentoringPage() {
             </Select>
           </FormControl>
           <Button
-            fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, backgroundColor: "#054496", color: "#FFFFFF", borderRadius: "100px", marginTop: '10px'}}
             type="submit"
           >
-            Criar
+           <AddIcon sx={{marginRight: '5px'}}/> Criar
           </Button>
         </Box>
 
@@ -229,7 +230,7 @@ export default function MentoringPage() {
             fontWeight: 700,
             flexDirection: "column",
             alignItems: "center",
-            marginTop: "30px",
+            marginTop: "50px",
             marginBottom: "15px",
           }}
           >
@@ -257,7 +258,7 @@ export default function MentoringPage() {
               <Typography variant="subtitle1" align="center" gutterBottom>
                 {mentoringRequest.curricularUnit.name}
               </Typography>
-              <Button variant="contained" sx={{ mt: 2 }} type="submit" color="success"><CheckIcon/></Button>
+              <Button variant="contained" sx={{ mt: 2, borderRadius: "100px", }} type="submit" color="success"><CheckIcon sx={{marginRight: '5px'}}/> Aceitar</Button>
             </Box>
           ))}
         </Box>
@@ -299,8 +300,8 @@ export default function MentoringPage() {
               {mentoring.curricularUnit?.name}: {mentoring.mentee?.profilemodel.discord}
             </Typography>
             
-              <Button variant="contained" sx={{ mt: 2 }}><DoneAllIcon/></Button>
-              <Button variant="outlined" sx={{ mt: 1 }} color="error"><CancelIcon/></Button>
+              <Button variant="contained" sx={{ mt: 2, borderRadius: "100px",  backgroundColor: "#054496",}}><DoneAllIcon sx={{marginRight: '5px'}}/> Terminar</Button>
+              <Button variant="outlined" sx={{ mt: 1 , borderRadius: "100px",}} color="error"><CancelIcon  sx={{marginRight: '5px'}}/> Cancelar</Button>
             </Box>
           ))}
         </Box>
