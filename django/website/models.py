@@ -225,6 +225,7 @@ class ProfileModel(ExportModelOperationsMixin('ProfileModel'), models.Model):
     ], null = True
   )
   image = models.ImageField(null=True, blank=True, upload_to='profile')
+  discord = models.TextField(null=True, blank=True)
 
   class Meta:
     ordering = ['user']
