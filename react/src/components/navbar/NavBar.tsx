@@ -120,18 +120,20 @@ function NavBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {isLoggedIn() ?
-              <Tooltip title="Abrir Definições">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar sx={{ backgroundColor: "#054496" }} src={localStorage.getItem('profile') ?? 'logo.png'}></Avatar>
-                </IconButton>
-              </Tooltip>
-              : <Tooltip title="Iniciar Sessão">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar sx={{ backgroundColor: "#054496" }}><PersonIcon /></Avatar>
-                </IconButton>
-              </Tooltip>
-            }
+          {isLoggedIn() ?
+            <Tooltip title="Abrir Definições">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar sx={{ backgroundColor: "#054496" }}>
+                  {localStorage.getItem('profile') ? <img src={localStorage.getItem('profile')} alt="Perfil" /> : <PersonIcon />}
+                </Avatar>
+              </IconButton>
+            </Tooltip>
+            : <Tooltip title="Iniciar Sessão">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar sx={{ backgroundColor: "#054496" }}><PersonIcon /></Avatar>
+              </IconButton>
+            </Tooltip>
+          }
 
             {/* icon user */}
             <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right', }} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>

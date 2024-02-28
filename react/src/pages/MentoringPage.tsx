@@ -12,8 +12,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 
-const defaultTheme = createTheme();
-
 export default function MentoringPage() {
   const defaultTheme = createTheme();
   const [mentoringRequestList, setMentoringRequestList] = useState<IMentoringRequest[]>([]);
@@ -103,7 +101,6 @@ export default function MentoringPage() {
         theme: "dark",
         transition: Bounce,
       });
-      setMentoringRequestList([...mentoringRequestList, newMentoringRequest]);
     }).catch(() => {
       toast.error("Ocorreu um erro ao criar o pedido de mentoria! Por favor tenta novamente!", {
         position: "top-right",
