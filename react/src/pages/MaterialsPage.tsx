@@ -276,7 +276,7 @@ export default function MaterialsPage() {
         </Typography>
 
         <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "0px", marginBottom: "30px" }}>
-          <InfoIcon sx={{marginRight: '5px', color: "#054496"}}/>
+          <InfoIcon sx={{marginRight: '5px', color: "#054496", marginBottom: "-3px"}}/>
           Podes ver materiais adicionados pela comunidade e verificados pelo NEI. 
           E tu, com a tua sessão iniciada, podes adicionar também.
         </Typography>

@@ -242,7 +242,7 @@ export default function CalendarPage() {
     <ThemeProvider theme={defaultTheme}>
       <Container maxWidth="xl" sx={{ marginBottom: '60px' }}>
         <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
-          <InfoIcon sx={{marginRight: '5px', color: "#054496"}}/>
+          <InfoIcon sx={{marginRight: '5px', color: "#054496", marginBottom: "-3px"}}/>
           Podes ver eventos adicionados pela comunidade e verificados pelo NEI. 
           Também mostramos feriados, e tu, com a tua sessão iniciada, podes criar eventos. 
           Quando crias um evento, ele fica visível para ti até que atualizes a página.

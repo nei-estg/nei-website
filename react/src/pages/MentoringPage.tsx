@@ -165,7 +165,7 @@ export default function MentoringPage() {
         </Typography>
 
         <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "0px", marginBottom: "30px" }}>
-          <InfoIcon sx={{marginRight: '5px', color: "#054496"}}/>
+          <InfoIcon sx={{marginRight: '5px', color: "#054496", marginBottom: "-3px"}}/>
           A tua privacidade é uma prioridade. 
           Por isso, não vais saber quem é a outra pessoa até aceitares a mentoria. 
           Depois, terão de combinar como falar, usando Discord, Teams, ou o que preferirem, para realizar a mentoria. 
