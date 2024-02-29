@@ -342,7 +342,38 @@ class ChangePasswordView(APIView):
     user.save()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
-class ActivateAccountView(APIView):
+class ResetPasswordView(APIView):
+  """
+  API endpoint that allows users to reset their password.
+  """
+  permission_classes = []
+  
+  #! Receive an username, if it matches send an email with a reset code
+  def get(self, request, *args, **kwargs):
+    username = request.query_params.get('username', None)
+    if username:
+      user = User.objects.get(username=username)
+      if user:
+        reset = UserResetModel.objects.create(user=user)
+        send_mail('Reset Password', f"Please reset your password by clicking the following link: http://127.0.0.1/reset-password/{reset.code}", "nei@estg.ipp.pt", [user.email], fail_silently=True)
+    return Response(status=status.HTTP_204_NO_CONTENT)
+  
+  #! Receive an username and a reset code and password, if it matches reset the password
+  def post(self, request, *args, **kwargs):
+    username = request.data.get('username', None)
+    code = request.data.get('code', None)
+    password = request.data.get('password', None)
+    if username and code and password:
+      user = User.objects.get(username=username)
+      if user:
+        reset = UserResetModel.objects.get(user=user, code=code)
+        if reset:
+          user.set_password(password)
+          user.save()
+          reset.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+class UserActivationView(APIView):
   """
   API endpoint that allows users to activate their account.
   """
@@ -354,7 +385,7 @@ class ActivateAccountView(APIView):
     if username:
       user = User.objects.get(username=username)
       if user:
-        activation = UserActivation.objects.create(user=user)
+        activation = UserActivationModel.objects.create(user=user)
         send_mail('Account Activation', f"Please activate your account by clicking the following link: http://127.0.0.1/activate/{activation.code}", "nei@estg.ipp.pt", [user.email], fail_silently=True)
     return Response(status=status.HTTP_204_NO_CONTENT)
     
@@ -365,7 +396,7 @@ class ActivateAccountView(APIView):
     if username and code:
       user = User.objects.get(username=username)
       if user:
-        activation = UserActivation.objects.get(user=user, code=code)
+        activation = UserActivationModel.objects.get(user=user, code=code)
         if activation:
           user.is_active = True
           user.save()
