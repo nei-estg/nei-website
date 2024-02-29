@@ -415,6 +415,7 @@ export default function ProfilePage() {
                       <Button
                         variant="contained"
                         startIcon={<KeyIcon />}
+                        href="/change-password"
                         sx={{
                           backgroundColor: "#054496",
                           color: "#FFFFFF",
