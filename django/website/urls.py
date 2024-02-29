@@ -22,6 +22,7 @@ urlpatterns = [
   path('', include(router.urls)),
   path('auth/', include('knox.urls')),
   path('auth/changePassword/', ChangePasswordView.as_view()),
+  path('user/activate/', ActivateAccountView.as_view()),
 ]
 
 if settings.DEBUG:

@@ -3,6 +3,8 @@ from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django_prometheus.models import ExportModelOperationsMixin
+import secrets
+import string
 
 class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
   name = models.TextField()
@@ -231,6 +233,21 @@ class ProfileModel(ExportModelOperationsMixin('ProfileModel'), models.Model):
     ordering = ['user']
     verbose_name = "Perfil de Utilizador"
     verbose_name_plural = "Perfis de Utilizadores"  
+
+  def __str__(self):
+    return self.user.username
+  
+class UserActivation(ExportModelOperationsMixin('UserActivation'), models.Model):
+  user = models.OneToOneField(User, on_delete=models.CASCADE)
+  code = models.TextField(default=''.join(secrets.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits + string.punctuation) for i in range(16)))
+  date = models.DateTimeField(auto_now_add=True)
+
+  class Meta:
+    constraints = [
+      models.UniqueConstraint(fields=['user', 'code'], name='unique_user_activation')
+    ]
+    verbose_name = "Ativação de Utilizador"
+    verbose_name_plural = "Ativações de Utilizadores"
 
   def __str__(self):
     return self.user.username

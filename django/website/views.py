@@ -10,6 +10,7 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 import base64
 from django.contrib.auth.password_validation import validate_password
+from django.core.mail import send_mail
 
 class CreateOnlyModelViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
   pass
@@ -229,17 +230,20 @@ class MentoringViewSet(CreateAndViewModelViewSet):
     if 'requestId' not in self.request.data:
       return Response({'detail': 'Request ID not found.'}, status=status.HTTP_400_BAD_REQUEST)
     mentoringRequest = MentoringRequestModel.objects.get(id=self.request.data.get('requestId', None))
-    
+
     if not mentoringRequest:
       return Response({'detail': 'Request not found.'}, status=status.HTTP_400_BAD_REQUEST)
-    
+
     if mentoringRequest.mentee == request.user:
       return Response({'detail': 'You cannot mentor yourself.'}, status=status.HTTP_400_BAD_REQUEST)
-    
+
     #TODO: check if the courses of the curricular unit matches one course of the user
-    
+
     mentoring = MentoringModel.objects.create(mentee=mentoringRequest.mentee, mentor=request.user, curricularUnit=mentoringRequest.curricularUnit)
     mentoringRequest.delete()
+
+
+    send_mail("Mentoring Accepted", f"Hey {mentoring.mentee.username}, {mentoring.mentor.username} accepted your mentoring request for {mentoring.curricularUnit.name}.", "nei@estg.ipp.pt", [mentoring.mentee.email], fail_silently=False)
     
     return Response(MentoringSerializer(mentoring).data, status=status.HTTP_201_CREATED)
 
@@ -336,4 +340,34 @@ class ChangePasswordView(APIView):
     
     user.set_password(new_password)
     user.save()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+class ActivateAccountView(APIView):
+  """
+  API endpoint that allows users to activate their account.
+  """
+  permission_classes = []
+  
+  #! Receive an username, if it matches send an email with an activation code
+  def get(self, request, *args, **kwargs):
+    username = request.query_params.get('username', None)
+    if username:
+      user = User.objects.get(username=username)
+      if user:
+        activation = UserActivation.objects.create(user=user)
+        send_mail('Account Activation', f"Please activate your account by clicking the following link: http://127.0.0.1/activate/{activation.code}", "nei@estg.ipp.pt", [user.email], fail_silently=True)
+    return Response(status=status.HTTP_204_NO_CONTENT)
+    
+  #! Receive an username and an activation code, if it matches activate the account
+  def post(self, request, *args, **kwargs):
+    username = request.data.get('username', None)
+    code = request.data.get('code', None)
+    if username and code:
+      user = User.objects.get(username=username)
+      if user:
+        activation = UserActivation.objects.get(user=user, code=code)
+        if activation:
+          user.is_active = True
+          user.save()
+          activation.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)

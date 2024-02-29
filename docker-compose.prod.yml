@@ -73,6 +73,12 @@ services:
       POSTGRES_USER: $POSTGRES_USER
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       ALLOWED_HOST: $ALLOWED_HOST
+      EMAIL_HOST: $EMAIL_HOST
+      EMAIL_PORT: $EMAIL_PORT
+      EMAIL_HOST_USER: $EMAIL_HOST_USER
+      EMAIL_HOST_PASSWORD: $EMAIL_HOST_PASSWORD
+      EMAIL_USE_TLS: $EMAIL_USE_TLS
+      EMAIL_USE_SSL: $EMAIL_USE_SSL
     volumes:
       - django_static_data:/shared/static
       - django_media_data:/shared/media
