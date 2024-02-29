@@ -11,6 +11,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import AddIcon from '@mui/icons-material/Add';
+import { text } from "stream/consumers";
 
 
 export default function MentoringPage() {
@@ -160,6 +161,25 @@ export default function MentoringPage() {
   };
 
 
+  /** corrigir o texto de "AAAA B CCCC" para "Aaaaaa b Ccccc"
+   * 
+   * @param text "AAAA B CCCC"
+   * @returns "Aaaaaa b Ccccc"
+   */
+  function correctText(text: string): string
+  {
+    
+    if (/^[^A-Z]|[^a-z]$/.test(text)) //verifica se a primeira letra não é maiúscula e se a última letra é minúscula
+    {
+      text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); //converte a primeira letra para maiúscula e a última para minúscula
+    }
+
+    return text;
+  }
+
+
+
+
 
 
 
@@ -262,7 +282,7 @@ export default function MentoringPage() {
             >
               <TextField name="requestId" value={mentoringRequest.id} sx={{ display: "none" }} />
               <Typography variant="subtitle1" align="center" gutterBottom>
-                {mentoringRequest.curricularUnit.name}
+                {correctText(mentoringRequest.curricularUnit.name)}
               </Typography>
               <Button variant="contained" sx={{ mt: 2, borderRadius: "100px", }} type="submit" color="success"><CheckIcon sx={{marginRight: '5px'}}/> Aceitar</Button>
             </Box>
