@@ -1,12 +1,15 @@
 from django.contrib.auth.models import User, Group
+from django.forms import ValidationError
 from rest_framework import viewsets, permissions, mixins
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.views import APIView
 from .models import *
 from .serializers import *
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 import base64
+from django.contrib.auth.password_validation import validate_password
 
 class CreateOnlyModelViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
   pass
@@ -312,3 +315,25 @@ class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
       user.profilemodel.image = profilemodel.get('image', user.profilemodel.image)
       user.profilemodel.save()
     return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+
+class ChangePasswordView(APIView):
+  """
+  API endpoint that allows users to change their password.
+  """
+  permission_classes = [permissions.IsAuthenticated]
+  
+  def post(self, request, *args, **kwargs):
+    user = request.user
+    old_password = request.data.get("oldPassword")
+    new_password = request.data.get("newPassword")
+    if not user.check_password(old_password):
+      return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+      validate_password(new_password, user=user)
+    except ValidationError as e:
+      return Response({"new_password": e.messages}, status=status.HTTP_400_BAD_REQUEST)
+    
+    user.set_password(new_password)
+    user.save()
+    return Response(status=status.HTTP_204_NO_CONTENT)

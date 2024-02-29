@@ -88,3 +88,8 @@ export const updateUser = async (user : IUser) => {
   if (response.status !== 200) throw new Error(response.data);
   return response.data as IUser;
 }
+
+export const changePassword = async (passwords : {oldPassword: string, newPassword: string}) => {
+  const response = await AuthenticatedClient.post('/api/auth/changePassword/', passwords);
+  if (response.status !== 204) throw new Error(response.data);
+}
