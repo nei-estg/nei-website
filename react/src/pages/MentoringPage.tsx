@@ -179,7 +179,46 @@ export default function MentoringPage() {
   }
 
 
+  /** calcular o tempo que já passou
+   * 
+   * @param dateString 
+   * @returns 
+   */
+  function calculatePastTime(dateString: string): string
+  {
+    const currentDate = new Date();
+    const dateProvided = new Date(dateString);
 
+    const differenceInMilliseconds = currentDate.getTime() - dateProvided.getTime();
+    const differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+    const differenceInHours = Math.floor(differenceInMilliseconds / (1000 * 60 * 60)) % 24;
+    const differenceInMinutes = Math.floor(differenceInMilliseconds / (1000 * 60)) % 60;
+
+
+    if (differenceInDays > 7) //se já passou mais de uma semana, retorna a data no formato "dd/mm/aaaa"
+    {
+      const day = String(dateProvided.getDate()).padStart(2, '0');
+      const month = String(dateProvided.getMonth() + 1).padStart(2, '0'); //os meses são baseados em zero
+      const year = dateProvided.getFullYear();
+      
+      return `${day}/${month}/${year}`;
+    }
+     else //caso contrário, retorna quanto tempo passou em relação à data atual
+    {
+      if (differenceInDays > 0)
+      {
+        return `${differenceInDays} dia(s) atrás`;
+      } 
+      else if (differenceInHours > 0) 
+      {
+        return `${differenceInHours} hora(s) atrás`;
+      }
+       else
+        {
+        return `${differenceInMinutes} minuto(s) atrás`;
+      }
+  }
+}
 
 
 
@@ -289,7 +328,7 @@ export default function MentoringPage() {
 
               <Typography variant="subtitle1" align="center" gutterBottom>
               <AccessTimeFilledIcon sx={{marginRight: '5px', color: "#636F80", marginBottom: "-5px"}}/>
-              {new Date(mentoringRequest.date).toLocaleDateString('PT')}
+              {calculatePastTime(mentoringRequest.date)}
             </Typography>
 
               <Button variant="contained" sx={{ mt: 2, borderRadius: "100px", }} type="submit" color="success"><CheckIcon sx={{marginRight: '5px'}}/> Aceitar</Button>
@@ -353,7 +392,7 @@ export default function MentoringPage() {
 
             <Typography variant="subtitle1" align="center" gutterBottom>
               <AccessTimeFilledIcon sx={{marginRight: '5px', color: "#636F80", marginBottom: "-5px"}}/>
-              {new Date(mentoring.date).toLocaleDateString('PT')}
+              {calculatePastTime(mentoring.date)}
             </Typography>
             
               <Button variant="contained" sx={{ mt: 2, borderRadius: "100px",  backgroundColor: "#054496",}}><DoneAllIcon sx={{marginRight: '5px'}}/> Terminar</Button>
