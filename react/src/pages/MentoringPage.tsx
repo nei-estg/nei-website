@@ -209,7 +209,7 @@ export default function MentoringPage() {
                   key={unit.abbreviation}
                   value={unit.abbreviation}
                 >
-                  {unit.abbreviation}
+                  {unit.name}
                 </MenuItem>
               ))}
             </Select>
@@ -223,6 +223,7 @@ export default function MentoringPage() {
           </Button>
         </Box>
 
+        {/* Lista de Pedidos de Mentoria */}
         <Typography variant="h4" 
           sx={{ 
             color: "#1E2022",
@@ -237,7 +238,12 @@ export default function MentoringPage() {
           Lista de Pedidos de Mentoria
         </Typography>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+        {mentoringRequestList.length === 0 ? (
+          <Typography variant="h5" color="#1E2022" fontWeight="700" align="center">
+            Não há Pedidos de Mentoria no momento.
+          </Typography>
+        ) : (
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
           {mentoringRequestList.map((mentoringRequest) => (
             <Box
               key={mentoringRequest.id} // Adiciona a chave de identificação
@@ -262,9 +268,10 @@ export default function MentoringPage() {
             </Box>
           ))}
         </Box>
+        )}
 
 
-
+        {/* Lista de Mentorias */}
         <Typography variant="h4" 
           sx={{ 
             color: "#1E2022",
@@ -279,7 +286,12 @@ export default function MentoringPage() {
           Lista de Mentorias
         </Typography>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+        {mentoringList.length === 0 ? (
+          <Typography variant="h5" color="#1E2022" fontWeight="700" align="center">
+            Não há Mentorias no momento.
+          </Typography>
+        ) : (
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
           {mentoringList.map((mentoring) => (
             <Box
              key={mentoring.id} // Adiciona a chave de identificação
@@ -305,6 +317,10 @@ export default function MentoringPage() {
             </Box>
           ))}
         </Box>
+        )}
+
+
+        
       </Container>
     </ThemeProvider>
   )
