@@ -170,7 +170,7 @@ export default function MentoringPage() {
   function correctText(text: string): string
   {
     
-    if (/^[^A-Z]|[^a-z]$/.test(text)) //verifica se a primeira letra não é maiúscula e se a última letra é minúscula
+    if (/^[^A-Z].*[^a-z]$/.test(text)) //verifica se a primeira letra não é maiúscula e se a última letra é minúscula
     {
       text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); //converte a primeira letra para maiúscula e a última para minúscula
     }
