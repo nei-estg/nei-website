@@ -11,7 +11,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import AddIcon from '@mui/icons-material/Add';
-import { text } from "stream/consumers";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 
 export default function MentoringPage() {
@@ -275,15 +275,19 @@ export default function MentoringPage() {
                 boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', // Adiciona uma sombra
                 padding: '20px', // Adiciona preenchimento para destacar a sombra
                 borderRadius: '8px', // Adiciona bordas arredondadas para um visual mais suave
-                width: '20%',
+                width: '25%',
               }}
               component="form"
               onSubmit={handleCreateMentoring} // Passa o evento e o ID do pedido de mentoria
             >
               <TextField name="requestId" value={mentoringRequest.id} sx={{ display: "none" }} />
               <Typography variant="subtitle1" align="center" gutterBottom>
+                <MenuBookIcon sx={{marginRight: '5px', color: "#636F80", marginBottom: "-5px"}}/>
                 {correctText(mentoringRequest.curricularUnit.name)}
               </Typography>
+
+              
+
               <Button variant="contained" sx={{ mt: 2, borderRadius: "100px", }} type="submit" color="success"><CheckIcon sx={{marginRight: '5px'}}/> Aceitar</Button>
             </Box>
           ))}
@@ -320,7 +324,7 @@ export default function MentoringPage() {
                justifyContent: 'center',
                alignContent: 'center',
                flexDirection: 'column',
-               width: '20%',
+               width: '25%',
                boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', // Adiciona uma sombra
                padding: '20px', // Adiciona preenchimento para destacar a sombra
                borderRadius: '8px', // Adiciona bordas arredondadas para um visual mais suave
@@ -329,7 +333,18 @@ export default function MentoringPage() {
 
           <TextField name="requestId" value={mentoring.id} sx={{ display: "none" }} />
             <Typography variant="subtitle1" align="center" gutterBottom>
-              {mentoring.curricularUnit?.name}: {mentoring.mentee?.profilemodel.discord}
+              <MenuBookIcon sx={{marginRight: '5px', color: "#636F80", marginBottom: "-5px"}}/>
+              {correctText(mentoring.curricularUnit?.name)}
+            </Typography>
+
+            <Typography variant="subtitle1" align="center" gutterBottom>
+              <img src="https://img.icons8.com/ios-glyphs/24/636F80/discord.png" alt="discord" style={{marginRight: '5px', marginBottom: "-5px"}}/>
+              @{mentoring.mentee?.profilemodel.discord} (mentorado)
+            </Typography>
+
+            <Typography variant="subtitle1" align="center" gutterBottom>
+              <img src="https://img.icons8.com/ios-glyphs/24/636F80/discord.png" alt="discord" style={{marginRight: '5px', marginBottom: "-5px"}}/>
+              @{mentoring.mentor?.profilemodel.discord} (mentor)
             </Typography>
             
               <Button variant="contained" sx={{ mt: 2, borderRadius: "100px",  backgroundColor: "#054496",}}><DoneAllIcon sx={{marginRight: '5px'}}/> Terminar</Button>
