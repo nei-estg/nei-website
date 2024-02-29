@@ -12,6 +12,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import AddIcon from '@mui/icons-material/Add';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 
 
 export default function MentoringPage() {
@@ -281,12 +282,15 @@ export default function MentoringPage() {
               onSubmit={handleCreateMentoring} // Passa o evento e o ID do pedido de mentoria
             >
               <TextField name="requestId" value={mentoringRequest.id} sx={{ display: "none" }} />
-              <Typography variant="subtitle1" align="center" gutterBottom>
+              <Typography variant="subtitle1" align="center" gutterBottom sx={{marginBottom: "20px"}}>
                 <MenuBookIcon sx={{marginRight: '5px', color: "#636F80", marginBottom: "-5px"}}/>
                 {correctText(mentoringRequest.curricularUnit.name)}
               </Typography>
 
-              
+              <Typography variant="subtitle1" align="center" gutterBottom>
+              <AccessTimeFilledIcon sx={{marginRight: '5px', color: "#636F80", marginBottom: "-5px"}}/>
+              {new Date(mentoringRequest.date).toLocaleDateString('PT')}
+            </Typography>
 
               <Button variant="contained" sx={{ mt: 2, borderRadius: "100px", }} type="submit" color="success"><CheckIcon sx={{marginRight: '5px'}}/> Aceitar</Button>
             </Box>
@@ -332,7 +336,7 @@ export default function MentoringPage() {
            >
 
           <TextField name="requestId" value={mentoring.id} sx={{ display: "none" }} />
-            <Typography variant="subtitle1" align="center" gutterBottom>
+            <Typography variant="subtitle1" align="center" gutterBottom sx={{marginBottom: "20px"}}>
               <MenuBookIcon sx={{marginRight: '5px', color: "#636F80", marginBottom: "-5px"}}/>
               {correctText(mentoring.curricularUnit?.name)}
             </Typography>
@@ -342,10 +346,12 @@ export default function MentoringPage() {
               @{mentoring.mentee?.profilemodel.discord} (mentorado)
             </Typography>
 
-            <Typography variant="subtitle1" align="center" gutterBottom>
+            <Typography variant="subtitle1" align="center" gutterBottom sx={{marginBottom: "20px"}}>
               <img src="https://img.icons8.com/ios-glyphs/24/636F80/discord.png" alt="discord" style={{marginRight: '5px', marginBottom: "-5px"}}/>
               @{mentoring.mentor?.profilemodel.discord} (mentor)
             </Typography>
+
+            
             
               <Button variant="contained" sx={{ mt: 2, borderRadius: "100px",  backgroundColor: "#054496",}}><DoneAllIcon sx={{marginRight: '5px'}}/> Terminar</Button>
               <Button variant="outlined" sx={{ mt: 1 , borderRadius: "100px",}} color="error"><CancelIcon  sx={{marginRight: '5px'}}/> Cancelar</Button>
