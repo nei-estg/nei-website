@@ -351,7 +351,10 @@ export default function MentoringPage() {
               @{mentoring.mentor?.profilemodel.discord} (mentor)
             </Typography>
 
-            
+            <Typography variant="subtitle1" align="center" gutterBottom>
+              <AccessTimeFilledIcon sx={{marginRight: '5px', color: "#636F80", marginBottom: "-5px"}}/>
+              {new Date(mentoring.date).toLocaleDateString('PT')}
+            </Typography>
             
               <Button variant="contained" sx={{ mt: 2, borderRadius: "100px",  backgroundColor: "#054496",}}><DoneAllIcon sx={{marginRight: '5px'}}/> Terminar</Button>
               <Button variant="outlined" sx={{ mt: 1 , borderRadius: "100px",}} color="error"><CancelIcon  sx={{marginRight: '5px'}}/> Cancelar</Button>
