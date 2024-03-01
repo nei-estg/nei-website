@@ -101,6 +101,21 @@ export const Footer = () => {
                   </Typography>
                 </Button>
               </Box>
+
+              <Box
+                display="flex"
+                justifyContent={isSmallScreen ? "center" : "center"}
+              >
+                <Button
+                  component={RouterLink}
+                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
+                  to={routes.privacypolicypage.path}
+                >
+                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
+                    {routes.privacypolicypage.name}
+                  </Typography>
+                </Button>
+              </Box>
             </Grid>
             <Grid item xs={12} sm={3}>
               <Typography
