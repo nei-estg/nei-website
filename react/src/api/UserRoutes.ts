@@ -100,7 +100,7 @@ export const getResetPasswordCode = async (username: string) => {
 }
 
 export const resetPassword = async (data : {username: string, code: string, password: string}) => {
-  const response = await client.post('/api/auth/resetPasswordConfirm/', data);
+  const response = await client.post('/api/auth/resetPassword/', data);
   if (response.status !== 204) throw new Error(response.data);
 }
 
