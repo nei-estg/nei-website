@@ -58,8 +58,8 @@ class UserSerializer(serializers.ModelSerializer):
     # if user email is 8dddddd@estg.ipp.pt
     if re.match(r'^8[0-9]{6}@estg\.ipp\.pt$', user.email):
       #TODO: send email with activation link
-      activation = UserActivation.objects.create(user=user)
-      send_mail('Account Activation', "Please activate your account by clicking the following link: http://127.0.0.1/activate/" + activation.code, "nei@estg.ipp.pt", [user.email], fail_silently=False)
+      activation = UserActivationModel.objects.create(user=user)
+      send_mail('Account Activation', "Please activate your account by clicking the following link: http://127.0.0.1/activate-account/" + activation.code, None, [user.email], fail_silently=False)
     
     return user
 

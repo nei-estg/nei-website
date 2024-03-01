@@ -243,7 +243,7 @@ class MentoringViewSet(CreateAndViewModelViewSet):
     mentoringRequest.delete()
 
 
-    send_mail("Mentoring Accepted", f"Hey {mentoring.mentee.username}, {mentoring.mentor.username} accepted your mentoring request for {mentoring.curricularUnit.name}.", "nei@estg.ipp.pt", [mentoring.mentee.email], fail_silently=False)
+    send_mail("Mentoring Accepted", f"Hey {mentoring.mentee.username}, {mentoring.mentor.username} accepted your mentoring request for {mentoring.curricularUnit.name}.", recipient_list=[mentoring.mentee.email, mentoring.mentor.email], fail_silently=False)
     
     return Response(MentoringSerializer(mentoring).data, status=status.HTTP_201_CREATED)
 
@@ -355,7 +355,7 @@ class ResetPasswordView(APIView):
       user = User.objects.get(username=username)
       if user:
         reset = UserResetModel.objects.create(user=user)
-        send_mail('Reset Password', f"Please reset your password by clicking the following link: http://127.0.0.1/reset-password/{reset.code}", "nei@estg.ipp.pt", [user.email], fail_silently=True)
+        send_mail('NEI - Reset Password', f"Please reset your password by clicking the following link: http://127.0.0.1/reset-password/{reset.code}", None, [user.email], fail_silently=True)
     return Response(status=status.HTTP_204_NO_CONTENT)
   
   #! Receive an username and a reset code and password, if it matches reset the password
@@ -386,7 +386,7 @@ class UserActivationView(APIView):
       user = User.objects.get(username=username)
       if user:
         activation = UserActivationModel.objects.create(user=user)
-        send_mail('Account Activation', f"Please activate your account by clicking the following link: http://127.0.0.1/activate/{activation.code}", "nei@estg.ipp.pt", [user.email], fail_silently=True)
+        send_mail('NEI - Account Activation', f"Please activate your account by clicking the following link: http://127.0.0.1/activate-account/{activation.code}", None, [user.email], fail_silently=True)
     return Response(status=status.HTTP_204_NO_CONTENT)
     
   #! Receive an username and an activation code, if it matches activate the account

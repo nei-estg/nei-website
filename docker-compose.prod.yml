@@ -79,6 +79,7 @@ services:
       EMAIL_HOST_PASSWORD: $EMAIL_HOST_PASSWORD
       EMAIL_USE_TLS: $EMAIL_USE_TLS
       EMAIL_USE_SSL: $EMAIL_USE_SSL
+      DEFAULT_FROM_EMAIL: $DEFAULT_FROM_EMAIL
     volumes:
       - django_static_data:/shared/static
       - django_media_data:/shared/media

@@ -6,7 +6,7 @@ import { IMentoringRequest } from "@src/interfaces/IMentoringRequest";
 import { IMentoring } from "@src/interfaces/IMentoring";
 import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, ThemeProvider, Typography, createTheme } from "@mui/material";
 import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
-import { getCurricularUnitsCourseUser } from "@src/api/CourseRoutes";
+import { getCurricularUnits, getCurricularUnitsCourseUser } from "@src/api/CourseRoutes";
 import InfoIcon from '@mui/icons-material/Info';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
@@ -54,7 +54,7 @@ export default function MentoringPage() {
         transition: Bounce,
       });
     });
-    getCurricularUnitsCourseUser().then((response) => {
+    getCurricularUnits().then((response) => {
       setCurricularUnitList(response)
     }).catch(() => {
       toast.error("Ocorreu um erro ao aceder às Unidades Curriculares! Por favor tenta novamente!", {
