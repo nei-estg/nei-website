@@ -1,12 +1,19 @@
 import { createMentoring, createMentoringRequest, getMentoringList, getMentoringRequestList } from "@src/api/MentoringRoutes"
 import { useEffect, useState } from "react";
 import { toast, Bounce } from "react-toastify";
+import CheckIcon from '@mui/icons-material/Check';
 import { IMentoringRequest } from "@src/interfaces/IMentoringRequest";
 import { IMentoring } from "@src/interfaces/IMentoring";
 import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, ThemeProvider, Typography, createTheme } from "@mui/material";
 import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
-import { getCurricularUnits } from "@src/api/CourseRoutes";
+import { getCurricularUnitsCourseUser } from "@src/api/CourseRoutes";
 import InfoIcon from '@mui/icons-material/Info';
+import CancelIcon from '@mui/icons-material/Cancel';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import AddIcon from '@mui/icons-material/Add';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+
 
 export default function MentoringPage() {
   const defaultTheme = createTheme();
@@ -47,7 +54,7 @@ export default function MentoringPage() {
         transition: Bounce,
       });
     });
-    getCurricularUnits().then((response) => {
+    getCurricularUnitsCourseUser().then((response) => {
       setCurricularUnitList(response)
     }).catch(() => {
       toast.error("Ocorreu um erro ao aceder às Unidades Curriculares! Por favor tenta novamente!", {
@@ -154,14 +161,72 @@ export default function MentoringPage() {
     );
   };
 
+
+  /** corrigir o texto de "AAAA B CCCC" para "Aaaaaa b Ccccc"
+   * 
+   * @param text "AAAA B CCCC"
+   * @returns "Aaaaaa b Ccccc"
+   */
+  function correctText(text: string): string
+  {
+    
+    if (/^[^A-Z].*[^a-z]$/.test(text)) //verifica se a primeira letra não é maiúscula e se a última letra é minúscula
+    {
+      text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); //converte a primeira letra para maiúscula e a última para minúscula
+    }
+
+    return text;
+  }
+
+
+  /** calcular o tempo que já passou
+   * 
+   * @param dateString 
+   * @returns 
+   */
+  function calculatePastTime(dateString: string): string
+  {
+    const currentDate = new Date();
+    const dateProvided = new Date(dateString);
+
+    const differenceInMilliseconds = currentDate.getTime() - dateProvided.getTime();
+    const differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+    const differenceInHours = Math.floor(differenceInMilliseconds / (1000 * 60 * 60)) % 24;
+    const differenceInMinutes = Math.floor(differenceInMilliseconds / (1000 * 60)) % 60;
+
+
+    if (differenceInDays > 7) //se já passou mais de uma semana, retorna a data no formato "dd/mm/aaaa"
+    {
+      const day = String(dateProvided.getDate()).padStart(2, '0');
+      const month = String(dateProvided.getMonth() + 1).padStart(2, '0'); //os meses são baseados em zero
+      const year = dateProvided.getFullYear();
+      
+      return `${day}/${month}/${year}`;
+    }
+     else //caso contrário, retorna quanto tempo passou em relação à data atual
+    {
+      if (differenceInDays > 0)
+      {
+        return `${differenceInDays} dia(s) atrás`;
+      } 
+      else if (differenceInHours > 0) 
+      {
+        return `${differenceInHours} hora(s) atrás`;
+      }
+       else
+        {
+        return `${differenceInMinutes} minuto(s) atrás`;
+      }
+  }
+}
+
+
+
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
-        <Typography variant="h3" align="left" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
-          Mentoria
-        </Typography>
-
-        <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "0px", marginBottom: "30px" }}>
+        <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
           <InfoIcon sx={{marginRight: '5px', color: "#054496", marginBottom: "-3px"}}/>
           A tua privacidade é uma prioridade. 
           Por isso, não vais saber quem é a outra pessoa até aceitares a mentoria. 
@@ -169,46 +234,26 @@ export default function MentoringPage() {
           É simples e seguro, garantindo que escolhes com quem queres partilhar informações.
         </Typography>
 
-        <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
-          Lista de Pedidos de Mentoria
-        </Typography>
-        {mentoringRequestList.map((mentoringRequest) => (
-          <Box
-            component="form"
-            onSubmit={handleCreateMentoring}
+        <Typography variant="h4" 
+          sx={{ 
+            color: "#1E2022",
+            display: "flex",
+            fontWeight: 700,
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "30px",
+            marginBottom: "0px",
+          }}
           >
-            <TextField
-              name="requestId"
-              value={mentoringRequest.id}
-              sx={{ display: "none" }}
-            />
-            <p>Pedido - {mentoringRequest.curricularUnit.abbreviation}</p>
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              type="submit"
-            >
-              Aceitar Mentoria
-            </Button>
-          </Box>
-        ))}
-
-        <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
-          Lista de Mentorias
-        </Typography>
-        {mentoringList.map((mentoring) => (
-          <p key={mentoring.id}>{mentoring.curricularUnit?.abbreviation} - {mentoring.mentor?.username} - {mentoring.mentee?.username}</p>
-        ))}
-       
-        <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: "30px", marginBottom: "0px" }}>
           Criar Pedido de Mentoria
         </Typography>
+
         <Box
           component="form"
           onSubmit={handleCreateMentoringRequest}
+          sx={{ width: '50%', margin: 'auto' }} // Adiciona margin auto para centralizar horizontalmente
         >
-          <FormControl fullWidth sx={{ mt: 2 }}>
+          <FormControl fullWidth sx={{ mt: 2, textAlign: 'center' }} > {/* Adiciona textAlign center para centralizar o FormControl */}
             <InputLabel id="curricular-unit-label">
               Curricular Unit
             </InputLabel>
@@ -224,20 +269,141 @@ export default function MentoringPage() {
                   key={unit.abbreviation}
                   value={unit.abbreviation}
                 >
-                  {unit.abbreviation}
+                  {unit.name}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
           <Button
-            fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, backgroundColor: "#054496", color: "#FFFFFF", borderRadius: "100px", marginTop: '10px'}}
             type="submit"
           >
-            Criar Pedido de Mentoria
+           <AddIcon sx={{marginRight: '5px'}}/> Criar
           </Button>
         </Box>
+
+        {/* Lista de Pedidos de Mentoria */}
+        <Typography variant="h4" 
+          sx={{ 
+            color: "#1E2022",
+            display: "flex",
+            fontWeight: 700,
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "50px",
+            marginBottom: "15px",
+          }}
+          >
+          Lista de Pedidos de Mentoria
+        </Typography>
+
+        {mentoringRequestList.length === 0 ? (
+          <Typography variant="h5" color="#1E2022" fontWeight="700" align="center">
+            Não há Pedidos de Mentoria no momento.
+          </Typography>
+        ) : (
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+          {mentoringRequestList.map((mentoringRequest) => (
+            <Box
+              key={mentoringRequest.id} // Adiciona a chave de identificação
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignContent: 'center',
+                flexDirection: 'column', // Para colocar os elementos um em cima do outro
+                boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', // Adiciona uma sombra
+                padding: '20px', // Adiciona preenchimento para destacar a sombra
+                borderRadius: '8px', // Adiciona bordas arredondadas para um visual mais suave
+                width: '25%',
+              }}
+              component="form"
+              onSubmit={handleCreateMentoring} // Passa o evento e o ID do pedido de mentoria
+            >
+              <TextField name="requestId" value={mentoringRequest.id} sx={{ display: "none" }} />
+              <Typography variant="subtitle1" align="center" gutterBottom sx={{marginBottom: "20px"}}>
+                <MenuBookIcon sx={{marginRight: '5px', color: "#636F80", marginBottom: "-5px"}}/>
+                {correctText(mentoringRequest.curricularUnit.name)}
+              </Typography>
+
+              <Typography variant="subtitle1" align="center" gutterBottom>
+              <AccessTimeFilledIcon sx={{marginRight: '5px', color: "#636F80", marginBottom: "-5px"}}/>
+              {calculatePastTime(mentoringRequest.date)}
+            </Typography>
+
+              <Button variant="contained" sx={{ mt: 2, borderRadius: "100px", }} type="submit" color="success"><CheckIcon sx={{marginRight: '5px'}}/> Aceitar</Button>
+            </Box>
+          ))}
+        </Box>
+        )}
+
+
+        {/* Lista de Mentorias */}
+        <Typography variant="h4" 
+          sx={{ 
+            color: "#1E2022",
+            display: "flex",
+            fontWeight: 700,
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "60px",
+            marginBottom: "15px",
+          }}
+          >
+          Lista de Mentorias
+        </Typography>
+
+        {mentoringList.length === 0 ? (
+          <Typography variant="h5" color="#1E2022" fontWeight="700" align="center">
+            Não há Mentorias no momento.
+          </Typography>
+        ) : (
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+          {mentoringList.map((mentoring) => (
+            <Box
+             key={mentoring.id} // Adiciona a chave de identificação
+             sx={{
+               display: 'flex',
+               justifyContent: 'center',
+               alignContent: 'center',
+               flexDirection: 'column',
+               width: '25%',
+               boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', // Adiciona uma sombra
+               padding: '20px', // Adiciona preenchimento para destacar a sombra
+               borderRadius: '8px', // Adiciona bordas arredondadas para um visual mais suave
+             }}
+           >
+
+          <TextField name="requestId" value={mentoring.id} sx={{ display: "none" }} />
+            <Typography variant="subtitle1" align="center" gutterBottom sx={{marginBottom: "20px"}}>
+              <MenuBookIcon sx={{marginRight: '5px', color: "#636F80", marginBottom: "-5px"}}/>
+              {correctText(mentoring.curricularUnit?.name)}
+            </Typography>
+
+            <Typography variant="subtitle1" align="center" gutterBottom>
+              <img src="https://img.icons8.com/ios-glyphs/24/636F80/discord.png" alt="discord" style={{marginRight: '5px', marginBottom: "-5px"}}/>
+              @{mentoring.mentee?.profilemodel.discord} (mentorado)
+            </Typography>
+
+            <Typography variant="subtitle1" align="center" gutterBottom sx={{marginBottom: "20px"}}>
+              <img src="https://img.icons8.com/ios-glyphs/24/636F80/discord.png" alt="discord" style={{marginRight: '5px', marginBottom: "-5px"}}/>
+              @{mentoring.mentor?.profilemodel.discord} (mentor)
+            </Typography>
+
+            <Typography variant="subtitle1" align="center" gutterBottom>
+              <AccessTimeFilledIcon sx={{marginRight: '5px', color: "#636F80", marginBottom: "-5px"}}/>
+              {calculatePastTime(mentoring.date)}
+            </Typography>
+            
+              <Button variant="contained" sx={{ mt: 2, borderRadius: "100px",  backgroundColor: "#054496",}}><DoneAllIcon sx={{marginRight: '5px'}}/> Terminar</Button>
+              <Button variant="outlined" sx={{ mt: 1 , borderRadius: "100px",}} color="error"><CancelIcon  sx={{marginRight: '5px'}}/> Cancelar</Button>
+            </Box>
+          ))}
+        </Box>
+        )}
+
+
+        
       </Container>
     </ThemeProvider>
   )

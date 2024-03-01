@@ -236,10 +236,25 @@ export default function ProfilePage() {
                       @{user.username}
                     </Typography>
 
+                    {/*cursos*/}
+                    <Typography
+                      variant="subtitle2"
+                      color="#969696"
+                      sx={{
+                        fontSize: "16px",
+                        textAlign: "center",
+                        marginTop: "0px",
+                      }}
+                    >
+                      {user.profilemodel?.course
+                        ?.map((course: ICourse) => course.abbreviation)
+                        .join(", ")}
+                    </Typography>
+
                     {/*ano*/}
                     <div>
                       <Tooltip
-                        title="Todos os anos tens que atualizar, não te esqueças!"
+                        title="Todos os anos tens que atualizar, não te esqueças! Este deve ser referente ao teu curso mais recente!"
                         placement="left-start"
                       >
                         <Typography
@@ -258,21 +273,6 @@ export default function ProfilePage() {
                         </Typography>
                       </Tooltip>
                     </div>
-
-                    {/*cursos*/}
-                    <Typography
-                      variant="subtitle2"
-                      color="#969696"
-                      sx={{
-                        fontSize: "16px",
-                        textAlign: "center",
-                        marginTop: "0px",
-                      }}
-                    >
-                      {user.profilemodel?.course
-                        ?.map((course: ICourse) => course.abbreviation)
-                        .join(", ")}
-                    </Typography>
                   </div>
                 )}
 
@@ -359,24 +359,6 @@ export default function ProfilePage() {
                       />
                     </div>
 
-                    {/*ano*/}
-                    <div style={{ marginTop: "20px", width: "70%" }}>
-                      <TextField
-                        id="tf-year"
-                        select
-                        label="Ano"
-                        defaultValue={user.profilemodel?.year}
-                        sx={{ width: "100%" }}
-                        helperText="Todos os anos tens que atualizar, não te esqueças!"
-                      >
-                        <MenuItem value={1}>1st</MenuItem>
-                        <MenuItem value={2}>2nd</MenuItem>
-                        <MenuItem value={3}>3rd</MenuItem>
-                        <MenuItem value={4}>Erasmus</MenuItem>
-                        <MenuItem value={5}>Alumni</MenuItem>
-                      </TextField>
-                    </div>
-
                     {/*cursos*/}
                     <div style={{ marginTop: "25px", width: "70%" }}>
                       <FormControl sx={{ width: "100%" }}>
@@ -410,11 +392,30 @@ export default function ProfilePage() {
                       </FormControl>
                     </div>
 
+                    {/*ano*/}
+                    <div style={{ marginTop: "20px", width: "70%" }}>
+                      <TextField
+                        id="tf-year"
+                        select
+                        label="Ano"
+                        defaultValue={user.profilemodel?.year}
+                        sx={{ width: "100%" }}
+                        helperText="Todos os anos tens que atualizar, não te esqueças! Este deve ser referente ao teu curso mais recente!"
+                      >
+                        <MenuItem value={1}>1st</MenuItem>
+                        <MenuItem value={2}>2nd</MenuItem>
+                        <MenuItem value={3}>3rd</MenuItem>
+                        <MenuItem value={4}>Erasmus</MenuItem>
+                        <MenuItem value={5}>Alumni</MenuItem>
+                      </TextField>
+                    </div>
+
                     {/*password*/}
                     <div style={{ marginTop: "25px" }}>
                       <Button
                         variant="contained"
                         startIcon={<KeyIcon />}
+                        href="/change-password"
                         sx={{
                           backgroundColor: "#054496",
                           color: "#FFFFFF",

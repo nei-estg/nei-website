@@ -4,6 +4,7 @@ from rest_framework import serializers
 from django.db import transaction
 from django.contrib.auth.hashers import make_password
 import re
+from django.core.mail import send_mail
 
 class CourseSerializer(serializers.ModelSerializer):
   class Meta:
@@ -53,52 +54,14 @@ class UserSerializer(serializers.ModelSerializer):
           profile.course.add(course)
       
       profile.save()
-    
+
     # if user email is 8dddddd@estg.ipp.pt
     if re.match(r'^8[0-9]{6}@estg\.ipp\.pt$', user.email):
       #TODO: send email with activation link
-      pass
+      activation = UserActivation.objects.create(user=user)
+      send_mail('Account Activation', "Please activate your account by clicking the following link: http://127.0.0.1/activate/" + activation.code, "nei@estg.ipp.pt", [user.email], fail_silently=False)
     
     return user
-
-  @transaction.atomic
-  def update(self, user, validated_data): #TODO: Test this
-    profile_data = validated_data.pop('profilemodel', None)
-    course_data = profile_data.pop('course', None)
-    
-    user.username = validated_data.get('username', user.username)
-    user.email = validated_data.get('email', user.email)
-    user.first_name = validated_data.get('first_name', user.first_name)
-    user.last_name = validated_data.get('last_name', user.last_name)
-    
-    #check if password is being updated
-    if 'password' in validated_data:
-      #check if oldPassword is present
-      if 'oldPassword' in validated_data:
-        if user.check_password(validated_data.get('oldPassword')):
-          user.set_password(validated_data.get('password'))
-        else:
-          raise serializers.ValidationError({'oldPassword': 'The old password is incorrect'})
-    
-    user.save()
-    
-    if profile_data:
-      profile = user.profilemodel
-      profile.year = profile_data.get('year', profile.year)
-      profile.image = profile_data.get('image', profile.image)
-      profile.bio = profile_data.get('bio', profile.bio)
-      profile.save()
-
-      if course_data:
-        profile.course.clear()
-        for course in course_data:
-          course = CourseModel.objects.get(name=course['name'])
-          profile.course.add(course)
-      
-      profile.save()
-      
-    return user
-
 
 class ContactSerializer(serializers.ModelSerializer):
   class Meta:

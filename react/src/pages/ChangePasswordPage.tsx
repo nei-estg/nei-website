@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect } from 'react';
+import { changePassword } from '@src/api/UserRoutes';
+import { toast, Bounce } from 'react-toastify';
 
 const defaultTheme = createTheme();
 
@@ -22,7 +24,28 @@ export default function ChangePasswordPage() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    //TODO: Implement Change Password
+    const passwords = {
+      oldPassword: event.currentTarget.oldPassword.value,
+      newPassword: event.currentTarget.newPassword.value
+    };
+    changePassword(passwords).then(() => {
+      window.location.href = "/profile";
+    }).catch(() => {
+      toast.error(
+        "Ocorreu um erro ao modificar a palavra-passe! Por favor tenta novamente!",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        }
+      );
+    });
   };
 
   return (
