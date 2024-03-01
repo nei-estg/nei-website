@@ -12,6 +12,7 @@ import BlogPage from "@src/pages/BlogPage";
 import NotFoundPage from "@src/pages/NotFoundPage";
 import PostPage from "@src/pages/PostPage";
 import ChangePasswordPage from "@src/pages/ChangePasswordPage";
+import ActivateAccountPage from "@src/pages/ActivateAccountPage";
 
 interface IRoutes {
   [key: string]: {
@@ -37,9 +38,14 @@ const routes: IRoutes = {
     path: '/register',
     element: <RegisterPage />,
   },
+  activateaccountpage: {
+    name: 'Ativar Conta',
+    path: '/activate-account/:code',
+    element: <ActivateAccountPage />,
+  },
   resetpasswordpage: {
     name: 'Redefinir Palavra Passe',
-    path: '/reset-password',
+    path: '/reset-password/:code',
     element: <ResetPasswordPage />,
   },
   changepasswordpage: {
