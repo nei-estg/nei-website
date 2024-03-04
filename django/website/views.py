@@ -30,7 +30,7 @@ class FAQViewSet(viewsets.ReadOnlyModelViewSet):
   """
   API endpoint that allows FAQs to be viewed.
   """
-  queryset = FAQModel.objects.all()
+  queryset = FAQModel.objects.all().prefetch_related('category')
   serializer_class = FAQSerializer
   permission_classes = []
   filterset_fields = FAQSerializer.Meta.fields
@@ -40,7 +40,7 @@ class CalendarViewSet(CreateAndViewModelViewSet):
   """
   API endpoint that allows calendar events to be viewed or created.
   """
-  queryset = CalendarModel.objects.filter(visible=True)
+  queryset = CalendarModel.objects.filter(visible=True).prefetch_related('curricularUnit')
   serializer_class = CalendarSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
   filterset_fields = CalendarSerializer.Meta.fields
@@ -81,7 +81,7 @@ class CurricularUnitViewSet(viewsets.ReadOnlyModelViewSet):
   """
   API endpoint that allows curricular units to be viewed.
   """
-  queryset = CurricularUnitModel.objects.all()
+  queryset = CurricularUnitModel.objects.all().prefetch_related('course')
   serializer_class = CurricularUnitSerializer
   permission_classes = []
   filterset_fields = CurricularUnitSerializer.Meta.fields
@@ -101,7 +101,7 @@ class MaterialViewSet(CreateAndViewModelViewSet):
   """
   API endpoint that allows materials to be viewed or edited.
   """
-  queryset = MaterialModel.objects.filter(visible=True)
+  queryset = MaterialModel.objects.filter(visible=True).prefetch_related('tags', 'curricularUnit')
   serializer_class = MaterialSerializer
   permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
   filterset_fields = ['name', 'tags', 'curricularUnit']
@@ -166,7 +166,7 @@ class MentoringRequestViewSet(CreateAndViewModelViewSet):
   """
   API endpoint that allows mentorship requests to be viewed or edited.
   """
-  queryset = MentoringRequestModel.objects.all()
+  queryset = MentoringRequestModel.objects.all().prefetch_related('mentee', 'curricularUnit')
   serializer_class = MentoringRequestSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
   filterset_fields = MentoringRequestSerializer.Meta.fields
@@ -202,19 +202,28 @@ class MentoringRequestViewSet(CreateAndViewModelViewSet):
     if curricularUnitJson:
       curricularUnit = CurricularUnitModel.objects.get(id=curricularUnitJson.get('id', None))
       if curricularUnit:
+        
+        #! Check if the user has a course
+        if not request.user.profilemodel.course:
+          return Response({'detail': 'You cannot request mentoring without a course.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        #TODO: Check if the courses of the curricular unit matches a course of the user
+        
         serializer = MentoringRequestSerializer(data=request.data)
         if serializer.is_valid():
           serializer.save(mentee=request.user, curricularUnit=curricularUnit)
           return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
           return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+      else:
+        return Response({'detail': 'Curricular Unit not found.'}, status=status.HTTP_400_BAD_REQUEST)
     return Response({'detail': 'Curricular Unit JSON not found.'}, status=status.HTTP_400_BAD_REQUEST)
 
 class MentoringViewSet(CreateAndViewModelViewSet):
   """
   API endpoint that allows mentorships to be viewed or edited.
   """
-  queryset = MentoringModel.objects.all()
+  queryset = MentoringModel.objects.all().prefetch_related('mentor', 'mentee', 'curricularUnit')
   serializer_class = MentoringSerializer
   permission_classes = [permissions.DjangoObjectPermissions]
   filterset_fields = MentoringSerializer.Meta.fields
@@ -241,7 +250,6 @@ class MentoringViewSet(CreateAndViewModelViewSet):
 
     mentoring = MentoringModel.objects.create(mentee=mentoringRequest.mentee, mentor=request.user, curricularUnit=mentoringRequest.curricularUnit)
     mentoringRequest.delete()
-
 
     send_mail("Mentoring Accepted", f"Hey {mentoring.mentee.username}, {mentoring.mentor.username} accepted your mentoring request for {mentoring.curricularUnit.name}.", recipient_list=[mentoring.mentee.email, mentoring.mentor.email], fail_silently=False)
     
@@ -271,16 +279,16 @@ class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
   """
   API endpoint that allows blog posts to be viewed.
   """
-  queryset = BlogPostModel.objects.all().order_by('-date')
+  queryset = BlogPostModel.objects.all().order_by('-date').prefetch_related('images', 'topics', 'author')
   serializer_class = BlogPostSerializer
   permission_classes = []
   filterset_fields = BlogPostSerializer.Meta.fields
 
 class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
   """
-  API endpoint that allows users to be viewed or edited.
+  API endpoint that allows users to be viewed, created or edited.
   """
-  queryset = User.objects.all()
+  queryset = User.objects.all().prefetch_related('profilemodel')
   serializer_class = UserSerializer
   permission_classes = []
   filterset_fields = ['id', 'username', 'first_name', 'last_name', 'email']

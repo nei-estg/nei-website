@@ -24,7 +24,10 @@ export const loginUser = async (login : IUser) => {
         try {
           const user = await getUser();
           if (user.profilemodel?.image) {
-            localStorage.setItem('profile', user.profilemodel?.image);
+            localStorage.setItem('profile', user.profilemodel.image);
+          }
+          if (user.profilemodel?.course) {
+            localStorage.setItem('courses', JSON.stringify(user.profilemodel.course));
           }
         } catch (error) {
           // Do nothing
@@ -74,6 +77,7 @@ export const logoutUser = async (allDevices: boolean) => {
     localStorage.removeItem('token');
     localStorage.removeItem('expiry');
     localStorage.removeItem('profile');
+    localStorage.removeItem('courses');
   }
 };
 

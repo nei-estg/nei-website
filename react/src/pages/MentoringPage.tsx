@@ -54,7 +54,7 @@ export default function MentoringPage() {
         transition: Bounce,
       });
     });
-    getCurricularUnits().then((response) => {
+    getCurricularUnitsCourseUser().then((response) => {
       setCurricularUnitList(response)
     }).catch(() => {
       toast.error("Ocorreu um erro ao aceder às Unidades Curriculares! Por favor tenta novamente!", {
