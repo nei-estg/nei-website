@@ -427,6 +427,23 @@ export default function ProfilePage() {
                       </Button>
                     </div>
 
+                    {/*logout-all*/}
+                    <div style={{ marginTop: "25px" }}>
+                      <Button
+                        variant="contained"
+                        startIcon={<KeyIcon />}
+                        href="/logout-all"
+                        sx={{
+                          backgroundColor: "#054496",
+                          color: "#FFFFFF",
+                          borderRadius: "100px",
+                          width: "100%",
+                        }}
+                      >
+                        Logout em todos os dispositivos
+                      </Button>
+                    </div>
+
                     <div style={{ marginTop: "40px" }}>
                       <Button
                         type="submit"

@@ -102,7 +102,7 @@ export default function FrontPage() {
             }}
           >
             <h1 style={{ color: 'white' }}>Bem-vindo ao NEI!</h1>
-            <p style={{ color: 'white' }}>add a description here maybe?</p>
+            <p style={{ color: 'white' }}>Prepara-te para passar maior parte do teu tempo aqui!</p>
           </div>
           <div
             style={{
@@ -195,11 +195,11 @@ export default function FrontPage() {
         style={{
           zIndex: 2,
           position: 'relative',
-          height: '60vh',
+          minHeight: '60vh',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'white',
+          backgroundColor: 'white'
         }}
       >
         <div
