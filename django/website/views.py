@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from django.forms import ValidationError
 from rest_framework import viewsets, permissions, mixins
 from rest_framework.response import Response
@@ -425,6 +425,15 @@ class UserActivationView(APIView):
     if username:
       user = User.objects.get(username=username)
       if user:
+        
+        #! Check if the user is already active
+        if user.is_active:
+          return Response({'detail': 'This account is already active.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        #! Check if the user email matches a student email
+        if not re.match(r'^8[0-9]{6}@estg\.ipp\.pt$', user.email):
+          return Response({'detail': 'You cannot activate this account.'}, status=status.HTTP_400_BAD_REQUEST)
+        
         activation = UserActivationModel.objects.create(user=user)
         send_mail('NEI - Account Activation', f"Please activate your account by clicking the following link: http://127.0.0.1/activate-account/{activation.code}", None, [user.email], fail_silently=True)
     return Response(status=status.HTTP_204_NO_CONTENT)

@@ -1,10 +1,21 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.contrib.auth.models import User, Group
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import Group
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django_prometheus.models import ExportModelOperationsMixin
 import secrets
 import string
+
+class User(AbstractUser):
+  email = models.EmailField(_('email address'), unique=True)
+
+  class Meta:
+    verbose_name = _('user')
+    verbose_name_plural = _('users')
+    db_table = 'auth_user'
+
 
 class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
   name = models.TextField()

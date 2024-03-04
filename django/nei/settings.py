@@ -144,6 +144,8 @@ MEDIA_ROOT = '/shared/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'website.User'
+
 # REST Framework
 # https://www.django-rest-framework.org/api-guide/settings/
 
