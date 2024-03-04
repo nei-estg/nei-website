@@ -251,7 +251,7 @@ class MentoringViewSet(CreateAndViewModelViewSet):
     mentoring = MentoringModel.objects.create(mentee=mentoringRequest.mentee, mentor=request.user, curricularUnit=mentoringRequest.curricularUnit)
     mentoringRequest.delete()
 
-    send_mail("Mentoring Accepted", f"Hey {mentoring.mentee.username}, {mentoring.mentor.username} accepted your mentoring request for {mentoring.curricularUnit.name}.", recipient_list=[mentoring.mentee.email, mentoring.mentor.email], fail_silently=False)
+    send_mail("Mentoring Accepted", f"Hey {mentoring.mentee.username}, {mentoring.mentor.username} accepted your mentoring request for {mentoring.curricularUnit.name}.", None, [mentoring.mentee.email, mentoring.mentor.email], fail_silently=False)
     
     return Response(MentoringSerializer(mentoring).data, status=status.HTTP_201_CREATED)
 
@@ -297,6 +297,38 @@ class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
   #* Limit so that is only possible to see the same user
   def get_queryset(self):
     return User.objects.filter(id=self.request.user.id)
+  
+  @transaction.atomic
+  def create(self, request, *args, **kwargs):
+    profile_data = request.data.pop('profilemodel', None)
+    course_data = profile_data.pop('course', None)
+    
+    # check if email already exists
+    if User.objects.filter(email=request.data.get('email')).exists():
+      raise serializers.ValidationError({'email': 'A user with this email address is already registered.'})
+    
+    user = User.objects.create_user(**request.data)
+    user.set_password(request.data.get('password'))
+    user.is_active = False
+    user.save()
+    
+    if profile_data:
+      profile = ProfileModel.objects.create(user=user, **profile_data)
+
+      if course_data:
+        for course in course_data:
+          course = CourseModel.objects.get(name=course['name'])
+          profile.course.add(course)
+      
+      profile.save()
+
+    # if user email is 8dddddd@estg.ipp.pt
+    if re.match(r'^8[0-9]{6}@estg\.ipp\.pt$', user.email):
+      #TODO: send email with activation link
+      activation = UserActivationModel.objects.create(user=user)
+      send_mail('Account Activation', "Please activate your account by clicking the following link: http://127.0.0.1/activate-account/" + activation.code, None, [user.email], fail_silently=False)
+    
+    return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
   
   #TODO: Adjust and test this method
   def update(self, request, *args, **kwargs):
