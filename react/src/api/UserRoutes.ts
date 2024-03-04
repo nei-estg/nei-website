@@ -113,7 +113,7 @@ export const getActivateAccountCode = async (username: string) => {
   if (response.status !== 204) throw new Error(response.data);
 }
 
-export const activateAccount = async (data: {username: string, code: string}) => {
+export const activateAccount = async (data: {code: string}) => {
   const response = await client.post('/api/auth/activateAccount/', data);
   if (response.status !== 204) throw new Error(response.data);
 }

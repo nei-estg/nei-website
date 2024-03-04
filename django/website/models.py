@@ -239,7 +239,7 @@ class ProfileModel(ExportModelOperationsMixin('ProfileModel'), models.Model):
   
 class UserActivationModel(ExportModelOperationsMixin('UserActivatioModel'), models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
-  code = models.TextField(default=''.join(secrets.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits + string.punctuation) for i in range(16)))
+  code = models.TextField(default=''.join(secrets.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for i in range(16)))
   date = models.DateTimeField(auto_now_add=True)
 
   class Meta:

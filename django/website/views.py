@@ -429,16 +429,13 @@ class UserActivationView(APIView):
         send_mail('NEI - Account Activation', f"Please activate your account by clicking the following link: http://127.0.0.1/activate-account/{activation.code}", None, [user.email], fail_silently=True)
     return Response(status=status.HTTP_204_NO_CONTENT)
     
-  #! Receive an username and an activation code, if it matches activate the account
+  #! Receive an activation code, if it matches activate the account
   def post(self, request, *args, **kwargs):
-    username = request.data.get('username', None)
     code = request.data.get('code', None)
-    if username and code:
-      user = User.objects.get(username=username)
-      if user:
-        activation = UserActivationModel.objects.get(user=user, code=code)
-        if activation:
-          user.is_active = True
-          user.save()
-          activation.delete()
+    if code:
+      activation = UserActivationModel.objects.get(code=code)
+      if activation:
+        activation.user.is_active = True
+        activation.user.save()
+        activation.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
