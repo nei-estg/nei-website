@@ -359,6 +359,18 @@ export default function ProfilePage() {
                       />
                     </div>
 
+                    {/*email*/}
+                    <div style={{ marginTop: "20px", width: "70%" }}>
+                      <TextField
+                        id="tf-email"
+                        label="Email"
+                        defaultValue={user.email}
+                        type="email"
+                        sx={{ width: "100%" }}
+                        input={<OutlinedInput label="Email" />}
+                      />
+                    </div>
+
                     {/*cursos*/}
                     <div style={{ marginTop: "25px", width: "70%" }}>
                       <FormControl sx={{ width: "100%" }}>
