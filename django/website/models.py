@@ -293,3 +293,8 @@ def create_student_group(sender, instance, created, **kwargs):
   if created:
     group, _ = Group.objects.get_or_create(name='Student')
     instance.groups.add(group)
+
+@receiver(post_delete, sender=MaterialModel)
+def delete_file_on_delete(sender, instance, **kwargs):
+  if instance.file:
+    instance.file.delete(False)
