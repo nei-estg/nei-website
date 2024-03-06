@@ -35,13 +35,22 @@ const Terminal: React.FC = () => {
     let result: string = '';
     switch (command.trim().toLowerCase()) {
       case 'help':
-        result = 'List of available commands: help, about, contact, color <hex color>';
+        result = 'Lista de comandos disponíveis: sobrenos, contacto, calendario, materiais, mentoria';
         break;
-      case 'about':
-        result = 'This is a terminal-like interface created with React and TypeScript.';
+      case 'sobrenos':
+        result = 'Somos o NEI ESTG - IPP, um grupo apaixonado por tecnologia que criou um espaço animado no Discord para estudantes de Informática. É um ponto de encontro para trocar ideias, dicas de programação e relaxar. Junta-te a nós nesta aventura pela Informática na ESTG - IPP! 🚀💻.';
         break;
-      case 'contact':
-        result = 'You can contact us at nei@estg.ipp.pt';
+      case 'calendario':
+        result = 'Podes ver eventos adicionados pela comunidade e verificados pelo NEI. Também mostramos feriados, e tu, com a tua sessão iniciada, podes criar eventos. Quando crias um evento, ele fica visível para ti até que atualizes a página.';
+        break;
+      case 'materiais':
+        result = 'Podes ver materiais adicionados pela comunidade e verificados pelo NEI. E tu, com a tua sessão iniciada, podes adicionar também.        ';
+        break;
+      case 'mentoria':
+        result = 'A tua privacidade é uma prioridade. Por isso, não vais saber quem é a outra pessoa até aceitares a mentoria. Depois, terão de combinar como falar, usando Discord, Teams, ou o que preferirem, para realizar a mentoria. É simples e seguro, garantindo que escolhes com quem queres partilhar informações.';
+        break;
+      case 'contacto':
+        result = 'Podes contactar-nos em nei@estg.ipp.pt';
         break;
       default:
         if (command.trim().toLowerCase().startsWith('color')) {
@@ -81,8 +90,8 @@ const Terminal: React.FC = () => {
       </div>
       <div className="screen" style={{ backgroundColor: terminalColor, color: textColor }}>
         <div className="terminal" ref={terminalRef}>
-          <div>Welcome to NEI'S Terminal!</div>
-          <div>Type "help" to see all commands</div>
+          <div>Bem-vindo ao terminal do NEI!</div>
+          <div>Escreve "help" para veres todos os comandos</div>
           {output.map((line, index) => (
             <div key={index}>{line}</div>
           ))}

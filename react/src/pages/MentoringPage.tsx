@@ -4,7 +4,7 @@ import { toast, Bounce } from "react-toastify";
 import CheckIcon from '@mui/icons-material/Check';
 import { IMentoringRequest } from "@src/interfaces/IMentoringRequest";
 import { IMentoring } from "@src/interfaces/IMentoring";
-import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, ThemeProvider, Typography, createTheme } from "@mui/material";
+import { Alert, Box, Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, ThemeProvider, Typography, createTheme } from "@mui/material";
 import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
 import { getCurricularUnits, getCurricularUnitsCourseUser } from "@src/api/CourseRoutes";
 import InfoIcon from '@mui/icons-material/Info';
@@ -23,7 +23,7 @@ export default function MentoringPage() {
   const [selectedCurricularUnit, setSelectedCurricularUnit] = useState<ICurricularUnit>();
 
   useEffect(() => {
-    document.title = "Mentoring - NEI"
+    document.title = "Mentoria - NEI"
     getMentoringRequestList().then((response) => {
       setMentoringRequestList(response)
     }).catch(() => {
@@ -226,13 +226,12 @@ export default function MentoringPage() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
-        <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
-          <InfoIcon sx={{marginRight: '5px', color: "#054496", marginBottom: "-3px"}}/>
+        <Alert severity="info" sx={{marginTop: "30px", marginBottom: "30px"}}>
           A tua privacidade é uma prioridade. 
           Por isso, não vais saber quem é a outra pessoa até aceitares a mentoria. 
           Depois, terão de combinar como falar, usando Discord, Teams, ou o que preferirem, para realizar a mentoria. 
           É simples e seguro, garantindo que escolhes com quem queres partilhar informações.
-        </Typography>
+        </Alert>
 
         <Typography variant="h4" 
           sx={{ 
@@ -255,12 +254,12 @@ export default function MentoringPage() {
         >
           <FormControl fullWidth sx={{ mt: 2, textAlign: 'center' }} > {/* Adiciona textAlign center para centralizar o FormControl */}
             <InputLabel id="curricular-unit-label">
-              Curricular Unit
+              Unidade Curricular
             </InputLabel>
             <Select
               labelId="curricular-unit-label"
               id="curricularUnit"
-              label="Curricular Unit"
+              label="Unidade Curricular"
               value={selectedCurricularUnit?.abbreviation}
               onChange={handleSelectCurricularUnit}
             >

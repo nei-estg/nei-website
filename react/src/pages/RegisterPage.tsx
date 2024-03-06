@@ -14,7 +14,7 @@ import { registerUser } from "@src/api/UserRoutes";
 import { toast, Bounce } from "react-toastify";
 import { IUser } from "@src/interfaces/IUser";
 import { ICourse } from "@src/interfaces/ICourse";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getCourses } from "@src/api/CourseRoutes";
 import {
   FormControl,
@@ -25,6 +25,7 @@ import {
   Checkbox,
   ListItemText,
   OutlinedInput,
+  Alert,
 } from "@mui/material";
 
 const defaultTheme = createTheme();
@@ -41,13 +42,15 @@ const MenuProps = {
 };
 
 export default function Register() {
+  const [userCreateAccount, setUserCreateAccount] = useState(false);
+
   const [courses, setCourses] = React.useState<ICourse[]>([]);
 
-  const [selectedCourses, setSelectedCourses] = React.useState<string[]>([]);
-  const [selectedYear, setSelectedYear] = React.useState<string>("");
+  const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
+  const [selectedYear, setSelectedYear] = useState<string>("");
 
   useEffect(() => {
-    document.title = "Register - NEI";
+    document.title = "Criar Conta - NEI";
     getCourses()
       .then((courses) => setCourses(courses))
       .catch(() => {
@@ -95,7 +98,8 @@ export default function Register() {
     };
     try {
       await registerUser(signUp);
-      window.location.href = "/login";
+      setUserCreateAccount(true);
+      //window.location.href = "/login";
     } catch (error) {
       toast.error("There was an error with your registration!", {
         position: "top-right",
@@ -113,11 +117,10 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xl">
+      <Container component="main" maxWidth="xl" sx={{marginTop: '60px', marginBottom: '60px'}}>
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -127,8 +130,18 @@ export default function Register() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Criar Conta
           </Typography>
+
+          {userCreateAccount && (
+            <Alert severity="info" sx={{marginTop: "30px", marginBottom: "30px"}}>
+              Precisas de ativar a tua conta!
+              Se o teu email da conta corresponder a um email de estudante, vais receber um email para ativares a tua conta. 
+              Se não corresponder, precisas de contactar o NEI para confirmar que és estudante ou ex-estudante da ESTG. 
+              Até ativares a tua conta, não vais conseguir entrar. 
+            </Alert>
+          )}
+
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -138,7 +151,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  label="Primeiro Nome"
                   autoFocus
                 />
               </Grid>
@@ -147,7 +160,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  label="Último Nome"
                   name="lastName"
                   autoComplete="family-name"
                 />
@@ -157,7 +170,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   autoComplete="email"
                 />
@@ -165,7 +178,7 @@ export default function Register() {
               <Grid item xs={12}>
                 <TextField
                   autoComplete="username"
-                  name="username"
+                  name="Username"
                   required
                   fullWidth
                   id="username"
@@ -177,7 +190,7 @@ export default function Register() {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label="Palavra-Passe"
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -185,7 +198,7 @@ export default function Register() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id="course-label">Course</InputLabel>
+                  <InputLabel id="course-label">Curso</InputLabel>
                   <Select
                     labelId="course-label"
                     id="course"
@@ -212,7 +225,7 @@ export default function Register() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id="year-label">Year</InputLabel>
+                  <InputLabel id="year-label">Ano</InputLabel>
                   <Select
                     labelId="year-label"
                     id="year"
@@ -236,12 +249,18 @@ export default function Register() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Criar Conta
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
+            <Grid container>
+              <Grid item xs>
                 <Link href="/login" variant="body2">
-                  Already have an account? Sign in
+                  Já tens conta? Inicia Sessão
+                </Link>
+              </Grid>
+
+              <Grid item>
+                <Link href="/activateAccount/" variant="body2">
+                  Ativar conta
                 </Link>
               </Grid>
             </Grid>

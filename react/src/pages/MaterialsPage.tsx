@@ -13,6 +13,7 @@ import {
   Checkbox,
   ListItemText,
   OutlinedInput,
+  Alert,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -171,7 +172,7 @@ export default function MaterialsPage() {
   };
 
   useEffect(() => {
-    document.title = "Materials - NEI";
+    document.title = "Materiais - NEI";
     getMaterialsList()
       .then((response) => {
         setMaterialsList(response);
@@ -240,7 +241,7 @@ export default function MaterialsPage() {
   const columns: GridColDef[] = [
     {
       field: "course",
-      headerName: "Course",
+      headerName: "Curso",
       width: 200,
       valueGetter: (params) => {
         return params.row.curricularUnit.course
@@ -250,7 +251,7 @@ export default function MaterialsPage() {
     },
     {
       field: "curricularUnit",
-      headerName: "Curricular Unit",
+      headerName: "Unidade Curricular",
       width: 200,
       valueGetter: (params) => {
         return params.row.curricularUnit.abbreviation;
@@ -264,7 +265,7 @@ export default function MaterialsPage() {
         return params.row.tags.map((tag: IMaterial) => tag.name).join(", ");
       },
     },
-    { field: "name", headerName: "Name", width: 200 },
+    { field: "name", headerName: "Nome", width: 200 },
     {
       field: "link",
       headerName: "Link",
@@ -275,7 +276,7 @@ export default function MaterialsPage() {
     },
     {
       field: "file",
-      headerName: "File",
+      headerName: "Ficheiro",
       width: 150,
       valueGetter: (params) => {
         return params.row.file ? "✅" : "❌";
@@ -311,6 +312,11 @@ export default function MaterialsPage() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
+        <Alert severity="info" sx={{marginTop: "30px", marginBottom: "30px"}}>
+          Podes ver materiais adicionados pela comunidade e verificados pelo NEI. 
+          E tu, com a tua sessão iniciada, podes adicionar também.
+        </Alert>
+
         <Typography
           variant="h4"
           sx={{
@@ -320,16 +326,10 @@ export default function MaterialsPage() {
             flexDirection: "column",
             alignItems: "center",
             marginTop: "30px",
-            marginBottom: "15px",
+            marginBottom: "30px",
           }}
         >
           Materiais de Unidades Curriculares
-        </Typography>
-
-        <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "0px", marginBottom: "30px" }}>
-          <InfoIcon sx={{marginRight: '5px', color: "#054496", marginBottom: "-3px"}}/>
-          Podes ver materiais adicionados pela comunidade e verificados pelo NEI. 
-          E tu, com a tua sessão iniciada, podes adicionar também.
         </Typography>
 
         <Modal
@@ -368,11 +368,11 @@ export default function MaterialsPage() {
                   autoFocus
                 />
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="course-label">Course</InputLabel>
+                  <InputLabel id="course-label">Curso</InputLabel>
                   <Select
                     labelId="course-label"
                     id="course"
-                    label="Course"
+                    label="Curso"
                     value={selectedCourse?.abbreviation ?? ""}
                     onChange={handleSelectCourse}
                   >
@@ -388,12 +388,12 @@ export default function MaterialsPage() {
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 2 }}>
                   <InputLabel id="curricular-unit-label">
-                    Curricular Unit
+                    Unidade Curricular
                   </InputLabel>
                   <Select
                     labelId="curricular-unit-label"
                     id="curricularUnit"
-                    label="Curricular Unit"
+                    label="Unidade Curricular"
                     value={selectedCurricularUnit.abbreviation}
                     onChange={handleSelectCurricularUnit}
                     disabled={!selectedCourse}

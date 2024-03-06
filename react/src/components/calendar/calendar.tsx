@@ -4,7 +4,7 @@ import events from "./events";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState } from "react";
 
-moment.locale("en-GB");
+moment.locale("pt-br");
 const localizer = momentLocalizer(moment);
 
 export default function ReactBigCalendar() {

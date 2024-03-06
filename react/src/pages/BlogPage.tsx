@@ -116,12 +116,15 @@ export default function BlogPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
-        {blogList.length === 0 ? (
-          <Typography variant="h5" color="#1E2022" fontWeight="700" align="center">
-            Não há posts disponíveis no momento.
-          </Typography>
-        ) : (
+
+    {blogList.length === 0 ? (
+       <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+         <Typography variant="h5" color="#1E2022" fontWeight="700" align="center">
+           Não há posts disponíveis no momento.
+         </Typography>
+     </Container>
+    ) : (
+      <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
           <Grid container spacing={1}>
             {blogList.map((blogItem, index) => (
               <Grid item key={index} xs={12} sm={6} md={4} lg={4} xl={4} sx={{ cursor: 'pointer' }} onClick={() => navigate(`/blog/post/${blogItem.slug}`)}>
@@ -174,8 +177,8 @@ export default function BlogPage() {
               </Grid>
             ))}
           </Grid>
-        )}
       </Container>
+    )}
     </ThemeProvider>
   )
 }

@@ -11,6 +11,7 @@ import {
 } from "@src/api/CalendarRoutes";
 import { toast, Bounce } from "react-toastify";
 import {
+  Alert,
   Box,
   Button,
   Container,
@@ -64,8 +65,8 @@ export default function CalendarPage() {
   const [selectedCurricularUnit, setSelectedCurricularUnit] = useState({} as ICurricularUnit);
 
   useEffect(() => {
-    document.title = "Calendar - NEI";
-
+    document.title = "Calendário - NEI";
+  
     //! Add Holidays to Calendar
     const holidays = hd.getHolidays();
     const holidayEvents = holidays.map((holiday, index) => ({
@@ -75,12 +76,11 @@ export default function CalendarPage() {
       startDate: new Date(holiday.start),
       endDate: new Date(holiday.end),
     }));
-    setEventsData((prevEventsData) => [...prevEventsData, ...holidayEvents]);
-
+  
     //! Get Calendar Events
     getCalendarEvents()
       .then((result) => {
-        setEventsData((prevEventsData) => [...prevEventsData, ...result]);
+        setEventsData(holidayEvents.concat(result)); // Adicionar eventos de feriados e eventos obtidos
       })
       .catch(() => {
         toast.error(
@@ -98,7 +98,7 @@ export default function CalendarPage() {
           }
         );
       });
-
+  
     //! Get Courses
     getCourses()
       .then((result) => {
@@ -120,6 +120,11 @@ export default function CalendarPage() {
           }
         );
       });
+  
+    // Limpar eventos antes de montar novamente o componente
+    return () => {
+      setEventsData([]);
+    };
   }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -241,11 +246,25 @@ export default function CalendarPage() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container maxWidth="xl" sx={{ marginBottom: '60px' }}>
-        <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
-          <InfoIcon sx={{marginRight: '5px', color: "#054496", marginBottom: "-3px"}}/>
+        <Alert severity="info" sx={{marginTop: "30px", marginBottom: "30px"}}>
           Podes ver eventos adicionados pela comunidade e verificados pelo NEI. 
           Também mostramos feriados, e tu, com a tua sessão iniciada, podes criar eventos. 
           Quando crias um evento, ele fica visível para ti até que atualizes a página.
+        </Alert>
+
+        <Typography
+          variant="h4"
+          sx={{
+            color: "#1E2022",
+            display: "flex",
+            fontWeight: 700,
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "30px",
+            marginBottom: "30px",
+          }}
+        >
+          Calendário
         </Typography>
 
         <div>
@@ -283,7 +302,6 @@ export default function CalendarPage() {
               p: 4,
             }}
           >
-            <h1>Ver Evento</h1>
             <p>Titulo: {selectedEvent?.name}</p>
             <p>Descrição: {selectedEvent?.description}</p>
             <p>
@@ -336,7 +354,7 @@ export default function CalendarPage() {
                   required
                   fullWidth
                   id="eventName"
-                  label="Name"
+                  label="Nome"
                   name="eventName"
                   autoFocus
                 />
@@ -345,7 +363,7 @@ export default function CalendarPage() {
                   required
                   fullWidth
                   name="description"
-                  label="Description"
+                  label="Descrição"
                   id="description"
                 />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -355,7 +373,7 @@ export default function CalendarPage() {
                       mt: 2,
                     }}
                     name="startDate"
-                    label="Start Date"
+                    label="Data Inicial"
                     value={dayjs(selectedSlot?.start)}
                   />
                   <DateTimePicker
@@ -364,7 +382,7 @@ export default function CalendarPage() {
                       mt: 2,
                     }}
                     name="endDate"
-                    label="End Date"
+                    label="Data Final"
                     value={dayjs(selectedSlot?.end)}
                   />
                 </LocalizationProvider>
@@ -372,15 +390,15 @@ export default function CalendarPage() {
                   margin="normal"
                   fullWidth
                   name="place"
-                  label="Place"
+                  label="Local"
                   id="place"
                 />
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="course-label">Course</InputLabel>
+                  <InputLabel id="course-label">Curso</InputLabel>
                   <Select
                     labelId="course-label"
                     id="course"
-                    label="Course"
+                    label="Curso"
                     value={selectedCourse.abbreviation}
                     onChange={handleSelectCourse}
                   >
@@ -396,12 +414,12 @@ export default function CalendarPage() {
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 2 }}>
                   <InputLabel id="curricular-unit-label">
-                    Curricular Unit
+                    Unidade Curricular
                   </InputLabel>
                   <Select
                     labelId="curricular-unit-label"
                     id="curricularUnit"
-                    label="Curricular Unit"
+                    label="Unidade Curricular"
                     value={selectedCurricularUnit.abbreviation}
                     onChange={handleSelectCurricularUnit}
                     disabled={!selectedCourse.abbreviation}
