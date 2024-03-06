@@ -13,6 +13,7 @@ import {
   Checkbox,
   ListItemText,
   OutlinedInput,
+  Alert,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -311,6 +312,11 @@ export default function MaterialsPage() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
+        <Alert severity="info" sx={{marginTop: "30px", marginBottom: "30px"}}>
+          Podes ver materiais adicionados pela comunidade e verificados pelo NEI. 
+          E tu, com a tua sessão iniciada, podes adicionar também.
+        </Alert>
+
         <Typography
           variant="h4"
           sx={{
@@ -320,16 +326,10 @@ export default function MaterialsPage() {
             flexDirection: "column",
             alignItems: "center",
             marginTop: "30px",
-            marginBottom: "15px",
+            marginBottom: "30px",
           }}
         >
           Materiais de Unidades Curriculares
-        </Typography>
-
-        <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "0px", marginBottom: "30px" }}>
-          <InfoIcon sx={{marginRight: '5px', color: "#054496", marginBottom: "-3px"}}/>
-          Podes ver materiais adicionados pela comunidade e verificados pelo NEI. 
-          E tu, com a tua sessão iniciada, podes adicionar também.
         </Typography>
 
         <Modal

@@ -11,6 +11,7 @@ import {
 } from "@src/api/CalendarRoutes";
 import { toast, Bounce } from "react-toastify";
 import {
+  Alert,
   Box,
   Button,
   Container,
@@ -241,11 +242,25 @@ export default function CalendarPage() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container maxWidth="xl" sx={{ marginBottom: '60px' }}>
-        <Typography variant="body1" align="center" gutterBottom sx={{ marginTop: "30px", marginBottom: "30px" }}>
-          <InfoIcon sx={{marginRight: '5px', color: "#054496", marginBottom: "-3px"}}/>
+        <Alert severity="info" sx={{marginTop: "30px", marginBottom: "30px"}}>
           Podes ver eventos adicionados pela comunidade e verificados pelo NEI. 
           Também mostramos feriados, e tu, com a tua sessão iniciada, podes criar eventos. 
           Quando crias um evento, ele fica visível para ti até que atualizes a página.
+        </Alert>
+
+        <Typography
+          variant="h4"
+          sx={{
+            color: "#1E2022",
+            display: "flex",
+            fontWeight: 700,
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "30px",
+            marginBottom: "30px",
+          }}
+        >
+          Calendário
         </Typography>
 
         <div>
