@@ -41,7 +41,7 @@ export default function ResetPasswordPage() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Reset Password
+            Redefinir a Palavra-Passe
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -59,7 +59,7 @@ export default function ResetPasswordPage() {
               required
               fullWidth
               name="resetCode"
-              label="Reset Code"
+              label="Código"
               id="resetCode"
             />
             <TextField
@@ -67,7 +67,7 @@ export default function ResetPasswordPage() {
               required
               fullWidth
               name="password"
-              label="New Password"
+              label="Nova Palavra-Passe"
               type="password"
               id="password"
               autoComplete='new-password'
@@ -83,7 +83,7 @@ export default function ResetPasswordPage() {
             <Grid container>
               <Grid item>
                 <Link href="/login" variant="body2">
-                  {"Want to go back? Login"}
+                  {"Queres voltar para a tua sessão? Inicia Sessão"}
                 </Link>
               </Grid>
             </Grid>

@@ -46,7 +46,7 @@ const routes: IRoutes = {
   },
   resetpasswordpage: {
     name: 'Redefinir Palavra Passe',
-    path: '/resetPassword/:code',
+    path: '/resetPassword',
     element: <ResetPasswordPage />,
   },
   changepasswordpage: {
