@@ -1,11 +1,15 @@
 import { createTheme, ThemeProvider, Container, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 
 const defaultTheme = createTheme();
 
 
 const NotFoundPage: React.FC = () => {
+  useEffect(() => {
+    document.title = "Página Não Encontrada - NEI";
+  }, []);
+  
   return (
   <ThemeProvider theme={defaultTheme}>
     <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', flexDirection: 'column' }}>

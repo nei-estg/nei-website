@@ -1,9 +1,15 @@
 import { Container, ThemeProvider, Typography, createTheme } from '@mui/material';
+import { useEffect } from 'react';
 
 const defaultTheme = createTheme();
 
 
 const PrivacyPolicyPage = () => {
+
+  useEffect(() => {
+    document.title = "Política de Privacidade - NEI";
+  })
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container maxWidth="xl" sx={{ marginTop: '30px' , marginBottom: '60px' }}>
