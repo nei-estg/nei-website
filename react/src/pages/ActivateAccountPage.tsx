@@ -1,5 +1,6 @@
 import { Container, ThemeProvider, Typography, createTheme } from "@mui/material";
-import { useState } from "react";
+import { activateAccount } from "@src/api/UserRoutes";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 
@@ -10,6 +11,17 @@ export default function ActivateAccountPage() {
   const navigate = useNavigate();
 
   const { code } = useParams();
+
+  useEffect(() => {
+    if (!code) {
+      navigate('/login');
+    }
+    activateAccount({ code: code as string }).then(() => {
+      setIsActivate(true);
+    }).catch(() => {
+      setIsActivate(false);
+    });
+  } ,[code, navigate]);
 
 
   function checkActivate(code: string) {

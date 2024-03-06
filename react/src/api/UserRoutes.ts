@@ -24,7 +24,10 @@ export const loginUser = async (login : IUser) => {
         try {
           const user = await getUser();
           if (user.profilemodel?.image) {
-            localStorage.setItem('profile', user.profilemodel?.image);
+            localStorage.setItem('profile', user.profilemodel.image);
+          }
+          if (user.profilemodel?.course) {
+            localStorage.setItem('courses', JSON.stringify(user.profilemodel.course));
           }
         } catch (error) {
           // Do nothing
@@ -74,6 +77,7 @@ export const logoutUser = async (allDevices: boolean) => {
     localStorage.removeItem('token');
     localStorage.removeItem('expiry');
     localStorage.removeItem('profile');
+    localStorage.removeItem('courses');
   }
 };
 
@@ -91,5 +95,25 @@ export const updateUser = async (user : IUser) => {
 
 export const changePassword = async (passwords : {oldPassword: string, newPassword: string}) => {
   const response = await AuthenticatedClient.post('/api/auth/changePassword/', passwords);
+  if (response.status !== 204) throw new Error(response.data);
+}
+
+export const getResetPasswordCode = async (username: string) => {
+  const response = await client.get('/api/auth/resetPassword/?username=' + username);
+  if (response.status !== 204) throw new Error(response.data);
+}
+
+export const resetPassword = async (data : {username: string, code: string, password: string}) => {
+  const response = await client.post('/api/auth/resetPassword/', data);
+  if (response.status !== 204) throw new Error(response.data);
+}
+
+export const getActivateAccountCode = async (username: string) => {
+  const response = await client.get('/api/auth/activateAccount/?username=' + username);
+  if (response.status !== 204) throw new Error(response.data);
+}
+
+export const activateAccount = async (data: {code: string}) => {
+  const response = await client.post('/api/auth/activateAccount/', data);
   if (response.status !== 204) throw new Error(response.data);
 }

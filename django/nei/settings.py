@@ -144,6 +144,8 @@ MEDIA_ROOT = '/shared/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'website.User'
+
 # REST Framework
 # https://www.django-rest-framework.org/api-guide/settings/
 
@@ -179,7 +181,12 @@ LOGOUT_REDIRECT_URL = '/api'
 
 # Email
 
-EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+if DEBUG:
+  EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+  EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', '')
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'localhost')
 EMAIL_PORT = os.getenv('EMAIL_PORT', 587)
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')

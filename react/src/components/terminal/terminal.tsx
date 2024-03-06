@@ -41,7 +41,7 @@ const Terminal: React.FC = () => {
         result = 'This is a terminal-like interface created with React and TypeScript.';
         break;
       case 'contact':
-        result = 'You can contact us at example@example.com';
+        result = 'You can contact us at nei@estg.ipp.pt';
         break;
       default:
         if (command.trim().toLowerCase().startsWith('color')) {

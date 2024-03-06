@@ -15,7 +15,6 @@ def custom_exception_handler(exc, context):
       },
       status=status.HTTP_400_BAD_REQUEST
     )
-    print(context.view)
   elif isinstance(exc, ObjectDoesNotExist) and not response:
     response = Response(
       {

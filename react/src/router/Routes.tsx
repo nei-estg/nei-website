@@ -12,6 +12,7 @@ import BlogPage from "@src/pages/BlogPage";
 import NotFoundPage from "@src/pages/NotFoundPage";
 import PostPage from "@src/pages/PostPage";
 import ChangePasswordPage from "@src/pages/ChangePasswordPage";
+import PrivacyPolicyPage from "@src/pages/PrivacyPolicyPage";
 import ActivateAccountPage from "@src/pages/ActivateAccountPage";
 
 interface IRoutes {
@@ -102,7 +103,12 @@ const routes: IRoutes = {
     name: 'Not Found',
     path: '*',
     element: <NotFoundPage/>,
-  }
+  },
+  privacypolicypage: {
+    name: 'Privacy Policy',
+    path: '/privacy-policy',
+    element: <PrivacyPolicyPage/>,
+  },
 }
 
 export default routes;

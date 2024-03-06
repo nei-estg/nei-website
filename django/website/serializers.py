@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from .models import *
 from rest_framework import serializers
 from django.db import transaction
@@ -30,38 +29,6 @@ class UserSerializer(serializers.ModelSerializer):
       'is_active': {'read_only': True},
       'date_joined': {'read_only': True},
     }
-
-  @transaction.atomic
-  def create(self, validated_data):
-    profile_data = validated_data.pop('profilemodel', None)
-    course_data = profile_data.pop('course', None)
-    
-    # check if email already exists
-    if User.objects.filter(email=validated_data.get('email')).exists():
-      raise serializers.ValidationError({'email': 'A user with this email address is already registered.'})
-    
-    user = User.objects.create_user(**validated_data)
-    user.set_password(validated_data.get('password'))
-    user.is_active = False
-    user.save()
-    
-    if profile_data:
-      profile = ProfileModel.objects.create(user=user, **profile_data)
-
-      if course_data:
-        for course in course_data:
-          course = CourseModel.objects.get(name=course['name'])
-          profile.course.add(course)
-      
-      profile.save()
-
-    # if user email is 8dddddd@estg.ipp.pt
-    if re.match(r'^8[0-9]{6}@estg\.ipp\.pt$', user.email):
-      #TODO: send email with activation link
-      activation = UserActivation.objects.create(user=user)
-      send_mail('Account Activation', "Please activate your account by clicking the following link: http://127.0.0.1/activate/" + activation.code, "nei@estg.ipp.pt", [user.email], fail_silently=False)
-    
-    return user
 
 class ContactSerializer(serializers.ModelSerializer):
   class Meta:

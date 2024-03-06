@@ -1,7 +1,6 @@
 import client from "./Client"
 import { ICourse } from "@src/interfaces/ICourse";
 import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
-import { getUser } from "./UserRoutes";
 
 export const getCourses = async () => {
   const response = await client.get('/api/course/');
@@ -20,16 +19,24 @@ export const getCurricularUnitsCourseUser = async () => {
   if (response.status !== 200) throw new Error(response.data);
 
   const curricularUnits = response.data as ICurricularUnit[];
-  const user = await getUser();
+  
+  const userCourses = localStorage.getItem('courses');
+  const userCoursesParsed = userCourses ? JSON.parse(userCourses) as ICourse[] : undefined;
 
-  // Obtém os cursos do usuário como um array de abreviações de curso.
-  const userCourses = user.profilemodel?.course?.map((course: ICourse) => course.abbreviation) || [];
+  if (!userCoursesParsed) {
+    return curricularUnits;
+  }
 
- // Filtra as unidades curriculares cujo curso esteja presente nos cursos do usuário.
- const userCurricularUnits = curricularUnits.filter(uc => {
-  // Verifica se pelo menos um dos cursos da unidade curricular está presente nos cursos do usuário.
-  return uc.course.some(course => userCourses.includes(course.abbreviation));
-});
+  // An user might have multiple courses just like curricular units have multiple courses
+  // Return the curricular units of the courses the user is enrolled in
+  
+  const userCurricularUnits = curricularUnits.filter(curricularUnit => {
+    return curricularUnit.course?.some(course => {
+      return userCoursesParsed.some(userCourse => {
+        return userCourse.abbreviation === course.abbreviation;
+      });
+    });
+  });
 
-return userCurricularUnits as ICurricularUnit[];
-}
+  return userCurricularUnits;
+};

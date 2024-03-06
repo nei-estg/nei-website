@@ -86,14 +86,19 @@ export default function PostPage() {
                     </Grid>
 
                     {/*descricao*/}
-                    <Typography color="#1E2022" sx={{fontSize: {xs: "22px", sm: "22px", md: "22px", lg: "22px", xl: "22px"}, marginTop: '10px', textAlign: 'start'}}>{postItem.description}</Typography>
-                  
-                    {/*carousel*/}
-                    <Carousel data={postItem.images} 
-                      maxWidth={{ xs: 300, sm: 400, md: 500, lg: 600, xl: 700 }}/>
+                    <Typography color="#969696" sx={{fontSize: {xs: "22px", sm: "22px", md: "22px", lg: "22px", xl: "22px"}, marginTop: '10px', textAlign: 'center'}}>{postItem.description}</Typography>
+
+                    {/*imagem*/}
+                    {postItem.images.length === 1 ? (
+                      <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <img src={postItem.images[0].image} alt="Post Image" style={{maxWidth: '25%', maxHeight: '25%', margin: '15px 0 15px 0'}}/>
+                      </div>
+                    ) : (
+                      <Carousel data={postItem.images} maxWidth={{ xs: 300, sm: 400, md: 500, lg: 600, xl: 700 }} />
+                    )}
 
                     {/*conteudo*/}
-                    <Typography color="#969696" sx={{fontSize: {xs: "16px", sm: "16px", md: "16px", lg: "16px", xl: "16px"}, marginTop: '10px', marginBottom: "50px", textAlign: 'start'}}>{postItem.content}</Typography>
+                    <Typography color="#1E2022" sx={{fontSize: {xs: "20px", sm: "20px", md: "20px", lg: "20px", xl: "20px"}, marginTop: '10px', marginBottom: "50px", textAlign: 'center'}}>{postItem.content}</Typography>
                   </div>
                 </Grid>
               </Grid>

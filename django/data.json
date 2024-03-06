@@ -6,105 +6,105 @@
       "curricularUnits": {
         "1": [
           {
-            "name": "MÉTODOS E TÉCNICAS DE SUPORTE AO DESENVOLVIMENTO DE SOFTWARE",
+            "name": "Métodos e Técnicas de Suporte ao Desenvolvimento de Software",
             "abbreviation": "MTSDS"
           },
           {
-            "name": "TÓPICOS AVANÇADOS DE ARMAZENAMENTO DE DADOS",
+            "name": "Tópicos Avançados de Armazenamento de Dados",
             "abbreviation": "TAAD"
           },
           {
-            "name": "COMPUTAÇÃO DISTRIBUÍDA E EM NÚVEM",
+            "name": "Computação Distribuída e em Nuvem",
             "abbreviation": "CDN"
           },
           {
-            "name": "NOÇÕES FUNDAMENTAIS DE MACHINE LEARNING",
+            "name": "Noções Fundamentais de Machine Learning",
             "abbreviation": "NFML"
           },
           {
-            "name": "REALIDADE VIRTUAL AUMENTADA",
+            "name": "Realidade Virtual Aumentada",
             "abbreviation": "RVA"
           },
           {
-            "name": "DADOS E PRIVACIDADE",
+            "name": "Dados e Privacidade",
             "abbreviation": "DP"
           },
           {
-            "name": "DESIGN DE INTERAÇÃO",
+            "name": "Design de Interação",
             "abbreviation": "DI"
           },
           {
-            "name": "MACHINE LEARNING",
+            "name": "Machine Learning",
             "abbreviation": "ML"
           },
           {
-            "name": "PROJETO DE SISTEMAS DE INFORMAÇÃO",
+            "name": "Projeto de Sistemas de Informação",
             "abbreviation": "PSI"
           },
           {
-            "name": "SIMULAÇÃO E OTIMIZAÇÃO",
+            "name": "Simulação e Otimização",
             "abbreviation": "SO"
           },
           {
-            "name": "TECNOLOGIAS ESCALÁVEIS PARA ANÁLISE DE DADOS",
+            "name": "Tecnologias Escaláveis para Análise de Dados",
             "abbreviation": "TEAD"
           },
           {
-            "name": "CIBERINTELIGÊNCIA",
+            "name": "Ciberinteligência",
             "abbreviation": "CI"
           },
           {
-            "name": "INFORMÁTICA FORENSE E CIBERCRIME",
+            "name": "Informática Forense e Cibercrime",
             "abbreviation": "IFC"
           },
           {
-            "name": "PARADIGMAS EMERGENTES PARA O DESENVOLVIMENTO WEB E MOBILE",
+            "name": "Paradigmas Emergentes para o Desenvolvimento Web e Mobile",
             "abbreviation": "PEDWM"
           },
           {
-            "name": "GESTÃO DA IDENTIDADE",
+            "name": "Gestão da Identidade",
             "abbreviation": "GI"
           },
           {
-            "name": "INDÚSTRIA",
+            "name": "Indústria",
             "abbreviation": "I"
           }
         ],
         "2": [
           {
-            "name": "SEMINÁRIO DE PROJETO",
+            "name": "Seminário de Projeto",
             "abbreviation": "SP"
           },
           {
-            "name": "COMPORTAMENTO ORGANIZACIONAL",
+            "name": "Comportamento Organizacional",
             "abbreviation": "CO"
           },
           {
-            "name": "GESTÃO DA CADEIA DE ABASTECIMENTO INTERNACIONAL",
+            "name": "Gestão da Cadeia de Abastecimento Internacional",
             "abbreviation": "GCAI"
           },
           {
-            "name": "GESTÃO DA IDI",
+            "name": "Gestão da Idi",
             "abbreviation": "GIDI"
           },
           {
-            "name": "LIDERANÇA E GESTÃO DE EQUIPAS",
+            "name": "Liderança e Gestão de Equipas",
             "abbreviation": "LGE"
           },
           {
-            "name": "NOÇÕES FUNDAMENTAIS DE DIREITO",
+            "name": "Noções Fundamentais de Direito",
             "abbreviation": "NFD"
           },
           {
-            "name": "ORGANIZAÇÃO E GESTÃO DE EMPRESAS",
+            "name": "Organização e Gestão de Empresas",
             "abbreviation": "OGE"
           },
           {
-            "name": "RECURSOS HUMANOS",
+            "name": "Recursos Humanos",
             "abbreviation": "RH"
           },
           {
-            "name": "ESTUDOS PREPARATÓRIOS E ELABORAÇÃO DA DISSERTAÇÃO/PROJETO/ESTÁGIO",
+            "name": "Estudos Preparatórios e Elaboração da Dissertação/Projeto/Estágio",
             "abbreviation": "EPEDPE"
           }
         ]
@@ -117,7 +117,8 @@
         "1": [
           {
             "name": "Álgebra Linear e Geometria Analítica",
-            "abbreviation": "ALGA"
+            "abbreviation": "ALGA",
+            "together": ["LEI"]
           },
           {
             "name": "Ética e Legislação Informática",
@@ -125,7 +126,8 @@
           },
           {
             "name": "Fundamentos da Programação",
-            "abbreviation": "FP"
+            "abbreviation": "FP",
+            "together": ["LEI"]
           },
           {
             "name": "Inglês Técnico",
@@ -133,19 +135,23 @@
           },
           {
             "name": "Introdução aos Sistemas Computacionais",
-            "abbreviation": "ISC"
+            "abbreviation": "ISC",
+            "together": ["LEI"]
           },
           {
             "name": "Laboratório de Programação",
-            "abbreviation": "LP"
+            "abbreviation": "LP",
+            "together": ["LEI"]
           },
           {
             "name": "Matemática Discreta",
-            "abbreviation": "MD"
+            "abbreviation": "MD",
+            "together": ["LEI"]
           },
           {
             "name": "Paradigmas de Programação",
-            "abbreviation": "PP"
+            "abbreviation": "PP",
+            "together": ["LEI"]
           },
           {
             "name": "Redes de Computadores I",
@@ -157,7 +163,8 @@
           },
           {
             "name": "Sistemas Digitais e Arquitetura de Computadores",
-            "abbreviation": "SDAC"
+            "abbreviation": "SDAC",
+            "together": ["LEI"]
           }
         ],
         "2": [
@@ -167,11 +174,13 @@
           },
           {
             "name": "Estruturas de Dados",
-            "abbreviation": "ED"
+            "abbreviation": "ED",
+            "together": ["LEI"]
           },
           {
             "name": "Processamento Estruturado de Informação",
-            "abbreviation": "PEI"
+            "abbreviation": "PEI",
+            "together": ["LEI"]
           },
           {
             "name": "Redes de Computadores II",
@@ -179,11 +188,13 @@
           },
           {
             "name": "Sistemas Operativos",
-            "abbreviation": "SO"
+            "abbreviation": "SO",
+            "together": ["LEI"]
           },
           {
             "name": "Bases de Dados",
-            "abbreviation": "BD"
+            "abbreviation": "BD",
+            "together": ["LEI"]
           },
           {
             "name": "Criptografia Aplicada",
@@ -191,7 +202,8 @@
           },
           {
             "name": "Programação em Ambiente Web",
-            "abbreviation": "PAW"
+            "abbreviation": "PAW",
+            "together": ["LEI"]
           },
           {
             "name": "Projeção e Planeamento de Redes",
@@ -205,7 +217,8 @@
         "3": [
           {
             "name": "Administração de Sistemas Informáticos",
-            "abbreviation": "ASI"
+            "abbreviation": "ASI",
+            "together": ["LEI"]
           },
           {
             "name": "Sistemas Críticos",
@@ -217,7 +230,8 @@
           },
           {
             "name": "Sistemas Distribuídos",
-            "abbreviation": "SD"
+            "abbreviation": "SD",
+            "together": ["LEI"]
           },
           {
             "name": "Testes de Penetração e Hacking Ético",
@@ -237,7 +251,8 @@
           },
           {
             "name": "Noções de Gestão",
-            "abbreviation": "NG"
+            "abbreviation": "NG",
+            "together": ["LEI"]
           }
         ]
       }
@@ -249,7 +264,8 @@
         "1": [
           {
             "name": "Álgebra Linear e Geometria Analítica",
-            "abbreviation": "ALGA"
+            "abbreviation": "ALGA",
+            "together": ["LSIRC"]
           },
           {
             "name": "Física Aplicada",
@@ -257,15 +273,18 @@
           },
           {
             "name": "Fundamentos de Programação",
-            "abbreviation": "FP"
+            "abbreviation": "FP",
+            "together": ["LSIRC"]
           },
           {
             "name": "Introdução aos Sistemas Computacionais",
-            "abbreviation": "ISC"
+            "abbreviation": "ISC",
+            "together": ["LSIRC"]
           },
           {
             "name": "Laboratório de Programação",
-            "abbreviation": "LP"
+            "abbreviation": "LP",
+            "together": ["LSIRC"]
           },
           {
             "name": "Engenharia de Software I",
@@ -277,15 +296,18 @@
           },
           {
             "name": "Matemática Discreta",
-            "abbreviation": "MD"
+            "abbreviation": "MD",
+            "together": ["LSIRC"]
           },
           {
             "name": "Paradigmas de Programação",
-            "abbreviation": "PP"
+            "abbreviation": "PP",
+            "together": ["LSIRC"]
           },
           {
             "name": "Sistemas Digitais e Arquitetura de Computadores",
-            "abbreviation": "SDAC"
+            "abbreviation": "SDAC",
+            "together": ["LSIRC"]
           }
         ],
         "2": [
@@ -295,7 +317,8 @@
           },
           {
             "name": "Estruturas de Dados",
-            "abbreviation": "ED"
+            "abbreviation": "ED",
+            "together": ["LSIRC"]
           },
           {
             "name": "Matemática Computacional II",
@@ -303,11 +326,13 @@
           },
           {
             "name": "Processamento Estruturado de Informação",
-            "abbreviation": "PEI"
+            "abbreviation": "PEI",
+            "together": ["LSIRC"]
           },
           {
             "name": "Sistemas Operativos",
-            "abbreviation": "SO"
+            "abbreviation": "SO",
+            "together": ["LSIRC"]
           },
           {
             "name": "Análise Algorítmica e Otimização",
@@ -315,7 +340,8 @@
           },
           {
             "name": "Bases de Dados",
-            "abbreviation": "BD"
+            "abbreviation": "BD",
+            "together": ["LSIRC"]
           },
           {
             "name": "Gestão de Projetos Informáticos",
@@ -323,7 +349,8 @@
           },
           {
             "name": "Programação em Ambiente Web",
-            "abbreviation": "PAW"
+            "abbreviation": "PAW",
+            "together": ["LSIRC"]
           },
           {
             "name": "Redes de Computadores",
@@ -333,7 +360,8 @@
         "3": [
           {
             "name": "Administração de Sistemas Informáticos",
-            "abbreviation": "ASI"
+            "abbreviation": "ASI",
+            "together": ["LSIRC"]
           },
           {
             "name": "Computação Móvel e Ubíqua",
@@ -345,7 +373,8 @@
           },
           {
             "name": "Sistemas Distribuídos",
-            "abbreviation": "SD"
+            "abbreviation": "SD",
+            "together": ["LSIRC"]
           },
           {
             "name": "Sistemas de Informação",
@@ -365,7 +394,8 @@
           },
           {
             "name": "Noções de Gestão",
-            "abbreviation": "NG"
+            "abbreviation": "NG",
+            "together": ["LSIRC"]
           }
         ]
       }
@@ -442,7 +472,7 @@
             "abbreviation": "L"
           },
           {
-            "name": "Qualidade de Softwareca",
+            "name": "Qualidade de Software",
             "abbreviation": "QS"
           },
           {
@@ -512,167 +542,167 @@
       "curricularUnits": {
         "1": [
           {
-            "name": "ANÁLISE E ARQUITETURA DE SISTEMAS",
+            "name": "Análise e Arquitetura de Sistemas",
             "abbreviation": "AAS"
           },
           {
-            "name": "ELEMENTOS DE ÁLGEBRA LINEAR",
+            "name": "Elementos de Álgebra Linear",
             "abbreviation": "EAL"
           },
           {
-            "name": "FUNDAMENTOS DE PROGRAMAÇÃO ORIENTADA A OBJETOSR",
+            "name": "Fundamentos de Programação Orientada a Objetos",
             "abbreviation": "FPOO"
           },
           {
-            "name": "FUNDAMENTOS DE SISTEMAS OPERATIVOS",
+            "name": "Fundamentos de Sistemas Operativos",
             "abbreviation": "FSO"
           },
           {
-            "name": "INTRODUÇÃO À SEGURANÇA E LEGISLAÇÃO",
+            "name": "Introdução à Segurança e Legislação",
             "abbreviation": "ISL"
           },
           {
-            "name": "OFICINA DA LÍNGUA PORTUGUESA",
+            "name": "Oficina da Língua Portuguesa",
             "abbreviation": "OLP"
           },
           {
-            "name": "ADMINISTRAÇÃO DE SISTEMAS I",
+            "name": "Administração de Sistemas I",
             "abbreviation": "AS1"
           },
           {
-            "name": "BASES DE DADOS",
+            "name": "Bases de Dados",
             "abbreviation": "BD"
           },
           {
-            "name": "FERRAMENTAS DE SEGURANÇA INFORMÁTICA",
+            "name": "Ferramentas de Segurança Informática",
             "abbreviation": "FSI"
           },
           {
-            "name": "INGLÊS",
+            "name": "Inglês",
             "abbreviation": "I"
           },
           {
-            "name": "PROGRAMAÇÃO PARA A WEB",
+            "name": "Programação para a Web",
             "abbreviation": "PW"
           },
           {
-            "name": "REDES E COMUNICAÇÃO DE DADOS",
+            "name": "Redes e Comunicação de Dados",
             "abbreviation": "RCD"
           }
         ],
         "2": [
           {
-            "name": "ADMINISTRAÇÃO DE SISTEMAS II",
+            "name": "Administração de Sistemas II",
             "abbreviation": "AS2"
           },
           {
-            "name": "ANÁLISE FORENSE DIGITAL",
+            "name": "Análise Forense Digital",
             "abbreviation": "AFD"
           },
           {
-            "name": "LABORATÓRIO DE PROJETO",
+            "name": "Laboratório de Projeto",
             "abbreviation": "LP"
           },
           {
-            "name": "OFICINA DE ESTATÍSTICA",
+            "name": "Oficina de Estatística",
             "abbreviation": "OE"
           },
           {
-            "name": "SEGURANÇA EM APLICAÇÕES WEB",
+            "name": "Segurança em Aplicações Web",
             "abbreviation": "SAW"
           },
           {
-            "name": "TÓPICOS AVANÇADOS DE REDES",
+            "name": "Tópicos Avançados de Redes",
             "abbreviation": "TAR"
           },
           {
-            "name": "ESTÁGIO",
+            "name": "Estágio",
             "abbreviation": "E"
           }
         ]
       }
     },
     {
-      "name": "CTeSP em Desenvolvimento para a WEB e Dispositivos Móveis",
+      "name": "CTeSP em Desenvolvimento para a Web e Dispositivos Móveis",
       "abbreviation": "DWDM",
       "curricularUnits": {
         "1": [
           {
-            "name": "ANÁLISE E ARQUITETURA DE SISTEMAS",
+            "name": "Análise e Arquitetura de Sistemas",
             "abbreviation": "AAS"
           },
           {
-            "name": "CONCEÇÃO DE INTERFACES GRÁFICOS",
+            "name": "Conceção de Interfaces Gráficos",
             "abbreviation": "CIG"
           },
           {
-            "name": "ELEMENTOS DE ÁLGEBRA LINEAR",
+            "name": "Elementos de Álgebra Linear",
             "abbreviation": "EAL"
           },
           {
-            "name": "FUNDAMENTOS DE PROGRAMAÇÃO ORIENTADA A OBJETOS",
+            "name": "Fundamentos de Programação Orientada a Objetos",
             "abbreviation": "FPOO"
           },
           {
-            "name": "FUNDAMENTOS DE SISTEMAS OPERATIVOS",
+            "name": "Fundamentos de Sistemas Operativos",
             "abbreviation": "FSO"
           },
           {
-            "name": "OFICINA DA LÍNGUA PORTUGUESA",
+            "name": "Oficina da Língua Portuguesa",
             "abbreviation": "OLP"
           },
           {
-            "name": "BASES DE DADOS",
+            "name": "Bases de Dados",
             "abbreviation": "BD"
           },
           {
-            "name": "INGLÊS",
+            "name": "Inglês",
             "abbreviation": "I"
           },
           {
-            "name": "PROGRAMAÇÃO PARA A WEB",
+            "name": "Programação para a Web",
             "abbreviation": "PW"
           },
           {
-            "name": "PROGRAMAÇÃO PARA DISPOSITIVOS MÓVEIS I",
+            "name": "Programação para Dispositivos Móveis I",
             "abbreviation": "PDM1"
           },
           {
-            "name": "REDES E COMUNICAÇÃO DE DADOS",
+            "name": "Redes e Comunicação de Dados",
             "abbreviation": "RCD"
           },
           {
-            "name": "TECNOLOGIAS PARA A WEB E APLICAÇÕES MÓVEIS",
+            "name": "Tecnologias para a Web e Aplicações Móveis",
             "abbreviation": "TWAM"
           }
         ],
         "2": [
           {
-            "name": "LABORATÓRIO DE PROJETO",
+            "name": "Laboratório de Projeto",
             "abbreviation": "LP"
           },
           {
-            "name": "OFICINA DE ESTATÍSTICA",
+            "name": "Oficina de Estatística",
             "abbreviation": "OE"
           },
           {
-            "name": "PROCESSO, ESTRUTURAÇÃO E INTEGRAÇÃO DE DADOS",
+            "name": "Processo, Estruturação e Integração de Dados",
             "abbreviation": "PEID"
           },
           {
-            "name": "PROGRAMAÇÃO PARA A WEB AVANÇADA",
+            "name": "Programação para a Web Avançada",
             "abbreviation": "PWA"
           },
           {
-            "name": "PROGRAMAÇÃO PARA DISPOSITIVOS MÓVEIS II",
+            "name": "Programação para Dispositivos Móveis II",
             "abbreviation": "PDM2"
           },
           {
-            "name": "SEGURANÇA EM APLICAÇÕES WEB",
+            "name": "Segurança em Aplicações Web",
             "abbreviation": "SAW"
           },
           {
-            "name": "ESTÁGIO",
+            "name": "Estágio",
             "abbreviation": "E"
           }
         ]

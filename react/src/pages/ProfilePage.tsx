@@ -359,6 +359,18 @@ export default function ProfilePage() {
                       />
                     </div>
 
+                    {/*email*/}
+                    <div style={{ marginTop: "20px", width: "70%" }}>
+                      <TextField
+                        id="tf-email"
+                        label="Email"
+                        defaultValue={user.email}
+                        type="email"
+                        sx={{ width: "100%" }}
+                        input={<OutlinedInput label="Email" />}
+                      />
+                    </div>
+
                     {/*cursos*/}
                     <div style={{ marginTop: "25px", width: "70%" }}>
                       <FormControl sx={{ width: "100%" }}>
@@ -424,6 +436,23 @@ export default function ProfilePage() {
                         }}
                       >
                         Alterar Palavra-Passe
+                      </Button>
+                    </div>
+
+                    {/*logout-all*/}
+                    <div style={{ marginTop: "25px" }}>
+                      <Button
+                        variant="contained"
+                        startIcon={<KeyIcon />}
+                        href="/logout-all"
+                        sx={{
+                          backgroundColor: "#054496",
+                          color: "#FFFFFF",
+                          borderRadius: "100px",
+                          width: "100%",
+                        }}
+                      >
+                        Logout em todos os dispositivos
                       </Button>
                     </div>
 

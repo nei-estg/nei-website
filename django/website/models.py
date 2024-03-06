@@ -1,10 +1,21 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.contrib.auth.models import User, Group
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import Group
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django_prometheus.models import ExportModelOperationsMixin
 import secrets
 import string
+
+class User(AbstractUser):
+  email = models.EmailField(_('email address'), unique=True)
+
+  class Meta:
+    verbose_name = _('user')
+    verbose_name_plural = _('users')
+    db_table = 'auth_user'
+
 
 class ContactModel(ExportModelOperationsMixin('ContactModel'), models.Model):
   name = models.TextField()
@@ -239,7 +250,7 @@ class ProfileModel(ExportModelOperationsMixin('ProfileModel'), models.Model):
   
 class UserActivationModel(ExportModelOperationsMixin('UserActivatioModel'), models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
-  code = models.TextField(default=''.join(secrets.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits + string.punctuation) for i in range(16)))
+  code = models.TextField(default=''.join(secrets.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for i in range(16)))
   date = models.DateTimeField(auto_now_add=True)
 
   class Meta:
@@ -254,7 +265,7 @@ class UserActivationModel(ExportModelOperationsMixin('UserActivatioModel'), mode
   
 class UserResetModel(ExportModelOperationsMixin('UserResetModel'), models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
-  code = models.TextField(default=''.join(secrets.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits + string.punctuation) for i in range(16)))
+  code = models.TextField(default=''.join(secrets.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for i in range(16)))
   date = models.DateTimeField(auto_now_add=True)
 
   class Meta:
@@ -282,3 +293,8 @@ def create_student_group(sender, instance, created, **kwargs):
   if created:
     group, _ = Group.objects.get_or_create(name='Student')
     instance.groups.add(group)
+
+@receiver(post_delete, sender=MaterialModel)
+def delete_file_on_delete(sender, instance, **kwargs):
+  if instance.file:
+    instance.file.delete(False)

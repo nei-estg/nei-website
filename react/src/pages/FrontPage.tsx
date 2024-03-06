@@ -102,7 +102,7 @@ export default function FrontPage() {
             }}
           >
             <h1 style={{ color: 'white' }}>Bem-vindo ao NEI!</h1>
-            <p style={{ color: 'white' }}>add a description here maybe?</p>
+            <p style={{ color: 'white' }}>Prepara-te para passar maior parte do teu tempo aqui!</p>
           </div>
           <div
             style={{
@@ -158,7 +158,7 @@ export default function FrontPage() {
             }}
           >
             <div id="div1" style={{ margin: '20px' }}>
-              <a href={routes.aboutFAQpage.path}>
+              <a href='/about'>
                 <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
                 <a href="/about" target="_blank">
                   <img
@@ -174,7 +174,7 @@ export default function FrontPage() {
             </div>
 
             <div id="div1" style={{ margin: '20px' }}>
-              <a href={routes.blogpage.path} target="_blank">
+              <a href='/blog' target="_blank">
                 <h1 style={{ color: 'white' }}>Atividades</h1>
                 <img
                   src="/icon/laptop.png"
@@ -195,11 +195,11 @@ export default function FrontPage() {
         style={{
           zIndex: 2,
           position: 'relative',
-          height: '60vh',
+          minHeight: '60vh',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'white',
+          backgroundColor: 'white'
         }}
       >
         <div
@@ -222,7 +222,6 @@ export default function FrontPage() {
                     fullWidth
                     id="uName"
                     label="Nome"
-                    autoFocus
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
