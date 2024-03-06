@@ -251,10 +251,16 @@ export default function Register() {
             >
               Criar Conta
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
+            <Grid container>
+              <Grid item xs>
                 <Link href="/login" variant="body2">
                   Já tens conta? Inicia Sessão
+                </Link>
+              </Grid>
+
+              <Grid item>
+                <Link href="/activateAccount/" variant="body2">
+                  Ativar conta
                 </Link>
               </Grid>
             </Grid>

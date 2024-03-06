@@ -100,7 +100,7 @@ const routes: IRoutes = {
     element: <PostPage />,
   },
   notfoundpage: {
-    name: 'Not Found',
+    name: 'Não Existe',
     path: '*',
     element: <NotFoundPage/>,
   },
