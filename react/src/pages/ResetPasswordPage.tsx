@@ -17,7 +17,7 @@ const defaultTheme = createTheme();
 export default function ResetPasswordPage() {
 
   useEffect(() => {
-    document.title = "Reset Password - NEI";
+    document.title = "Mudar Palavra-Passe - NEI";
   }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

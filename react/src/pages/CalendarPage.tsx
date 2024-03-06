@@ -65,7 +65,7 @@ export default function CalendarPage() {
   const [selectedCurricularUnit, setSelectedCurricularUnit] = useState({} as ICurricularUnit);
 
   useEffect(() => {
-    document.title = "Calendar - NEI";
+    document.title = "Calendário - NEI";
 
     //! Add Holidays to Calendar
     const holidays = hd.getHolidays();
@@ -351,7 +351,7 @@ export default function CalendarPage() {
                   required
                   fullWidth
                   id="eventName"
-                  label="Name"
+                  label="Nome"
                   name="eventName"
                   autoFocus
                 />
@@ -360,7 +360,7 @@ export default function CalendarPage() {
                   required
                   fullWidth
                   name="description"
-                  label="Description"
+                  label="Descrição"
                   id="description"
                 />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -370,7 +370,7 @@ export default function CalendarPage() {
                       mt: 2,
                     }}
                     name="startDate"
-                    label="Start Date"
+                    label="Data Inicial"
                     value={dayjs(selectedSlot?.start)}
                   />
                   <DateTimePicker
@@ -379,7 +379,7 @@ export default function CalendarPage() {
                       mt: 2,
                     }}
                     name="endDate"
-                    label="End Date"
+                    label="Data Final"
                     value={dayjs(selectedSlot?.end)}
                   />
                 </LocalizationProvider>
@@ -387,15 +387,15 @@ export default function CalendarPage() {
                   margin="normal"
                   fullWidth
                   name="place"
-                  label="Place"
+                  label="Local"
                   id="place"
                 />
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="course-label">Course</InputLabel>
+                  <InputLabel id="course-label">Curso</InputLabel>
                   <Select
                     labelId="course-label"
                     id="course"
-                    label="Course"
+                    label="Curso"
                     value={selectedCourse.abbreviation}
                     onChange={handleSelectCourse}
                   >
@@ -411,12 +411,12 @@ export default function CalendarPage() {
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 2 }}>
                   <InputLabel id="curricular-unit-label">
-                    Curricular Unit
+                    Unidade Curricular
                   </InputLabel>
                   <Select
                     labelId="curricular-unit-label"
                     id="curricularUnit"
-                    label="Curricular Unit"
+                    label="Unidade Curricular"
                     value={selectedCurricularUnit.abbreviation}
                     onChange={handleSelectCurricularUnit}
                     disabled={!selectedCourse.abbreviation}

@@ -75,7 +75,7 @@ const routes: IRoutes = {
     element: <MentoringPage />,
   },
   calendarpage: {
-    name: 'Calendario',
+    name: 'Calendário',
     path: '/calendar',
     element: <CalendarPage />,
   },
@@ -105,7 +105,7 @@ const routes: IRoutes = {
     element: <NotFoundPage/>,
   },
   privacypolicypage: {
-    name: 'Privacy Policy',
+    name: 'Política de Privacidade',
     path: '/privacy-policy',
     element: <PrivacyPolicyPage/>,
   },

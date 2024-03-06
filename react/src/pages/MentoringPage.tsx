@@ -23,7 +23,7 @@ export default function MentoringPage() {
   const [selectedCurricularUnit, setSelectedCurricularUnit] = useState<ICurricularUnit>();
 
   useEffect(() => {
-    document.title = "Mentoring - NEI"
+    document.title = "Mentoria - NEI"
     getMentoringRequestList().then((response) => {
       setMentoringRequestList(response)
     }).catch(() => {
@@ -254,12 +254,12 @@ export default function MentoringPage() {
         >
           <FormControl fullWidth sx={{ mt: 2, textAlign: 'center' }} > {/* Adiciona textAlign center para centralizar o FormControl */}
             <InputLabel id="curricular-unit-label">
-              Curricular Unit
+              Unidade Curricular
             </InputLabel>
             <Select
               labelId="curricular-unit-label"
               id="curricularUnit"
-              label="Curricular Unit"
+              label="Unidade Curricular"
               value={selectedCurricularUnit?.abbreviation}
               onChange={handleSelectCurricularUnit}
             >

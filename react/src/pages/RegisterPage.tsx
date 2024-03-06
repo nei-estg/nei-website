@@ -50,7 +50,7 @@ export default function Register() {
   const [selectedYear, setSelectedYear] = useState<string>("");
 
   useEffect(() => {
-    document.title = "Register - NEI";
+    document.title = "Criar Conta - NEI";
     getCourses()
       .then((courses) => setCourses(courses))
       .catch(() => {
@@ -254,7 +254,7 @@ export default function Register() {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/login" variant="body2">
-                  Already have an account? Sign in
+                  Já tens conta? Inicia Sessão
                 </Link>
               </Grid>
             </Grid>

@@ -20,7 +20,7 @@ const defaultTheme = createTheme();
 export default function LoginPage() {
 
   useEffect(() => {
-    document.title = "Login - NEI";
+    document.title = "Iniciar Sessão - NEI";
   }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -62,7 +62,7 @@ export default function LoginPage() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Iniciar Sessão
           </Typography>
           <Box
             component="form"
@@ -84,7 +84,7 @@ export default function LoginPage() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Palavra-Passe"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -100,12 +100,12 @@ export default function LoginPage() {
             <Grid container>
               <Grid item xs>
                 <Link href="/resetPassword" variant="body2">
-                  Forgot password?
+                  Esqueceste da palavra-passe?
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"Ainda não tens conta? Regista-te"}
                 </Link>
               </Grid>
             </Grid>

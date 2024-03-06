@@ -28,7 +28,7 @@ export default function FrontPage() {
   };
 
   useEffect(() => {
-    document.title = 'Home - NEI';
+    document.title = 'Página Inicial - NEI';
   }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

@@ -53,7 +53,7 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
-    document.title = "Profile - NEI";
+    document.title = "Perfil - NEI";
     getUser()
       .then((response) => {
         setUser(response);
