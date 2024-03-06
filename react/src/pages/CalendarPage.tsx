@@ -66,7 +66,7 @@ export default function CalendarPage() {
 
   useEffect(() => {
     document.title = "Calendário - NEI";
-
+  
     //! Add Holidays to Calendar
     const holidays = hd.getHolidays();
     const holidayEvents = holidays.map((holiday, index) => ({
@@ -76,12 +76,11 @@ export default function CalendarPage() {
       startDate: new Date(holiday.start),
       endDate: new Date(holiday.end),
     }));
-    setEventsData((prevEventsData) => [...prevEventsData, ...holidayEvents]);
-
+  
     //! Get Calendar Events
     getCalendarEvents()
       .then((result) => {
-        setEventsData((prevEventsData) => [...prevEventsData, ...result]);
+        setEventsData(holidayEvents.concat(result)); // Adicionar eventos de feriados e eventos obtidos
       })
       .catch(() => {
         toast.error(
@@ -99,7 +98,7 @@ export default function CalendarPage() {
           }
         );
       });
-
+  
     //! Get Courses
     getCourses()
       .then((result) => {
@@ -121,6 +120,11 @@ export default function CalendarPage() {
           }
         );
       });
+  
+    // Limpar eventos antes de montar novamente o componente
+    return () => {
+      setEventsData([]);
+    };
   }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -298,7 +302,6 @@ export default function CalendarPage() {
               p: 4,
             }}
           >
-            <h1>Ver Evento</h1>
             <p>Titulo: {selectedEvent?.name}</p>
             <p>Descrição: {selectedEvent?.description}</p>
             <p>
