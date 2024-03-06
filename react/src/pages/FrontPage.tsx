@@ -90,7 +90,7 @@ export default function FrontPage() {
             justifyContent: 'space-between',
             width: '80%',
             zIndex: '3',
-            flexDirection: window.innerWidth <= 1000 ? 'column' : 'row',
+            flexDirection: window.innerWidth <= 1200 ? 'column' : 'row',
           }}
         >
           <div
@@ -158,9 +158,9 @@ export default function FrontPage() {
             }}
           >
             <div id="div1" style={{ margin: '20px' }}>
-              <a href='/about'>
+              <a href='/about' style={{ textDecoration: 'none' }}>
                 <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
-                <a href="/about" target="_blank">
+                <a href="/about" target="_blank" style={{ textDecoration: 'none' }}>
                   <img
                     src="logo.png"
                     alt="Descrição da imagem"
@@ -174,7 +174,7 @@ export default function FrontPage() {
             </div>
 
             <div id="div1" style={{ margin: '20px' }}>
-              <a href='/blog' target="_blank">
+              <a href='/blog' target="_blank" style={{ textDecoration: 'none' }}>
                 <h1 style={{ color: 'white' }}>Atividades</h1>
                 <img
                   src="/icon/laptop.png"
