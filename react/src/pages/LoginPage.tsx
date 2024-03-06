@@ -49,11 +49,10 @@ export default function LoginPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xl">
+      <Container component="main" maxWidth="xl" sx={{marginTop: '60px', marginBottom: '60px'}}>
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -100,7 +99,7 @@ export default function LoginPage() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/reset-password" variant="body2">
+                <Link href="/resetPassword" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>

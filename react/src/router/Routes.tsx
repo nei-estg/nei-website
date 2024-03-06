@@ -41,12 +41,12 @@ const routes: IRoutes = {
   },
   activateaccountpage: {
     name: 'Ativar Conta',
-    path: '/activate-account/:code',
+    path: '/activateAccount/:code',
     element: <ActivateAccountPage />,
   },
   resetpasswordpage: {
     name: 'Redefinir Palavra Passe',
-    path: '/reset-password/:code',
+    path: '/resetPassword/:code',
     element: <ResetPasswordPage />,
   },
   changepasswordpage: {

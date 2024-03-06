@@ -326,7 +326,7 @@ class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
     if re.match(r'^8[0-9]{6}@estg\.ipp\.pt$', user.email):
       #TODO: send email with activation link
       activation = UserActivationModel.objects.create(user=user)
-      send_mail('Account Activation', "Please activate your account by clicking the following link: http://127.0.0.1/activate-account/" + activation.code, None, [user.email], fail_silently=False)
+      send_mail('Account Activation', "Please activate your account by clicking the following link: http://127.0.0.1/activateAccount/" + activation.code, None, [user.email], fail_silently=False)
     
     return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
   
@@ -395,7 +395,7 @@ class ResetPasswordView(APIView):
       user = User.objects.get(username=username)
       if user:
         reset = UserResetModel.objects.create(user=user)
-        send_mail('NEI - Reset Password', f"Please reset your password by clicking the following link: http://127.0.0.1/reset-password/{reset.code}", None, [user.email], fail_silently=True)
+        send_mail('NEI - Reset Password', f"Please reset your password by clicking the following link: http://127.0.0.1/resetPassword/{reset.code}", None, [user.email], fail_silently=True)
     return Response(status=status.HTTP_204_NO_CONTENT)
   
   #! Receive an username and a reset code and password, if it matches reset the password
@@ -435,7 +435,7 @@ class UserActivationView(APIView):
           return Response({'detail': 'You cannot activate this account.'}, status=status.HTTP_400_BAD_REQUEST)
         
         activation = UserActivationModel.objects.create(user=user)
-        send_mail('NEI - Account Activation', f"Please activate your account by clicking the following link: http://127.0.0.1/activate-account/{activation.code}", None, [user.email], fail_silently=True)
+        send_mail('NEI - Account Activation', f"Please activate your account by clicking the following link: http://127.0.0.1/activateAccount/{activation.code}", None, [user.email], fail_silently=True)
     return Response(status=status.HTTP_204_NO_CONTENT)
     
   #! Receive an activation code, if it matches activate the account
