@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect } from 'react';
 import { changePassword } from '@src/api/UserRoutes';
 import { toast, Bounce } from 'react-toastify';
+import routes from '@src/router/Routes';
 
 const defaultTheme = createTheme();
 
@@ -29,7 +30,7 @@ export default function ChangePasswordPage() {
       newPassword: event.currentTarget.newPassword.value
     };
     changePassword(passwords).then(() => {
-      window.location.href = "/profile";
+      window.location.href = routes.profilepage.path;
     }).catch(() => {
       toast.error(
         "Ocorreu um erro ao modificar a palavra-passe! Por favor tenta novamente!",
@@ -95,7 +96,7 @@ export default function ChangePasswordPage() {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/profile" variant="body2">
+                <Link href={routes.profilepage.path} variant="body2">
                   {"Want to go back? Profile"}
                 </Link>
               </Grid>

@@ -1,3 +1,5 @@
+from datetime import timezone
+import datetime
 from django.contrib.auth.models import Group
 from django.forms import ValidationError
 from rest_framework import viewsets, permissions, mixins
@@ -283,6 +285,7 @@ class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
   serializer_class = BlogPostSerializer
   permission_classes = []
   filterset_fields = BlogPostSerializer.Meta.fields
+  pagination_class = None
 
 class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
   """
@@ -389,16 +392,25 @@ class ResetPasswordView(APIView):
   permission_classes = []
   
   #! Receive an username, if it matches send an email with a reset code
+  @transaction.atomic
   def get(self, request, *args, **kwargs):
     username = request.query_params.get('username', None)
     if username:
       user = User.objects.get(username=username)
       if user:
+        #! Check if a code already exists and if was created in the last minute, if not delete the code
+        if UserResetModel.objects.filter(user=user).exists():
+          reset = UserResetModel.objects.get(user=user)
+          if (datetime.datetime.now(timezone.utc) - reset.date).seconds > 60:
+            reset.delete()
+          else:
+            return Response({'detail': 'You already requested a reset code.'}, status=status.HTTP_400_BAD_REQUEST)
         reset = UserResetModel.objects.create(user=user)
-        send_mail('NEI - Reset Password', f"Please reset your password by clicking the following link: http://127.0.0.1/resetPassword/{reset.code}", None, [user.email], fail_silently=True)
+        send_mail('NEI - Reset Password', f"Please reset your password with the following code: {reset.code}", None, [user.email], fail_silently=True)
     return Response(status=status.HTTP_204_NO_CONTENT)
   
   #! Receive an username and a reset code and password, if it matches reset the password
+  @transaction.atomic
   def post(self, request, *args, **kwargs):
     username = request.data.get('username', None)
     code = request.data.get('code', None)
@@ -420,6 +432,7 @@ class UserActivationView(APIView):
   permission_classes = []
   
   #! Receive an username, if it matches send an email with an activation code
+  @transaction.atomic
   def get(self, request, *args, **kwargs):
     username = request.query_params.get('username', None)
     if username:
@@ -434,11 +447,20 @@ class UserActivationView(APIView):
         if not re.match(r'^8[0-9]{6}@estg\.ipp\.pt$', user.email):
           return Response({'detail': 'You cannot activate this account.'}, status=status.HTTP_400_BAD_REQUEST)
         
+        #! Check if a code already exists and if was created in the last minute, if not delete the code
+        if UserActivationModel.objects.filter(user=user).exists():
+          activation = UserActivationModel.objects.get(user=user)
+          if (datetime.datetime.now(timezone.utc) - activation.date).seconds > 60:
+            activation.delete()
+          else:
+            return Response({'detail': 'You already requested an activation code.'}, status=status.HTTP_400_BAD_REQUEST)
+        
         activation = UserActivationModel.objects.create(user=user)
-        send_mail('NEI - Account Activation', f"Please activate your account by clicking the following link: http://127.0.0.1/activateAccount/{activation.code}", None, [user.email], fail_silently=True)
+        send_mail('NEI - Account Activation', f"Please activate your account with the following code: http://127.0.0.1/activateAccount/{activation.code}", None, [user.email], fail_silently=True)
     return Response(status=status.HTTP_204_NO_CONTENT)
     
   #! Receive an activation code, if it matches activate the account
+  @transaction.atomic
   def post(self, request, *args, **kwargs):
     code = request.data.get('code', None)
     if code:

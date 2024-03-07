@@ -51,7 +51,7 @@ const routes: IRoutes = {
   },
   changepasswordpage: {
     name: 'Mudar Palavra Passe',
-    path: '/change-password',
+    path: '/changePassword',
     element: <ChangePasswordPage />,
   },
   logoutpage: {
@@ -99,16 +99,16 @@ const routes: IRoutes = {
     path: '/blog/post/:slug',
     element: <PostPage />,
   },
-  notfoundpage: {
-    name: 'Não Existe',
-    path: '*',
-    element: <NotFoundPage/>,
-  },
   privacypolicypage: {
     name: 'Política de Privacidade',
     path: '/privacy-policy',
     element: <PrivacyPolicyPage/>,
   },
+  notfoundpage: {
+    name: 'Não Existe',
+    path: '*',
+    element: <NotFoundPage/>,
+  }
 }
 
 export default routes;

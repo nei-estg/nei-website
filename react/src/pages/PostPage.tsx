@@ -27,11 +27,11 @@ export default function PostPage() {
     document.title = "Blog - NEI";
     getBlog(slug).then((response) =>{
       
-      if (response.results.length == 0) {
+      if (response.length == 0) {
         navigate("/404");
       } else {
-        document.title = response.results[0].title + " - NEI";
-        setPost(response.results)
+        document.title = response[0].title + " - NEI";
+        setPost(response)
       }
       
     }).catch(() => {

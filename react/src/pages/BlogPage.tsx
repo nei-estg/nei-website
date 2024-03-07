@@ -30,9 +30,8 @@ export default function BlogPage() {
 
   useEffect(() => {
     document.title = "Blog - NEI";
-    //TODO: Implement Pagination
     getBlogList().then((response) => {
-      setBlogList(response.results)
+      setBlogList(response)
     }).catch(() => {
       toast.error("Ocorreu um erro ao aceder ao Blog! Por favor tenta novamente!", {
         position: "top-right",

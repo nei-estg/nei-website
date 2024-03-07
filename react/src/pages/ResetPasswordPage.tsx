@@ -11,6 +11,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect } from 'react';
+import { getResetPasswordCode, resetPassword } from '@src/api/UserRoutes';
+import { toast, Bounce } from 'react-toastify';
+import routes from '@src/router/Routes';
 
 const defaultTheme = createTheme();
 
@@ -20,9 +23,72 @@ export default function ResetPasswordPage() {
     document.title = "Mudar Palavra-Passe - NEI";
   }, []);
 
+  const handleGetCode = async () => {
+    const username = document.getElementById('username') as HTMLInputElement;
+    if (username.value === "") {
+      return;
+    }
+    getResetPasswordCode(username.value).then(() => {
+      toast.success("Se o teu username existir, receberás um código!!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }).catch(() => {
+      toast.error("Ocorreu um erro interno ao enviar o código! Por favor tenta novamente!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    });
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    //TODO: Implement Reset Password
+
+    const data = {
+      username: event.currentTarget.username.value,
+      code: event.currentTarget.resetCode.value,
+      password: event.currentTarget.password.value
+    };
+
+    resetPassword(data).then(() => {
+      toast.success("Se os dados corresponderem, a tua password será alterada!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }).catch(() => {
+      toast.error("Ocorreu um erro interno ao alterar a Palavra-Passe! Por favor tenta novamente!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    });
   };
 
   return (
@@ -54,12 +120,21 @@ export default function ResetPasswordPage() {
               autoComplete="username"
               autoFocus
             />
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={handleGetCode}
+            >
+              Enviar Código
+            </Button>
             <TextField
               margin="normal"
               required
               fullWidth
               name="resetCode"
               label="Código"
+              type="password"
               id="resetCode"
             />
             <TextField
@@ -78,11 +153,11 @@ export default function ResetPasswordPage() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Reset
+              Redefinir
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/login" variant="body2">
+                <Link href={routes.loginpage.path} variant="body2">
                   {"Queres voltar para a tua sessão? Inicia Sessão"}
                 </Link>
               </Grid>
