@@ -1,58 +1,62 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useEffect } from 'react';
-import { getResetPasswordCode, resetPassword } from '@src/api/UserRoutes';
-import { toast, Bounce } from 'react-toastify';
-import routes from '@src/router/Routes';
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { getResetPasswordCode, resetPassword } from "@src/api/UserRoutes";
+import routes from "@src/router/Routes";
+import * as React from "react";
+import { useEffect } from "react";
+import { Bounce, toast } from "react-toastify";
 
 const defaultTheme = createTheme();
 
 export default function ResetPasswordPage() {
-
   useEffect(() => {
-    document.title = "Mudar Palavra-Passe - NEI";
+    document.title = routes.changepasswordpage.path;
   }, []);
 
   const handleGetCode = async () => {
-    const username = document.getElementById('username') as HTMLInputElement;
+    const username = document.getElementById("username") as HTMLInputElement;
     if (username.value === "") {
       return;
     }
-    getResetPasswordCode(username.value).then(() => {
-      toast.success("Se o teu username existir, receberás um código!!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
+    getResetPasswordCode(username.value)
+      .then(() => {
+        toast.success("Se o teu username existir, receberás um código!!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+      })
+      .catch(() => {
+        toast.error(
+          "Ocorreu um erro interno ao enviar o código! Por favor tenta novamente!",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          }
+        );
       });
-    }).catch(() => {
-      toast.error("Ocorreu um erro interno ao enviar o código! Por favor tenta novamente!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
-    });
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -61,34 +65,42 @@ export default function ResetPasswordPage() {
     const data = {
       username: event.currentTarget.username.value,
       code: event.currentTarget.resetCode.value,
-      password: event.currentTarget.password.value
+      password: event.currentTarget.password.value,
     };
 
-    resetPassword(data).then(() => {
-      toast.success("Se os dados corresponderem, a tua password será alterada!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
+    resetPassword(data)
+      .then(() => {
+        toast.success(
+          "Se os dados corresponderem, a tua password será alterada!",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          }
+        );
+      })
+      .catch(() => {
+        toast.error(
+          "Ocorreu um erro interno ao alterar a Palavra-Passe! Por favor tenta novamente!",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          }
+        );
       });
-    }).catch(() => {
-      toast.error("Ocorreu um erro interno ao alterar a Palavra-Passe! Por favor tenta novamente!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
-    });
   };
 
   return (
@@ -98,18 +110,23 @@ export default function ResetPasswordPage() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Redefinir a Palavra-Passe
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -145,7 +162,7 @@ export default function ResetPasswordPage() {
               label="Nova Palavra-Passe"
               type="password"
               id="password"
-              autoComplete='new-password'
+              autoComplete="new-password"
             />
             <Button
               type="submit"

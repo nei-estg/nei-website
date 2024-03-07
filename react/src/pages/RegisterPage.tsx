@@ -1,33 +1,33 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { registerUser } from "@src/api/UserRoutes";
-import { toast, Bounce } from "react-toastify";
-import { IUser } from "@src/interfaces/IUser";
-import { ICourse } from "@src/interfaces/ICourse";
-import { useEffect, useState } from "react";
-import { getCourses } from "@src/api/CourseRoutes";
 import {
+  Alert,
+  Checkbox,
   FormControl,
   InputLabel,
-  Select,
-  MenuItem,
-  SelectChangeEvent,
-  Checkbox,
   ListItemText,
+  MenuItem,
   OutlinedInput,
-  Alert,
+  Select,
+  SelectChangeEvent,
 } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { getCourses } from "@src/api/CourseRoutes";
+import { registerUser } from "@src/api/UserRoutes";
+import { ICourse } from "@src/interfaces/ICourse";
+import { IUser } from "@src/interfaces/IUser";
 import routes from "@src/router/Routes";
+import * as React from "react";
+import { useEffect, useState } from "react";
+import { Bounce, toast } from "react-toastify";
 
 const defaultTheme = createTheme();
 
@@ -51,21 +51,24 @@ export default function Register() {
   const [selectedYear, setSelectedYear] = useState<string>("");
 
   useEffect(() => {
-    document.title = "Criar Conta - NEI";
+    document.title = routes.registerpage.path;
     getCourses()
       .then((courses) => setCourses(courses))
       .catch(() => {
-        toast.error("Ocorreu um erro ao aceder aos Cursos! Por favor tenta novamente!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          transition: Bounce,
-        });
+        toast.error(
+          "Ocorreu um erro ao aceder aos Cursos! Por favor tenta novamente!",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          }
+        );
       });
   }, []);
 
@@ -73,18 +76,18 @@ export default function Register() {
     const {
       target: { value },
     } = event;
-    setSelectedCourses(
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  }
+    setSelectedCourses(typeof value === "string" ? value.split(",") : value);
+  };
 
   const handleChangeYear = (event: SelectChangeEvent) => {
     setSelectedYear(event.target.value as string);
-  }
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const selectedCoursesObj = courses.filter((course) => selectedCourses.includes(course.abbreviation));
+    const selectedCoursesObj = courses.filter((course) =>
+      selectedCourses.includes(course.abbreviation)
+    );
 
     const signUp: IUser = {
       username: event.currentTarget.username.value,
@@ -100,7 +103,6 @@ export default function Register() {
     try {
       await registerUser(signUp);
       setUserCreateAccount(true);
-      //window.location.href = "/login";
     } catch (error) {
       toast.error("There was an error with your registration!", {
         position: "top-right",
@@ -118,7 +120,11 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xl" sx={{marginTop: '60px', marginBottom: '60px'}}>
+      <Container
+        component="main"
+        maxWidth="xl"
+        sx={{ marginTop: "60px", marginBottom: "60px" }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -135,11 +141,15 @@ export default function Register() {
           </Typography>
 
           {userCreateAccount && (
-            <Alert severity="info" sx={{marginTop: "30px", marginBottom: "30px"}}>
-              Precisas de ativar a tua conta!
-              Se o teu email da conta corresponder a um email de estudante, vais receber um email para ativares a tua conta. 
-              Se não corresponder, precisas de contactar o NEI para confirmar que és estudante ou ex-estudante da ESTG. 
-              Até ativares a tua conta, não vais conseguir entrar. 
+            <Alert
+              severity="info"
+              sx={{ marginTop: "30px", marginBottom: "30px" }}
+            >
+              Precisas de ativar a tua conta! Se o teu email da conta
+              corresponder a um email de estudante, vais receber um email para
+              ativares a tua conta. Se não corresponder, precisas de contactar o
+              NEI para confirmar que és estudante ou ex-estudante da ESTG. Até
+              ativares a tua conta, não vais conseguir entrar.
             </Alert>
           )}
 
@@ -212,7 +222,10 @@ export default function Register() {
                     MenuProps={MenuProps}
                   >
                     {courses.map((course) => (
-                      <MenuItem key={course.abbreviation} value={course.abbreviation}>
+                      <MenuItem
+                        key={course.abbreviation}
+                        value={course.abbreviation}
+                      >
                         <Checkbox
                           checked={
                             selectedCourses.indexOf(course.abbreviation) > -1

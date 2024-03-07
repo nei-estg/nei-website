@@ -1,8 +1,8 @@
-import InfoIcon from "@mui/icons-material/Info";
-import EditIcon from "@mui/icons-material/Edit";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import SaveIcon from "@mui/icons-material/Save";
+import EditIcon from "@mui/icons-material/Edit";
+import InfoIcon from "@mui/icons-material/Info";
 import KeyIcon from "@mui/icons-material/Key";
+import SaveIcon from "@mui/icons-material/Save";
 import SecurityIcon from "@mui/icons-material/Security";
 import {
   Avatar,
@@ -11,7 +11,6 @@ import {
   Container,
   FormControl,
   Grid,
-  IconButton,
   InputAdornment,
   InputLabel,
   ListItemText,
@@ -26,13 +25,13 @@ import {
   createTheme,
   styled,
 } from "@mui/material";
+import { getCourses } from "@src/api/CourseRoutes";
 import { getUser } from "@src/api/UserRoutes";
 import { ICourse } from "@src/interfaces/ICourse";
 import { IUser } from "@src/interfaces/IUser";
-import { useEffect, useState } from "react";
-import { toast, Bounce } from "react-toastify";
-import { getCourses } from "@src/api/CourseRoutes";
 import routes from "@src/router/Routes";
+import { useEffect, useState } from "react";
+import { Bounce, toast } from "react-toastify";
 
 const defaultTheme = createTheme();
 
@@ -54,7 +53,7 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
-    document.title = "Perfil - NEI";
+    document.title = routes.profilepage.name;
     getUser()
       .then((response) => {
         setUser(response);

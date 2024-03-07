@@ -83,7 +83,7 @@ export const FooterMain = () => {
                   to={routes.aboutFAQpage.path}
                 >
                   <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    {routes.aboutFAQpage.name}
+                    Sobre Nós
                   </Typography>
                 </Button>
               </Box>
@@ -98,7 +98,7 @@ export const FooterMain = () => {
                   to={routes.blogpage.path}
                 >
                   <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    {routes.blogpage.name}
+                    Blog
                   </Typography>
                 </Button>
               </Box>
@@ -113,7 +113,7 @@ export const FooterMain = () => {
                   to={routes.calendarpage.path}
                 >
                   <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    {routes.calendarpage.name}
+                    Calendário
                   </Typography>
                 </Button>
               </Box>
@@ -128,7 +128,7 @@ export const FooterMain = () => {
                   to={routes.materialspage.path}
                 >
                   <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    {routes.materialspage.name}
+                    Materiais UC's
                   </Typography>
                 </Button>
               </Box>
@@ -143,7 +143,7 @@ export const FooterMain = () => {
                   to={routes.privacypolicypage.path}
                 >
                   <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    {routes.privacypolicypage.name}
+                    Política de Privacidade
                   </Typography>
                 </Button>
               </Box>

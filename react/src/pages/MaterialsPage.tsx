@@ -32,8 +32,6 @@ import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
-
-
 const defaultTheme = createTheme();
 
 const ITEM_HEIGHT = 48;
@@ -119,22 +117,30 @@ export default function MaterialsPage() {
       return;
     }
 
-    
     const newMaterial: IMaterial = {
       name: event.currentTarget.fileName.value,
       link: event.currentTarget.link.value,
-      tags: materialTagList.filter((tag) => selectedMaterialTag.includes(tag.name)),
+      tags: materialTagList.filter((tag) =>
+        selectedMaterialTag.includes(tag.name)
+      ),
       curricularUnit: selectedCurricularUnit,
     };
-    
+
     //if there is a file
     if (event.currentTarget.file.files.length > 0) {
-      const file = new File([event.currentTarget.file.files[0]], event.currentTarget.file.files[0].name, { type: event.currentTarget.file.files[0].type })
+      const file = new File(
+        [event.currentTarget.file.files[0]],
+        event.currentTarget.file.files[0].name,
+        { type: event.currentTarget.file.files[0].type }
+      );
       const buffer = await file.arrayBuffer();
-      const fileData = new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), '');
+      const fileData = new Uint8Array(buffer).reduce(
+        (data, byte) => data + String.fromCharCode(byte),
+        ""
+      );
       const encodedFileData = btoa(fileData);
 
-      newMaterial.file = await file.name + ":" + encodedFileData;
+      newMaterial.file = (await file.name) + ":" + encodedFileData;
     }
 
     createMaterial(newMaterial)
@@ -154,7 +160,7 @@ export default function MaterialsPage() {
           }
         );
         handleCloseCreateMaterialModal();
-        setMaterialsList([...materialsList, result])
+        setMaterialsList([...materialsList, result]);
       })
       .catch(() => {
         toast.error("Ocorreu um erro ao tentar criar o material :(", {
@@ -305,16 +311,16 @@ export default function MaterialsPage() {
       target: { value },
     } = event;
     setSelectedMaterialTag(
-      typeof value === 'string' ? value.split(',') : value,
+      typeof value === "string" ? value.split(",") : value
     );
-  }
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
-        <Alert severity="info" sx={{marginTop: "30px", marginBottom: "30px"}}>
-          Podes ver materiais adicionados pela comunidade e verificados pelo NEI. 
-          E tu, com a tua sessão iniciada, podes adicionar também.
+        <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
+          Podes ver materiais adicionados pela comunidade e verificados pelo
+          NEI. E tu, com a tua sessão iniciada, podes adicionar também.
         </Alert>
 
         <Typography
@@ -410,7 +416,7 @@ export default function MaterialsPage() {
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 2 }}>
                   <InputLabel id="material-tags-label">
-                    Material Tags 
+                    Material Tags
                   </InputLabel>
                   <Select
                     labelId="material-tags-label"
@@ -427,7 +433,9 @@ export default function MaterialsPage() {
                       <MenuItem key={materialTag.name} value={materialTag.name}>
                         <Checkbox
                           checked={
-                            selectedMaterialTag.indexOf(String(materialTag.name)) > -1
+                            selectedMaterialTag.indexOf(
+                              String(materialTag.name)
+                            ) > -1
                           }
                         />
                         <ListItemText primary={materialTag.name} />
