@@ -91,7 +91,7 @@ class CurricularUnitModel(ExportModelOperationsMixin('CurricularUnitModel'), mod
     verbose_name_plural = "Unidades Curriculares"
 
   def __str__(self):
-    return self.abbreviation
+    return ', '.join([course.abbreviation for course in self.course.all()]) + " - " + self.abbreviation
 
 
 class MaterialTagModel(ExportModelOperationsMixin('MaterialTagModel'), models.Model):

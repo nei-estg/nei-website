@@ -230,13 +230,18 @@ class MentoringViewSet(CreateAndViewModelViewSet, mixins.DestroyModelMixin):
     return Response(MentoringSerializer(mentoring).data, status=status.HTTP_201_CREATED)
 
   def destroy(self, request, *args, **kwargs):
-    mentoring = MentoringModel.objects.filter(id=request.data['id'])
+    #! Get ID from URL
+    mentoring = MentoringModel.objects.filter(id=kwargs['pk'])
     if mentoring.exists():
       mentoring = mentoring.first()
       #! Check if the user is the mentor or the mentee
       if mentoring.mentor != request.user and mentoring.mentee != request.user:
         return Response(status=status.HTTP_403_FORBIDDEN, data={'detail': 'You cannot delete this mentoring.'})
+      
+      #TODO: Send Email
+      
       mentoring.delete()
+      
       return Response(status=status.HTTP_204_NO_CONTENT)
 
 class BlogTopicViewSet(viewsets.ReadOnlyModelViewSet):

@@ -25,3 +25,8 @@ export const createMentoring = async (mentoring: IMentoring) => {
   if (response.status !== 201) throw new Error(response.data);
   return response.data as IMentoring;
 }
+
+export const stopMentoring = async (mentoringId: number) => {
+  const response = await AuthenticatedClient.delete(`/api/mentoring/${mentoringId}/`);
+  if (response.status !== 204) throw new Error(response.data);
+}

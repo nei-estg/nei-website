@@ -25,6 +25,7 @@ import {
   createMentoringRequest,
   getMentoringList,
   getMentoringRequestList,
+  stopMentoring,
 } from "@src/api/MentoringRoutes";
 import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
 import { IMentoring } from "@src/interfaces/IMentoring";
@@ -109,7 +110,7 @@ export default function MentoringPage() {
       });
   }, []);
 
-  const handleCreateMentoringRequest = (
+  const handleCreateMentoringRequest = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
@@ -269,6 +270,42 @@ export default function MentoringPage() {
         return `${differenceInMinutes} minuto(s) atrás`;
       }
     }
+  }
+
+  const handleStopMentoring = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const id = event.currentTarget.mentoringId.value;
+    stopMentoring(id).then(() => {
+      toast.success("Mentoria terminada com sucesso! :))", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      //! Delete the mentoring from the list
+      const filteredMentoringList = mentoringList.filter((mentoring) => mentoring.id !== parseInt(id));
+      setMentoringList(filteredMentoringList);
+    }).catch(() => {
+      toast.error(
+        "Ocorreu um erro ao terminar a mentoria! Por favor tenta novamente!",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        }
+      );
+    })
   }
 
   return (
@@ -478,6 +515,8 @@ export default function MentoringPage() {
           >
             {mentoringList.map((mentoring) => (
               <Box
+                component="form"
+                onSubmit={handleStopMentoring}
                 key={mentoring.id} // Adiciona a chave de identificação
                 sx={{
                   display: "flex",
@@ -491,7 +530,7 @@ export default function MentoringPage() {
                 }}
               >
                 <TextField
-                  name="requestId"
+                  name="mentoringId"
                   value={mentoring.id}
                   sx={{ display: "none" }}
                 />
@@ -553,6 +592,7 @@ export default function MentoringPage() {
 
                 <Button
                   variant="contained"
+                  type="submit"
                   sx={{
                     mt: 2,
                     borderRadius: "100px",
@@ -560,13 +600,6 @@ export default function MentoringPage() {
                   }}
                 >
                   <DoneAllIcon sx={{ marginRight: "5px" }} /> Terminar
-                </Button>
-                <Button
-                  variant="outlined"
-                  sx={{ mt: 1, borderRadius: "100px" }}
-                  color="error"
-                >
-                  <CancelIcon sx={{ marginRight: "5px" }} /> Cancelar
                 </Button>
               </Box>
             ))}
