@@ -22,13 +22,8 @@ const defaultTheme = createTheme();
 export default function FrontPage() {
   const [showForm, setShowForm] = useState(true);
 
-  //APAGAR - APENAS PARA TESTAR BREAKPOINTS
-  window.onresize = function () {
-    location.reload();
-  };
-
   useEffect(() => {
-    document.title = 'Página Inicial - NEI';
+    document.title = routes.frontpage.name;
   }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

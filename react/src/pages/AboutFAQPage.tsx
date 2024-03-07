@@ -1,12 +1,13 @@
 import { GitHub, LinkedIn } from "@mui/icons-material";
 import { Avatar, Box, Grid, Paper, Tab, Tabs, Typography, styled } from "@mui/material";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import AccordionUsage from "@src/components/aboutFAQ/Accordion";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { getFAQ } from "@src/api/AboutRoutes";
+import AccordionUsage from "@src/components/aboutFAQ/Accordion";
 import { IFAQ } from "@src/interfaces/IFAQ";
-import { toast, Bounce } from "react-toastify";
+import routes from "@src/router/Routes";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { Bounce, toast } from "react-toastify";
 
 const defaultTheme = createTheme();
 
@@ -148,7 +149,7 @@ export default function AboutFAQPage() {
   const [faq, setFaq] = useState<FaqSection[]>([]);
 
   useEffect(() => {
-    document.title = "Sobre Nós - NEI";
+    document.title = routes.aboutFAQpage.name;
     getFAQ().then((result) => {
       const faq: FaqSection[] = transformData(result);
       setFaq(faq);

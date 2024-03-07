@@ -25,7 +25,7 @@ interface IRoutes {
 
 const routes: IRoutes = {
   frontpage: {
-    name: 'Página Inicial',
+    name: 'Página Inicial - NEI',
     path: '/',
     element: <FrontPage />,
   },
@@ -35,7 +35,7 @@ const routes: IRoutes = {
     element: <LoginPage />,
   },
   registerpage: {
-    name: 'Criar Conta',
+    name: 'Registar - NEI',
     path: '/register',
     element: <RegisterPage />,
   },
@@ -45,62 +45,62 @@ const routes: IRoutes = {
     element: <ActivateAccountPage />,
   },
   resetpasswordpage: {
-    name: 'Redefinir Palavra Passe',
+    name: 'Redefinir Palavra Passe - NEI',
     path: '/resetPassword',
     element: <ResetPasswordPage />,
   },
   changepasswordpage: {
-    name: 'Mudar Palavra Passe',
+    name: 'Mudar Palavra Passe - NEI',
     path: '/changePassword',
     element: <ChangePasswordPage />,
   },
   logoutpage: {
-    name: 'Terminar Sessão',
+    name: 'Terminar Sessão - NEI',
     path: '/logout',
     element: <LogoutPage />,
   },
   logoutallpage: {
-    name: 'Terminar Sessão',
+    name: 'Terminar Sessão - NEI',
     path: '/logoutAll',
     element: <LogoutPage />,
   },
   profilepage: {
-    name: 'Perfil',
+    name: 'Perfil - NEI',
     path: '/profile',
     element: <ProfilePage />,
   },
   mentoringpage: {
-    name: 'Mentoria',
+    name: 'Mentoria - NEI',
     path: '/mentoring',
     element: <MentoringPage />,
   },
   calendarpage: {
-    name: 'Calendário',
+    name: 'Calendário - NEI',
     path: '/calendar',
     element: <CalendarPage />,
   },
   aboutFAQpage: {
-    name: 'Sobre Nós',
+    name: 'Sobre Nós - NEI',
     path: '/about',
     element: <AboutFAQPage />,
   },
   materialspage: {
-    name: 'Materiais',
+    name: 'Materiais UC\'s - NEI',
     path: '/materials',
     element: <MaterialsPage />,
   },
   blogpage: {
-    name: 'Blog',
+    name: 'Blog - NEI',
     path: '/blog',
     element: <BlogPage />,
   },
   postpage: {
-    name: 'Post',
+    name: 'Post - NEI',
     path: '/blog/post/:slug',
     element: <PostPage />,
   },
   privacypolicypage: {
-    name: 'Política de Privacidade',
+    name: 'Política de Privacidade - NEI',
     path: '/privacy-policy',
     element: <PrivacyPolicyPage/>,
   },

@@ -1,21 +1,21 @@
 import {
-  Button,
-  Modal,
-  TextField,
-  Typography,
-  Select,
-  MenuItem,
-  InputLabel,
+  Alert,
   Box,
+  Button,
+  Checkbox,
   Container,
   FormControl,
-  SelectChangeEvent,
-  Checkbox,
+  InputLabel,
   ListItemText,
+  MenuItem,
+  Modal,
   OutlinedInput,
-  Alert,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Typography,
 } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { getCourses } from "@src/api/CourseRoutes";
 import {
@@ -28,9 +28,9 @@ import { ICourse } from "@src/interfaces/ICourse";
 import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
 import { IMaterial } from "@src/interfaces/IMaterial";
 import { IMaterialTag } from "@src/interfaces/IMaterialTag";
+import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
-import { toast, Bounce } from "react-toastify";
-import InfoIcon from '@mui/icons-material/Info';
+import { Bounce, toast } from "react-toastify";
 
 
 
@@ -172,7 +172,7 @@ export default function MaterialsPage() {
   };
 
   useEffect(() => {
-    document.title = "Materiais - NEI";
+    document.title = routes.materialspage.name;
     getMaterialsList()
       .then((response) => {
         setMaterialsList(response);

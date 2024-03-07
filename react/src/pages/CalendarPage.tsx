@@ -1,15 +1,3 @@
-import InfoIcon from '@mui/icons-material/Info';
-import { Calendar, SlotInfo, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useEffect, useState } from "react";
-import { ICalendar } from "@src/interfaces/ICalendar";
-import "../components/calendar/calendar.css";
-import {
-  createCalendarEvent,
-  getCalendarEvents,
-} from "@src/api/CalendarRoutes";
-import { toast, Bounce } from "react-toastify";
 import {
   Alert,
   Box,
@@ -28,12 +16,24 @@ import {
 } from "@mui/material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs from "dayjs";
-import { ICourse } from "@src/interfaces/ICourse";
+import {
+  createCalendarEvent,
+  getCalendarEvents,
+} from "@src/api/CalendarRoutes";
 import { getCourses } from "@src/api/CourseRoutes";
+import { isLoggedIn } from "@src/api/utils/LoginStatus";
+import { ICalendar } from "@src/interfaces/ICalendar";
+import { ICourse } from "@src/interfaces/ICourse";
 import { ICurricularUnit } from "@src/interfaces/ICurricularUnit";
 import Holidays from "date-holidays";
-import { isLoggedIn } from "@src/api/utils/LoginStatus";
+import dayjs from "dayjs";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import { Calendar, SlotInfo, momentLocalizer } from "react-big-calendar";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import { Bounce, toast } from "react-toastify";
+import "../components/calendar/calendar.css";
+import routes from "@src/router/Routes";
 
 moment.locale("pt-BR"); // Set the locale to Portuguese
 const localizer = momentLocalizer(moment);
@@ -65,7 +65,7 @@ export default function CalendarPage() {
   const [selectedCurricularUnit, setSelectedCurricularUnit] = useState({} as ICurricularUnit);
 
   useEffect(() => {
-    document.title = "Calendário - NEI";
+    document.title = routes.calendarpage.name;
   
     //! Add Holidays to Calendar
     const holidays = hd.getHolidays();

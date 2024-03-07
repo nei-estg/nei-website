@@ -1,10 +1,11 @@
-import { getBlogList } from "@src/api/BlogRoutes"
-import { useEffect, useState } from "react"
-import { IBlogPost } from "@src/interfaces/IBlogPost";
-import { toast, Bounce } from "react-toastify";
 import { Avatar, Container, Grid, Paper, ThemeProvider, Typography, createTheme, styled, useMediaQuery } from "@mui/material";
+import { getBlogList } from "@src/api/BlogRoutes";
+import { IBlogPost } from "@src/interfaces/IBlogPost";
 import { ICourse } from "@src/interfaces/ICourse";
+import routes from "@src/router/Routes";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
 
 const defaultTheme = createTheme();
 
@@ -29,7 +30,7 @@ export default function BlogPage() {
   }));
 
   useEffect(() => {
-    document.title = "Blog - NEI";
+    document.title = routes.blogpage.name;
     getBlogList().then((response) => {
       setBlogList(response)
     }).catch(() => {
