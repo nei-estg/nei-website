@@ -110,6 +110,36 @@ export const FooterMain = () => {
                 <Button
                   component={RouterLink}
                   sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
+                  to={routes.calendarpage.path}
+                >
+                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
+                    {routes.calendarpage.name}
+                  </Typography>
+                </Button>
+              </Box>
+
+              <Box
+                display="flex"
+                justifyContent={isSmallScreen ? "center" : "center"}
+              >
+                <Button
+                  component={RouterLink}
+                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
+                  to={routes.materialspage.path}
+                >
+                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
+                    {routes.materialspage.name}
+                  </Typography>
+                </Button>
+              </Box>
+
+              <Box
+                display="flex"
+                justifyContent={isSmallScreen ? "center" : "center"}
+              >
+                <Button
+                  component={RouterLink}
+                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
                   to={routes.privacypolicypage.path}
                 >
                   <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
