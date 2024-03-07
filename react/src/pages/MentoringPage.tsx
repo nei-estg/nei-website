@@ -148,6 +148,9 @@ export default function MentoringPage() {
             transition: Bounce,
           }
         );
+        getMentoringRequestList().then((response) => {
+          setMentoringRequestList(response);
+        });
       })
       .catch(() => {
         toast.error(
@@ -416,14 +419,24 @@ export default function MentoringPage() {
                   {calculatePastTime(mentoringRequest.date)}
                 </Typography>
 
-                <Button
-                  variant="contained"
-                  sx={{ mt: 2, borderRadius: "100px" }}
-                  type="submit"
-                  color="success"
-                >
-                  <CheckIcon sx={{ marginRight: "5px" }} /> Aceitar
-                </Button>
+                {mentoringRequest.mentee != null ? (
+                  <Button
+                    variant="contained"
+                    sx={{ mt: 2, borderRadius: "100px" }}
+                    disabled
+                  >
+                    <CheckIcon sx={{ marginRight: "5px" }} /> Teu Pedido
+                  </Button>
+                ) : (
+                  <Button
+                    variant="contained"
+                    sx={{ mt: 2, borderRadius: "100px" }}
+                    type="submit"
+                    color="success"
+                  >
+                    <CheckIcon sx={{ marginRight: "5px" }} /> Aceitar
+                  </Button>
+                )}
               </Box>
             ))}
           </Box>
@@ -504,7 +517,10 @@ export default function MentoringPage() {
                     alt="discord"
                     style={{ marginRight: "5px", marginBottom: "-5px" }}
                   />
-                  @{mentoring.mentee?.profilemodel?.discord || mentoring.mentee?.email} (mentorado)
+                  @&nbsp;
+                  {mentoring.mentee?.profilemodel?.discord ||
+                    mentoring.mentee?.email}{" "}
+                  (mentorado)
                 </Typography>
 
                 <Typography
@@ -518,7 +534,10 @@ export default function MentoringPage() {
                     alt="discord"
                     style={{ marginRight: "5px", marginBottom: "-5px" }}
                   />
-                  @{mentoring.mentor?.profilemodel?.discord || mentoring.mentor?.email} (mentor)
+                  @&nbsp;
+                  {mentoring.mentor?.profilemodel?.discord ||
+                    mentoring.mentor?.email}{" "}
+                  (mentor)
                 </Typography>
 
                 <Typography variant="subtitle1" align="center" gutterBottom>

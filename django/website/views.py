@@ -8,9 +8,6 @@ from rest_framework import status
 from rest_framework.views import APIView
 from .models import *
 from .serializers import *
-from django.core.files.base import ContentFile
-from django.core.files.storage import default_storage
-import base64
 from django.contrib.auth.password_validation import validate_password
 from django.core.mail import send_mail
 
@@ -149,17 +146,15 @@ class MentoringRequestViewSet(CreateAndViewModelViewSet):
   filterset_fields = MentoringRequestSerializer.Meta.fields
   pagination_class = None
 
-  #* Hide users from requests
   def retrieve(self, request, *args, **kwargs):
-    queryset = self.get_queryset()
-    serializer = MentoringRequestSerializer(queryset, many=True)
-    data = serializer.data
-    newData = []
-    for i in range(len(data)):
-      if data[i]['mentee']['id'] != request.user.id:
-        data[i]['mentee'] = None
-        newData.append(data[i])
-    return Response(newData)
+    return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+  
+  def get_queryset(self):
+    queryset = super().get_queryset()
+    
+    queryset = queryset.filter(curricularUnit__course__in=self.request.user.profilemodel.course.all()).prefetch_related('mentee', 'curricularUnit')
+    
+    return queryset
   
   #* Hide users from requests
   def list(self, request, *args, **kwargs):
@@ -170,6 +165,8 @@ class MentoringRequestViewSet(CreateAndViewModelViewSet):
     for i in range(len(data)):
       if data[i]['mentee']['id'] != request.user.id:
         data[i]['mentee'] = None
+        newData.append(data[i])
+      else:
         newData.append(data[i])
     return Response(newData)
 
@@ -196,7 +193,7 @@ class MentoringRequestViewSet(CreateAndViewModelViewSet):
         return Response({'detail': 'Curricular Unit not found.'}, status=status.HTTP_400_BAD_REQUEST)
     return Response({'detail': 'Curricular Unit JSON not found.'}, status=status.HTTP_400_BAD_REQUEST)
 
-class MentoringViewSet(CreateAndViewModelViewSet):
+class MentoringViewSet(CreateAndViewModelViewSet, mixins.DestroyModelMixin):
   """
   API endpoint that allows mentorships to be viewed or edited.
   """
@@ -231,6 +228,16 @@ class MentoringViewSet(CreateAndViewModelViewSet):
     send_mail("Mentoring Accepted", f"Hey {mentoring.mentee.username}, {mentoring.mentor.username} accepted your mentoring request for {mentoring.curricularUnit.name}.", None, [mentoring.mentee.email, mentoring.mentor.email], fail_silently=False)
     
     return Response(MentoringSerializer(mentoring).data, status=status.HTTP_201_CREATED)
+
+  def destroy(self, request, *args, **kwargs):
+    mentoring = MentoringModel.objects.filter(id=request.data['id'])
+    if mentoring.exists():
+      mentoring = mentoring.first()
+      #! Check if the user is the mentor or the mentee
+      if mentoring.mentor != request.user and mentoring.mentee != request.user:
+        return Response(status=status.HTTP_403_FORBIDDEN, data={'detail': 'You cannot delete this mentoring.'})
+      mentoring.delete()
+      return Response(status=status.HTTP_204_NO_CONTENT)
 
 class BlogTopicViewSet(viewsets.ReadOnlyModelViewSet):
   """
