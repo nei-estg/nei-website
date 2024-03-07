@@ -107,21 +107,13 @@ class MaterialTagModel(ExportModelOperationsMixin('MaterialTagModel'), models.Mo
 
 class MaterialModel(ExportModelOperationsMixin('MaterialModel'), models.Model):
   name = models.TextField()
-  file = models.FileField(null=True, blank=True)
-  link = models.URLField(null=True, blank=True)
+  link = models.URLField()
   tags = models.ManyToManyField(MaterialTagModel, blank=True)
   curricularUnit = models.ForeignKey(CurricularUnitModel, on_delete=models.CASCADE)
   date = models.DateTimeField(auto_now_add=True)
   visible = models.BooleanField(default=False)
 
   class Meta:
-    #constraint to have either file or link filled
-    constraints = [
-      models.CheckConstraint(
-        check=models.Q(file__isnull=False) | models.Q(link__isnull=False),
-        name='file_or_link'
-      )
-    ]
     verbose_name = "Material de Unidade Curricular"
     verbose_name_plural = "Materiais das Unidades Curriculares"
 

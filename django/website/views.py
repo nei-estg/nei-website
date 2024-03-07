@@ -110,7 +110,6 @@ class MaterialViewSet(CreateAndViewModelViewSet):
   pagination_class = None
 
   def create(self, request, *args, **kwargs): #TODO: Improve this method
-    fileJson = request.data.get('file', None)
     curricularUnitJson = request.data.get('curricularUnit', None)
     
     #Check if we have a curricular unit
@@ -121,11 +120,6 @@ class MaterialViewSet(CreateAndViewModelViewSet):
     
     if not curricularUnit:
       return Response({'detail': 'Curricular Unit not found.'}, status=status.HTTP_400_BAD_REQUEST)
-    
-    if not fileJson and not request.data.get('link', None):
-      return Response({'detail': 'File or link not found.'}, status=status.HTTP_400_BAD_REQUEST)
-    
-    courses = curricularUnit.course.all()
     
     tagsJson = request.data.get('tags', [])
     if not tagsJson:
@@ -139,26 +133,7 @@ class MaterialViewSet(CreateAndViewModelViewSet):
       else:
         return Response({'detail': 'Tag not found.'}, status=status.HTTP_400_BAD_REQUEST)
     
-    material = None
-
-    if fileJson:
-      fileSplit = fileJson.split(":")
-      fileName = fileSplit[0]
-      decodedFile = base64.b64decode(fileSplit[1])
-      
-      #if the curricular unit has more than one course it should be Abbreviation + Abbreviation + ...
-      if len(courses) > 1:
-        course = " + ".join([course.abbreviation for course in courses])
-      else:
-        course = courses[0].abbreviation
-      
-      filePath = f"{course}/{curricularUnit.abbreviation}/{request.user.username}/{fileName}"
-      
-      default_storage.save(filePath, ContentFile(decodedFile))
-      
-      material = MaterialModel.objects.create(name=request.data.get('name', ''), file=filePath, curricularUnit=curricularUnit)
-    else:
-      material = MaterialModel.objects.create(name=request.data.get('name', ''), link=request.data.get('link', ''), curricularUnit=curricularUnit)
+    material = MaterialModel.objects.create(name=request.data.get('name', ''), link=request.data.get('link', ''), curricularUnit=curricularUnit)
     
     material.tags.set(tags)
     return Response(MaterialSerializer(material).data, status=status.HTTP_201_CREATED)
@@ -329,7 +304,7 @@ class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
     if re.match(r'^8[0-9]{6}@estg\.ipp\.pt$', user.email):
       #TODO: send email with activation link
       activation = UserActivationModel.objects.create(user=user)
-      send_mail('Account Activation', "Please activate your account with the following code: " + activation.code, None, [user.email], fail_silently=False)
+      send_mail('NEI - Account Activation', "Please activate your account with the following code: " + activation.code, None, [user.email], fail_silently=False)
     
     return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
   
@@ -337,31 +312,26 @@ class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
   def update(self, request, *args, **kwargs):
     user = User.objects.get(id=request.user.id)
     profilemodel = request.data.pop('profilemodel', None)
-    user.first_name = request.data.get('first_name', user.first_name)
-    user.last_name = request.data.get('last_name', user.last_namee)
-    user.email = request.data.get('email', user.email)
-    user.save()
-    if profilemodel:
-      user.profilemodel.course = profilemodel.get('course', user.profilemodel.course)
-      user.profilemodel.year = profilemodel.get('year', user.profilemodel.year)
-      user.profilemodel.image = profilemodel.get('image', user.profilemodel.image)
-      user.profilemodel.save()
-    return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
-  
-  #TODO: Adjust and test this method
-  def partial_update(self, request, *args, **kwargs):
-    user = User.objects.get(id=request.user.id)
+    course_data = profilemodel.pop('course', None)
     user.first_name = request.data.get('first_name', user.first_name)
     user.last_name = request.data.get('last_name', user.last_name)
+    user.username = request.data.get('username', user.username)
     user.email = request.data.get('email', user.email)
-    profilemodel = request.data.get('profilemodel', None)
     user.save()
     if profilemodel:
-      user.profilemodel.course = profilemodel.get('course', user.profilemodel.course)
       user.profilemodel.year = profilemodel.get('year', user.profilemodel.year)
-      user.profilemodel.image = profilemodel.get('image', user.profilemodel.image)
+      user.profilemodel.discord = profilemodel.get('discord', user.profilemodel.discord)
       user.profilemodel.save()
+      
+      if course_data:
+        user.profilemodel.course.clear()
+        for course in course_data:
+          course = CourseModel.objects.get(name=course['name'])
+          user.profilemodel.course.add(course)
     return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+  
+  def partial_update(self, request, *args, **kwargs):
+    return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 class ChangePasswordView(APIView):
   """

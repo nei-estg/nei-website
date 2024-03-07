@@ -1,4 +1,3 @@
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import EditIcon from "@mui/icons-material/Edit";
 import InfoIcon from "@mui/icons-material/Info";
 import KeyIcon from "@mui/icons-material/Key";
@@ -6,6 +5,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import SecurityIcon from "@mui/icons-material/Security";
 import {
   Avatar,
+  Box,
   Button,
   Checkbox,
   Container,
@@ -23,10 +23,9 @@ import {
   Tooltip,
   Typography,
   createTheme,
-  styled,
 } from "@mui/material";
 import { getCourses } from "@src/api/CourseRoutes";
-import { getUser } from "@src/api/UserRoutes";
+import { getUser, updateUser } from "@src/api/UserRoutes";
 import { ICourse } from "@src/interfaces/ICourse";
 import { IUser } from "@src/interfaces/IUser";
 import routes from "@src/router/Routes";
@@ -153,17 +152,52 @@ export default function ProfilePage() {
     }
   }
 
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const data = {
+      first_name: event.currentTarget.firstName.value,
+      last_name: event.currentTarget.lastName.value,
+      username: event.currentTarget.username.value,
+      email: event.currentTarget.email.value,
+      profilemodel: {
+        discord: event.currentTarget.discord.value,
+        course: courses.filter((course) =>
+          selectedCourses.includes(course.abbreviation)
+        ),
+        year: event.currentTarget.year.value,
+      },
+    } as IUser;
+
+    updateUser(data)
+      .then(() => {
+        toast.success("Perfil atualizado com sucesso!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+        //TODO: Update stuff on localstorage
+      })
+      .catch(() => {
+        toast.error("Ocorreu um erro ao atualizar o perfil!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+      });
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -286,191 +320,184 @@ export default function ProfilePage() {
                       width: "92%",
                     }}
                   >
-                    {/*foto*/}
-                    <div>
-                      <Button
-                        component="label"
-                        sx={{
-                          backgroundColor: "#054496",
-                          color: "#FFFFFF",
-                          borderRadius: "100px",
-                          width: "100%",
+                    <Box component="form" onSubmit={handleSubmit}>
+                      {/*nome*/}
+                      <div
+                        style={{
+                          marginTop: "40px",
+                          width: "70%",
+                          display: "flex",
+                          justifyContent: "space-between",
                         }}
-                        role={undefined}
-                        variant="contained"
-                        tabIndex={-1}
-                        startIcon={<CloudUploadIcon />}
                       >
-                        Alterar Foto de Perfil{" "}
-                        <VisuallyHiddenInput type="file" />
-                      </Button>
-                    </div>
+                        <TextField
+                          id="tf-firstName"
+                          label="Primeiro Nome"
+                          name="firstName"
+                          defaultValue={user.first_name}
+                          sx={{ width: "48%" }}
+                        />
+                        <TextField
+                          id="tf-lastName"
+                          label="Último Nome"
+                          name="lastName"
+                          defaultValue={user.last_name}
+                          sx={{ width: "48%" }}
+                        />
+                      </div>
 
-                    {/*nome*/}
-                    <div
-                      style={{
-                        marginTop: "40px",
-                        width: "70%",
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <TextField
-                        id="tf-firstName"
-                        label="Primeiro Nome"
-                        defaultValue={user.first_name}
-                        sx={{ width: "48%" }}
-                      />
-                      <TextField
-                        id="tf-lastName"
-                        label="Último Nome"
-                        defaultValue={user.last_name}
-                        sx={{ width: "48%" }}
-                      />
-                    </div>
+                      {/*username*/}
+                      <div style={{ marginTop: "20px", width: "70%" }}>
+                        <TextField
+                          id="tf-username"
+                          label="Username"
+                          name="username"
+                          defaultValue={user.username}
+                          sx={{ width: "100%" }}
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                @
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                      </div>
 
-                    {/*username*/}
-                    <div style={{ marginTop: "20px", width: "70%" }}>
-                      <TextField
-                        id="tf-username"
-                        label="Username"
-                        defaultValue={user.username}
-                        sx={{ width: "100%" }}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">@</InputAdornment>
-                          ),
-                        }}
-                      />
-                    </div>
+                      {/*username Discord*/}
+                      <div style={{ marginTop: "20px", width: "70%" }}>
+                        <TextField
+                          id="tf-usernameDiscord"
+                          label="Discord Username"
+                          name="discord"
+                          defaultValue={user.profilemodel?.discord}
+                          sx={{ width: "100%" }}
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                @
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                      </div>
 
-                    {/*username Discord*/}
-                    <div style={{ marginTop: "20px", width: "70%" }}>
-                      <TextField
-                        id="tf-usernameDiscord"
-                        label="Discord Username"
-                        defaultValue={user.profilemodel?.discord}
-                        sx={{ width: "100%" }}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">@</InputAdornment>
-                          ),
-                        }}
-                      />
-                    </div>
+                      {/*email*/}
+                      <div style={{ marginTop: "20px", width: "70%" }}>
+                        <TextField
+                          id="tf-email"
+                          label="Email"
+                          defaultValue={user.email}
+                          type="email"
+                          name="email"
+                          sx={{ width: "100%" }}
+                          input={<OutlinedInput label="Email" />}
+                        />
+                      </div>
 
-                    {/*email*/}
-                    <div style={{ marginTop: "20px", width: "70%" }}>
-                      <TextField
-                        id="tf-email"
-                        label="Email"
-                        defaultValue={user.email}
-                        type="email"
-                        sx={{ width: "100%" }}
-                        input={<OutlinedInput label="Email" />}
-                      />
-                    </div>
+                      {/*cursos*/}
+                      <div style={{ marginTop: "25px", width: "70%" }}>
+                        <FormControl sx={{ width: "100%" }}>
+                          <InputLabel id="course-label">Cursos</InputLabel>
+                          <Select
+                            labelId="course-label"
+                            id="course"
+                            multiple
+                            required
+                            value={selectedCourses}
+                            onChange={handleChangeCourses}
+                            input={<OutlinedInput label="Course" />}
+                            renderValue={(selected) => selected.join(", ")}
+                            MenuProps={MenuProps}
+                          >
+                            {courses.map((course) => (
+                              <MenuItem
+                                key={course.abbreviation}
+                                value={course.abbreviation}
+                              >
+                                <Checkbox
+                                  checked={
+                                    selectedCourses.indexOf(
+                                      course.abbreviation
+                                    ) > -1
+                                  }
+                                />
+                                <ListItemText primary={course.abbreviation} />
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </div>
 
-                    {/*cursos*/}
-                    <div style={{ marginTop: "25px", width: "70%" }}>
-                      <FormControl sx={{ width: "100%" }}>
-                        <InputLabel id="course-label">Cursos</InputLabel>
-                        <Select
-                          labelId="course-label"
-                          id="course"
-                          multiple
-                          required
-                          value={selectedCourses}
-                          onChange={handleChangeCourses}
-                          input={<OutlinedInput label="Course" />}
-                          renderValue={(selected) => selected.join(", ")}
-                          MenuProps={MenuProps}
+                      {/*ano*/}
+                      <div style={{ marginTop: "20px", width: "70%" }}>
+                        <TextField
+                          id="tf-year"
+                          select
+                          name="year"
+                          label="Ano"
+                          defaultValue={user.profilemodel?.year}
+                          sx={{ width: "100%" }}
+                          helperText="Todos os anos tens que atualizar, não te esqueças! Este deve ser referente ao teu curso mais recente!"
                         >
-                          {courses.map((course) => (
-                            <MenuItem
-                              key={course.abbreviation}
-                              value={course.abbreviation}
-                            >
-                              <Checkbox
-                                checked={
-                                  selectedCourses.indexOf(course.abbreviation) >
-                                  -1
-                                }
-                              />
-                              <ListItemText primary={course.abbreviation} />
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </div>
+                          <MenuItem value={1}>1st</MenuItem>
+                          <MenuItem value={2}>2nd</MenuItem>
+                          <MenuItem value={3}>3rd</MenuItem>
+                          <MenuItem value={4}>Erasmus</MenuItem>
+                          <MenuItem value={5}>Alumni</MenuItem>
+                        </TextField>
+                      </div>
 
-                    {/*ano*/}
-                    <div style={{ marginTop: "20px", width: "70%" }}>
-                      <TextField
-                        id="tf-year"
-                        select
-                        label="Ano"
-                        defaultValue={user.profilemodel?.year}
-                        sx={{ width: "100%" }}
-                        helperText="Todos os anos tens que atualizar, não te esqueças! Este deve ser referente ao teu curso mais recente!"
-                      >
-                        <MenuItem value={1}>1st</MenuItem>
-                        <MenuItem value={2}>2nd</MenuItem>
-                        <MenuItem value={3}>3rd</MenuItem>
-                        <MenuItem value={4}>Erasmus</MenuItem>
-                        <MenuItem value={5}>Alumni</MenuItem>
-                      </TextField>
-                    </div>
+                      {/*password*/}
+                      <div style={{ marginTop: "25px" }}>
+                        <Button
+                          variant="contained"
+                          startIcon={<KeyIcon />}
+                          href={routes.changepasswordpage.path}
+                          sx={{
+                            backgroundColor: "#054496",
+                            color: "#FFFFFF",
+                            borderRadius: "100px",
+                            width: "100%",
+                          }}
+                        >
+                          Alterar Palavra-Passe
+                        </Button>
+                      </div>
 
-                    {/*password*/}
-                    <div style={{ marginTop: "25px" }}>
-                      <Button
-                        variant="contained"
-                        startIcon={<KeyIcon />}
-                        href={routes.changepasswordpage.path}
-                        sx={{
-                          backgroundColor: "#054496",
-                          color: "#FFFFFF",
-                          borderRadius: "100px",
-                          width: "100%",
-                        }}
-                      >
-                        Alterar Palavra-Passe
-                      </Button>
-                    </div>
+                      {/*logout-all*/}
+                      <div style={{ marginTop: "25px" }}>
+                        <Button
+                          variant="contained"
+                          startIcon={<KeyIcon />}
+                          href={routes.logoutallpage.path}
+                          sx={{
+                            backgroundColor: "#054496",
+                            color: "#FFFFFF",
+                            borderRadius: "100px",
+                            width: "100%",
+                          }}
+                        >
+                          Logout em todos os dispositivos
+                        </Button>
+                      </div>
 
-                    {/*logout-all*/}
-                    <div style={{ marginTop: "25px" }}>
-                      <Button
-                        variant="contained"
-                        startIcon={<KeyIcon />}
-                        href={routes.logoutallpage.path}
-                        sx={{
-                          backgroundColor: "#054496",
-                          color: "#FFFFFF",
-                          borderRadius: "100px",
-                          width: "100%",
-                        }}
-                      >
-                        Logout em todos os dispositivos
-                      </Button>
-                    </div>
-
-                    <div style={{ marginTop: "40px" }}>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        startIcon={<SaveIcon />}
-                        sx={{
-                          backgroundColor: "#054496",
-                          color: "#FFFFFF",
-                          borderRadius: "100px",
-                          width: "100%",
-                        }}
-                      >
-                        Guardar Alterações
-                      </Button>
-                    </div>
+                      <div style={{ marginTop: "40px" }}>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          startIcon={<SaveIcon />}
+                          sx={{
+                            backgroundColor: "#054496",
+                            color: "#FFFFFF",
+                            borderRadius: "100px",
+                            width: "100%",
+                          }}
+                        >
+                          Guardar Alterações
+                        </Button>
+                      </div>
+                    </Box>
                   </div>
                 )}
 

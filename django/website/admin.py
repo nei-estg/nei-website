@@ -31,7 +31,7 @@ admin.site.register(CourseModel)
 admin.site.register(CurricularUnitModel, CurricularUnitAdmin)
 
 class MaterialAdmin(admin.ModelAdmin):
-  list_display = ('name', 'file', 'link', 'curricularUnit', 'visible')
+  list_display = ('name', 'link', 'curricularUnit', 'visible')
   list_filter = list_display
   
   def make_visible(self, request, queryset):
@@ -80,3 +80,6 @@ class ProfileAdmin(admin.ModelAdmin):
   exclude = ('resetCode',)
 
 admin.site.register(ProfileModel, ProfileAdmin)
+
+admin.site.register(UserActivationModel)
+admin.site.register(UserResetModel)

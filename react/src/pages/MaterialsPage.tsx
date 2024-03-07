@@ -98,25 +98,6 @@ export default function MaterialsPage() {
       return;
     }
 
-    //check if we have either a link or a file
-    if (
-      event.currentTarget.link.value === "" &&
-      event.currentTarget.file.files.length === 0
-    ) {
-      toast.error("Por favor adicione um link ou um ficheiro!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
-      return;
-    }
-
     const newMaterial: IMaterial = {
       name: event.currentTarget.fileName.value,
       link: event.currentTarget.link.value,
@@ -125,23 +106,6 @@ export default function MaterialsPage() {
       ),
       curricularUnit: selectedCurricularUnit,
     };
-
-    //if there is a file
-    if (event.currentTarget.file.files.length > 0) {
-      const file = new File(
-        [event.currentTarget.file.files[0]],
-        event.currentTarget.file.files[0].name,
-        { type: event.currentTarget.file.files[0].type }
-      );
-      const buffer = await file.arrayBuffer();
-      const fileData = new Uint8Array(buffer).reduce(
-        (data, byte) => data + String.fromCharCode(byte),
-        ""
-      );
-      const encodedFileData = btoa(fileData);
-
-      newMaterial.file = (await file.name) + ":" + encodedFileData;
-    }
 
     createMaterial(newMaterial)
       .then((result) => {
@@ -277,17 +241,9 @@ export default function MaterialsPage() {
       headerName: "Link",
       width: 150,
       valueGetter: (params) => {
-        return params.row.link ? "✅" : "❌";
+        return params.row.link;
       },
-    },
-    {
-      field: "file",
-      headerName: "Ficheiro",
-      width: 150,
-      valueGetter: (params) => {
-        return params.row.file ? "✅" : "❌";
-      },
-    },
+    }
   ];
 
   const handleSelectCourse = (event: SelectChangeEvent) => {
@@ -447,17 +403,11 @@ export default function MaterialsPage() {
                   margin="normal"
                   fullWidth
                   id="link"
-                  label="Link (optional)"
+                  label="Link"
                   name="link"
                   type="url"
                   autoComplete="link"
-                />
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  id="file"
-                  name="file"
-                  type="file"
+                  required
                 />
                 <Button
                   fullWidth
@@ -477,10 +427,6 @@ export default function MaterialsPage() {
             columns={columns}
             pageSizeOptions={[20, 100]}
             onRowDoubleClick={(row) => {
-              console.log(row.row);
-              if (row.row.file !== null) {
-                window.open(row.row.file);
-              }
               if (row.row.link !== null) {
                 window.open(row.row.link);
               }

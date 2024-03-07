@@ -169,7 +169,7 @@ export default function FrontPage() {
             </div>
 
             <div id="div1" style={{ margin: '20px' }}>
-              <a href={routes.blogpage.path} target="_blank" style={{ textDecoration: 'none' }}>
+              <a href={routes.blogpage.path} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                 <h1 style={{ color: 'white' }}>Atividades</h1>
                 <img
                   src="/icon/laptop.png"
