@@ -329,7 +329,7 @@ class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
     if re.match(r'^8[0-9]{6}@estg\.ipp\.pt$', user.email):
       #TODO: send email with activation link
       activation = UserActivationModel.objects.create(user=user)
-      send_mail('Account Activation', "Please activate your account by clicking the following link: http://127.0.0.1/activateAccount/" + activation.code, None, [user.email], fail_silently=False)
+      send_mail('Account Activation', "Please activate your account with the following code: " + activation.code, None, [user.email], fail_silently=False)
     
     return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
   
@@ -396,8 +396,9 @@ class ResetPasswordView(APIView):
   def get(self, request, *args, **kwargs):
     username = request.query_params.get('username', None)
     if username:
-      user = User.objects.get(username=username)
-      if user:
+      user = User.objects.filter(username=username)
+      if user.exists():
+        user = user.first()
         #! Check if a code already exists and if was created in the last minute, if not delete the code
         if UserResetModel.objects.filter(user=user).exists():
           reset = UserResetModel.objects.get(user=user)
@@ -416,10 +417,17 @@ class ResetPasswordView(APIView):
     code = request.data.get('code', None)
     password = request.data.get('password', None)
     if username and code and password:
-      user = User.objects.get(username=username)
-      if user:
-        reset = UserResetModel.objects.get(user=user, code=code)
-        if reset:
+      user = User.objects.filter(username=username)
+      if user.exists():
+        user = user.first()
+        reset = UserResetModel.objects.filter(user=user, code=code)
+        if reset.exists():
+          reset = reset.first()
+          
+          #! Check if the code was created in the last 5 minutes
+          if (datetime.datetime.now(timezone.utc) - reset.first().date).seconds > 300:
+            return Response({'detail': 'The code is expired.'}, status=status.HTTP_400_BAD_REQUEST)
+          
           user.set_password(password)
           user.save()
           reset.delete()
@@ -436,12 +444,13 @@ class UserActivationView(APIView):
   def get(self, request, *args, **kwargs):
     username = request.query_params.get('username', None)
     if username:
-      user = User.objects.get(username=username)
-      if user:
+      user = User.objects.filter(username=username)
+      if user.exists():
+        user = user.first()
         
         #! Check if the user is already active
         if user.is_active:
-          return Response({'detail': 'This account is already active.'}, status=status.HTTP_400_BAD_REQUEST)
+          return Response(status=status.HTTP_204_NO_CONTENT)
         
         #! Check if the user email matches a student email
         if not re.match(r'^8[0-9]{6}@estg\.ipp\.pt$', user.email):
@@ -456,17 +465,28 @@ class UserActivationView(APIView):
             return Response({'detail': 'You already requested an activation code.'}, status=status.HTTP_400_BAD_REQUEST)
         
         activation = UserActivationModel.objects.create(user=user)
-        send_mail('NEI - Account Activation', f"Please activate your account with the following code: http://127.0.0.1/activateAccount/{activation.code}", None, [user.email], fail_silently=True)
+        send_mail('NEI - Account Activation', f"Please activate your account with the following code: {activation.code}", None, [user.email], fail_silently=True)
     return Response(status=status.HTTP_204_NO_CONTENT)
     
   #! Receive an activation code, if it matches activate the account
   @transaction.atomic
   def post(self, request, *args, **kwargs):
-    code = request.data.get('code', None)
-    if code:
-      activation = UserActivationModel.objects.get(code=code)
-      if activation:
-        activation.user.is_active = True
-        activation.user.save()
-        activation.delete()
+    username = request.data.get('username', None)
+    if username:
+      user = User.objects.filter(username=username)
+      if user.exists():
+        user = user.first()
+        code = request.data.get('code', None)
+        if code:
+          activation = UserActivationModel.objects.filter(user=user, code=code)
+          if activation.exists():
+            activation = activation.first()
+            
+            #! Check if the code was created in the last 5 minutes
+            if (datetime.datetime.now(timezone.utc) - activation.date).seconds > 300:
+              return Response({'detail': 'The code is expired.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            activation.user.is_active = True
+            activation.user.save()
+            activation.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)

@@ -27,6 +27,7 @@ import {
   OutlinedInput,
   Alert,
 } from "@mui/material";
+import routes from "@src/router/Routes";
 
 const defaultTheme = createTheme();
 
@@ -253,13 +254,13 @@ export default function Register() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/login" variant="body2">
+                <Link href={routes.loginpage.path} variant="body2">
                   Já tens conta? Inicia Sessão
                 </Link>
               </Grid>
 
               <Grid item>
-                <Link href="/activateAccount/" variant="body2">
+                <Link href={routes.activateaccountpage.path} variant="body2">
                   Ativar conta
                 </Link>
               </Grid>

@@ -32,6 +32,7 @@ import { IUser } from "@src/interfaces/IUser";
 import { useEffect, useState } from "react";
 import { toast, Bounce } from "react-toastify";
 import { getCourses } from "@src/api/CourseRoutes";
+import routes from "@src/router/Routes";
 
 const defaultTheme = createTheme();
 
@@ -427,7 +428,7 @@ export default function ProfilePage() {
                       <Button
                         variant="contained"
                         startIcon={<KeyIcon />}
-                        href="/change-password"
+                        href={routes.changepasswordpage.path}
                         sx={{
                           backgroundColor: "#054496",
                           color: "#FFFFFF",
@@ -444,7 +445,7 @@ export default function ProfilePage() {
                       <Button
                         variant="contained"
                         startIcon={<KeyIcon />}
-                        href="/logout-all"
+                        href={routes.logoutallpage.path}
                         sx={{
                           backgroundColor: "#054496",
                           color: "#FFFFFF",

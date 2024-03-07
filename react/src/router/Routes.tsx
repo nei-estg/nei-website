@@ -40,8 +40,8 @@ const routes: IRoutes = {
     element: <RegisterPage />,
   },
   activateaccountpage: {
-    name: 'Ativar Conta',
-    path: '/activateAccount/:code',
+    name: 'Ativar Conta - NEI',
+    path: '/activateAccount/',
     element: <ActivateAccountPage />,
   },
   resetpasswordpage: {
@@ -61,7 +61,7 @@ const routes: IRoutes = {
   },
   logoutallpage: {
     name: 'Terminar Sessão',
-    path: '/logout-all',
+    path: '/logoutAll',
     element: <LogoutPage />,
   },
   profilepage: {

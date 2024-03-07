@@ -158,7 +158,7 @@ export default function FrontPage() {
             }}
           >
             <div id="div1" style={{ margin: '20px' }}>
-              <a href='/about' style={{ textDecoration: 'none' }}>
+              <a href={routes.aboutFAQpage.path} style={{ textDecoration: 'none' }}>
                 <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
                 <a href="/about" target="_blank" style={{ textDecoration: 'none' }}>
                   <img
@@ -174,7 +174,7 @@ export default function FrontPage() {
             </div>
 
             <div id="div1" style={{ margin: '20px' }}>
-              <a href='/blog' target="_blank" style={{ textDecoration: 'none' }}>
+              <a href={routes.blogpage.path} target="_blank" style={{ textDecoration: 'none' }}>
                 <h1 style={{ color: 'white' }}>Atividades</h1>
                 <img
                   src="/icon/laptop.png"
