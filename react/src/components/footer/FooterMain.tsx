@@ -33,8 +33,8 @@ export const FooterMain = () => {
         }}
       >
         <Container maxWidth="lg">
-          <Grid container spacing={5}>
-            <Grid item xs={12} sm={6}>
+        <Grid container spacing={5}>
+            <Grid item xs={12} sm={6} style={{ display: "flex", alignItems: "center" }}>
               <Grid
                 container
                 direction="row"
@@ -46,21 +46,20 @@ export const FooterMain = () => {
                   alt="logo"
                   style={{
                     marginRight: "10px",
-                    marginBottom: '10px',
                     height: "100px",
                     width: "100px",
                   }}
                 />
                 <div>
                   <Typography
-                    sx={{
+                    sx={{ marginTop: "10px" ,
                       textAlign: { xs: "center", sm: "center", md: "center" },
                     }}
-                    variant="body2"
+                    variant="h6"
                   >
                     NEI
                   </Typography>
-                  <Typography variant="body2" sx={{textAlign: "center"}}>
+                  <Typography variant="body2" sx={{ textAlign: "center" }}>
                     Núcleo de Estudantes de Informática da ESTG
                   </Typography>
                 </div>
