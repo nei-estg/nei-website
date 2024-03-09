@@ -20,6 +20,7 @@ export const FooterMain = () => {
     {id: 2, name: "linkedin", URL: "https://www.linkedin.com/company/estg-nei"},
     {id: 3, name: "instagram", URL: "https://www.instagram.com/nei_estg/"},
     {id: 4, name: "discord", URL: "https://discord.gg/xbD38MS2e8"},
+    {id: 5, name: "linktree", URL: "https://linktr.ee/nei.estg"},
   ];
 
   return (
