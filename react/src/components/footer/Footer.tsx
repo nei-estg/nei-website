@@ -42,7 +42,7 @@ export const Footer = () => {
       >
       <Container maxWidth="lg">
         <Grid container spacing={5}>
-            <Grid item xs={12} sm={6} style={{ display: "flex", alignItems: "center" }}>
+            <Grid item xs={12} sm={5} style={{ display: "flex", alignItems: "center" }}>
               <Grid
                 container
                 direction="row"
@@ -73,7 +73,7 @@ export const Footer = () => {
                 </div>
               </Grid>
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <Typography
                 variant="h6"
                 gutterBottom
