@@ -51,7 +51,7 @@ export default function Register() {
   const [selectedYear, setSelectedYear] = useState<string>("");
 
   useEffect(() => {
-    document.title = routes.registerpage.path;
+    document.title = routes.registerpage.name;
     getCourses()
       .then((courses) => setCourses(courses))
       .catch(() => {
@@ -120,11 +120,7 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container
-        component="main"
-        maxWidth="xl"
-        sx={{ marginTop: "60px", marginBottom: "60px" }}
-      >
+      <Container  component="main"  maxWidth="xl"  sx={{ marginTop: "60px", marginBottom: "60px" }}>
         <CssBaseline />
         <Box
           sx={{
@@ -153,7 +149,7 @@ export default function Register() {
             </Alert>
           )}
 
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3, width: '34%' }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField

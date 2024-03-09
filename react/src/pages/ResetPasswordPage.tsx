@@ -19,7 +19,7 @@ const defaultTheme = createTheme();
 
 export default function ResetPasswordPage() {
   useEffect(() => {
-    document.title = routes.changepasswordpage.path;
+    document.title = routes.changepasswordpage.name;
   }, []);
 
   const handleGetCode = async () => {
@@ -105,11 +105,10 @@ export default function ResetPasswordPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{marginTop: '60px', marginBottom: '60px'}}>
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -140,7 +139,7 @@ export default function ResetPasswordPage() {
             <Button
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, marginTop: '0px', marginBottom: '20px' }}
               onClick={handleGetCode}
             >
               Enviar Código
@@ -163,12 +162,13 @@ export default function ResetPasswordPage() {
               type="password"
               id="password"
               autoComplete="new-password"
+              sx={{marginTop: '5px'}}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, marginTop: '0px', marginBottom: '10px' }}
             >
               Redefinir
             </Button>

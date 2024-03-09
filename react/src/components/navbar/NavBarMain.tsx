@@ -196,6 +196,7 @@ function NavBarMain() {
               ))}
             </Box>
 
+            {/* icon user */}
             <Box sx={{ flexGrow: 0 }}>
               {isLoggedIn() ? (
                 <Tooltip title="Abrir Definições">
@@ -210,14 +211,12 @@ function NavBarMain() {
               ) : (
                 <Tooltip title="Iniciar Sessão">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar sx={{ backgroundColor: "#054496" }}>
-                      <PersonIcon />
-                    </Avatar>
+                    <Avatar sx={{ backgroundColor: "#054496" }}/>
                   </IconButton>
                 </Tooltip>
               )}
 
-              {/* icon user */}
+              
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
