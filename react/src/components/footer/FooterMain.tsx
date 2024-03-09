@@ -10,6 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import logo from "../../assets/logo.png";
+import { linkSync } from "fs";
 
 export const FooterMain = () => {
   const theme = useTheme();
@@ -22,6 +23,16 @@ export const FooterMain = () => {
     {id: 4, name: "discord", URL: "https://discord.gg/xbD38MS2e8"},
     {id: 5, name: "linktree", URL: "https://linktr.ee/nei.estg"},
   ];
+
+  const linksWebsite = [
+    {id: 1, name: "Sobre Nós", to: routes.aboutFAQpage.path},
+    {id: 2, name: "Blog", to: routes.blogpage.path},
+    {id: 3, name: "Calendário", to: routes.calendarpage.path},
+    {id: 4, name: "Materiais UC's", to: routes.materialspage.path},
+    {id: 5, name: "Política de Privacidade", to: routes.privacypolicypage.path},
+  ];
+
+
 
   return (
     <div style={{ zIndex: 1, position: 'relative' }}>
@@ -73,80 +84,23 @@ export const FooterMain = () => {
               >
                 Links
               </Typography>
-              <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.aboutFAQpage.path}
-                >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Sobre Nós
-                  </Typography>
-                </Button>
-              </Box>
 
-              <Box
+              {linksWebsite.map((link, index) => (
+                <Box
                 display="flex"
                 justifyContent={isSmallScreen ? "center" : "center"}
               >
                 <Button
                   component={RouterLink}
                   sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.blogpage.path}
+                  to={link.to}
                 >
                   <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Blog
+                    {link.name}
                   </Typography>
                 </Button>
               </Box>
-
-              <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.calendarpage.path}
-                >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Calendário
-                  </Typography>
-                </Button>
-              </Box>
-
-              <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.materialspage.path}
-                >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Materiais UC's
-                  </Typography>
-                </Button>
-              </Box>
-
-              <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.privacypolicypage.path}
-                >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Política de Privacidade
-                  </Typography>
-                </Button>
-              </Box>
+              ))}
             </Grid>
             <Grid item xs={12} sm={3}>
               <Typography

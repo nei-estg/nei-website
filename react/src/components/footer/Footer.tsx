@@ -23,6 +23,14 @@ export const Footer = () => {
     {id: 5, name: "linktree", URL: "https://linktr.ee/nei.estg"},
   ];
 
+  const linksWebsite = [
+    {id: 1, name: "Sobre Nós", to: routes.aboutFAQpage.path},
+    {id: 2, name: "Blog", to: routes.blogpage.path},
+    {id: 3, name: "Calendário", to: routes.calendarpage.path},
+    {id: 4, name: "Materiais UC's", to: routes.materialspage.path},
+    {id: 5, name: "Política de Privacidade", to: routes.privacypolicypage.path},
+  ];
+
   return (
     <div style={{ position: 'relative' }}>
       <Box
@@ -33,7 +41,7 @@ export const Footer = () => {
         }}
       >
       <Container maxWidth="lg">
-          <Grid container spacing={5}>
+        <Grid container spacing={5}>
             <Grid item xs={12} sm={6} style={{ display: "flex", alignItems: "center" }}>
               <Grid
                 container
@@ -73,80 +81,23 @@ export const Footer = () => {
               >
                 Links
               </Typography>
-              <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.aboutFAQpage.path}
-                >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Sobre Nós
-                  </Typography>
-                </Button>
-              </Box>
 
-              <Box
+              {linksWebsite.map((link, index) => (
+                <Box
                 display="flex"
                 justifyContent={isSmallScreen ? "center" : "center"}
               >
                 <Button
                   component={RouterLink}
                   sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.blogpage.path}
+                  to={link.to}
                 >
                   <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Blog
+                    {link.name}
                   </Typography>
                 </Button>
               </Box>
-
-              <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.calendarpage.path}
-                >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Calendário
-                  </Typography>
-                </Button>
-              </Box>
-
-              <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.materialspage.path}
-                >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Materiais UC's
-                  </Typography>
-                </Button>
-              </Box>
-
-              <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.privacypolicypage.path}
-                >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Política de Privacidade
-                  </Typography>
-                </Button>
-              </Box>
+              ))}
             </Grid>
             <Grid item xs={12} sm={3}>
               <Typography
@@ -156,13 +107,13 @@ export const Footer = () => {
               >
                 Redes Sociais
               </Typography>
-              
+
               {socialNetworks.map((sn, index) => (
                 <Box
                 display="flex"
-                justifyContent={{ xs: "center", md: "center" }}
+                justifyContent={isSmallScreen ? "center" : "center"}
               >
-                <Button key={sn.id}
+                 <Button key={sn.id}
                   component={RouterLink}
                   sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
                   to={sn.URL}
