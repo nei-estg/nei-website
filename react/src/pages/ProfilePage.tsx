@@ -212,15 +212,7 @@ export default function ProfilePage() {
                 justifyContent="center"
               >
                 {!isEditing && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "92%",
-                    }}
-                  >
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "93%", }}>
                     {/*foto*/}
                     <Avatar
                       sx={{ width: "160px", height: "160px" }}
@@ -311,13 +303,7 @@ export default function ProfilePage() {
                 )}
 
                 {isEditing && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "92%",
+                  <div style={{  display: "flex",  flexDirection: "column",  alignItems: "center", justifyContent: "center", width: "93%",
                     }}
                   >
                     <Box component="form" onSubmit={handleSubmit}>
@@ -501,15 +487,7 @@ export default function ProfilePage() {
                   </div>
                 )}
 
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "end",
-                    justifyContent: "end",
-                    width: "8%",
-                  }}
-                >
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "end", justifyContent: "end", width: "7%", }}>
                   <Button
                     onClick={handleEditClick}
                     variant="contained"
