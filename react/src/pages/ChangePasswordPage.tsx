@@ -10,9 +10,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { changePassword } from '@src/api/UserRoutes';
+import { isLoggedIn } from '@src/api/utils/LoginStatus';
 import routes from '@src/router/Routes';
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Bounce, toast } from 'react-toastify';
 
 const defaultTheme = createTheme();
@@ -21,6 +22,13 @@ export default function ChangePasswordPage() {
 
   useEffect(() => {
     document.title = routes.changepasswordpage.name;
+
+
+    //verificar se o user está logado
+    if(!isLoggedIn())
+    {
+      window.location.href = routes.loginpage.path;
+    }
   }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
