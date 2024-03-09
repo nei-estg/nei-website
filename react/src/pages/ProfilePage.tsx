@@ -325,7 +325,7 @@ export default function ProfilePage() {
                       <div
                         style={{
                           marginTop: "40px",
-                          width: "70%",
+                          width: "100%",
                           display: "flex",
                           justifyContent: "space-between",
                         }}
@@ -347,7 +347,7 @@ export default function ProfilePage() {
                       </div>
 
                       {/*username*/}
-                      <div style={{ marginTop: "20px", width: "70%" }}>
+                      <div style={{ marginTop: "20px", width: "100%" }}>
                         <TextField
                           id="tf-username"
                           label="Username"
@@ -365,7 +365,7 @@ export default function ProfilePage() {
                       </div>
 
                       {/*username Discord*/}
-                      <div style={{ marginTop: "20px", width: "70%" }}>
+                      <div style={{ marginTop: "20px", width: "100%" }}>
                         <TextField
                           id="tf-usernameDiscord"
                           label="Discord Username"
@@ -383,7 +383,7 @@ export default function ProfilePage() {
                       </div>
 
                       {/*email*/}
-                      <div style={{ marginTop: "20px", width: "70%" }}>
+                      <div style={{ marginTop: "20px", width: "100%" }}>
                         <TextField
                           id="tf-email"
                           label="Email"
@@ -396,7 +396,7 @@ export default function ProfilePage() {
                       </div>
 
                       {/*cursos*/}
-                      <div style={{ marginTop: "25px", width: "70%" }}>
+                      <div style={{ marginTop: "25px", width: "100%" }}>
                         <FormControl sx={{ width: "100%" }}>
                           <InputLabel id="course-label">Cursos</InputLabel>
                           <Select
@@ -430,7 +430,7 @@ export default function ProfilePage() {
                       </div>
 
                       {/*ano*/}
-                      <div style={{ marginTop: "20px", width: "70%" }}>
+                      <div style={{ marginTop: "20px", width: "100%" }}>
                         <TextField
                           id="tf-year"
                           select
