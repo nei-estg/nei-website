@@ -308,6 +308,25 @@ export default function MentoringPage() {
     })
   }
 
+
+  const discordImg = "https://img.icons8.com/ios-glyphs/24/636F80/discord.png";
+  const mailImg = "https://img.icons8.com/ios-glyphs/24/636F80/secured-letter--v1.png";
+
+  /** verifica se tanto o mentor como o mentorado têm discord
+   * 
+   * @param mentoring 
+   * @returns true caso os dois tenham discord, caso contrario, false
+   */
+  function checkMentorMenteeHaveDiscord(mentoring: IMentoring): boolean {
+
+    if (mentoring.mentee?.profilemodel?.discord == null || mentoring.mentor?.profilemodel?.discord == null) {
+      return false;
+    }
+
+    return true;
+  }
+
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
@@ -550,34 +569,60 @@ export default function MentoringPage() {
                   {correctText(mentoring.curricularUnit?.name)}
                 </Typography>
 
-                <Typography variant="subtitle1" align="center" gutterBottom>
-                  <img
-                    src="https://img.icons8.com/ios-glyphs/24/636F80/discord.png"
-                    alt="discord"
-                    style={{ marginRight: "5px", marginBottom: "-5px" }}
-                  />
-                  @&nbsp;
-                  {mentoring.mentee?.profilemodel?.discord ||
-                    mentoring.mentee?.email}{" "}
-                  (mentorado)
-                </Typography>
+                {checkMentorMenteeHaveDiscord(mentoring) === true ? (
+                  <>
+                    <Typography variant="subtitle1" align="center" gutterBottom>
+                      <img
+                        src={discordImg}
+                        alt="discord"
+                        style={{ marginRight: "5px", marginBottom: "-5px" }}
+                      />
+                      {mentoring.mentee?.profilemodel?.discord}
+                      (mentorado)
+                    </Typography>
 
-                <Typography
-                  variant="subtitle1"
-                  align="center"
-                  gutterBottom
-                  sx={{ marginBottom: "20px" }}
-                >
-                  <img
-                    src="https://img.icons8.com/ios-glyphs/24/636F80/discord.png"
-                    alt="discord"
-                    style={{ marginRight: "5px", marginBottom: "-5px" }}
-                  />
-                  @&nbsp;
-                  {mentoring.mentor?.profilemodel?.discord ||
-                    mentoring.mentor?.email}{" "}
-                  (mentor)
-                </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      align="center"
+                      gutterBottom
+                      sx={{ marginBottom: "20px" }}
+                    >
+                      <img
+                        src={discordImg}
+                        alt="discord"
+                        style={{ marginRight: "5px", marginBottom: "-5px" }}
+                      />
+                      {mentoring.mentor?.profilemodel?.discord}
+                      (mentor)
+                    </Typography>
+                  </>
+                ) : (
+                  <>
+                    <Typography variant="subtitle1" align="center" gutterBottom>
+                      <img
+                        src={mailImg}
+                        alt="mail"
+                        style={{ marginRight: "5px", marginBottom: "-5px" }}
+                      />
+                      {mentoring.mentee?.email} (mentorado)
+                    </Typography>
+
+                    <Typography
+                      variant="subtitle1"
+                      align="center"
+                      gutterBottom
+                      sx={{ marginBottom: "20px" }}
+                    >
+                      <img
+                        src={mailImg}
+                        alt="mail"
+                        style={{ marginRight: "5px", marginBottom: "-5px" }}
+                      />
+                      {mentoring.mentor?.email} (mentor)
+                    </Typography>
+                  </>
+                )}
+
 
                 <Typography variant="subtitle1" align="center" gutterBottom>
                   <AccessTimeFilledIcon
