@@ -16,6 +16,7 @@ import { isLoggedIn } from "@src/api/utils/LoginStatus";
 import routes from "@src/router/Routes";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import DarkLightModeToggle from "./DarkLightModeToggle";
 
 const navbar = {
   pages: [
@@ -207,12 +208,12 @@ function NavBar() {
               ) : (
                 <Tooltip title="Iniciar Sessão">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar sx={{ backgroundColor: "#054496" }}/>
+                    <Avatar sx={{ backgroundColor: "#054496" }} />
                   </IconButton>
                 </Tooltip>
               )}
 
-              
+
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
@@ -223,33 +224,43 @@ function NavBar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {isLoggedIn()
-                  ? settings.logged.map((setting) => (
-                      <Link
-                        key={setting.id}
-                        href={setting.URL}
-                        component="a"
-                        underline="none"
-                        color="inherit"
-                      >
-                        <MenuItem onClick={handleCloseUserMenu}>
-                          {setting.name}
-                        </MenuItem>
-                      </Link>
-                    ))
+
+                <Link
+                  component="a"
+                  underline="none"
+                  color="inherit"
+                >
+                  <MenuItem>
+                    <DarkLightModeToggle />
+                  </MenuItem>
+                </Link>
+
+                {isLoggedIn() ? settings.logged.map((setting) => (
+                  <Link
+                    key={setting.id}
+                    href={setting.URL}
+                    component="a"
+                    underline="none"
+                    color="inherit"
+                  >
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      {setting.name}
+                    </MenuItem>
+                  </Link>
+                ))
                   : settings.guest.map((setting) => (
-                      <Link
-                        key={setting.id}
-                        href={setting.URL}
-                        component="a"
-                        underline="none"
-                        color="inherit"
-                      >
-                        <MenuItem onClick={handleCloseUserMenu}>
-                          {setting.name}
-                        </MenuItem>
-                      </Link>
-                    ))}
+                    <Link
+                      key={setting.id}
+                      href={setting.URL}
+                      component="a"
+                      underline="none"
+                      color="inherit"
+                    >
+                      <MenuItem onClick={handleCloseUserMenu}>
+                        {setting.name}
+                      </MenuItem>
+                    </Link>
+                  ))}
               </Menu>
             </Box>
           </Toolbar>
