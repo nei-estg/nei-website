@@ -12,12 +12,15 @@ import Typography from "@mui/material/Typography";
 import { getResetPasswordCode, resetPassword } from "@src/api/UserRoutes";
 import routes from "@src/router/Routes";
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
 const defaultTheme = createTheme();
 
 export default function ResetPasswordPage() {
+  const [clickGetCode, setClickGetCode] = useState(false);
+
+
   useEffect(() => {
     document.title = routes.changepasswordpage.name;
   }, []);
@@ -27,21 +30,24 @@ export default function ResetPasswordPage() {
     if (username.value === "") {
       return;
     }
-    getResetPasswordCode(username.value)
-      .then(() => {
-        toast.success("Se o teu username existir, receberás um código!!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          transition: Bounce,
-        });
-      })
+    getResetPasswordCode(username.value).then(() => {
+      setClickGetCode(true);
+
+      toast.success("Se o teu username existir, receberás um código!!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    })
       .catch(() => {
+        setClickGetCode(false);
+
         toast.error(
           "Ocorreu um erro interno ao enviar o código! Por favor tenta novamente!",
           {
@@ -105,7 +111,7 @@ export default function ResetPasswordPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs" sx={{marginTop: '60px', marginBottom: '60px'}}>
+      <Container component="main" maxWidth="xs" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box
           sx={{
@@ -126,24 +132,29 @@ export default function ResetPasswordPage() {
             noValidate
             sx={{ mt: 1 }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-            />
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, marginTop: '0px', marginBottom: '20px' }}
-              onClick={handleGetCode}
-            >
-              Enviar Código
-            </Button>
+            {!clickGetCode &&
+              <>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                  autoComplete="username"
+                  autoFocus
+                />
+                <Button
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2, marginTop: '0px', marginBottom: '20px' }}
+                  onClick={handleGetCode}
+                >
+                  Enviar Código
+                </Button>
+              </>
+            }
+
             <TextField
               margin="normal"
               required
@@ -162,7 +173,7 @@ export default function ResetPasswordPage() {
               type="password"
               id="password"
               autoComplete="new-password"
-              sx={{marginTop: '5px'}}
+              sx={{ marginTop: '5px' }}
             />
             <Button
               type="submit"
