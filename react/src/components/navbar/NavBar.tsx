@@ -1,5 +1,4 @@
 import MenuIcon from "@mui/icons-material/Menu";
-import PersonIcon from "@mui/icons-material/Person";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -16,7 +15,7 @@ import { isLoggedIn } from "@src/api/utils/LoginStatus";
 import routes from "@src/router/Routes";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import DarkLightModeToggle from "./DarkLightModeToggle";
+import DarkLightModeToggle from "../darkLightMode/DarkLightModeToggle";
 
 const navbar = {
   pages: [
@@ -59,7 +58,7 @@ const settings = {
   ],
 };
 
-function NavBar() {
+function NavBar({ darkMode, setDarkMode }) {
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -231,7 +230,7 @@ function NavBar() {
                   color="inherit"
                 >
                   <MenuItem>
-                    <DarkLightModeToggle />
+                    <DarkLightModeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
                   </MenuItem>
                 </Link>
 

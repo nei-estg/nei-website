@@ -1,12 +1,16 @@
-import { CssBaseline, Typography, Switch, Container, FormControlLabel, styled } from "@mui/material";
+import { CssBaseline, Switch, Container, FormControlLabel, styled } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useState } from "react";
 
 
 
-function DarkLightModeToggle() {
-  const [darkMode, setDarkMode] = useState(false);
-  const defaultTheme = createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } });
+function DarkLightModeToggle({ darkMode, setDarkMode }) {
+  const defaultTheme = createTheme({
+    typography: {
+      fontFamily: 'Cabin, sans-serif',
+    },
+    palette: { mode: darkMode ? 'dark' : 'light' }
+  });
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);

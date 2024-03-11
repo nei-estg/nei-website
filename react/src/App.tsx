@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Router from "./router/Router";
 import Box from "@mui/material/Box";
@@ -9,10 +10,23 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
-import { useEffect } from "react";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    setDarkMode(isDarkMode);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('darkMode', darkMode.toString());
+  }, [darkMode]);
+
   const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+    },
     typography: {
       fontFamily: 'Cabin, sans-serif',
     },
@@ -21,7 +35,6 @@ function App() {
   useEffect(() => {
     const handler = () => {
       console.log('Developer console is open!');
-
       alert('Developer console is open!');
     };
 
@@ -45,7 +58,7 @@ function App() {
             color: "text.primary",
           }}
         >
-          <NavBarWrapper/>
+          <NavBarWrapper darkMode={darkMode} setDarkMode={setDarkMode} />
           <Container maxWidth={false} disableGutters={true} sx={{ flexGrow: 1 }}>
             <Router />
           </Container>
