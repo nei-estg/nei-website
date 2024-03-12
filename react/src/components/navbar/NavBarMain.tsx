@@ -212,7 +212,7 @@ function NavBarMain({ darkMode, setDarkMode }) {
               ) : (
                 <Tooltip title="Iniciar Sessão">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar sx={{ backgroundColor: "#054496" }} />
+                    <Avatar sx={{ backgroundColor: "#054496", color: "#FFFF" }} />
                   </IconButton>
                 </Tooltip>
               )}
