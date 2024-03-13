@@ -30,11 +30,11 @@ jobs:
         with:
           compose-file: docker-compose.prod.yml
 
-      - name: Add Roles
-        run: docker-compose exec -T django python manage.py add_roles
+      #- name: Add Roles
+      #  run: docker-compose exec -T django python manage.py add_roles
 
-      - name: Add Static Data
-        run: docker-compose exec -T django python manage.py add_from_json
+      #- name: Add Static Data
+      #  run: docker-compose exec -T django python manage.py add_from_json
         
       - name: Run Django Tests
         run: docker-compose exec -T django python manage.py test
