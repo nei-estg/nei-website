@@ -29,22 +29,22 @@ jobs:
         uses: isbang/compose-action@v1.5.1
         with:
           compose-file: docker-compose.prod.yml
-          
-      - name: Run Django Tests
-        run: docker-compose exec -T django python manage.py test
 
       - name: Add Roles
-        run: docker-compose exec django python manage.py add_roles
+        run: docker-compose exec -T django python manage.py add_roles
 
       - name: Add Static Data
-        run: docker-compose exec django python manage.py add_from_json
-
+        run: docker-compose exec -T django python manage.py add_from_json
+        
+      - name: Run Django Tests
+        run: docker-compose exec -T django python manage.py test
+        
       - name: ZAP Full Scan
         uses: zaproxy/action-full-scan@v0.9.0
         with:
           token: ${{ github.token }}
           # Target URL
-          target: http://127.0.0.1
+          target: http://127.0.0.1/
           # Relative path of the ZAP configuration file
           #rules_file_name: # optional
           # The Docker file to be executed
