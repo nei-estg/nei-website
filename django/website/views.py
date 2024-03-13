@@ -281,7 +281,7 @@ class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
   queryset = User.objects.all().prefetch_related('profilemodel')
   serializer_class = UserSerializer
   permission_classes = []
-  filterset_fields = ['id', 'username', 'first_name', 'last_name', 'email']
+  filterset_fields = []
   pagination_class = None
   
   #* Limit so that is only possible to see the same user
@@ -318,7 +318,9 @@ class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
       activation = UserActivationModel.objects.create(user=user)
       send_mail('NEI - Account Activation', "Please activate your account with the following code: " + activation.code, None, [user.email], fail_silently=False)
     
-    return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+    serializer = UserSerializer(user)
+    serializer.data.pop('password')
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
   
   #TODO: Adjust and test this method
   def update(self, request, *args, **kwargs):
