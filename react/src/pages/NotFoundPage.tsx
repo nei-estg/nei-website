@@ -5,17 +5,21 @@ import {
   createTheme,
 } from "@mui/material";
 import routes from "@src/router/Routes";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-const defaultTheme = createTheme();
 
-const NotFoundPage: React.FC = () => {
+const NotFoundPage = () => {
   useEffect(() => {
     document.title = routes.notfoundpage.name;
   }, []);
 
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+
       <Container
         maxWidth="xl"
         sx={{
@@ -54,5 +58,6 @@ const NotFoundPage: React.FC = () => {
     </ThemeProvider>
   );
 };
+
 
 export default NotFoundPage;

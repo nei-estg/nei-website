@@ -16,17 +16,21 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Bounce, toast } from 'react-toastify';
 
-const defaultTheme = createTheme();
+
+
 
 export default function ChangePasswordPage() {
+
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
 
   useEffect(() => {
     document.title = routes.changepasswordpage.name;
 
 
     //verificar se o user está logado
-    if(!isLoggedIn())
-    {
+    if (!isLoggedIn()) {
       window.location.href = routes.loginpage.path;
     }
   }, []);
@@ -58,8 +62,9 @@ export default function ChangePasswordPage() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs" sx={{marginTop: '60px', marginBottom: '60px'}}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+
+      <Container component="main" maxWidth="xs" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box
           sx={{
@@ -75,7 +80,7 @@ export default function ChangePasswordPage() {
             Change Password
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
+            <TextField
               margin="normal"
               required
               fullWidth

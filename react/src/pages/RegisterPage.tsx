@@ -29,7 +29,8 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
+
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -42,7 +43,12 @@ const MenuProps = {
   },
 };
 
+
 export default function Register() {
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+
   const [userCreateAccount, setUserCreateAccount] = useState(false);
 
   const [courses, setCourses] = React.useState<ICourse[]>([]);
@@ -119,8 +125,9 @@ export default function Register() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container  component="main"  maxWidth="xl"  sx={{ marginTop: "60px", marginBottom: "60px" }}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+
+      <Container component="main" maxWidth="xl" sx={{ marginTop: "60px", marginBottom: "60px" }}>
         <CssBaseline />
         <Box
           sx={{

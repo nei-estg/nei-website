@@ -13,10 +13,9 @@ import { loginUser } from "@src/api/UserRoutes";
 import { IUser } from "@src/interfaces/IUser";
 import routes from "@src/router/Routes";
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
 
 export default function LoginPage() {
 
@@ -48,9 +47,14 @@ export default function LoginPage() {
     window.location.href = routes.frontpage.path;
   };
 
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xl" sx={{marginTop: '60px', marginBottom: '60px'}}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+
+      <Container component="main" maxWidth="xl" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box
           sx={{

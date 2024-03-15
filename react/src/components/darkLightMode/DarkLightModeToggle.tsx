@@ -1,16 +1,9 @@
 import { CssBaseline, Switch, Container, FormControlLabel, styled } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { useState } from "react";
 
 
 
 function DarkLightModeToggle({ darkMode, setDarkMode }) {
-  const defaultTheme = createTheme({
-    typography: {
-      fontFamily: 'Cabin, sans-serif',
-    },
-    palette: { mode: darkMode ? 'dark' : 'light' }
-  });
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -63,13 +56,22 @@ function DarkLightModeToggle({ darkMode, setDarkMode }) {
     },
   }));
 
+  // Criar o tema com base no estado do modo escuro
+  const defaultTheme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+    },
+    typography: {
+      fontFamily: 'Cabin, sans-serif',
+    },
+  });
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Container>
         <FormControlLabel
-          control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked checked={darkMode} onChange={toggleDarkMode} />} label={undefined} />
+          control={<MaterialUISwitch sx={{ m: 1 }} checked={darkMode} onChange={toggleDarkMode} />} label={undefined} />
       </Container>
     </ThemeProvider>
   );

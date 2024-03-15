@@ -12,27 +12,17 @@ import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
-
-  useEffect(() => {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
-    setDarkMode(isDarkMode);
-  }, []);
+  const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
 
   useEffect(() => {
     localStorage.setItem('darkMode', darkMode.toString());
-  }, [darkMode]);
 
-  const theme = createTheme({
-    palette: {
-      mode: darkMode ? 'dark' : 'light',
-    },
-    typography: {
-      fontFamily: 'Cabin, sans-serif',
-    },
-  });
+    const isDarkMode = localStorage.getItem('darkMode') === 'undefined' || localStorage.getItem('darkMode') === 'true';
+    setDarkMode(isDarkMode);
 
-  useEffect(() => {
+    console.log("App - darkMode: ", darkMode);
+
+
     const handler = () => {
       console.log('Developer console is open!');
       alert('Developer console is open!');
@@ -43,7 +33,16 @@ function App() {
     return () => {
       window.removeEventListener('devtoolschange', handler);
     };
-  }, []);
+  }, [darkMode]);
+
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+    },
+    typography: {
+      fontFamily: 'Cabin, sans-serif',
+    },
+  });
 
   return (
     <ThemeProvider theme={theme}>

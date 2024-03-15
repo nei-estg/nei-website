@@ -7,10 +7,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
-
 
 export default function BlogPage() {
+
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+
+  const defaultTheme = createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } });
+
   const isXs = useMediaQuery(defaultTheme.breakpoints.only('xs'));
   const isSm = useMediaQuery(defaultTheme.breakpoints.only('sm'));
   const isMd = useMediaQuery(defaultTheme.breakpoints.only('md'));
@@ -117,14 +122,14 @@ export default function BlogPage() {
   return (
     <ThemeProvider theme={defaultTheme}>
 
-    {blogList.length === 0 ? (
-       <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
-         <Typography variant="h5" color="#1E2022" fontWeight="700" align="center">
-           Não há posts disponíveis no momento.
-         </Typography>
-     </Container>
-    ) : (
-      <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      {blogList.length === 0 ? (
+        <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+          <Typography variant="h5" color="#1E2022" fontWeight="700" align="center">
+            Não há posts disponíveis no momento.
+          </Typography>
+        </Container>
+      ) : (
+        <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Grid container spacing={1}>
             {blogList.map((blogItem, index) => (
               <Grid item key={index} xs={12} sm={6} md={4} lg={4} xl={4} sx={{ cursor: 'pointer' }} onClick={() => navigate(`/blog/post/${blogItem.slug}`)}>
@@ -177,8 +182,9 @@ export default function BlogPage() {
               </Grid>
             ))}
           </Grid>
-      </Container>
-    )}
+        </Container>
+      )
+      }
     </ThemeProvider>
   )
 }

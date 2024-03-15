@@ -15,9 +15,14 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
+
+
+
 
 export default function ResetPasswordPage() {
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
   const [clickGetCode, setClickGetCode] = useState(false);
 
 
@@ -110,7 +115,8 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+
       <Container component="main" maxWidth="xs" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box

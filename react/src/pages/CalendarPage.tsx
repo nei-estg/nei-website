@@ -49,9 +49,14 @@ const customLabels = {
   next: ">",
 };
 
-const defaultTheme = createTheme();
+
+
 
 export default function CalendarPage() {
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+
   const [eventsData, setEventsData] = useState<ICalendar[]>([]);
   const [coursesData, setCoursesData] = useState<ICourse[]>([]);
   const [openAddEventModal, setOpenAddEventModal] = useState(false);
@@ -66,7 +71,7 @@ export default function CalendarPage() {
 
   useEffect(() => {
     document.title = routes.calendarpage.name;
-  
+
     //! Add Holidays to Calendar
     const holidays = hd.getHolidays();
     const holidayEvents = holidays.map((holiday, index) => ({
@@ -76,7 +81,7 @@ export default function CalendarPage() {
       startDate: new Date(holiday.start),
       endDate: new Date(holiday.end),
     }));
-  
+
     //! Get Calendar Events
     getCalendarEvents()
       .then((result) => {
@@ -98,7 +103,7 @@ export default function CalendarPage() {
           }
         );
       });
-  
+
     //! Get Courses
     getCourses()
       .then((result) => {
@@ -120,7 +125,7 @@ export default function CalendarPage() {
           }
         );
       });
-  
+
     // Limpar eventos antes de montar novamente o componente
     return () => {
       setEventsData([]);
@@ -244,11 +249,12 @@ export default function CalendarPage() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+
       <Container maxWidth="xl" sx={{ marginBottom: '60px' }}>
-        <Alert severity="info" sx={{marginTop: "30px", marginBottom: "30px"}}>
-          Podes ver eventos adicionados pela comunidade e verificados pelo NEI. 
-          Também mostramos feriados, e tu, com a tua sessão iniciada, podes criar eventos. 
+        <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
+          Podes ver eventos adicionados pela comunidade e verificados pelo NEI.
+          Também mostramos feriados, e tu, com a tua sessão iniciada, podes criar eventos.
           Quando crias um evento, ele fica visível para ti até que atualizes a página.
         </Alert>
 

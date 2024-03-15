@@ -6,10 +6,14 @@ import { toast, Bounce } from "react-toastify";
 import { useEffect, useState } from "react";
 
 
-const defaultTheme = createTheme();
+
+
 
 export default function ActivateAccountPage() {
   const [clickGetCode, setClickGetCode] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
 
   useEffect(() => {
     document.title = routes.activateaccountpage.name;
@@ -87,7 +91,7 @@ export default function ActivateAccountPage() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
       <Container component="main" maxWidth="xs" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box

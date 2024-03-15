@@ -34,8 +34,13 @@ import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
+
 export default function MentoringPage() {
-  const defaultTheme = createTheme();
+
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+
   const [mentoringRequestList, setMentoringRequestList] = useState<
     IMentoringRequest[]
   >([]);
@@ -328,7 +333,8 @@ export default function MentoringPage() {
 
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
         <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
           A tua privacidade é uma prioridade. Por isso, não vais saber quem é a

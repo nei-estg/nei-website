@@ -17,14 +17,22 @@ import './css/FrontPage.css';
 import Terminal from '@src/components/terminal/terminal';
 import routes from '@src/router/Routes';
 
-const defaultTheme = createTheme();
 
 export default function FrontPage() {
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+  
   const [showForm, setShowForm] = useState(true);
+
 
   useEffect(() => {
     document.title = routes.frontpage.name;
-  }, []);
+
+    console.log("FrontPage - darkMode:", darkMode);
+
+  }, [darkMode]);
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -47,7 +55,7 @@ export default function FrontPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: 'dark',
+            theme: darkMode ? 'dark' : 'light',
             transition: Bounce,
           }
         );
@@ -63,14 +71,17 @@ export default function FrontPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: 'dark',
+            theme: darkMode ? 'dark' : 'light',
             transition: Bounce,
           }
         );
       });
   };
+
+
+
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
       <div>
         <div
           id="bgnr"
@@ -207,7 +218,7 @@ export default function FrontPage() {
         >
           {showForm && (
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <h1 className="responsive-header">Dúvidas? Envia-nos uma mensagem! :)</h1>
+              <h1 className="responsive-header" style={{ color: (darkMode === undefined || darkMode) ? '#FFFFFF' : '#000000' }}>Dúvidas? Envia-nos uma mensagem! :)</h1>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -255,11 +266,11 @@ export default function FrontPage() {
               <Button
                 type="submit"
                 variant="contained"
-                sx={{ 
-                  mt: 3, 
-                  mb: 2, 
-                  width: { xs: '100%', sm: '50%' }, 
-                  borderRadius: '8px' 
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  width: { xs: '100%', sm: '50%' },
+                  borderRadius: '8px'
                 }}
               >
                 Enviar Mensagem

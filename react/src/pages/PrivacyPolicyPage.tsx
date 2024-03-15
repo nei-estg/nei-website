@@ -5,17 +5,21 @@ import {
   createTheme,
 } from "@mui/material";
 import routes from "@src/router/Routes";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const defaultTheme = createTheme();
 
 const PrivacyPolicyPage = () => {
   useEffect(() => {
     document.title = routes.privacypolicypage.name;
   });
 
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+
       <Container maxWidth="xl" sx={{ marginTop: "30px", marginBottom: "60px" }}>
         <div style={{ textAlign: "center" }}>
           <Typography

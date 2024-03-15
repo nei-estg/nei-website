@@ -32,7 +32,6 @@ import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -45,7 +44,12 @@ const MenuProps = {
   },
 };
 
+
+
 export default function MaterialsPage() {
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
   const [materialsList, setMaterialsList] = useState<IMaterial[]>([]);
   const [curricularUnits, setCurricularUnits] = useState<ICurricularUnit[]>([]);
   const [coursesData, setCoursesData] = useState<ICourse[]>([]);
@@ -272,7 +276,8 @@ export default function MaterialsPage() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
         <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
           Podes ver materiais adicionados pela comunidade e verificados pelo

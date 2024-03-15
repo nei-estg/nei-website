@@ -17,9 +17,17 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
+
+
+
 
 export default function PostPage() {
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+  const defaultTheme = createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } });
+
+
   const isXs = useMediaQuery(defaultTheme.breakpoints.only("xs"));
   const isSm = useMediaQuery(defaultTheme.breakpoints.only("sm"));
   const isMd = useMediaQuery(defaultTheme.breakpoints.only("md"));
@@ -62,7 +70,8 @@ export default function PostPage() {
   }, []);
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+
       <Container maxWidth="xl" sx={{ marginTop: "30px", marginBottom: "60px" }}>
         <div>
           <Grid container spacing={1}>

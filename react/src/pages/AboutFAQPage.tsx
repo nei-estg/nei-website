@@ -9,7 +9,6 @@ import routes from "@src/router/Routes";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
 
 interface TeamItem {
   photo: string;
@@ -130,8 +129,14 @@ const transformData = (originalData: IFAQ[]): FaqSection[] => {
   return transformedData;
 };
 
+
+
+
 export default function AboutFAQPage() {
 
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
   const [valueDirecao, setValueDirecao] = useState(0);
 
   const handleChangeDirecao = (event: SyntheticEvent, newValue: number) => {
@@ -168,8 +173,12 @@ export default function AboutFAQPage() {
     });
   }, [])
 
+  const defaultTheme = createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } });
+
+
   return (
     <ThemeProvider theme={defaultTheme}>
+
       <Container maxWidth="xl" sx={{ marginBottom: '60px' }}>
 
         {/*About Us*/}
@@ -432,8 +441,7 @@ export default function AboutFAQPage() {
             ))}
           </div>
         )}
-
       </Container>
     </ThemeProvider>
-  )
+  );
 }

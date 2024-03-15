@@ -32,9 +32,15 @@ import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
+
+
+
 
 export default function ProfilePage() {
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+
   const [user, setUser] = useState<IUser>({} as IUser);
   const [isEditing, setIsEditing] = useState(false); // Estado para controlar a visibilidade
   const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
@@ -200,7 +206,8 @@ export default function ProfilePage() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+
       <Container maxWidth="xl" sx={{ marginTop: "30px", marginBottom: "60px" }}>
         <div>
           <Grid container spacing={1}>
@@ -303,8 +310,9 @@ export default function ProfilePage() {
                 )}
 
                 {isEditing && (
-                  <div style={{  display: "flex",  flexDirection: "column",  alignItems: "center", justifyContent: "center", width: "93%",
-                    }}
+                  <div style={{
+                    display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "93%",
+                  }}
                   >
                     <Box component="form" onSubmit={handleSubmit}>
                       {/*nome*/}
