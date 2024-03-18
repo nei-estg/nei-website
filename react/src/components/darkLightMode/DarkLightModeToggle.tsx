@@ -1,12 +1,18 @@
 import { CssBaseline, Switch, Container, FormControlLabel, styled } from "@mui/material";
+import { toggleTheme } from "./../redux/actions";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from "./../redux/store";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 
 
-function DarkLightModeToggle({ darkMode, setDarkMode }) {
+function DarkLightModeToggle() {
+
+  const dispatch = useDispatch();
+  const themeMode = useSelector((state: RootState) => state.theme.darkMode);
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    dispatch(toggleTheme());
   };
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
@@ -56,22 +62,15 @@ function DarkLightModeToggle({ darkMode, setDarkMode }) {
     },
   }));
 
-  // Criar o tema com base no estado do modo escuro
-  const defaultTheme = createTheme({
-    palette: {
-      mode: darkMode ? 'dark' : 'light',
-    },
-    typography: {
-      fontFamily: 'Cabin, sans-serif',
-    },
-  });
+  const defaultTheme = createTheme({ palette: { mode: themeMode ? 'dark' : 'light' } });
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Container>
         <FormControlLabel
-          control={<MaterialUISwitch sx={{ m: 1 }} checked={darkMode} onChange={toggleDarkMode} />} label={undefined} />
+          control={<MaterialUISwitch sx={{ m: 1 }} checked={themeMode} onChange={toggleDarkMode} />} label={undefined} />
       </Container>
     </ThemeProvider>
   );

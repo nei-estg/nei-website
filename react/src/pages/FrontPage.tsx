@@ -3,9 +3,7 @@ import {
   Button,
   CssBaseline,
   Grid,
-  TextField,
-  ThemeProvider,
-  createTheme,
+  TextField
 } from '@mui/material';
 import { sendContactForm } from '@src/api/ContactRoutes';
 import { IContact } from '@src/interfaces/IContact';
@@ -16,21 +14,20 @@ import { Scroll } from '@src/components/button/scroll';
 import './css/FrontPage.css';
 import Terminal from '@src/components/terminal/terminal';
 import routes from '@src/router/Routes';
+import { useSelector } from 'react-redux';
+import { RootState } from '@src/components/redux/store';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 
 export default function FrontPage() {
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
-  );
+
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
   
   const [showForm, setShowForm] = useState(true);
 
 
   useEffect(() => {
     document.title = routes.frontpage.name;
-
-    console.log("FrontPage - darkMode:", darkMode);
-
   }, [darkMode]);
 
 

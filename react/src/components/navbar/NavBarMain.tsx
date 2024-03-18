@@ -1,5 +1,4 @@
 import MenuIcon from "@mui/icons-material/Menu";
-import PersonIcon from "@mui/icons-material/Person";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -59,7 +58,7 @@ const settings = {
   ],
 };
 
-function NavBarMain({ darkMode, setDarkMode }) {
+function NavBarMain() {
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -235,7 +234,7 @@ function NavBarMain({ darkMode, setDarkMode }) {
                   color="inherit"
                 >
                   <MenuItem>
-                    <DarkLightModeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
+                    <DarkLightModeToggle />
                   </MenuItem>
                 </Link>
 

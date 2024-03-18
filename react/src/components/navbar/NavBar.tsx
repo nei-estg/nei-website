@@ -58,7 +58,7 @@ const settings = {
   ],
 };
 
-function NavBar({ darkMode, setDarkMode }) {
+function NavBar() {
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -230,7 +230,7 @@ function NavBar({ darkMode, setDarkMode }) {
                   color="inherit"
                 >
                   <MenuItem>
-                    <DarkLightModeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
+                    <DarkLightModeToggle/>
                   </MenuItem>
                 </Link>
 
