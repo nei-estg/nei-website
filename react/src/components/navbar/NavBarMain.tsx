@@ -149,7 +149,7 @@ function NavBarMain() {
                     >
                       <Button
                         onClick={() => navigate(page.URL)}
-                        sx={{ color: "inherit", textTransform: "none" }}
+                        sx={{ color: themeMode ? "inherit" : "#191919", textTransform: "none" }}
                       >
                         {page.name}
                       </Button>
@@ -177,7 +177,7 @@ function NavBarMain() {
                   flexGrow: 1,
                   fontWeight: 700,
                   letterSpacing: ".3rem",
-                  color: "inherit",
+                  color: themeMode ? "inherit" : "#191919",
                   textDecoration: "none",
                 }}
               >
@@ -194,7 +194,10 @@ function NavBarMain() {
                     style={{
                       my: 2,
                       color:
-                        !isLoggedIn() && page.requiredLogin ? "#969696" : "white",
+                        page.requiredLogin && !isLoggedIn() ? "#969696" : // requiredLogin e não logado
+                          themeMode && !page.requiredLogin ? "inherit" : // dark e não requiredLogin
+                            !themeMode && !page.requiredLogin ? "#191919" : // light e não requiredLogin
+                              "#FFFFFF", // Todas as outras condições padrão
                       display: "block",
                     }}
                     disabled={!isLoggedIn() && page.requiredLogin}
