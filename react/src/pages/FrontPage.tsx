@@ -16,7 +16,6 @@ import Terminal from '@src/components/terminal/terminal';
 import routes from '@src/router/Routes';
 import { useSelector } from 'react-redux';
 import { RootState } from '@src/components/redux/store';
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 
 export default function FrontPage() {

@@ -10,26 +10,28 @@ import {
   useTheme,
 } from "@mui/material";
 import logo from "../../assets/logo.png";
-import { linkSync } from "fs";
+import { useSelector } from "react-redux";
+import { RootState } from "@src/components/redux/store";
 
 export const FooterMain = () => {
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const socialNetworks = [
-    {id: 1, name: "email", URL: "mailto:nei@estg.ipp.pt"},
-    {id: 2, name: "linkedin", URL: "https://www.linkedin.com/company/estg-nei"},
-    {id: 3, name: "instagram", URL: "https://www.instagram.com/nei_estg/"},
-    {id: 4, name: "discord", URL: "https://discord.gg/xbD38MS2e8"},
-    {id: 5, name: "linktree", URL: "https://linktr.ee/nei.estg"},
+    { id: 1, name: "email", URL: "mailto:nei@estg.ipp.pt" },
+    { id: 2, name: "linkedin", URL: "https://www.linkedin.com/company/estg-nei" },
+    { id: 3, name: "instagram", URL: "https://www.instagram.com/nei_estg/" },
+    { id: 4, name: "discord", URL: "https://discord.gg/xbD38MS2e8" },
+    { id: 5, name: "linktree", URL: "https://linktr.ee/nei.estg" },
   ];
 
   const linksWebsite = [
-    {id: 1, name: "Sobre Nós", to: routes.aboutFAQpage.path},
-    {id: 2, name: "Blog", to: routes.blogpage.path},
-    {id: 3, name: "Calendário", to: routes.calendarpage.path},
-    {id: 4, name: "Materiais UC's", to: routes.materialspage.path},
-    {id: 5, name: "Política de Privacidade", to: routes.privacypolicypage.path},
+    { id: 1, name: "Sobre Nós", to: routes.aboutFAQpage.path },
+    { id: 2, name: "Blog", to: routes.blogpage.path },
+    { id: 3, name: "Calendário", to: routes.calendarpage.path },
+    { id: 4, name: "Materiais UC's", to: routes.materialspage.path },
+    { id: 5, name: "Política de Privacidade", to: routes.privacypolicypage.path },
   ];
 
 
@@ -44,7 +46,7 @@ export const FooterMain = () => {
         }}
       >
         <Container maxWidth="lg">
-        <Grid container spacing={5}>
+          <Grid container spacing={5}>
             <Grid item xs={12} sm={5} style={{ display: "flex", alignItems: "center" }}>
               <Grid
                 container
@@ -63,14 +65,20 @@ export const FooterMain = () => {
                 />
                 <div>
                   <Typography
-                    sx={{ marginTop: "10px" ,
+                    sx={{
+                      marginTop: "10px",
                       textAlign: { xs: "center", sm: "center", md: "center" },
+                      color: darkMode ? "#FFFFFF" : "#191919"
                     }}
                     variant="h6"
                   >
                     NEI
                   </Typography>
-                  <Typography variant="body2" sx={{ textAlign: "center" }}>
+                  <Typography
+                    variant="body2"
+                    sx={{ textAlign: "center" }}
+                    color={darkMode ? "#FFFFFF" : "#191919"}
+                  >
                     Núcleo de Estudantes de Informática da ESTG
                   </Typography>
                 </div>
@@ -81,25 +89,26 @@ export const FooterMain = () => {
                 variant="h6"
                 gutterBottom
                 align={isSmallScreen ? "center" : "center"}
+                color={darkMode ? "#FFFFFF" : "#191919"}
               >
                 Links
               </Typography>
 
               {linksWebsite.map((link, index) => (
                 <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={link.to}
+                  display="flex"
+                  justifyContent={isSmallScreen ? "center" : "center"}
                 >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    {link.name}
-                  </Typography>
-                </Button>
-              </Box>
+                  <Button
+                    component={RouterLink}
+                    sx={{ marginLeft: "0px", color: darkMode ? "#FFFFFF" : "#191919", textTransform: 'lowercase', }}
+                    to={link.to}
+                  >
+                    <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
+                      {link.name}
+                    </Typography>
+                  </Button>
+                </Box>
               ))}
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -107,30 +116,31 @@ export const FooterMain = () => {
                 variant="h6"
                 gutterBottom
                 align={isSmallScreen ? "center" : "center"}
+                color={darkMode ? "#FFFFFF" : "#191919"}
               >
                 Redes Sociais
               </Typography>
 
               {socialNetworks.map((sn, index) => (
                 <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                 <Button key={sn.id}
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={sn.URL}
+                  display="flex"
+                  justifyContent={isSmallScreen ? "center" : "center"}
                 >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    {sn.name}
-                  </Typography>
+                  <Button key={sn.id}
+                    component={RouterLink}
+                    sx={{ marginLeft: "0px", color: darkMode ? "#FFFFFF" : "#191919", textTransform: 'lowercase', }}
+                    to={sn.URL}
+                  >
+                    <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
+                      {sn.name}
+                    </Typography>
                   </Button>
                 </Box>
               ))}
             </Grid>
           </Grid>
           <Box mt={5}>
-            <Typography variant="body2" align="center">
+            <Typography variant="body2" align="center" color={darkMode ? "#FFFFFF" : "#191919"}>
               Made with ❤️ and ☕ by NEI's Web Development Team
             </Typography>
           </Box>
