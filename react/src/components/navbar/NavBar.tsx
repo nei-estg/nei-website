@@ -19,6 +19,7 @@ import DarkLightModeToggle from "../darkLightMode/DarkLightModeToggle";
 import { RootState } from "@src/components/redux/store";
 import { useSelector } from "react-redux";
 import './Navbar.css';
+import { createTheme, ThemeProvider } from "@mui/material";
 
 
 const navbar = {
@@ -93,7 +94,7 @@ function NavBar() {
 
 
   return (
-    <>
+    <ThemeProvider theme={createTheme({ palette: { mode: themeMode ? 'dark' : 'light' } })}>
       <div style={{ position: "relative" }}>
         <AppBar position="static" sx={{ backgroundColor: "#002454" }}>
           <Container maxWidth="xl">
@@ -275,7 +276,7 @@ function NavBar() {
           </Container>
         </AppBar>
       </div>
-    </>
+    </ThemeProvider>
   );
 }
 export default NavBar;
