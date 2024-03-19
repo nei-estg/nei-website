@@ -18,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 import DarkLightModeToggle from "../darkLightMode/DarkLightModeToggle";
 import { RootState } from "@src/components/redux/store";
 import { useSelector } from "react-redux";
-import './Navbar.css';
 import { createTheme, ThemeProvider } from "@mui/material";
 
 

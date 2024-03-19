@@ -205,7 +205,7 @@ export default function FrontPage() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'white'
+          backgroundColor: darkMode ? '#2f2f2f' : '#FFFFFF'
         }}
       >
         <div
@@ -217,11 +217,12 @@ export default function FrontPage() {
           }}
         >
           {showForm && (
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <h1 className="responsive-header" style={{ color: (darkMode === undefined || darkMode) ? '#FFFFFF' : '#000000' }}>Dúvidas? Envia-nos uma mensagem! :)</h1>
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3, }}>
+              <h1 className="responsive-header" style={{ color: darkMode ? '#FFFFFF' : '#000000' }}>Dúvidas? Envia-nos uma mensagem! :)</h1>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    sx={{ backgroundColor: darkMode ? '#FFFFFF' : '' }}
                     autoComplete="name"
                     name="uName"
                     required
@@ -232,6 +233,7 @@ export default function FrontPage() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    sx={{ backgroundColor: darkMode ? '#FFFFFF' : '' }}
                     required
                     fullWidth
                     id="email"
@@ -242,6 +244,7 @@ export default function FrontPage() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    sx={{ backgroundColor: darkMode ? '#FFFFFF' : '' }}
                     autoComplete="subject"
                     name="subject"
                     required
@@ -252,6 +255,7 @@ export default function FrontPage() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    sx={{ backgroundColor: darkMode ? '#FFFFFF' : '' }}
                     required
                     fullWidth
                     name="message"
@@ -277,7 +281,7 @@ export default function FrontPage() {
               </Button>
             </Box>
           )}
-          {!showForm && <div>Obrigado, até breve!</div>}
+          {!showForm && <div style={{ color: darkMode ? '#FFFFFF' : '#000000' }}>Obrigado, até breve!</div>}
         </div>
       </div>
       <div style={{ zIndex: 1, position: 'absolute' }}>

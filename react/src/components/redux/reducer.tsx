@@ -7,7 +7,7 @@ interface ThemeState {
 }
 
 const initialState: ThemeState = {
-  darkMode: false,
+  darkMode: true,
 };
 
 const themeReducer = (state = initialState, action: { type: string }) => {
