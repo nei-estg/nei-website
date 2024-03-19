@@ -1,4 +1,3 @@
-import React from "react";
 import routes from "@src/router/Routes";
 import { useLocation } from "react-router-dom";
 import NavBar from "./NavBar";

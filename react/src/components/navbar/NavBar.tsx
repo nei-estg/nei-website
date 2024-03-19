@@ -16,6 +16,10 @@ import routes from "@src/router/Routes";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import DarkLightModeToggle from "../darkLightMode/DarkLightModeToggle";
+import { RootState } from "@src/components/redux/store";
+import { useSelector } from "react-redux";
+import './Navbar.css';
+
 
 const navbar = {
   pages: [
@@ -84,170 +88,162 @@ function NavBar() {
     setAnchorElUser(null);
   };
 
-  return (
-    <div style={{ position: "relative" }}>
-      <AppBar position="static" sx={{ backgroundColor: "#002454" }}>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            {/* screen > 899 x 877 */}
-            <Avatar
-              alt="NEI"
-              src="/logo.png"
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            />
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="nei menu"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
+  const themeMode = useSelector((state: RootState) => state.theme.darkMode);
+
+
+  return (
+    <>
+      <div style={{ position: "relative" }}>
+        <AppBar position="static" sx={{ backgroundColor: "#002454" }}>
+          <Container maxWidth="xl">
+            <Toolbar disableGutters>
+              {/* screen > 899 x 877 */}
+              <Avatar
+                alt="NEI"
+                src="/logo.png"
+                component="a"
+                href="/"
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              />
+
+              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+                <IconButton
+                  size="large"
+                  aria-label="nei menu"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                  keepMounted
+                  transformOrigin={{ vertical: "top", horizontal: "left" }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{ display: { xs: "block", md: "none" } }}
+                >
+                  {navbar.pages.map((page) => (
+                    <MenuItem
+                      key={page.id}
+                      onClick={() => {
+                        handleCloseNavMenu();
+                        navigate(page.URL);
+                      }}
+                      disabled={!isLoggedIn() && page.requiredLogin}
+                    >
+                      <Button
+                        onClick={() => navigate(page.URL)}
+                        sx={{ color: "inherit", textTransform: "none" }}
+                      >
+                        {page.name}
+                      </Button>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+
+              {/* screen <= 899 x 877 */}
+              <Avatar
+                alt="NEI"
+                src="/logo.png"
+                sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+                component="a"
+                href="/"
+              />
+
+              <Typography
+                variant="h5"
+                noWrap
+                component="a"
+                sx={{
+                  mr: 2,
+                  display: { xs: "flex", md: "none" },
+                  flexGrow: 1,
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
               >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                keepMounted
-                transformOrigin={{ vertical: "top", horizontal: "left" }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{ display: { xs: "block", md: "none" } }}
-              >
+                NEI
+              </Typography>
+              <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                 {navbar.pages.map((page) => (
-                  <MenuItem
+                  <Button
                     key={page.id}
                     onClick={() => {
                       handleCloseNavMenu();
                       navigate(page.URL);
                     }}
+                    style={{
+                      my: 2,
+                      color:
+                        !isLoggedIn() && page.requiredLogin ? "#969696" : "white",
+                      display: "block",
+                    }}
                     disabled={!isLoggedIn() && page.requiredLogin}
                   >
-                    <Button
-                      onClick={() => navigate(page.URL)}
-                      sx={{ color: "inherit", textTransform: "none" }}
-                    >
-                      {page.name}
-                    </Button>
-                  </MenuItem>
+                    {page.name}
+                  </Button>
                 ))}
-              </Menu>
-            </Box>
+              </Box>
 
-            {/* screen <= 899 x 877 */}
-            <Avatar
-              alt="NEI"
-              src="/logo.png"
-              sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
-              component="a"
-              href="/"
-            />
+              {/* icon user */}
+              <Box sx={{ flexGrow: 0 }}>
+                {isLoggedIn() ? (
+                  <Tooltip title="Abrir Definições">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar
+                        sx={{ backgroundColor: "#054496" }}
+                        alt="Perfil"
+                        src={localStorage.getItem("profile") || undefined}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Iniciar Sessão">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar sx={{ backgroundColor: "#054496", color: "#FFF" }} />
+                    </IconButton>
+                  </Tooltip>
+                )}
 
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              NEI
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {navbar.pages.map((page) => (
-                <Button
-                  key={page.id}
-                  onClick={() => {
-                    handleCloseNavMenu();
-                    navigate(page.URL);
-                  }}
-                  style={{
-                    my: 2,
-                    color:
-                      !isLoggedIn() && page.requiredLogin ? "#969696" : "white",
-                    display: "block",
-                  }}
-                  disabled={!isLoggedIn() && page.requiredLogin}
+
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                  keepMounted
+                  transformOrigin={{ vertical: "top", horizontal: "right" }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
                 >
-                  {page.name}
-                </Button>
-              ))}
-            </Box>
 
-            {/* icon user */}
-            <Box sx={{ flexGrow: 0 }}>
-              {isLoggedIn() ? (
-                <Tooltip title="Abrir Definições">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      sx={{ backgroundColor: "#054496" }}
-                      alt="Perfil"
-                      src={localStorage.getItem("profile") || undefined}
-                    />
-                  </IconButton>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Iniciar Sessão">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar sx={{ backgroundColor: "#054496", color: "#FFF" }} />
-                  </IconButton>
-                </Tooltip>
-              )}
-
-
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                keepMounted
-                transformOrigin={{ vertical: "top", horizontal: "right" }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-
-                <Link
-                  component="a"
-                  underline="none"
-                  color="inherit"
-                >
-                  <MenuItem>
-                    <DarkLightModeToggle/>
-                  </MenuItem>
-                </Link>
-
-                {isLoggedIn() ? settings.logged.map((setting) => (
                   <Link
-                    key={setting.id}
-                    href={setting.URL}
                     component="a"
                     underline="none"
                     color="inherit"
                   >
-                    <MenuItem onClick={handleCloseUserMenu}>
-                      {setting.name}
+                    <MenuItem>
+                      <DarkLightModeToggle />
                     </MenuItem>
                   </Link>
-                ))
-                  : settings.guest.map((setting) => (
+
+                  {isLoggedIn() ? settings.logged.map((setting) => (
                     <Link
                       key={setting.id}
                       href={setting.URL}
@@ -259,13 +255,27 @@ function NavBar() {
                         {setting.name}
                       </MenuItem>
                     </Link>
-                  ))}
-              </Menu>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </div>
+                  ))
+                    : settings.guest.map((setting) => (
+                      <Link
+                        key={setting.id}
+                        href={setting.URL}
+                        component="a"
+                        underline="none"
+                        color="inherit"
+                      >
+                        <MenuItem onClick={handleCloseUserMenu}>
+                          {setting.name}
+                        </MenuItem>
+                      </Link>
+                    ))}
+                </Menu>
+              </Box>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </div>
+    </>
   );
 }
 export default NavBar;

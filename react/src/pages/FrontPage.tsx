@@ -22,12 +22,15 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 export default function FrontPage() {
 
   const darkMode = useSelector((state: RootState) => state.theme.darkMode);
-  
+
   const [showForm, setShowForm] = useState(true);
 
 
   useEffect(() => {
     document.title = routes.frontpage.name;
+
+    console.log("FrontPage - darkMode:", darkMode);
+
   }, [darkMode]);
 
 
@@ -78,7 +81,7 @@ export default function FrontPage() {
 
 
   return (
-    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+    <>
       <div>
         <div
           id="bgnr"
@@ -280,6 +283,6 @@ export default function FrontPage() {
       <div style={{ zIndex: 1, position: 'absolute' }}>
         <Particle />
       </div>
-    </ThemeProvider>
+    </>
   );
 }

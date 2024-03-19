@@ -62,11 +62,8 @@ function DarkLightModeToggle() {
     },
   }));
 
-  const defaultTheme = createTheme({ palette: { mode: themeMode ? 'dark' : 'light' } });
-
-
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme({ palette: { mode: themeMode ? 'dark' : 'light' } })}>
       <CssBaseline />
       <Container>
         <FormControlLabel
