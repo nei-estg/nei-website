@@ -107,8 +107,8 @@ export default function FrontPage() {
               justifyContent: 'center',
             }}
           >
-            <h1 style={{ color: 'white' }}>Bem-vindo ao NEI!</h1>
-            <p style={{ color: 'white' }}>Prepara-te para passar maior parte do teu tempo aqui!</p>
+            <h1 style={{ color: darkMode ? '#FFFFFF' : "#191919" }}>Bem-vindo ao NEI!</h1>
+            <p style={{ color: darkMode ? '#FFFFFF' : "#191919" }}>Prepara-te para passar maior parte do teu tempo aqui!</p>
           </div>
           <div
             style={{
@@ -165,7 +165,7 @@ export default function FrontPage() {
           >
             <div id="div1" style={{ margin: '20px' }}>
               <a href={routes.aboutFAQpage.path} style={{ textDecoration: 'none' }}>
-                <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
+                <h1 style={{ color: darkMode ? '#FFFFFF' : "#191919" }}>Sobre o Nosso Núcleo</h1>
                 <a href="/about" target="_blank" style={{ textDecoration: 'none' }}>
                   <img
                     src="logo.png"
@@ -173,7 +173,7 @@ export default function FrontPage() {
                     style={{ height: '150px', width: '150px' }}
                   />
                 </a>
-                <p style={{ color: 'white', fontWeight: 'bold' }}>
+                <p style={{ color: darkMode ? '#FFFFFF' : "#191919", fontWeight: 'bold' }}>
                   Direção, Cursos, entre outros.
                 </p>
               </a>
@@ -181,13 +181,13 @@ export default function FrontPage() {
 
             <div id="div1" style={{ margin: '20px' }}>
               <a href={routes.blogpage.path} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                <h1 style={{ color: 'white' }}>Atividades</h1>
+                <h1 style={{ color: darkMode ? '#FFFFFF' : "#191919" }}>Atividades</h1>
                 <img
                   src="/icon/laptop.png"
                   alt="Descrição da imagem"
                   style={{ height: '150px', width: '150px' }}
                 />
-                <p style={{ color: 'white', fontWeight: 'bold' }}>
+                <p style={{ color: darkMode ? '#FFFFFF' : "#191919", fontWeight: 'bold' }}>
                   Eventos e Atividades mais recentes.
                 </p>
               </a>
