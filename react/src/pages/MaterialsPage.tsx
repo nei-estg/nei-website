@@ -336,16 +336,18 @@ export default function MaterialsPage() {
                   required
                   fullWidth
                   id="fileName"
-                  label="Name"
+                  variant="filled"
+                  label="Nome"
                   name="fileName"
                   autoComplete="fileName"
                   autoFocus
                 />
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="course-label">Curso</InputLabel>
+                  <InputLabel id="course-label" variant="filled">Curso</InputLabel>
                   <Select
                     labelId="course-label"
                     id="course"
+                    variant="filled"
                     label="Curso"
                     value={selectedCourse?.abbreviation ?? ""}
                     onChange={handleSelectCourse}
@@ -361,7 +363,7 @@ export default function MaterialsPage() {
                   </Select>
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="curricular-unit-label">
+                  <InputLabel id="curricular-unit-label" variant="filled">
                     Unidade Curricular
                   </InputLabel>
                   <Select
@@ -383,7 +385,7 @@ export default function MaterialsPage() {
                   </Select>
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="material-tags-label">
+                  <InputLabel id="material-tags-label" variant="filled">
                     Material Tags
                   </InputLabel>
                   <Select
@@ -417,6 +419,7 @@ export default function MaterialsPage() {
                   id="link"
                   label="Link"
                   name="link"
+                  variant="filled"
                   type="url"
                   autoComplete="link"
                   required

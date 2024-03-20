@@ -117,6 +117,7 @@ export default function ActivateAccountPage() {
                   required
                   fullWidth
                   id="username"
+                  variant="filled"
                   label="Username"
                   name="username"
                   autoComplete="username"
@@ -137,6 +138,7 @@ export default function ActivateAccountPage() {
               margin="normal"
               required
               fullWidth
+              variant="filled"
               name="resetCode"
               label="Código"
               type="password"

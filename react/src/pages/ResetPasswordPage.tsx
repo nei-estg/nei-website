@@ -146,6 +146,7 @@ export default function ResetPasswordPage() {
                   required
                   fullWidth
                   id="username"
+                  variant="filled"
                   label="Username"
                   name="username"
                   autoComplete="username"
@@ -169,6 +170,7 @@ export default function ResetPasswordPage() {
               fullWidth
               name="resetCode"
               label="Código"
+              variant="filled"
               type="password"
               id="resetCode"
               sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
@@ -181,6 +183,7 @@ export default function ResetPasswordPage() {
               label="Nova Palavra-Passe"
               type="password"
               id="password"
+              variant="filled"
               autoComplete="new-password"
               sx={{ marginTop: '5px', backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '' }}
             />

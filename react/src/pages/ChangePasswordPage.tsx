@@ -84,6 +84,7 @@ export default function ChangePasswordPage() {
             <TextField
               margin="normal"
               required
+              variant="filled"
               fullWidth
               name="oldPassword"
               label="Antiga Palavra Passe"
@@ -96,6 +97,7 @@ export default function ChangePasswordPage() {
               required
               fullWidth
               name="newPassword"
+              variant="filled"
               label="Nova Palavra Passe"
               type="password"
               id="newPassword"

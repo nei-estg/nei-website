@@ -172,6 +172,7 @@ export default function Register() {
                   name="firstName"
                   required
                   fullWidth
+                  variant="filled"
                   id="firstName"
                   label="Primeiro Nome"
                   autoFocus
@@ -182,6 +183,7 @@ export default function Register() {
                 <TextField
                   required
                   fullWidth
+                  variant="filled"
                   id="lastName"
                   label="Último Nome"
                   name="lastName"
@@ -195,6 +197,7 @@ export default function Register() {
                   fullWidth
                   id="email"
                   label="Email"
+                  variant="filled"
                   name="email"
                   autoComplete="email"
                   sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
@@ -204,6 +207,7 @@ export default function Register() {
               <Grid item xs={12}>
                 <TextField
                   autoComplete="username"
+                  variant="filled"
                   name="Username"
                   required
                   fullWidth
@@ -217,6 +221,7 @@ export default function Register() {
                 <TextField
                   required
                   fullWidth
+                  variant="filled"
                   name="password"
                   label="Palavra-Passe"
                   type="password"

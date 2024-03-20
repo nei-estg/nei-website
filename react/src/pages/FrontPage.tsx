@@ -224,6 +224,7 @@ export default function FrontPage() {
                     sx={{ backgroundColor: darkMode ? '#FFFFFF' : '' }}
                     autoComplete="name"
                     name="uName"
+                    variant="filled"
                     required
                     fullWidth
                     id="uName"
@@ -236,6 +237,7 @@ export default function FrontPage() {
                     required
                     fullWidth
                     id="email"
+                    variant="filled"
                     label="Email"
                     name="email"
                     autoComplete="email"
@@ -246,6 +248,7 @@ export default function FrontPage() {
                     sx={{ backgroundColor: darkMode ? '#FFFFFF' : '' }}
                     autoComplete="subject"
                     name="subject"
+                    variant="filled"
                     required
                     fullWidth
                     id="subject"
@@ -259,10 +262,10 @@ export default function FrontPage() {
                     fullWidth
                     name="message"
                     label="Mensagem"
+                    variant="filled"
                     id="message"
                     autoComplete=""
                     multiline
-                    variant="outlined"
                   />
                 </Grid>
               </Grid>

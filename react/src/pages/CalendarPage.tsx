@@ -368,6 +368,7 @@ export default function CalendarPage() {
                 <TextField
                   margin="normal"
                   required
+                  variant="filled"
                   fullWidth
                   id="eventName"
                   label="Nome"
@@ -378,6 +379,7 @@ export default function CalendarPage() {
                   margin="normal"
                   required
                   fullWidth
+                  variant="filled"
                   name="description"
                   label="Descrição"
                   id="description"
@@ -404,6 +406,7 @@ export default function CalendarPage() {
                 </LocalizationProvider>
                 <TextField
                   margin="normal"
+                  variant="filled"
                   fullWidth
                   name="place"
                   label="Local"

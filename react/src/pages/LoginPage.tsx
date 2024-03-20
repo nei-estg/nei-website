@@ -77,6 +77,7 @@ export default function LoginPage() {
               margin="normal"
               required
               fullWidth
+              variant="filled"
               id="username"
               label="Username"
               name="username"
@@ -87,6 +88,7 @@ export default function LoginPage() {
             <TextField
               margin="normal"
               required
+              variant="filled"
               fullWidth
               name="password"
               label="Palavra-Passe"

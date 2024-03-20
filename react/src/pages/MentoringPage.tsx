@@ -462,6 +462,7 @@ export default function MentoringPage() {
               >
                 <TextField
                   name="requestId"
+                  variant="filled"
                   value={mentoringRequest.id}
                   sx={{ display: "none" }}
                 />
@@ -568,6 +569,7 @@ export default function MentoringPage() {
               >
                 <TextField
                   name="mentoringId"
+                  variant="filled"
                   value={mentoring.id}
                   sx={{ display: "none" }}
                 />
