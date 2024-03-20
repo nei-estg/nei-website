@@ -233,12 +233,13 @@ export default function Register() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id="course-label">Curso</InputLabel>
+                  <InputLabel id="course-label" variant="filled">Curso</InputLabel>
                   <Select
                     labelId="course-label"
                     id="course"
                     multiple
                     required
+                    variant="filled"
                     value={selectedCourses} //? Ignore this error
                     onChange={handleChangeCourses}
                     input={<OutlinedInput label="Course" />}
@@ -264,13 +265,14 @@ export default function Register() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id="year-label" >Ano</InputLabel>
+                  <InputLabel id="year-label" variant="filled">Ano</InputLabel>
                   <Select
                     labelId="year-label"
                     id="year"
                     value={selectedYear}
                     label="Age"
                     required
+                    variant="filled"
                     onChange={handleChangeYear}
                     sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
                     >

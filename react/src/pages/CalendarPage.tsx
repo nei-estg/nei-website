@@ -413,11 +413,12 @@ export default function CalendarPage() {
                   id="place"
                 />
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="course-label">Curso</InputLabel>
+                  <InputLabel id="course-label" variant="filled">Curso</InputLabel>
                   <Select
                     labelId="course-label"
                     id="course"
                     label="Curso"
+                    variant="filled"
                     value={selectedCourse.abbreviation}
                     onChange={handleSelectCourse}
                   >
@@ -432,13 +433,14 @@ export default function CalendarPage() {
                   </Select>
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="curricular-unit-label">
+                  <InputLabel id="curricular-unit-label" variant="filled">
                     Unidade Curricular
                   </InputLabel>
                   <Select
                     labelId="curricular-unit-label"
                     id="curricularUnit"
                     label="Unidade Curricular"
+                    variant="filled"
                     value={selectedCurricularUnit.abbreviation}
                     onChange={handleSelectCurricularUnit}
                     disabled={!selectedCourse.abbreviation}

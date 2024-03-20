@@ -378,7 +378,7 @@ export default function MentoringPage() {
           <FormControl fullWidth sx={{ mt: 2, textAlign: "center" }}>
             {" "}
             {/* Adiciona textAlign center para centralizar o FormControl */}
-            <InputLabel id="curricular-unit-label">
+            <InputLabel id="curricular-unit-label" variant="filled">
               Unidade Curricular
             </InputLabel>
             <Select
@@ -386,6 +386,7 @@ export default function MentoringPage() {
               id="curricularUnit"
               label="Unidade Curricular"
               value={selectedCurricularUnit?.abbreviation}
+              variant="filled"
               onChange={handleSelectCurricularUnit}
             >
               {curricularUnitList.map((unit) => (

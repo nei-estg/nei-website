@@ -370,6 +370,7 @@ export default function MaterialsPage() {
                     labelId="curricular-unit-label"
                     id="curricularUnit"
                     label="Unidade Curricular"
+                    variant="filled"
                     value={selectedCurricularUnit.abbreviation}
                     onChange={handleSelectCurricularUnit}
                     disabled={!selectedCourse}
@@ -392,6 +393,7 @@ export default function MaterialsPage() {
                     labelId="material-tags-label"
                     id="material-tags"
                     multiple
+                    variant="filled"
                     required
                     value={selectedMaterialTag} //? Ignore this error
                     onChange={handleChangeMaterialTag}
