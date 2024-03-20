@@ -1,18 +1,19 @@
 import { Avatar, Container, Grid, Paper, ThemeProvider, Typography, createTheme, styled, useMediaQuery } from "@mui/material";
+import { RootState } from "@src/components/redux/store";
 import { getBlogList } from "@src/api/BlogRoutes";
 import { IBlogPost } from "@src/interfaces/IBlogPost";
 import { ICourse } from "@src/interfaces/ICourse";
 import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
 
 export default function BlogPage() {
 
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
-  );
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
 
   const defaultTheme = createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } });
 
@@ -121,70 +122,69 @@ export default function BlogPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+    {blogList.length === 0 ? (
+      <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+      <Typography variant="h5" color={darkMode ? "#ffffff" :"#1E2022"} fontWeight="700" align="center">
+        Não há posts disponíveis no momento.
+      </Typography>
+    </Container>
+    ) : (
+      <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Grid container spacing={1}>
+          {blogList.map((blogItem, index) => (
+            <Grid item key={index} xs={12} sm={6} md={4} lg={4} xl={4} sx={{ cursor: 'pointer' }} onClick={() => navigate(`/blog/post/${blogItem.slug}`)}>
+              <Grid container direction="column">
+                <Item>
+                  {/* Usando um div para o avatar com imagem de fundo */}
+                  <div style={{
+                    width: '100%',
+                    height: '265px',
+                    marginBottom: '10px',
+                    borderRadius: '4px',
+                    backgroundPosition: 'top',
+                    backgroundSize: 'cover',
+                    backgroundImage: `url(${blogItem.images[0].image})`
+                  }} />
 
-      {blogList.length === 0 ? (
-        <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
-          <Typography variant="h5" color="#1E2022" fontWeight="700" align="center">
-            Não há posts disponíveis no momento.
-          </Typography>
-        </Container>
-      ) : (
-        <Container maxWidth="xl" sx={{ marginTop: '30px', marginBottom: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Grid container spacing={1}>
-            {blogList.map((blogItem, index) => (
-              <Grid item key={index} xs={12} sm={6} md={4} lg={4} xl={4} sx={{ cursor: 'pointer' }} onClick={() => navigate(`/blog/post/${blogItem.slug}`)}>
-                <Grid container direction="column">
-                  <Item>
-                    {/* Usando um div para o avatar com imagem de fundo */}
-                    <div style={{
-                      width: '100%',
-                      height: '265px',
-                      marginBottom: '10px',
-                      borderRadius: '4px',
-                      backgroundPosition: 'top',
-                      backgroundSize: 'cover',
-                      backgroundImage: `url(${blogItem.images[0].image})`
-                    }} />
+                  {/*categorias e data*/}
+                  <Grid container sx={{ marginBottom: '10px' }}>
+                    <Grid item>
+                      <Grid container direction="row">
+                        {/*categorias*/}
+                        {blogItem.topics.map((blogItemTopic) => (
+                          <Typography variant="subtitle2" color="#636F80" sx={{ marginRight: '5px' }}>{blogItemTopic.name}</Typography>
+                        ))}
 
-                    {/*categorias e data*/}
-                    <Grid container sx={{ marginBottom: '10px' }}>
-                      <Grid item>
-                        <Grid container direction="row">
-                          {/*categorias*/}
-                          {blogItem.topics.map((blogItemTopic) => (
-                            <Typography variant="subtitle2" color="#636F80" sx={{ marginRight: '5px' }}>{blogItemTopic.name}</Typography>
-                          ))}
-
-                          <Typography variant="subtitle2" color="#969696" sx={{ marginLeft: '5px', marginRight: '10px' }}>•</Typography>
-                          <Typography variant="subtitle2" color="#969696">{new Date(blogItem.date).toLocaleDateString('PT')}</Typography>
-                        </Grid>
+                        <Typography variant="subtitle2" color="#969696" sx={{ marginLeft: '5px', marginRight: '10px' }}>•</Typography>
+                        <Typography variant="subtitle2" color="#969696">{new Date(blogItem.date).toLocaleDateString('PT')}</Typography>
                       </Grid>
                     </Grid>
+                  </Grid>
 
-                    <Typography variant="h5" color="#002454" sx={{ marginBottom: '10px', textAlign: 'start' }}>{limitTitle(blogItem.title)}</Typography>
-                    <Typography variant="subtitle2" color="#969696" sx={{ textAlign: 'start' }}>{limitDescription(blogItem.description)}</Typography>
+                  <Typography variant="h5" color={darkMode ? "#90CAF9" :"#002454"} sx={{ marginBottom: '10px', textAlign: 'start' }}>{limitTitle(blogItem.title)}</Typography>
+                  <Typography variant="subtitle2" color="#969696" sx={{ textAlign: 'start' }}>{limitDescription(blogItem.description)}</Typography>
 
-                    {/*nome autor e curso*/}
-                    <Grid container sx={{ marginTop: '20px' }}>
-                      <Grid item>
-                        <Grid container direction="row">
-                          <Avatar src={blogItem.author.profilemodel?.image} sx={{ alignSelf: "center" }} />
+                  {/*nome autor e curso*/}
+                  <Grid container sx={{ marginTop: '20px' }}>
+                    <Grid item>
+                      <Grid container direction="row">
+                        <Avatar src={blogItem.author.profilemodel?.image} sx={{ alignSelf: "center" }} />
 
-                          <div>
-                            <Typography variant="subtitle2" color="#636F80" sx={{ marginLeft: '10px', textAlign: 'start' }}>{blogItem.author.first_name} {blogItem.author.last_name}</Typography>
-                            <Typography variant="subtitle2" color="#969696" sx={{ marginLeft: '10px', textAlign: 'start' }}>{blogItem.author.profilemodel?.course?.map((course: ICourse) => course.abbreviation).join(", ")}</Typography>
-                          </div>
-                        </Grid>
+                        <div>
+                          <Typography variant="subtitle2" color="#636F80" sx={{ marginLeft: '10px', textAlign: 'start' }}>{blogItem.author.first_name} {blogItem.author.last_name}</Typography>
+                          <Typography variant="subtitle2" color="#969696" sx={{ marginLeft: '10px', textAlign: 'start' }}>{blogItem.author.profilemodel?.course?.map((course: ICourse) => course.abbreviation).join(", ")}</Typography>
+                        </div>
                       </Grid>
                     </Grid>
-                  </Item>
-                </Grid>
+                  </Grid>
+                </Item>
               </Grid>
-            ))}
-          </Grid>
-        </Container>
-      )
-      }
-    </ThemeProvider>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    )
+    }
+  </ThemeProvider>
   )
 }
