@@ -20,6 +20,7 @@ import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { RootState } from "@src/components/redux/store";
 import { getCourses } from "@src/api/CourseRoutes";
 import { registerUser } from "@src/api/UserRoutes";
 import { ICourse } from "@src/interfaces/ICourse";
@@ -27,6 +28,7 @@ import { IUser } from "@src/interfaces/IUser";
 import routes from "@src/router/Routes";
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
 
@@ -45,9 +47,8 @@ const MenuProps = {
 
 
 export default function Register() {
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
-  );
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
 
   const [userCreateAccount, setUserCreateAccount] = useState(false);
 
@@ -125,7 +126,7 @@ export default function Register() {
   };
 
   return (
-    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+    <ThemeProvider theme={createTheme()}>
 
       <Container component="main" maxWidth="xl" sx={{ marginTop: "60px", marginBottom: "60px" }}>
         <CssBaseline />
@@ -139,22 +140,29 @@ export default function Register() {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color={darkMode ? "#FFFFFF" : "#191919"}>
             Criar Conta
           </Typography>
 
-          {userCreateAccount && (
-            <Alert
-              severity="info"
-              sx={{ marginTop: "30px", marginBottom: "30px" }}
-            >
-              Precisas de ativar a tua conta! Se o teu email da conta
+          {userCreateAccount && darkMode && (
+          <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
+            Precisas de ativar a tua conta! Se o teu email da conta
               corresponder a um email de estudante, vais receber um email para
               ativares a tua conta. Se não corresponder, precisas de contactar o
               NEI para confirmar que és estudante ou ex-estudante da ESTG. Até
               ativares a tua conta, não vais conseguir entrar.
-            </Alert>
-          )}
+          </Alert>
+        )}
+
+          {userCreateAccount && !darkMode && (
+          <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
+             Precisas de ativar a tua conta! Se o teu email da conta
+              corresponder a um email de estudante, vais receber um email para
+              ativares a tua conta. Se não corresponder, precisas de contactar o
+              NEI para confirmar que és estudante ou ex-estudante da ESTG. Até
+              ativares a tua conta, não vais conseguir entrar.
+          </Alert>
+        )}
 
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3, width: '34%' }}>
             <Grid container spacing={2}>
@@ -167,6 +175,7 @@ export default function Register() {
                   id="firstName"
                   label="Primeiro Nome"
                   autoFocus
+                  sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -177,6 +186,7 @@ export default function Register() {
                   label="Último Nome"
                   name="lastName"
                   autoComplete="family-name"
+                  sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -187,6 +197,8 @@ export default function Register() {
                   label="Email"
                   name="email"
                   autoComplete="email"
+                  sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
+
                 />
               </Grid>
               <Grid item xs={12}>
@@ -197,6 +209,8 @@ export default function Register() {
                   fullWidth
                   id="username"
                   label="Username"
+                  sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
+
                 />
               </Grid>
               <Grid item xs={12}>
@@ -208,6 +222,8 @@ export default function Register() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
+
                 />
               </Grid>
               <Grid item xs={12}>
@@ -223,6 +239,7 @@ export default function Register() {
                     input={<OutlinedInput label="Course" />}
                     renderValue={(selected) => selected + " "}
                     MenuProps={MenuProps}
+                    sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
                   >
                     {courses.map((course) => (
                       <MenuItem
@@ -242,7 +259,7 @@ export default function Register() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id="year-label">Ano</InputLabel>
+                  <InputLabel id="year-label" >Ano</InputLabel>
                   <Select
                     labelId="year-label"
                     id="year"
@@ -250,7 +267,8 @@ export default function Register() {
                     label="Age"
                     required
                     onChange={handleChangeYear}
-                  >
+                    sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
+                    >
                     <MenuItem value={1}>1st</MenuItem>
                     <MenuItem value={2}>2nd</MenuItem>
                     <MenuItem value={3}>3rd</MenuItem>
@@ -264,7 +282,7 @@ export default function Register() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF" }}
             >
               Criar Conta
             </Button>
