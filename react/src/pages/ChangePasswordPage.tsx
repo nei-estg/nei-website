@@ -9,11 +9,13 @@ import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { RootState } from '@src/components/redux/store';
 import { changePassword } from '@src/api/UserRoutes';
 import { isLoggedIn } from '@src/api/utils/LoginStatus';
 import routes from '@src/router/Routes';
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Bounce, toast } from 'react-toastify';
 
 
@@ -21,9 +23,8 @@ import { Bounce, toast } from 'react-toastify';
 
 export default function ChangePasswordPage() {
 
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
-  );
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
 
   useEffect(() => {
     document.title = routes.changepasswordpage.name;
@@ -62,7 +63,7 @@ export default function ChangePasswordPage() {
   };
 
   return (
-    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+    <ThemeProvider theme={createTheme()}>
 
       <Container component="main" maxWidth="xs" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
@@ -76,8 +77,8 @@ export default function ChangePasswordPage() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            Change Password
+          <Typography component="h1" variant="h5" color={darkMode ? "#FFFFFF" : "#191919"}>
+            Alterar a Palavra Passe
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -85,31 +86,33 @@ export default function ChangePasswordPage() {
               required
               fullWidth
               name="oldPassword"
-              label="Old Password"
+              label="Antiga Palavra Passe"
               type="password"
               id="oldPassword"
+              sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
             />
             <TextField
               margin="normal"
               required
               fullWidth
               name="newPassword"
-              label="New Password"
+              label="Nova Palavra Passe"
               type="password"
               id="newPassword"
+              sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF" }}
             >
-              Change
+              Alterar
             </Button>
             <Grid container>
               <Grid item>
                 <Link href={routes.profilepage.path} variant="body2">
-                  {"Want to go back? Profile"}
+                  {"Queres voltar para trás? Perfil"}
                 </Link>
               </Grid>
             </Grid>
