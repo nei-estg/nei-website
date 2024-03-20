@@ -4,6 +4,8 @@ import { activateAccount, getActivateAccountCode } from "@src/api/UserRoutes";
 import routes from "@src/router/Routes";
 import { toast, Bounce } from "react-toastify";
 import { useEffect, useState } from "react";
+import { RootState } from "@src/components/redux/store";
+import { useSelector } from "react-redux";
 
 
 
@@ -11,9 +13,8 @@ import { useEffect, useState } from "react";
 
 export default function ActivateAccountPage() {
   const [clickGetCode, setClickGetCode] = useState(false);
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
-  );
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
 
   useEffect(() => {
     document.title = routes.activateaccountpage.name;
@@ -91,7 +92,7 @@ export default function ActivateAccountPage() {
   };
 
   return (
-    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+    <ThemeProvider theme={createTheme()}>
       <Container component="main" maxWidth="xs" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box
@@ -105,7 +106,7 @@ export default function ActivateAccountPage() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color={darkMode ? "#FFFFFF" : "#191919"}>
             Ativar Conta
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
