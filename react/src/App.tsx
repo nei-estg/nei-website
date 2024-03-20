@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Router from "./router/Router";
 import Box from "@mui/material/Box";
@@ -8,14 +7,17 @@ import FooterWrapper from "./components/footer/FooterWrapper";
 import NavBarWrapper from "./components/navbar/NavBarWrapper";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Provider } from "react-redux";
-import store from "./components/redux/store";
+import { useSelector } from "react-redux";
+import { RootState } from "@src/components/redux/store";
 
 
 function App() {
 
+  const themeMode = useSelector((state: RootState) => state.theme.darkMode);
+
+
   return (
-    <Provider store={store}>
+    <>
       <CssBaseline />
       <BrowserRouter>
         <Box
@@ -28,14 +30,14 @@ function App() {
           }}
         >
           <NavBarWrapper />
-          <Container maxWidth={false} disableGutters={true} sx={{ flexGrow: 1 }}>
+          <Container maxWidth={false} disableGutters={true} sx={{ flexGrow: 1, backgroundColor: themeMode ? "#191919" : "#FFFFFF" }}>
             <Router />
           </Container>
           <FooterWrapper />
           <ToastContainer />
         </Box>
       </BrowserRouter>
-    </Provider>
+    </>
   );
 }
 
