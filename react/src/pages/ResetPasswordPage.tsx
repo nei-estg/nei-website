@@ -9,10 +9,12 @@ import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { RootState } from "@src/components/redux/store";
 import { getResetPasswordCode, resetPassword } from "@src/api/UserRoutes";
 import routes from "@src/router/Routes";
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
 
@@ -20,9 +22,8 @@ import { Bounce, toast } from "react-toastify";
 
 
 export default function ResetPasswordPage() {
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
-  );
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
   const [clickGetCode, setClickGetCode] = useState(false);
 
 
@@ -115,7 +116,7 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+    <ThemeProvider theme={createTheme()}>
 
       <Container component="main" maxWidth="xs" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
@@ -129,7 +130,7 @@ export default function ResetPasswordPage() {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color={darkMode ? "#FFFFFF" : "#191919"}>
             Redefinir a Palavra-Passe
           </Typography>
           <Box
@@ -149,6 +150,7 @@ export default function ResetPasswordPage() {
                   name="username"
                   autoComplete="username"
                   autoFocus
+                  sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
                 />
                 <Button
                   fullWidth
@@ -169,6 +171,7 @@ export default function ResetPasswordPage() {
               label="Código"
               type="password"
               id="resetCode"
+              sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
             />
             <TextField
               margin="normal"
@@ -179,7 +182,7 @@ export default function ResetPasswordPage() {
               type="password"
               id="password"
               autoComplete="new-password"
-              sx={{ marginTop: '5px' }}
+              sx={{ marginTop: '5px', backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '' }}
             />
             <Button
               type="submit"
