@@ -30,7 +30,7 @@ export const Particle = () => {
       options={{
         background: {
           color: {
-            value: darkMode ? "#191919" : "#ebebeb",
+            value: darkMode ? "#191919" : "#FFFFFF",
           },
         },
         fpsLimit: 100,
@@ -58,15 +58,15 @@ export const Particle = () => {
         },
         particles: {
           color: {
-            value: darkMode ? "#ebebeb" : "#191919",
+            value: darkMode ? "#FFFFFF" : "#191919",
           },
           links: {
             color: {
-              value: darkMode ? "#ebebeb" : "#191919",
+              value: darkMode ? "#FFFFFF" : "#191919",
             },
             distance: 100,
             enable: true,
-            opacity: 0.5,
+            opacity: darkMode ? "0.5" : "0.2",
             width: 1,
           },
           move: {

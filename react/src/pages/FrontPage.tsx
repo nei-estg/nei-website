@@ -106,8 +106,8 @@ export default function FrontPage() {
               justifyContent: 'center',
             }}
           >
-            <h1 style={{ color: darkMode ? '#FFFFFF' : "#191919" }}>Bem-vindo ao NEI!</h1>
-            <p style={{ color: darkMode ? '#FFFFFF' : "#191919" }}>Prepara-te para passar maior parte do teu tempo aqui!</p>
+            <h1 style={{ color: darkMode ? '#FFFFFF' : "#FFFFFF" }}>Bem-vindo ao NEI!</h1>
+            <p style={{ color: darkMode ? '#FFFFFF' : "#FFFFFF" }}>Prepara-te para passar maior parte do teu tempo aqui!</p>
           </div>
           <div
             style={{
