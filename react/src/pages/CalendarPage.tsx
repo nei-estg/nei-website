@@ -34,6 +34,8 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Bounce, toast } from "react-toastify";
 import "../components/calendar/calendar.css";
 import routes from "@src/router/Routes";
+import { RootState } from "@src/components/redux/store";
+import { useSelector } from "react-redux";
 
 moment.locale("pt-BR"); // Set the locale to Portuguese
 const localizer = momentLocalizer(moment);
@@ -53,9 +55,8 @@ const customLabels = {
 
 
 export default function CalendarPage() {
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
-  );
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
 
   const [eventsData, setEventsData] = useState<ICalendar[]>([]);
   const [coursesData, setCoursesData] = useState<ICourse[]>([]);
@@ -252,16 +253,25 @@ export default function CalendarPage() {
     <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
 
       <Container maxWidth="xl" sx={{ marginBottom: '60px' }}>
-        <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
-          Podes ver eventos adicionados pela comunidade e verificados pelo NEI.
-          Também mostramos feriados, e tu, com a tua sessão iniciada, podes criar eventos.
-          Quando crias um evento, ele fica visível para ti até que atualizes a página.
-        </Alert>
+        {darkMode ? (
+          <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
+            Podes ver eventos adicionados pela comunidade e verificados pelo NEI.
+            Também mostramos feriados, e tu, com a tua sessão iniciada, podes criar eventos.
+            Quando crias um evento, ele fica visível para ti até que atualizes a página.
+          </Alert>
+        ) : (
+          <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
+            Podes ver eventos adicionados pela comunidade e verificados pelo NEI.
+            Também mostramos feriados, e tu, com a tua sessão iniciada, podes criar eventos.
+            Quando crias um evento, ele fica visível para ti até que atualizes a página.
+          </Alert>
+        )}
+
 
         <Typography
           variant="h4"
           sx={{
-            color: "#1E2022",
+            color: darkMode ? "#FFFFFF" : "#1E2022" ,
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -273,7 +283,7 @@ export default function CalendarPage() {
           Calendário
         </Typography>
 
-        <div>
+        <div style={{backgroundColor: darkMode ? "#FFFFFF" : "#FFFFFF"}}>
           <Calendar
             views={["day", "work_week", "month"]}
             selectable
@@ -440,8 +450,8 @@ export default function CalendarPage() {
                 <Button
                   type="submit"
                   fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  variant="contained" 
+                  sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF", }}
                 >
                   Adicionar Evento
                 </Button>
