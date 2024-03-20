@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { RootState } from "@src/components/redux/store";
 import { getCourses } from "@src/api/CourseRoutes";
 import {
   createMaterial,
@@ -30,6 +31,7 @@ import { IMaterial } from "@src/interfaces/IMaterial";
 import { IMaterialTag } from "@src/interfaces/IMaterialTag";
 import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
 
@@ -47,9 +49,7 @@ const MenuProps = {
 
 
 export default function MaterialsPage() {
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
-  );
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
   const [materialsList, setMaterialsList] = useState<IMaterial[]>([]);
   const [curricularUnits, setCurricularUnits] = useState<ICurricularUnit[]>([]);
   const [coursesData, setCoursesData] = useState<ICourse[]>([]);
@@ -279,15 +279,22 @@ export default function MaterialsPage() {
     <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
 
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
-        <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
-          Podes ver materiais adicionados pela comunidade e verificados pelo
+      {darkMode ? (
+          <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
+            Podes ver materiais adicionados pela comunidade e verificados pelo
+            NEI. E tu, com a tua sessão iniciada, podes adicionar também.
+          </Alert>
+        ) : (
+          <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
+            Podes ver materiais adicionados pela comunidade e verificados pelo
           NEI. E tu, com a tua sessão iniciada, podes adicionar também.
-        </Alert>
+          </Alert>
+        )}
 
         <Typography
           variant="h4"
           sx={{
-            color: "#1E2022",
+            color: darkMode ? "#FFFFFF" : "#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -418,7 +425,7 @@ export default function MaterialsPage() {
                   fullWidth
                   type="submit"
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF", }}
                 >
                   Adicionar
                 </Button>
