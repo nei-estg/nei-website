@@ -24,12 +24,14 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
+import { RootState } from "@src/components/redux/store";
 import { getCourses } from "@src/api/CourseRoutes";
 import { getUser, updateUser } from "@src/api/UserRoutes";
 import { ICourse } from "@src/interfaces/ICourse";
 import { IUser } from "@src/interfaces/IUser";
 import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
 
@@ -37,9 +39,8 @@ import { Bounce, toast } from "react-toastify";
 
 
 export default function ProfilePage() {
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
-  );
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
 
   const [user, setUser] = useState<IUser>({} as IUser);
   const [isEditing, setIsEditing] = useState(false); // Estado para controlar a visibilidade
@@ -206,7 +207,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+    <ThemeProvider theme={createTheme()}>
 
       <Container maxWidth="xl" sx={{ marginTop: "30px", marginBottom: "60px" }}>
         <div>
@@ -326,17 +327,19 @@ export default function ProfilePage() {
                       >
                         <TextField
                           id="tf-firstName"
+                          variant="filled"
                           label="Primeiro Nome"
                           name="firstName"
                           defaultValue={user.first_name}
-                          sx={{ width: "48%" }}
+                          sx={{ width: "48%", backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '', }}
                         />
                         <TextField
                           id="tf-lastName"
                           label="Último Nome"
                           name="lastName"
+                          variant="filled"
                           defaultValue={user.last_name}
-                          sx={{ width: "48%" }}
+                          sx={{ width: "48%", backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '', }}
                         />
                       </div>
 
@@ -345,9 +348,10 @@ export default function ProfilePage() {
                         <TextField
                           id="tf-username"
                           label="Username"
+                          variant="filled"
                           name="username"
                           defaultValue={user.username}
-                          sx={{ width: "100%" }}
+                          sx={{ width: "100%", backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '', }}
                           InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
@@ -364,8 +368,9 @@ export default function ProfilePage() {
                           id="tf-usernameDiscord"
                           label="Discord Username"
                           name="discord"
+                          variant="filled"
                           defaultValue={user.profilemodel?.discord}
-                          sx={{ width: "100%" }}
+                          sx={{ width: "100%", backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '', }}
                           InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
@@ -381,10 +386,11 @@ export default function ProfilePage() {
                         <TextField
                           id="tf-email"
                           label="Email"
+                          variant="filled"
                           defaultValue={user.email}
                           type="email"
                           name="email"
-                          sx={{ width: "100%" }}
+                          sx={{ width: "100%", backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '', }}
                           input={<OutlinedInput label="Email" />}
                         />
                       </div>
@@ -392,7 +398,7 @@ export default function ProfilePage() {
                       {/*cursos*/}
                       <div style={{ marginTop: "25px", width: "100%" }}>
                         <FormControl sx={{ width: "100%" }}>
-                          <InputLabel id="course-label">Cursos</InputLabel>
+                          <InputLabel id="course-label" variant="filled">Cursos</InputLabel>
                           <Select
                             labelId="course-label"
                             id="course"
@@ -402,6 +408,7 @@ export default function ProfilePage() {
                             onChange={handleChangeCourses}
                             input={<OutlinedInput label="Course" />}
                             renderValue={(selected) => selected.join(", ")}
+                            sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
                             MenuProps={MenuProps}
                           >
                             {courses.map((course) => (
@@ -429,9 +436,10 @@ export default function ProfilePage() {
                           id="tf-year"
                           select
                           name="year"
+                          variant="filled"
                           label="Ano"
                           defaultValue={user.profilemodel?.year}
-                          sx={{ width: "100%" }}
+                          sx={{ width: "100%", backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '', }}
                           helperText="Todos os anos tens que atualizar, não te esqueças! Este deve ser referente ao teu curso mais recente!"
                         >
                           <MenuItem value={1}>1st</MenuItem>
