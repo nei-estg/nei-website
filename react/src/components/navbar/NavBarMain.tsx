@@ -124,9 +124,9 @@ function NavBarMain() {
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleOpenNavMenu}
-                  color="inherit"
+                  color={themeMode ? '#191919' : '#FFFFFF'}
                 >
-                  <MenuIcon />
+                  <MenuIcon/>
                 </IconButton>
                 <Menu
                   id="menu-appbar"
@@ -197,6 +197,7 @@ function NavBarMain() {
                         page.requiredLogin && !isLoggedIn() ? "#969696" : // requiredLogin e não logado
                           themeMode && !page.requiredLogin ? "inherit" : // dark e não requiredLogin
                             !themeMode && !page.requiredLogin ? "#191919" : // light e não requiredLogin
+                            !themeMode && page.requiredLogin && isLoggedIn() ? "#191919" : // light, requiredLogin e logado
                               "#FFFFFF", // Todas as outras condições padrão
                       display: "block",
                     }}
@@ -213,7 +214,7 @@ function NavBarMain() {
                   <Tooltip title="Abrir Definições">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                       <Avatar
-                        sx={{ backgroundColor: "#054496" }}
+                        sx={{ backgroundColor: "#054496", color: "#FFFFFF" }}
                         alt="Perfil"
                         src={localStorage.getItem("profile") || undefined}
                       />

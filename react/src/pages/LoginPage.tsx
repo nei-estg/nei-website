@@ -9,11 +9,13 @@ import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { RootState } from "@src/components/redux/store";
 import { loginUser } from "@src/api/UserRoutes";
 import { IUser } from "@src/interfaces/IUser";
 import routes from "@src/router/Routes";
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
 
@@ -47,13 +49,11 @@ export default function LoginPage() {
     window.location.href = routes.frontpage.path;
   };
 
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
-  );
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
 
   return (
-    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
-
+    <ThemeProvider theme={createTheme()}>
       <Container component="main" maxWidth="xl" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box
@@ -66,13 +66,12 @@ export default function LoginPage() {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color={darkMode ? "#FFFFFF" : "#191919"}>
             Iniciar Sessão
           </Typography>
           <Box
             component="form"
             onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
           >
             <TextField
               margin="normal"
@@ -83,6 +82,7 @@ export default function LoginPage() {
               name="username"
               autoComplete="username"
               autoFocus
+              sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
             />
             <TextField
               margin="normal"
@@ -93,14 +93,15 @@ export default function LoginPage() {
               type="password"
               id="password"
               autoComplete="current-password"
+              sx={{ backgroundColor: darkMode ? '#FFFFFF' : '' }}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF"}}
             >
-              Sign In
+              Iniciar Sessão
             </Button>
             <Grid container>
               <Grid item xs>
