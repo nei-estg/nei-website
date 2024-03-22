@@ -361,7 +361,7 @@ export default function MaterialsPage() {
               textAlign: "center",
               boxShadow: 24,
               p: 4,
-              borderRadius: 1,
+              borderRadius: 2,
               backgroundColor: darkMode ? "#191919" : "#FFFFFF",
             }}
           >

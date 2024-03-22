@@ -353,7 +353,7 @@ export default function CalendarPage() {
               textAlign: "center",
               boxShadow: 24,
               p: 4,
-              borderRadius: 1
+              borderRadius: 2
             }}
           >
             <p>Titulo: {selectedEvent?.name}</p>
@@ -397,6 +397,7 @@ export default function CalendarPage() {
               boxShadow: 24,
               p: 4,
               backgroundColor: darkMode ? "#191919" : "#FFFFFF",
+              borderRadius: 2,
             }}
           >
             <h1 style={{ color: darkMode ? "#FFFF" : "#191919" }}>Adicionar Evento</h1>
