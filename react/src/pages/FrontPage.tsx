@@ -1,6 +1,8 @@
 import {
   Box,
   Button,
+  createMuiTheme,
+  createTheme,
   CssBaseline,
   Grid,
   TextField
@@ -16,6 +18,8 @@ import Terminal from '@src/components/terminal/terminal';
 import routes from '@src/router/Routes';
 import { useSelector } from 'react-redux';
 import { RootState } from '@src/components/redux/store';
+import { ThemeProvider } from '@emotion/react';
+
 
 
 export default function FrontPage() {
@@ -78,9 +82,30 @@ export default function FrontPage() {
   };
 
 
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(250, 232, 241)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(250, 241, 232)',
+            },
+          },
+        },
+      },
+    },
+  });
+
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <div>
         <div
           id="bgnr"
@@ -221,7 +246,6 @@ export default function FrontPage() {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    sx={{ backgroundColor: darkMode ? '#FFFFFF' : '' }}
                     autoComplete="name"
                     name="uName"
                     variant="filled"
@@ -233,7 +257,6 @@ export default function FrontPage() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    sx={{ backgroundColor: darkMode ? '#FFFFFF' : '' }}
                     required
                     fullWidth
                     id="email"
@@ -245,7 +268,6 @@ export default function FrontPage() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    sx={{ backgroundColor: darkMode ? '#FFFFFF' : '' }}
                     autoComplete="subject"
                     name="subject"
                     variant="filled"
@@ -257,7 +279,6 @@ export default function FrontPage() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    sx={{ backgroundColor: darkMode ? '#FFFFFF' : '' }}
                     required
                     fullWidth
                     name="message"
@@ -289,6 +310,6 @@ export default function FrontPage() {
       <div style={{ zIndex: 1, position: 'absolute' }}>
         <Particle />
       </div>
-    </>
+    </ThemeProvider>
   );
 }

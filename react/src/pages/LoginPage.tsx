@@ -52,8 +52,45 @@ export default function LoginPage() {
   const darkMode = useSelector((state: RootState) => state.theme.darkMode);
 
 
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    }
+  });
+
   return (
-    <ThemeProvider theme={createTheme()}>
+    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xl" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box
@@ -83,7 +120,6 @@ export default function LoginPage() {
               name="username"
               autoComplete="username"
               autoFocus
-              sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
             />
             <TextField
               margin="normal"
@@ -95,13 +131,12 @@ export default function LoginPage() {
               type="password"
               id="password"
               autoComplete="current-password"
-              sx={{ backgroundColor: darkMode ? '#FFFFFF' : '' }}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF"}}
+              sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF" }}
             >
               Iniciar Sessão
             </Button>

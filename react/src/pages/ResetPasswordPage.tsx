@@ -115,8 +115,45 @@ export default function ResetPasswordPage() {
       });
   };
 
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    }
+  });
+
   return (
-    <ThemeProvider theme={createTheme()}>
+    <ThemeProvider theme={theme}>
 
       <Container component="main" maxWidth="xs" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
@@ -151,7 +188,6 @@ export default function ResetPasswordPage() {
                   name="username"
                   autoComplete="username"
                   autoFocus
-                  sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
                 />
                 <Button
                   fullWidth
@@ -173,7 +209,6 @@ export default function ResetPasswordPage() {
               variant="filled"
               type="password"
               id="resetCode"
-              sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
             />
             <TextField
               margin="normal"
@@ -185,7 +220,7 @@ export default function ResetPasswordPage() {
               id="password"
               variant="filled"
               autoComplete="new-password"
-              sx={{ marginTop: '5px', backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '' }}
+              sx={{ marginTop: '5px', }}
             />
             <Button
               type="submit"

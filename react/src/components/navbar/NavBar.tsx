@@ -207,7 +207,7 @@ function NavBar() {
                   <Tooltip title="Abrir Definições">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                       <Avatar
-                        sx={{ backgroundColor: "#054496" }}
+                        sx={{ backgroundColor: "#054496",  color: "#FFFFFF" }}
                         alt="Perfil"
                         src={localStorage.getItem("profile") || undefined}
                       />

@@ -275,11 +275,48 @@ export default function MaterialsPage() {
     );
   };
 
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    },
+  });
+
   return (
-    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+    <ThemeProvider theme={theme}>
 
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
-      {darkMode ? (
+        {darkMode ? (
           <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
             Podes ver materiais adicionados pela comunidade e verificados pelo
             NEI. E tu, com a tua sessão iniciada, podes adicionar também.
@@ -287,7 +324,7 @@ export default function MaterialsPage() {
         ) : (
           <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
             Podes ver materiais adicionados pela comunidade e verificados pelo
-          NEI. E tu, com a tua sessão iniciada, podes adicionar também.
+            NEI. E tu, com a tua sessão iniciada, podes adicionar também.
           </Alert>
         )}
 
@@ -324,6 +361,8 @@ export default function MaterialsPage() {
               textAlign: "center",
               boxShadow: 24,
               p: 4,
+              borderRadius: 1,
+              backgroundColor: darkMode ? "#191919" : "#FFFFFF",
             }}
           >
             <h1>Adicionar Material</h1>
@@ -339,7 +378,6 @@ export default function MaterialsPage() {
                   variant="filled"
                   label="Nome"
                   name="fileName"
-                  autoComplete="fileName"
                   autoFocus
                 />
                 <FormControl fullWidth sx={{ mt: 2 }}>
@@ -373,7 +411,6 @@ export default function MaterialsPage() {
                     variant="filled"
                     value={selectedCurricularUnit.abbreviation}
                     onChange={handleSelectCurricularUnit}
-                    disabled={!selectedCourse}
                   >
                     {selectedCourse?.curricularUnits?.map((unit) => (
                       <MenuItem
@@ -397,7 +434,6 @@ export default function MaterialsPage() {
                     required
                     value={selectedMaterialTag} //? Ignore this error
                     onChange={handleChangeMaterialTag}
-                    input={<OutlinedInput label="Material Tag" />}
                     renderValue={(selected) => selected + " "}
                     MenuProps={MenuProps}
                   >
@@ -438,7 +474,7 @@ export default function MaterialsPage() {
             )}
           </Box>
         </Modal>
-        <div style={{ height: 400, width: "100%" }}>
+        <div style={{ height: 400, width: "100%", borderRadius: 5, backgroundColor: darkMode ? "#ffffff" : "#ffffff" }}>
           <DataGrid
             rows={materialsList}
             columns={columns}
@@ -452,6 +488,6 @@ export default function MaterialsPage() {
         </div>
         <Button onClick={handleOpen}>Adicionar Material</Button>
       </Container>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }

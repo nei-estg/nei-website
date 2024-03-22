@@ -249,8 +249,45 @@ export default function CalendarPage() {
     setOpenViewEventModal(true);
   };
 
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    }
+  });
+
   return (
-    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+    <ThemeProvider theme={theme}>
 
       <Container maxWidth="xl" sx={{ marginBottom: '60px' }}>
         {darkMode ? (
@@ -271,7 +308,7 @@ export default function CalendarPage() {
         <Typography
           variant="h4"
           sx={{
-            color: darkMode ? "#FFFFFF" : "#1E2022" ,
+            color: darkMode ? "#FFFFFF" : "#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -283,7 +320,7 @@ export default function CalendarPage() {
           Calendário
         </Typography>
 
-        <div style={{backgroundColor: darkMode ? "#FFFFFF" : "#FFFFFF"}}>
+        <div style={{ borderRadius: 5, backgroundColor: darkMode ? "#FFFFFF" : "#FFFFFF" }}>
           <Calendar
             views={["day", "work_week", "month"]}
             selectable
@@ -316,6 +353,7 @@ export default function CalendarPage() {
               textAlign: "center",
               boxShadow: 24,
               p: 4,
+              borderRadius: 1
             }}
           >
             <p>Titulo: {selectedEvent?.name}</p>
@@ -358,9 +396,10 @@ export default function CalendarPage() {
               textAlign: "center",
               boxShadow: 24,
               p: 4,
+              backgroundColor: darkMode ? "#191919" : "#FFFFFF",
             }}
           >
-            <h1>Adicionar Evento</h1>
+            <h1 style={{ color: darkMode ? "#FFFF" : "#191919" }}>Adicionar Evento</h1>
             {!isLoggedIn() ? (
               <h2>Para adicionar um evento é necessário iniciar sessão!</h2>
             ) : (
@@ -389,6 +428,16 @@ export default function CalendarPage() {
                     sx={{
                       width: "100%",
                       mt: 2,
+                      backgroundColor: 'rgb(232, 241, 250)',
+                      '&:hover': {
+                        backgroundColor: 'rgb(232, 241, 250)',
+                        '@media (hover: none)': {
+                          backgroundColor: 'rgb(232, 241, 250)',
+                        },
+                      },
+                      '&.Mui-focused': {
+                        backgroundColor: 'rgb(232, 241, 250)',
+                      },
                     }}
                     name="startDate"
                     label="Data Inicial"
@@ -398,6 +447,16 @@ export default function CalendarPage() {
                     sx={{
                       width: "100%",
                       mt: 2,
+                      backgroundColor: 'rgb(232, 241, 250)',
+                      '&:hover': {
+                        backgroundColor: 'rgb(232, 241, 250)',
+                        '@media (hover: none)': {
+                          backgroundColor: 'rgb(232, 241, 250)',
+                        },
+                      },
+                      '&.Mui-focused': {
+                        backgroundColor: 'rgb(232, 241, 250)',
+                      },
                     }}
                     name="endDate"
                     label="Data Final"
@@ -433,9 +492,7 @@ export default function CalendarPage() {
                   </Select>
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="curricular-unit-label" variant="filled">
-                    Unidade Curricular
-                  </InputLabel>
+                  <InputLabel id="curricular-unit-label" variant="filled">Unidade Curricular</InputLabel>
                   <Select
                     labelId="curricular-unit-label"
                     id="curricularUnit"
@@ -443,7 +500,6 @@ export default function CalendarPage() {
                     variant="filled"
                     value={selectedCurricularUnit.abbreviation}
                     onChange={handleSelectCurricularUnit}
-                    disabled={!selectedCourse.abbreviation}
                   >
                     {selectedCourse?.curricularUnits?.map((unit) => (
                       <MenuItem key={unit.abbreviation} value={unit.abbreviation}>
@@ -455,7 +511,7 @@ export default function CalendarPage() {
                 <Button
                   type="submit"
                   fullWidth
-                  variant="contained" 
+                  variant="contained"
                   sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF", }}
                 >
                   Adicionar Evento

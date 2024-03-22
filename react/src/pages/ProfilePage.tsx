@@ -206,8 +206,45 @@ export default function ProfilePage() {
       });
   };
 
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    }
+  });
+
   return (
-    <ThemeProvider theme={createTheme()}>
+    <ThemeProvider theme={theme}>
 
       <Container maxWidth="xl" sx={{ marginTop: "30px", marginBottom: "60px" }}>
         <div>
@@ -331,7 +368,7 @@ export default function ProfilePage() {
                           label="Primeiro Nome"
                           name="firstName"
                           defaultValue={user.first_name}
-                          sx={{ width: "48%", backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '', }}
+                          sx={{ width: "48%", }}
                         />
                         <TextField
                           id="tf-lastName"
@@ -339,7 +376,7 @@ export default function ProfilePage() {
                           name="lastName"
                           variant="filled"
                           defaultValue={user.last_name}
-                          sx={{ width: "48%", backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '', }}
+                          sx={{ width: "48%",}}
                         />
                       </div>
 
@@ -351,7 +388,7 @@ export default function ProfilePage() {
                           variant="filled"
                           name="username"
                           defaultValue={user.username}
-                          sx={{ width: "100%", backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '', }}
+                          sx={{ width: "100%", }}
                           InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
@@ -370,7 +407,7 @@ export default function ProfilePage() {
                           name="discord"
                           variant="filled"
                           defaultValue={user.profilemodel?.discord}
-                          sx={{ width: "100%", backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '', }}
+                          sx={{ width: "100%", }}
                           InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
@@ -390,7 +427,7 @@ export default function ProfilePage() {
                           defaultValue={user.email}
                           type="email"
                           name="email"
-                          sx={{ width: "100%", backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '', }}
+                          sx={{ width: "100%", }}
                           input={<OutlinedInput label="Email" />}
                         />
                       </div>
@@ -406,9 +443,7 @@ export default function ProfilePage() {
                             required
                             value={selectedCourses}
                             onChange={handleChangeCourses}
-                            input={<OutlinedInput label="Course" />}
                             renderValue={(selected) => selected.join(", ")}
-                            sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
                             MenuProps={MenuProps}
                           >
                             {courses.map((course) => (
@@ -439,7 +474,7 @@ export default function ProfilePage() {
                           variant="filled"
                           label="Ano"
                           defaultValue={user.profilemodel?.year}
-                          sx={{ width: "100%", backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '', }}
+                          sx={{ width: "100%", }}
                           helperText="Todos os anos tens que atualizar, não te esqueças! Este deve ser referente ao teu curso mais recente!"
                         >
                           <MenuItem value={1}>1st</MenuItem>

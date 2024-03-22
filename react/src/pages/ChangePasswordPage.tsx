@@ -62,8 +62,45 @@ export default function ChangePasswordPage() {
     });
   };
 
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    }
+  });
+
   return (
-    <ThemeProvider theme={createTheme()}>
+    <ThemeProvider theme={theme}>
 
       <Container component="main" maxWidth="xs" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
@@ -90,7 +127,6 @@ export default function ChangePasswordPage() {
               label="Antiga Palavra Passe"
               type="password"
               id="oldPassword"
-              sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
             />
             <TextField
               margin="normal"
@@ -101,7 +137,6 @@ export default function ChangePasswordPage() {
               label="Nova Palavra Passe"
               type="password"
               id="newPassword"
-              sx={{ backgroundColor: darkMode ? '#FFFFFF' : '', color: darkMode ? '#FFFFFF' : '',}}
             />
             <Button
               type="submit"

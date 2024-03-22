@@ -331,28 +331,64 @@ export default function MentoringPage() {
     return true;
   }
 
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    }
+  });
 
   return (
-    <ThemeProvider theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}>
+    <ThemeProvider theme={theme}>
 
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
         {darkMode ? (
-            <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
-              A tua privacidade é uma prioridade. Por isso, não vais saber quem é a
-          outra pessoa até aceitares a mentoria. Depois, terão de combinar como
-          falar, usando Discord, Teams, ou o que preferirem, para realizar a
-          mentoria. É simples e seguro, garantindo que escolhes com quem queres
-          partilhar informações.
-            </Alert>
-          ) : (
-            <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
-              A tua privacidade é uma prioridade. Por isso, não vais saber quem é a
-          outra pessoa até aceitares a mentoria. Depois, terão de combinar como
-          falar, usando Discord, Teams, ou o que preferirem, para realizar a
-          mentoria. É simples e seguro, garantindo que escolhes com quem queres
-          partilhar informações.
-            </Alert>
-          )}
+          <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
+            A tua privacidade é uma prioridade. Por isso, não vais saber quem é a
+            outra pessoa até aceitares a mentoria. Depois, terão de combinar como
+            falar, usando Discord, Teams, ou o que preferirem, para realizar a
+            mentoria. É simples e seguro, garantindo que escolhes com quem queres
+            partilhar informações.
+          </Alert>
+        ) : (
+          <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
+            A tua privacidade é uma prioridade. Por isso, não vais saber quem é a
+            outra pessoa até aceitares a mentoria. Depois, terão de combinar como
+            falar, usando Discord, Teams, ou o que preferirem, para realizar a
+            mentoria. É simples e seguro, garantindo que escolhes com quem queres
+            partilhar informações.
+          </Alert>
+        )}
 
 
         <Typography
@@ -483,7 +519,7 @@ export default function MentoringPage() {
                   {correctText(mentoringRequest.curricularUnit.name)}
                 </Typography>
 
-                <Typography variant="subtitle1" align="center" gutterBottom sx={{color: darkMode ? "#FFFFFF" : "#191919"}}>
+                <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: darkMode ? "#FFFFFF" : "#191919" }}>
                   <AccessTimeFilledIcon
                     sx={{
                       marginRight: "5px",
@@ -497,7 +533,7 @@ export default function MentoringPage() {
                 {mentoringRequest.mentee != null ? (
                   <Button
                     variant="contained"
-                    sx={{ mt: 2, borderRadius: "100px" }}
+                    sx={{ mt: 2, borderRadius: "100px", '&.Mui-disabled': { backgroundColor: "#E0E0E0" } }}
                     disabled
                   >
                     <CheckIcon sx={{ marginRight: "5px" }} /> Teu Pedido
@@ -578,7 +614,7 @@ export default function MentoringPage() {
                   variant="subtitle1"
                   align="center"
                   gutterBottom
-                  sx={{ marginBottom: "20px", color: darkMode ? "#FFFFFF" : "#191919"}}
+                  sx={{ marginBottom: "20px", color: darkMode ? "#FFFFFF" : "#191919" }}
                 >
                   <MenuBookIcon
                     sx={{
@@ -619,7 +655,7 @@ export default function MentoringPage() {
                   </>
                 ) : (
                   <>
-                    <Typography variant="subtitle1" align="center" gutterBottom sx={{color: darkMode ? "#FFFFFF" : "#191919"}}>
+                    <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: darkMode ? "#FFFFFF" : "#191919" }}>
                       <img
                         src={mailImg}
                         alt="mail"
@@ -645,7 +681,7 @@ export default function MentoringPage() {
                 )}
 
 
-                <Typography variant="subtitle1" align="center" gutterBottom sx={{color: darkMode ? "#FFFFFF" : "#191919"}}>
+                <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: darkMode ? "#FFFFFF" : "#191919" }}>
                   <AccessTimeFilledIcon
                     sx={{
                       marginRight: "5px",
@@ -665,7 +701,7 @@ export default function MentoringPage() {
                     backgroundColor: "#054496",
                   }}
                 >
-                  <DoneAllIcon sx={{ marginRight: "5px", color: darkMode ? "#191919" : "#FFFFFF" }} /> Terminar
+                  <DoneAllIcon sx={{ marginRight: "5px", color: "#FFFFFF" }} /> Terminar
                 </Button>
               </Box>
             ))}
