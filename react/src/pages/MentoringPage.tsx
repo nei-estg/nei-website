@@ -409,7 +409,7 @@ export default function MentoringPage() {
         <Box
           component="form"
           onSubmit={handleCreateMentoringRequest}
-          sx={{ width: "50%", margin: "auto" }} // Adiciona margin auto para centralizar horizontalmente
+          sx={{ width: "300px", margin: "auto" }} // Adiciona margin auto para centralizar horizontalmente
         >
           <FormControl fullWidth sx={{ mt: 2, textAlign: "center" }}>
             {" "}
@@ -492,7 +492,7 @@ export default function MentoringPage() {
                   boxShadow: darkMode ? "0px 0px 10px rgba(255, 255, 255, 0.1)" : "0px 0px 10px rgba(0, 0, 0, 0.1)", // Adiciona uma sombra
                   padding: "20px", // Adiciona preenchimento para destacar a sombra
                   borderRadius: "8px", // Adiciona bordas arredondadas para um visual mais suave
-                  width: "25%",
+                  width: "300px",
                 }}
                 component="form"
                 onSubmit={handleCreateMentoring} // Passa o evento e o ID do pedido de mentoria
@@ -598,7 +598,7 @@ export default function MentoringPage() {
                   justifyContent: "center",
                   alignContent: "center",
                   flexDirection: "column",
-                  width: "25%",
+                  width: "300px",
                   boxShadow: darkMode ? "0px 0px 10px rgba(255, 255, 255, 0.1)" : "0px 0px 10px rgba(0, 0, 0, 0.1)", // Adiciona uma sombra
                   padding: "20px", // Adiciona preenchimento para destacar a sombra
                   borderRadius: "8px", // Adiciona bordas arredondadas para um visual mais suave

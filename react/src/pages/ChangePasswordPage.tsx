@@ -117,7 +117,7 @@ export default function ChangePasswordPage() {
           <Typography component="h1" variant="h5" color={darkMode ? "#FFFFFF" : "#191919"}>
             Alterar a Palavra Passe
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '70%' }}>
             <TextField
               margin="normal"
               required

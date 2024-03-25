@@ -109,6 +109,7 @@ export default function LoginPage() {
           <Box
             component="form"
             onSubmit={handleSubmit}
+            sx={{ mt: 3, width: '70%' }}
           >
             <TextField
               margin="normal"

@@ -146,7 +146,7 @@ export default function ActivateAccountPage() {
           <Typography component="h1" variant="h5" color={darkMode ? "#FFFFFF" : "#191919"}>
             Ativar Conta
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '70%' }}>
             {!clickGetCode &&
               <>
                 <TextField

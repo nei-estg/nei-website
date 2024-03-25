@@ -352,7 +352,7 @@ export default function ProfilePage() {
                     display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "93%",
                   }}
                   >
-                    <Box component="form" onSubmit={handleSubmit}>
+                    <Box component="form" onSubmit={handleSubmit} >
                       {/*nome*/}
                       <div
                         style={{
@@ -474,7 +474,7 @@ export default function ProfilePage() {
                           variant="filled"
                           label="Ano"
                           defaultValue={user.profilemodel?.year}
-                          sx={{ width: "100%", }}
+                          sx={{ width: "100%", backgroundColor: darkMode ? "#FFFFFF" : ""}}
                           helperText="Todos os anos tens que atualizar, não te esqueças! Este deve ser referente ao teu curso mais recente!"
                         >
                           <MenuItem value={1}>1st</MenuItem>

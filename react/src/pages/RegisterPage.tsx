@@ -201,7 +201,7 @@ export default function Register() {
             </Alert>
           )}
 
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3, width: '34%' }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3, width: '70%' }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField

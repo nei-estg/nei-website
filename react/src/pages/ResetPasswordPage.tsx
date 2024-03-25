@@ -174,7 +174,7 @@ export default function ResetPasswordPage() {
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
+            sx={{ mt: 1, width: '70%' }}
           >
             {!clickGetCode &&
               <>
