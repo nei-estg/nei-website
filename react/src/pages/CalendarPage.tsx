@@ -352,6 +352,7 @@ export default function CalendarPage() {
               border: "2px solid #000",
               textAlign: "center",
               boxShadow: 24,
+              backgroundColor: darkMode ? "#191919" : "#FFFFFF",
               p: 4,
               borderRadius: 2
             }}
