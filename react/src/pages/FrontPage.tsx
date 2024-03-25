@@ -89,13 +89,13 @@ export default function FrontPage() {
           root: {
             backgroundColor: 'rgb(232, 241, 250)',
             '&:hover': {
-              backgroundColor: 'rgb(250, 232, 241)',
+              backgroundColor: 'rgb(232, 241, 250)',
               '@media (hover: none)': {
                 backgroundColor: 'rgb(232, 241, 250)',
               },
             },
             '&.Mui-focused': {
-              backgroundColor: 'rgb(250, 241, 232)',
+              backgroundColor: 'rgb(232, 241, 250)',
             },
           },
         },
