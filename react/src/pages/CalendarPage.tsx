@@ -357,19 +357,19 @@ export default function CalendarPage() {
               borderRadius: 2
             }}
           >
-            <p>Titulo: {selectedEvent?.name}</p>
-            <p>Descrição: {selectedEvent?.description}</p>
-            <p>
+            <p style={{ color: darkMode ? "#FFFF" : "#191919" }}>Titulo: {selectedEvent?.name}</p>
+            <p style={{ color: darkMode ? "#FFFF" : "#191919" }}>Descrição: {selectedEvent?.description}</p>
+            <p style={{ color: darkMode ? "#FFFF" : "#191919" }}>
               Inicio: {new Date(selectedEvent?.startDate).toLocaleString("pt-PT")}
             </p>
-            <p>Fim: {new Date(selectedEvent?.endDate).toLocaleString("pt-PT")}</p>
+            <p style={{ color: darkMode ? "#FFFF" : "#191919" }}>Fim: {new Date(selectedEvent?.endDate).toLocaleString("pt-PT")}</p>
             {selectedEvent?.place && <p>Local: {selectedEvent.place}</p>}
             {selectedEvent?.curricularUnit && (
               <>
-                <p>
+                <p style={{ color: darkMode ? "#FFFF" : "#191919" }}>
                   Unidade Curricular: {selectedEvent.curricularUnit.abbreviation}
                 </p>
-                <p>
+                <p style={{ color: darkMode ? "#FFFF" : "#191919" }}>
                   Curso:{" "}
                   {selectedEvent.curricularUnit?.course
                     ?.map((course) => course.abbreviation)
@@ -403,7 +403,7 @@ export default function CalendarPage() {
           >
             <h1 style={{ color: darkMode ? "#FFFF" : "#191919" }}>Adicionar Evento</h1>
             {!isLoggedIn() ? (
-              <h2>Para adicionar um evento é necessário iniciar sessão!</h2>
+              <h2 style={{ color: darkMode ? "#FFFF" : "#191919" }}>Para adicionar um evento é necessário iniciar sessão!</h2>
             ) : (
               <>
                 <TextField
