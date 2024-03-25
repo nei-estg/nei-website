@@ -1,5 +1,5 @@
 import { GitHub, LinkedIn } from "@mui/icons-material";
-import { Avatar, Box, Grid, Paper, Tab, Tabs, Typography, styled } from "@mui/material";
+import { Avatar, Box, Grid, Paper, Tab, Tabs, Typography, makeStyles, styled } from "@mui/material";
 import Container from "@mui/material/Container";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { getFAQ } from "@src/api/AboutRoutes";
@@ -7,9 +7,10 @@ import AccordionUsage from "@src/components/aboutFAQ/Accordion";
 import { IFAQ } from "@src/interfaces/IFAQ";
 import routes from "@src/router/Routes";
 import { SyntheticEvent, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
+import { RootState } from "@src/components/redux/store";
 
-const defaultTheme = createTheme();
 
 interface TeamItem {
   photo: string;
@@ -132,6 +133,7 @@ const transformData = (originalData: IFAQ[]): FaqSection[] => {
 
 export default function AboutFAQPage() {
 
+  const themeMode = useSelector((state: RootState) => state.theme.darkMode);
   const [valueDirecao, setValueDirecao] = useState(0);
 
   const handleChangeDirecao = (event: SyntheticEvent, newValue: number) => {
@@ -166,7 +168,9 @@ export default function AboutFAQPage() {
         transition: Bounce,
       });
     });
-  }, [])
+  }, [themeMode])
+
+  const defaultTheme = createTheme({ palette: { mode: themeMode ? 'dark' : 'light' } });
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -175,7 +179,7 @@ export default function AboutFAQPage() {
         {/*About Us*/}
         <Typography variant="h4"
           sx={{
-            color: '#1E2022',
+            color: themeMode ? "#FFFFFF" : '#1E2022',
             display: 'flex',
             fontWeight: 700,
             flexDirection: 'column',
@@ -188,7 +192,7 @@ export default function AboutFAQPage() {
         {/*Quem somos*/}
         <Typography variant="subtitle1"
           sx={{
-            color: '#969696',
+            color: themeMode ? "#969696" : "#969696",
             display: 'flex',
             fontWeight: 600,
             flexDirection: 'column',
@@ -201,7 +205,7 @@ export default function AboutFAQPage() {
         <Container maxWidth="lg">
           <Typography variant="h6"
             sx={{
-              color: '#1E2022',
+              color: themeMode ? "#FFFFFF" : "#1E2022" ,
               display: 'flex',
               fontWeight: 500,
               flexDirection: 'column',
@@ -224,7 +228,7 @@ export default function AboutFAQPage() {
 
           <Typography variant="h6"
             sx={{
-              color: '#1E2022',
+              color: themeMode ? "#FFFFFF" : "#1E2022" ,
               display: 'flex',
               fontWeight: 500,
               flexDirection: 'column',
@@ -246,7 +250,7 @@ export default function AboutFAQPage() {
 
           <Typography variant="h6"
             sx={{
-              color: '#1E2022',
+              color: themeMode ? "#FFFFFF" : "#1E2022" ,
               display: 'flex',
               fontWeight: 500,
               flexDirection: 'column',
@@ -269,7 +273,7 @@ export default function AboutFAQPage() {
         {/*Direcao*/}
         <Typography variant="subtitle1"
           sx={{
-            color: '#969696',
+            color: themeMode ? "#969696" : "#969696" ,
             display: 'flex',
             fontWeight: 600,
             flexDirection: 'column',
@@ -390,7 +394,7 @@ export default function AboutFAQPage() {
           <div>
             <Typography variant="h4"
               sx={{
-                color: '#1E2022',
+                color: themeMode ? "#FFFFFF" : "#1E2022" ,
                 display: 'flex',
                 fontWeight: 700,
                 flexDirection: 'column',
@@ -402,7 +406,7 @@ export default function AboutFAQPage() {
 
             <Typography variant="h6"
               sx={{
-                color: '#969696',
+                color: themeMode ? "#969696" : "#969696" ,
                 display: 'flex',
                 fontWeight: 600,
                 flexDirection: 'column',
@@ -416,7 +420,7 @@ export default function AboutFAQPage() {
               <div key={index}>
                 <Typography variant="h5"
                   sx={{
-                    color: '#1E2022',
+                    color: themeMode ? "#FFFFFF" : "#1E2022" ,
                     display: 'flex',
                     fontWeight: 700,
                     flexDirection: 'column',
@@ -432,8 +436,7 @@ export default function AboutFAQPage() {
             ))}
           </div>
         )}
-
       </Container>
     </ThemeProvider>
-  )
+  );
 }

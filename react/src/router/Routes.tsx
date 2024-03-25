@@ -92,12 +92,12 @@ const routes: IRoutes = {
   blogpage: {
     name: "Blog - NEI",
     path: "/blog",
-    element: <BlogPage />,
+    element: <BlogPage  />,
   },
   postpage: {
     name: "Post - NEI",
     path: "/blog/post/:slug",
-    element: <PostPage />,
+    element: <PostPage  />,
   },
   privacypolicypage: {
     name: "Política de Privacidade - NEI",

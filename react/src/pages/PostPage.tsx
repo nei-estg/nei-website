@@ -8,18 +8,27 @@ import {
   createTheme,
   useMediaQuery
 } from "@mui/material";
+import { RootState } from "@src/components/redux/store";
 import { getBlog } from "@src/api/BlogRoutes";
 import Carousel from "@src/components/post/Carousel";
 import { IBlogPost } from "@src/interfaces/IBlogPost";
 import { ICourse } from "@src/interfaces/ICourse";
 import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
+
+
+
 
 export default function PostPage() {
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
+  const defaultTheme = createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } });
+
+
   const isXs = useMediaQuery(defaultTheme.breakpoints.only("xs"));
   const isSm = useMediaQuery(defaultTheme.breakpoints.only("sm"));
   const isMd = useMediaQuery(defaultTheme.breakpoints.only("md"));
@@ -63,6 +72,7 @@ export default function PostPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+
       <Container maxWidth="xl" sx={{ marginTop: "30px", marginBottom: "60px" }}>
         <div>
           <Grid container spacing={1}>
@@ -98,7 +108,7 @@ export default function PostPage() {
                     </Button>
 
                     <Typography
-                      color="#002454"
+                      color={darkMode ? "#90CAF9" :"#002454"}
                       sx={{
                         fontSize: {
                           xs: "24px",
@@ -206,7 +216,7 @@ export default function PostPage() {
 
                     {/*conteudo*/}
                     <Typography
-                      color="#1E2022"
+                      color={darkMode ? "#FFFF" :"#1E2022"}
                       sx={{
                         fontSize: {
                           xs: "20px",

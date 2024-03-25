@@ -20,6 +20,7 @@ import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { RootState } from "@src/components/redux/store";
 import { getCourses } from "@src/api/CourseRoutes";
 import { registerUser } from "@src/api/UserRoutes";
 import { ICourse } from "@src/interfaces/ICourse";
@@ -27,9 +28,11 @@ import { IUser } from "@src/interfaces/IUser";
 import routes from "@src/router/Routes";
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
+
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -42,7 +45,11 @@ const MenuProps = {
   },
 };
 
+
 export default function Register() {
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
+
   const [userCreateAccount, setUserCreateAccount] = useState(false);
 
   const [courses, setCourses] = React.useState<ICourse[]>([]);
@@ -51,7 +58,7 @@ export default function Register() {
   const [selectedYear, setSelectedYear] = useState<string>("");
 
   useEffect(() => {
-    document.title = routes.registerpage.path;
+    document.title = routes.registerpage.name;
     getCourses()
       .then((courses) => setCourses(courses))
       .catch(() => {
@@ -118,13 +125,47 @@ export default function Register() {
     }
   };
 
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    }
+  });
+
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container
-        component="main"
-        maxWidth="xl"
-        sx={{ marginTop: "60px", marginBottom: "60px" }}
-      >
+    <ThemeProvider theme={theme}>
+
+      <Container component="main" maxWidth="xl" sx={{ marginTop: "60px", marginBottom: "60px" }}>
         <CssBaseline />
         <Box
           sx={{
@@ -136,15 +177,12 @@ export default function Register() {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color={darkMode ? "#FFFFFF" : "#191919"}>
             Criar Conta
           </Typography>
 
-          {userCreateAccount && (
-            <Alert
-              severity="info"
-              sx={{ marginTop: "30px", marginBottom: "30px" }}
-            >
+          {userCreateAccount && darkMode && (
+            <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
               Precisas de ativar a tua conta! Se o teu email da conta
               corresponder a um email de estudante, vais receber um email para
               ativares a tua conta. Se não corresponder, precisas de contactar o
@@ -153,7 +191,17 @@ export default function Register() {
             </Alert>
           )}
 
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          {userCreateAccount && !darkMode && (
+            <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
+              Precisas de ativar a tua conta! Se o teu email da conta
+              corresponder a um email de estudante, vais receber um email para
+              ativares a tua conta. Se não corresponder, precisas de contactar o
+              NEI para confirmar que és estudante ou ex-estudante da ESTG. Até
+              ativares a tua conta, não vais conseguir entrar.
+            </Alert>
+          )}
+
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3, width: '70%' }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -161,6 +209,7 @@ export default function Register() {
                   name="firstName"
                   required
                   fullWidth
+                  variant="filled"
                   id="firstName"
                   label="Primeiro Nome"
                   autoFocus
@@ -170,6 +219,7 @@ export default function Register() {
                 <TextField
                   required
                   fullWidth
+                  variant="filled"
                   id="lastName"
                   label="Último Nome"
                   name="lastName"
@@ -182,6 +232,7 @@ export default function Register() {
                   fullWidth
                   id="email"
                   label="Email"
+                  variant="filled"
                   name="email"
                   autoComplete="email"
                 />
@@ -189,6 +240,7 @@ export default function Register() {
               <Grid item xs={12}>
                 <TextField
                   autoComplete="username"
+                  variant="filled"
                   name="Username"
                   required
                   fullWidth
@@ -200,6 +252,7 @@ export default function Register() {
                 <TextField
                   required
                   fullWidth
+                  variant="filled"
                   name="password"
                   label="Palavra-Passe"
                   type="password"
@@ -209,15 +262,15 @@ export default function Register() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id="course-label">Curso</InputLabel>
+                  <InputLabel id="course-label" variant="filled">Curso</InputLabel>
                   <Select
                     labelId="course-label"
                     id="course"
                     multiple
                     required
+                    variant="filled"
                     value={selectedCourses} //? Ignore this error
                     onChange={handleChangeCourses}
-                    input={<OutlinedInput label="Course" />}
                     renderValue={(selected) => selected + " "}
                     MenuProps={MenuProps}
                   >
@@ -239,13 +292,14 @@ export default function Register() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id="year-label">Ano</InputLabel>
+                  <InputLabel id="year-label" variant="filled">Ano</InputLabel>
                   <Select
                     labelId="year-label"
                     id="year"
                     value={selectedYear}
                     label="Age"
                     required
+                    variant="filled"
                     onChange={handleChangeYear}
                   >
                     <MenuItem value={1}>1st</MenuItem>
@@ -261,7 +315,7 @@ export default function Register() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF" }}
             >
               Criar Conta
             </Button>

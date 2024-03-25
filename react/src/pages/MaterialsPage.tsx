@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { RootState } from "@src/components/redux/store";
 import { getCourses } from "@src/api/CourseRoutes";
 import {
   createMaterial,
@@ -30,9 +31,9 @@ import { IMaterial } from "@src/interfaces/IMaterial";
 import { IMaterialTag } from "@src/interfaces/IMaterialTag";
 import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -45,7 +46,10 @@ const MenuProps = {
   },
 };
 
+
+
 export default function MaterialsPage() {
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
   const [materialsList, setMaterialsList] = useState<IMaterial[]>([]);
   const [curricularUnits, setCurricularUnits] = useState<ICurricularUnit[]>([]);
   const [coursesData, setCoursesData] = useState<ICourse[]>([]);
@@ -271,18 +275,63 @@ export default function MaterialsPage() {
     );
   };
 
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    },
+  });
+
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
+
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
-        <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
-          Podes ver materiais adicionados pela comunidade e verificados pelo
-          NEI. E tu, com a tua sessão iniciada, podes adicionar também.
-        </Alert>
+        {darkMode ? (
+          <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
+            Podes ver materiais adicionados pela comunidade e verificados pelo
+            NEI. E tu, com a tua sessão iniciada, podes adicionar também.
+          </Alert>
+        ) : (
+          <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
+            Podes ver materiais adicionados pela comunidade e verificados pelo
+            NEI. E tu, com a tua sessão iniciada, podes adicionar também.
+          </Alert>
+        )}
 
         <Typography
           variant="h4"
           sx={{
-            color: "#1E2022",
+            color: darkMode ? "#FFFFFF" : "#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -306,12 +355,14 @@ export default function MaterialsPage() {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: 400,
+              width: '70%',
               bgcolor: "background.paper",
               border: "2px solid #000",
               textAlign: "center",
               boxShadow: 24,
               p: 4,
+              borderRadius: 2,
+              backgroundColor: darkMode ? "#191919" : "#FFFFFF",
             }}
           >
             <h1>Adicionar Material</h1>
@@ -324,16 +375,17 @@ export default function MaterialsPage() {
                   required
                   fullWidth
                   id="fileName"
-                  label="Name"
+                  variant="filled"
+                  label="Nome"
                   name="fileName"
-                  autoComplete="fileName"
                   autoFocus
                 />
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="course-label">Curso</InputLabel>
+                  <InputLabel id="course-label" variant="filled">Curso</InputLabel>
                   <Select
                     labelId="course-label"
                     id="course"
+                    variant="filled"
                     label="Curso"
                     value={selectedCourse?.abbreviation ?? ""}
                     onChange={handleSelectCourse}
@@ -349,16 +401,16 @@ export default function MaterialsPage() {
                   </Select>
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="curricular-unit-label">
+                  <InputLabel id="curricular-unit-label" variant="filled">
                     Unidade Curricular
                   </InputLabel>
                   <Select
                     labelId="curricular-unit-label"
                     id="curricularUnit"
                     label="Unidade Curricular"
+                    variant="filled"
                     value={selectedCurricularUnit.abbreviation}
                     onChange={handleSelectCurricularUnit}
-                    disabled={!selectedCourse}
                   >
                     {selectedCourse?.curricularUnits?.map((unit) => (
                       <MenuItem
@@ -371,17 +423,17 @@ export default function MaterialsPage() {
                   </Select>
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="material-tags-label">
+                  <InputLabel id="material-tags-label" variant="filled">
                     Material Tags
                   </InputLabel>
                   <Select
                     labelId="material-tags-label"
                     id="material-tags"
                     multiple
+                    variant="filled"
                     required
                     value={selectedMaterialTag} //? Ignore this error
                     onChange={handleChangeMaterialTag}
-                    input={<OutlinedInput label="Material Tag" />}
                     renderValue={(selected) => selected + " "}
                     MenuProps={MenuProps}
                   >
@@ -405,6 +457,7 @@ export default function MaterialsPage() {
                   id="link"
                   label="Link"
                   name="link"
+                  variant="filled"
                   type="url"
                   autoComplete="link"
                   required
@@ -413,7 +466,7 @@ export default function MaterialsPage() {
                   fullWidth
                   type="submit"
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF", }}
                 >
                   Adicionar
                 </Button>
@@ -421,7 +474,7 @@ export default function MaterialsPage() {
             )}
           </Box>
         </Modal>
-        <div style={{ height: 400, width: "100%" }}>
+        <div style={{ height: 400, width: "100%", borderRadius: 5, backgroundColor: darkMode ? "#ffffff" : "#ffffff" }}>
           <DataGrid
             rows={materialsList}
             columns={columns}
@@ -435,6 +488,6 @@ export default function MaterialsPage() {
         </div>
         <Button onClick={handleOpen}>Adicionar Material</Button>
       </Container>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }

@@ -9,18 +9,31 @@ import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { RootState } from '@src/components/redux/store';
 import { changePassword } from '@src/api/UserRoutes';
+import { isLoggedIn } from '@src/api/utils/LoginStatus';
 import routes from '@src/router/Routes';
 import * as React from 'react';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Bounce, toast } from 'react-toastify';
 
-const defaultTheme = createTheme();
+
+
 
 export default function ChangePasswordPage() {
 
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
+
   useEffect(() => {
     document.title = routes.changepasswordpage.name;
+
+
+    //verificar se o user está logado
+    if (!isLoggedIn()) {
+      window.location.href = routes.loginpage.path;
+    }
   }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,13 +62,50 @@ export default function ChangePasswordPage() {
     });
   };
 
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    }
+  });
+
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+    <ThemeProvider theme={theme}>
+
+      <Container component="main" maxWidth="xs" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -64,16 +114,17 @@ export default function ChangePasswordPage() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            Change Password
+          <Typography component="h1" variant="h5" color={darkMode ? "#FFFFFF" : "#191919"}>
+            Alterar a Palavra Passe
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '70%' }}>
+            <TextField
               margin="normal"
               required
+              variant="filled"
               fullWidth
               name="oldPassword"
-              label="Old Password"
+              label="Antiga Palavra Passe"
               type="password"
               id="oldPassword"
             />
@@ -82,7 +133,8 @@ export default function ChangePasswordPage() {
               required
               fullWidth
               name="newPassword"
-              label="New Password"
+              variant="filled"
+              label="Nova Palavra Passe"
               type="password"
               id="newPassword"
             />
@@ -90,14 +142,14 @@ export default function ChangePasswordPage() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF" }}
             >
-              Change
+              Alterar
             </Button>
             <Grid container>
               <Grid item>
                 <Link href={routes.profilepage.path} variant="body2">
-                  {"Want to go back? Profile"}
+                  {"Queres voltar para trás? Perfil"}
                 </Link>
               </Grid>
             </Grid>

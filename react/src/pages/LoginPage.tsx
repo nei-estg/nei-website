@@ -9,14 +9,15 @@ import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { RootState } from "@src/components/redux/store";
 import { loginUser } from "@src/api/UserRoutes";
 import { IUser } from "@src/interfaces/IUser";
 import routes from "@src/router/Routes";
 import * as React from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
 
 export default function LoginPage() {
 
@@ -48,9 +49,49 @@ export default function LoginPage() {
     window.location.href = routes.frontpage.path;
   };
 
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
+
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    }
+  });
+
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xl" sx={{marginTop: '60px', marginBottom: '60px'}}>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xl" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box
           sx={{
@@ -62,18 +103,19 @@ export default function LoginPage() {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color={darkMode ? "#FFFFFF" : "#191919"}>
             Iniciar Sessão
           </Typography>
           <Box
             component="form"
             onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
+            sx={{ mt: 3, width: '70%' }}
           >
             <TextField
               margin="normal"
               required
               fullWidth
+              variant="filled"
               id="username"
               label="Username"
               name="username"
@@ -83,6 +125,7 @@ export default function LoginPage() {
             <TextField
               margin="normal"
               required
+              variant="filled"
               fullWidth
               name="password"
               label="Palavra-Passe"
@@ -94,9 +137,9 @@ export default function LoginPage() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF" }}
             >
-              Sign In
+              Iniciar Sessão
             </Button>
             <Grid container>
               <Grid item xs>

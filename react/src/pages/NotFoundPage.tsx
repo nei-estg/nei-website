@@ -4,18 +4,23 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
+import { RootState } from "@src/components/redux/store";
 import routes from "@src/router/Routes";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-const defaultTheme = createTheme();
 
-const NotFoundPage: React.FC = () => {
+const NotFoundPage = () => {
   useEffect(() => {
     document.title = routes.notfoundpage.name;
   }, []);
 
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+
+
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={createTheme()}>
+
       <Container
         maxWidth="xl"
         sx={{
@@ -32,7 +37,7 @@ const NotFoundPage: React.FC = () => {
           variant="h4"
           align="center"
           sx={{
-            color: "#1E2022",
+            color: darkMode ? "#FFFFFF" : "#191919",
             fontWeight: 700,
             marginBottom: "20px",
           }}
@@ -44,7 +49,7 @@ const NotFoundPage: React.FC = () => {
           variant="h6"
           align="center"
           sx={{
-            color: "#1E2022",
+            color: darkMode ? "#FFFFFF" : "#191919",
             fontWeight: 700,
           }}
         >
@@ -54,5 +59,6 @@ const NotFoundPage: React.FC = () => {
     </ThemeProvider>
   );
 };
+
 
 export default NotFoundPage;
