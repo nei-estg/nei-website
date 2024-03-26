@@ -16,6 +16,7 @@ import { isLoggedIn } from "@src/api/utils/LoginStatus";
 import routes from "@src/router/Routes";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import DarkModeSwitch from "../DarkModeSwitch";
 
 const navbar = {
   pages: [
@@ -228,6 +229,7 @@ function NavBarMain() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
+                <DarkModeSwitch/>
                 {isLoggedIn()
                   ? settings.logged.map((setting) => (
                       <Link
