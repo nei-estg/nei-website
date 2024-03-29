@@ -312,6 +312,7 @@ export default function CalendarPage() {
             messages={customLabels}
           />
         </div>
+        
         <Modal
           open={openViewEventModal}
           onClose={() => setOpenViewEventModal(false)}
@@ -353,6 +354,7 @@ export default function CalendarPage() {
             )}
           </Box>
         </Modal>
+
         <Modal
           open={openAddEventModal}
           onClose={() => setOpenAddEventModal(false)}
@@ -365,7 +367,7 @@ export default function CalendarPage() {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: '70%',
+              width: '40%',
               bgcolor: "background.paper",
               border: "2px solid #000",
               textAlign: "center",
