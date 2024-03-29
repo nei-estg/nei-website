@@ -8,7 +8,7 @@ import { RootState } from '@src/components/redux/store';
 
 
 export default function AccordionUsage({ question, answer }) {
-  const themeMode = useSelector((state: RootState) => state.theme.darkMode);
+  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
 
   const handleAccordionChange = () => {
@@ -17,18 +17,18 @@ export default function AccordionUsage({ question, answer }) {
 
   return (
     <div style={{marginBottom: '15px', marginTop: '15px',}}>
-      <Accordion expanded={isAccordionExpanded} onChange={handleAccordionChange}>
+      <Accordion expanded={isAccordionExpanded} onChange={handleAccordionChange} sx={{color: darkReader ? "#181A1B" : "#FFFFFF"}}>
 
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1-content"
           id="panel1-header"
-          sx={{ color: themeMode ? "#FFFFFF" : "#1E2022" , fontWeight: 700, }}
+          sx={{ color: darkReader ? "#FFFFFF" : "#1E2022", backgroundColor: darkReader ? "#191919" : "#FFFFFF", fontWeight: 700, }}
         >
           {question}
         </AccordionSummary>
 
-        <AccordionDetails sx={{color: themeMode ? "#969696" : "#969696" ,}}>{answer}</AccordionDetails>
+        <AccordionDetails sx={{color: "#969696", backgroundColor: darkReader ? "#191919" : "#FFFFFF",}}>{answer}</AccordionDetails>
       </Accordion>
     </div>
   );

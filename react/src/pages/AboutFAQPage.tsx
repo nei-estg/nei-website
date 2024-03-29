@@ -133,7 +133,7 @@ const transformData = (originalData: IFAQ[]): FaqSection[] => {
 
 export default function AboutFAQPage() {
 
-  const themeMode = useSelector((state: RootState) => state.theme.darkMode);
+  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
   const [valueDirecao, setValueDirecao] = useState(0);
 
   const handleChangeDirecao = (event: SyntheticEvent, newValue: number) => {
@@ -168,9 +168,9 @@ export default function AboutFAQPage() {
         transition: Bounce,
       });
     });
-  }, [themeMode])
+  }, [darkReader])
 
-  const defaultTheme = createTheme({ palette: { mode: themeMode ? 'dark' : 'light' } });
+  const defaultTheme = createTheme();
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -179,7 +179,7 @@ export default function AboutFAQPage() {
         {/*About Us*/}
         <Typography variant="h4"
           sx={{
-            color: themeMode ? "#FFFFFF" : '#1E2022',
+            color: darkReader ? "#FFFFFF" : '#1E2022',
             display: 'flex',
             fontWeight: 700,
             flexDirection: 'column',
@@ -192,7 +192,7 @@ export default function AboutFAQPage() {
         {/*Quem somos*/}
         <Typography variant="subtitle1"
           sx={{
-            color: themeMode ? "#969696" : "#969696",
+            color: "#969696",
             display: 'flex',
             fontWeight: 600,
             flexDirection: 'column',
@@ -205,7 +205,7 @@ export default function AboutFAQPage() {
         <Container maxWidth="lg">
           <Typography variant="h6"
             sx={{
-              color: themeMode ? "#FFFFFF" : "#1E2022" ,
+              color: darkReader ? "#FFFFFF" : "#1E2022" ,
               display: 'flex',
               fontWeight: 500,
               flexDirection: 'column',
@@ -228,7 +228,7 @@ export default function AboutFAQPage() {
 
           <Typography variant="h6"
             sx={{
-              color: themeMode ? "#FFFFFF" : "#1E2022" ,
+              color: darkReader ? "#FFFFFF" : "#1E2022" ,
               display: 'flex',
               fontWeight: 500,
               flexDirection: 'column',
@@ -250,7 +250,7 @@ export default function AboutFAQPage() {
 
           <Typography variant="h6"
             sx={{
-              color: themeMode ? "#FFFFFF" : "#1E2022" ,
+              color: darkReader ? "#FFFFFF" : "#1E2022" ,
               display: 'flex',
               fontWeight: 500,
               flexDirection: 'column',
@@ -273,7 +273,7 @@ export default function AboutFAQPage() {
         {/*Direcao*/}
         <Typography variant="subtitle1"
           sx={{
-            color: themeMode ? "#969696" : "#969696" ,
+            color: "#969696" ,
             display: 'flex',
             fontWeight: 600,
             flexDirection: 'column',
@@ -292,7 +292,7 @@ export default function AboutFAQPage() {
             aria-label="scrollable auto tabs example">
 
             {direcao.map((member, index) => (
-              <Tab label={member.year} key={index} />
+              <Tab label={member.year} key={index} sx={{color: "#969696"}}/>
             ))}
           </Tabs>
         </Box>
@@ -303,13 +303,13 @@ export default function AboutFAQPage() {
             <Grid container spacing={1}>
 
               {member.team.map((teamMember, teamIndex) => (
-                <Grid item xs={12} sm={4} md={3} lg={2} xl={1} key={teamIndex} display="flex" alignItems="center" sx={{ marginBottom: '1px', [defaultTheme.breakpoints.up('xl')]: { marginRight: '41px', }, }}>
-                  <Grid container direction="column" display="flex" alignItems="center">
-                    <Item>
+                <Grid item xs={12} sm={4} md={3} lg={2} xl={1} key={teamIndex} display="flex" alignItems="center" sx={{marginBottom: '1px', [defaultTheme.breakpoints.up('xl')]: { marginRight: '41px', }, }}>
+                  <Grid container direction="column" display="flex" alignItems="center" >
+                    <Item sx={{backgroundColor: darkReader ? "#181A1B" : "#FFFFFF",}}>
                       <Avatar src={teamMember.photo} sx={{ width: '115px', height: '128px', marginBottom: '10px' }} variant="rounded" />
 
                       <Typography variant="subtitle1" color="primary">{teamMember.role}</Typography>
-                      <Typography variant="subtitle2">{teamMember.fullname}</Typography>
+                      <Typography variant="subtitle2" sx={{color: "#969696"}}>{teamMember.fullname}</Typography>
 
                       {teamMember.github && (
                         <GitHub
@@ -362,7 +362,7 @@ export default function AboutFAQPage() {
             aria-label="scrollable auto tabs example">
 
             {courses.map((course, index) => (
-              <Tab label={course.type} key={index} />
+              <Tab label={course.type} key={index} sx={{color: "#969696"}}/>
             ))}
           </Tabs>
         </Box>
@@ -375,10 +375,10 @@ export default function AboutFAQPage() {
               {courses.course.map((course, courseIndex) => (
                 <Grid item xs={12} sm={4} md={3} lg={2} xl={1} key={courseIndex} display="flex" sx={{ marginBottom: '1px', [defaultTheme.breakpoints.up('xl')]: { marginRight: '41px', }, }}>
                   <Grid container direction="column" display="flex">
-                    <Item onClick={() => window.open(course.URL, '_blank')} style={{ cursor: 'pointer', textAlign: 'center' }}>
+                    <Item onClick={() => window.open(course.URL, '_blank')} style={{ cursor: 'pointer', textAlign: 'center' }} sx={{backgroundColor: darkReader ? "#181A1B" : "#FFFFFF",}}>
                       <Avatar src={course.photo} sx={{ width: '115px', height: 'auto', objectFit: 'cover', marginBottom: '10px', display: 'block', margin: '0 auto' }} variant="rounded" />
                       <Typography variant="subtitle1" color="primary">{course.sigla}</Typography>
-                      <Typography variant="subtitle2">{course.name}</Typography>
+                      <Typography variant="subtitle2" sx={{color: "#969696"}}>{course.name}</Typography>
                     </Item>
                   </Grid>
                 </Grid>
@@ -394,7 +394,7 @@ export default function AboutFAQPage() {
           <div>
             <Typography variant="h4"
               sx={{
-                color: themeMode ? "#FFFFFF" : "#1E2022" ,
+                color: darkReader ? "#FFFFFF" : "#1E2022" ,
                 display: 'flex',
                 fontWeight: 700,
                 flexDirection: 'column',
@@ -406,7 +406,7 @@ export default function AboutFAQPage() {
 
             <Typography variant="h6"
               sx={{
-                color: themeMode ? "#969696" : "#969696" ,
+                color: "#969696" ,
                 display: 'flex',
                 fontWeight: 600,
                 flexDirection: 'column',
@@ -420,7 +420,7 @@ export default function AboutFAQPage() {
               <div key={index}>
                 <Typography variant="h5"
                   sx={{
-                    color: themeMode ? "#FFFFFF" : "#1E2022" ,
+                    color: darkReader ? "#FFFFFF" : "#1E2022" ,
                     display: 'flex',
                     fontWeight: 700,
                     flexDirection: 'column',
