@@ -180,11 +180,12 @@ function NavBarMain() {
                   color: themeMode ? "inherit" : "#191919",
                   textDecoration: "none",
                 }}
+                href="/"
               >
                 NEI
               </Typography>
 
-              <Box sx={{flexGrow: 0, display: { xs: "flex", md: "none" }, marginRight: '-30px'}}>
+              <Box sx={{flexGrow: 0, display: { xs: "flex", md: "none" }, marginLeft: '-120px', marginRight: '-30px'}}>
                 <DarkLightModeToggle />
               </Box>
 
