@@ -327,7 +327,6 @@ export default function CalendarPage() {
               border: "2px solid #000",
               textAlign: "center",
               boxShadow: 24,
-              backgroundColor: "#FFFFFF",
               p: 4,
               borderRadius: 2
             }}
@@ -372,11 +371,10 @@ export default function CalendarPage() {
               textAlign: "center",
               boxShadow: 24,
               p: 4,
-              backgroundColor: darkReader ? "#191919" : "#FFFFFF",
               borderRadius: 2,
             }}
           >
-            <h1 style={{ color: darkReader ? "#FFFF" : "#191919" }}>Adicionar Evento</h1>
+            <h1>Adicionar Evento</h1>
             {!isLoggedIn() ? (
               <h2 style={{ color: darkReader ? "#FFFF" : "#191919" }}>Para adicionar um evento é necessário iniciar sessão!</h2>
             ) : (

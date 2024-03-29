@@ -313,20 +313,13 @@ export default function MaterialsPage() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
 
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
-        {darkReader ? (
-          <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
-            Podes ver materiais adicionados pela comunidade e verificados pelo
-            NEI. E tu, com a tua sessão iniciada, podes adicionar também.
-          </Alert>
-        ) : (
           <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
             Podes ver materiais adicionados pela comunidade e verificados pelo
             NEI. E tu, com a tua sessão iniciada, podes adicionar também.
           </Alert>
-        )}
 
         <Typography
           variant="h4"
@@ -488,6 +481,6 @@ export default function MaterialsPage() {
         </div>
         <Button onClick={handleOpen}>Adicionar Material</Button>
       </Container>
-    </ThemeProvider >
+    </ >
   );
 }
