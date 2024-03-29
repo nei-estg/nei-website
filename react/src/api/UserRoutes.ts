@@ -4,6 +4,11 @@ import { AxiosError } from 'axios';
 
 import { IUser } from '@src/interfaces/IUser';
 import { toast, Bounce } from 'react-toastify';
+import { RootState } from '@src/components/redux/store';
+import { useSelector } from 'react-redux';
+
+
+const darkReader = useSelector((state: RootState) => state.theme.darkMode);
 
 export const loginUser = async (login : IUser) => {
   try {
@@ -70,7 +75,7 @@ export const logoutUser = async (allDevices: boolean) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "dark",
+      theme: darkReader ? "dark" : "light",
       transition: Bounce,
     });
   } finally {

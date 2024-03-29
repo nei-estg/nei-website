@@ -5,6 +5,8 @@ const client = axios.create({
   baseURL: "/"
 });
 
+const darkReader = useSelector((state: RootState) => state.theme.darkMode);
+
 client.interceptors.response.use(
   (response) => {
     return response;
@@ -22,7 +24,7 @@ client.interceptors.response.use(
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           });
         } else if (error.response.data) {
@@ -34,7 +36,7 @@ client.interceptors.response.use(
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           });
         } else {
@@ -46,7 +48,7 @@ client.interceptors.response.use(
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           });
         }
@@ -59,7 +61,7 @@ client.interceptors.response.use(
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: darkReader ? "dark" : "light",
           transition: Bounce,
         });
       } else if (error.response.status === 429) {
@@ -71,7 +73,7 @@ client.interceptors.response.use(
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: darkReader ? "dark" : "light",
           transition: Bounce,
         });
       } else if (error.response.status === 500) {
@@ -83,7 +85,7 @@ client.interceptors.response.use(
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: darkReader ? "dark" : "light",
           transition: Bounce,
         });
       } else if (error.response.status === 502) {
@@ -95,7 +97,7 @@ client.interceptors.response.use(
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: darkReader ? "dark" : "light",
           transition: Bounce,
         });
       }

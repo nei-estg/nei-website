@@ -164,7 +164,7 @@ export default function AboutFAQPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
     });

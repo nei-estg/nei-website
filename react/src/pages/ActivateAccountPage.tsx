@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 
 export default function ActivateAccountPage() {
   const [clickGetCode, setClickGetCode] = useState(false);
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
 
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function ActivateAccountPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
     }).catch(() => {
@@ -50,7 +50,7 @@ export default function ActivateAccountPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
     });
@@ -73,7 +73,7 @@ export default function ActivateAccountPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
     }).catch(() => {
@@ -85,7 +85,7 @@ export default function ActivateAccountPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
     });

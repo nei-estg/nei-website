@@ -24,9 +24,9 @@ import { Bounce, toast } from "react-toastify";
 
 
 export default function PostPage() {
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
 
-  const defaultTheme = createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } });
+  const defaultTheme = createTheme();
 
 
   const isXs = useMediaQuery(defaultTheme.breakpoints.only("xs"));
@@ -63,7 +63,7 @@ export default function PostPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -108,7 +108,7 @@ export default function PostPage() {
                     </Button>
 
                     <Typography
-                      color={darkMode ? "#90CAF9" :"#002454"}
+                      color={darkReader ? "#90CAF9" :"#002454"}
                       sx={{
                         fontSize: {
                           xs: "24px",
@@ -216,7 +216,7 @@ export default function PostPage() {
 
                     {/*conteudo*/}
                     <Typography
-                      color={darkMode ? "#FFFF" :"#1E2022"}
+                      color={darkReader ? "#FFFF" :"#1E2022"}
                       sx={{
                         fontSize: {
                           xs: "20px",

@@ -23,7 +23,7 @@ import { Bounce, toast } from 'react-toastify';
 
 export default function ChangePasswordPage() {
 
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
 
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function ChangePasswordPage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: darkReader ? "dark" : "light",
           transition: Bounce,
         }
       );

@@ -55,7 +55,7 @@ const customLabels = {
 
 
 export default function CalendarPage() {
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
 
 
   const [eventsData, setEventsData] = useState<ICalendar[]>([]);
@@ -99,7 +99,7 @@ export default function CalendarPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -121,7 +121,7 @@ export default function CalendarPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -149,7 +149,7 @@ export default function CalendarPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
       return;
@@ -165,7 +165,7 @@ export default function CalendarPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
       return;
@@ -191,7 +191,7 @@ export default function CalendarPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -211,7 +211,7 @@ export default function CalendarPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );

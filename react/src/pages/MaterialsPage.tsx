@@ -49,7 +49,7 @@ const MenuProps = {
 
 
 export default function MaterialsPage() {
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
   const [materialsList, setMaterialsList] = useState<IMaterial[]>([]);
   const [curricularUnits, setCurricularUnits] = useState<ICurricularUnit[]>([]);
   const [coursesData, setCoursesData] = useState<ICourse[]>([]);
@@ -80,7 +80,7 @@ export default function MaterialsPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
       return;
@@ -96,7 +96,7 @@ export default function MaterialsPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
       return;
@@ -123,7 +123,7 @@ export default function MaterialsPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -139,7 +139,7 @@ export default function MaterialsPage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: darkReader ? "dark" : "light",
           transition: Bounce,
         });
       });
@@ -162,7 +162,7 @@ export default function MaterialsPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -184,7 +184,7 @@ export default function MaterialsPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -205,7 +205,7 @@ export default function MaterialsPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );

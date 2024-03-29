@@ -38,7 +38,7 @@ import { Bounce, toast } from "react-toastify";
 
 export default function MentoringPage() {
 
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
 
 
   const [mentoringRequestList, setMentoringRequestList] = useState<
@@ -68,7 +68,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -88,7 +88,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -108,7 +108,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -129,7 +129,7 @@ export default function MentoringPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
       return;
@@ -150,7 +150,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -169,7 +169,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -193,7 +193,7 @@ export default function MentoringPage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: darkReader ? "dark" : "light",
           transition: Bounce,
         });
         //TODO: Remove mentoring request from list
@@ -212,7 +212,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -289,7 +289,7 @@ export default function MentoringPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
       //! Delete the mentoring from the list
@@ -306,7 +306,7 @@ export default function MentoringPage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: darkReader ? "dark" : "light",
           transition: Bounce,
         }
       );

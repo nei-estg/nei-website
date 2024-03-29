@@ -22,7 +22,7 @@ import { Bounce, toast } from "react-toastify";
 
 
 export default function ResetPasswordPage() {
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
 
   const [clickGetCode, setClickGetCode] = useState(false);
 
@@ -47,7 +47,7 @@ export default function ResetPasswordPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
     })
@@ -64,7 +64,7 @@ export default function ResetPasswordPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -92,7 +92,7 @@ export default function ResetPasswordPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -108,7 +108,7 @@ export default function ResetPasswordPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );

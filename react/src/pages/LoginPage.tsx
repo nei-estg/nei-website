@@ -20,6 +20,7 @@ import { Bounce, toast } from "react-toastify";
 
 
 export default function LoginPage() {
+  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
 
   useEffect(() => {
     document.title = routes.loginpage.name;
@@ -41,7 +42,7 @@ export default function LoginPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: darkReader ? "dark" : "light",
         transition: Bounce,
       });
       return;
@@ -49,7 +50,6 @@ export default function LoginPage() {
     window.location.href = routes.frontpage.path;
   };
 
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
 
 
   const theme = createTheme({

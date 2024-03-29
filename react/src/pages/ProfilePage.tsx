@@ -39,7 +39,7 @@ import { Bounce, toast } from "react-toastify";
 
 
 export default function ProfilePage() {
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
+  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
 
 
   const [user, setUser] = useState<IUser>({} as IUser);
@@ -82,7 +82,7 @@ export default function ProfilePage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -101,7 +101,7 @@ export default function ProfilePage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -186,7 +186,7 @@ export default function ProfilePage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: darkReader ? "dark" : "light",
           transition: Bounce,
         });
         //TODO: Update stuff on localstorage
@@ -200,7 +200,7 @@ export default function ProfilePage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: darkReader ? "dark" : "light",
           transition: Bounce,
         });
       });
