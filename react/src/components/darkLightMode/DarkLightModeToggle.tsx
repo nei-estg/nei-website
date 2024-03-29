@@ -78,7 +78,8 @@ function DarkLightModeToggle() {
       <CssBaseline />
       <Container>
         <FormControlLabel
-          control={<MaterialUISwitch sx={{ m: 1 }} checked={themeMode} onChange={toggleDarkMode} />} label={undefined} />
+          control={<MaterialUISwitch sx={{ m: 1 }} checked={themeMode} onChange={toggleDarkMode} />} 
+          label={undefined} />
       </Container>
     </>
   );

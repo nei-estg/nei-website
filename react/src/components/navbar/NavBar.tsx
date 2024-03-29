@@ -180,6 +180,11 @@ function NavBar() {
               >
                 NEI
               </Typography>
+
+              <Box sx={{flexGrow: 0, display: { xs: "flex", md: "none" }, marginRight: '-30px'}}>
+                <DarkLightModeToggle />
+              </Box>
+
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                 {navbar.pages.map((page) => (
                   <Button
@@ -199,6 +204,10 @@ function NavBar() {
                     {page.name}
                   </Button>
                 ))}
+              </Box>
+
+              <Box sx={{flexGrow: 0, display: { xs: "none", md: "flex", marginRight: '-30px'}}}>
+                <DarkLightModeToggle />
               </Box>
 
               {/* icon user */}
@@ -232,16 +241,6 @@ function NavBar() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-
-                  <Link
-                    component="a"
-                    underline="none"
-                    color="inherit"
-                  >
-                    <MenuItem>
-                      <DarkLightModeToggle />
-                    </MenuItem>
-                  </Link>
 
                   {isLoggedIn() ? settings.logged.map((setting) => (
                     <Link
