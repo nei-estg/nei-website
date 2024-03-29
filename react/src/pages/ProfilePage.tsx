@@ -244,8 +244,7 @@ export default function ProfilePage() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-
+    <>
       <Container maxWidth="xl" sx={{ marginTop: "30px", marginBottom: "60px" }}>
         <div>
           <Grid container spacing={1}>
@@ -557,6 +556,6 @@ export default function ProfilePage() {
           </Grid>
         </div>
       </Container>
-    </ThemeProvider>
+    </>
   );
 }
