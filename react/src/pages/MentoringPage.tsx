@@ -369,26 +369,16 @@ export default function MentoringPage() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
 
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
-        {darkReader ? (
-          <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
+        <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
             A tua privacidade é uma prioridade. Por isso, não vais saber quem é a
             outra pessoa até aceitares a mentoria. Depois, terão de combinar como
             falar, usando Discord, Teams, ou o que preferirem, para realizar a
             mentoria. É simples e seguro, garantindo que escolhes com quem queres
             partilhar informações.
           </Alert>
-        ) : (
-          <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
-            A tua privacidade é uma prioridade. Por isso, não vais saber quem é a
-            outra pessoa até aceitares a mentoria. Depois, terão de combinar como
-            falar, usando Discord, Teams, ou o que preferirem, para realizar a
-            mentoria. É simples e seguro, garantindo que escolhes com quem queres
-            partilhar informações.
-          </Alert>
-        )}
 
 
         <Typography
@@ -708,6 +698,6 @@ export default function MentoringPage() {
           </Box>
         )}
       </Container>
-    </ThemeProvider>
+    </>
   );
 }
