@@ -90,7 +90,7 @@ const Terminal: React.FC = () => {
           <span className="macbook-button green"></span>
         </div>
       </div>
-      <div className="screen" style={{ border: '1px solid #c0c0c0', backgroundColor: darkMode ? '#000000' : '#FFFFFF', color: darkMode ? '#ffffff' : '#ffffff' }}>
+      <div className="screen" style={{ border: '1px solid #c0c0c0', backgroundColor: darkMode ? '#000000' : '#FFFFFF', color: '#ffffff' }}>
         <div className="terminal" ref={terminalRef}>
           <div style={{ color: darkMode ? '#ffffff' : '#000000' }}>Bem-vindo ao terminal do NEI!</div>
           <div style={{ color: darkMode ? '#ffffff' : '#000000' }}>Escreve "help" para veres todos os comandos</div>
@@ -104,9 +104,9 @@ const Terminal: React.FC = () => {
               value={input}
               onChange={handleInputChange}
               onKeyDown={handleEnterPress}
-              color={darkMode ? '#ffffff' : '#000000' }
+              style={{color: darkMode ? '#ffffff' : '#000000'}}
             />
-            {typingAnimationVisible && <span className="typing-animation">_</span>}
+            {typingAnimationVisible && <span className="typing-animation"></span>}
           </div>
         </div>
       </div>
