@@ -19,7 +19,7 @@ const NotFoundPage = () => {
 
 
   return (
-    <ThemeProvider theme={createTheme()}>
+    <>
 
       <Container
         maxWidth="xl"
@@ -37,7 +37,6 @@ const NotFoundPage = () => {
           variant="h4"
           align="center"
           sx={{
-            color: darkMode ? "#FFFFFF" : "#191919",
             fontWeight: 700,
             marginBottom: "20px",
           }}
@@ -49,14 +48,13 @@ const NotFoundPage = () => {
           variant="h6"
           align="center"
           sx={{
-            color: darkMode ? "#FFFFFF" : "#191919",
             fontWeight: 700,
           }}
         >
           A página que estás a procura, não existe.
         </Typography>
       </Container>
-    </ThemeProvider>
+    </>
   );
 };
 

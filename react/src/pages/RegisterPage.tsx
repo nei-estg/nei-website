@@ -163,7 +163,7 @@ export default function Register() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
 
       <Container component="main" maxWidth="xl" sx={{ marginTop: "60px", marginBottom: "60px" }}>
         <CssBaseline />
@@ -335,6 +335,6 @@ export default function Register() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </>
   );
 }

@@ -369,7 +369,7 @@ export default function MentoringPage() {
   });
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
 
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
         <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
@@ -698,6 +698,6 @@ export default function MentoringPage() {
           </Box>
         )}
       </Container>
-    </>
+    </ThemeProvider>
   );
 }

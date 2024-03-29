@@ -90,7 +90,7 @@ export default function LoginPage() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Container component="main" maxWidth="xl" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box
@@ -103,7 +103,7 @@ export default function LoginPage() {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" color={darkReader ? "#FFFFFF" : "#191919"}>
+          <Typography component="h1" variant="h5">
             Iniciar Sessão
           </Typography>
           <Box
@@ -156,6 +156,6 @@ export default function LoginPage() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </>
   );
 }

@@ -313,7 +313,7 @@ export default function MaterialsPage() {
   });
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
 
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
           <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
@@ -481,6 +481,6 @@ export default function MaterialsPage() {
         </div>
         <Button onClick={handleOpen}>Adicionar Material</Button>
       </Container>
-    </ >
+    </ThemeProvider >
   );
 }

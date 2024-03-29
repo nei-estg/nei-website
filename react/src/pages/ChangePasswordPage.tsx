@@ -100,7 +100,7 @@ export default function ChangePasswordPage() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
 
       <Container component="main" maxWidth="xs" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
@@ -114,7 +114,7 @@ export default function ChangePasswordPage() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" color={darkReader ? "#FFFFFF" : "#191919"}>
+          <Typography component="h1" variant="h5">
             Alterar a Palavra Passe
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '70%' }}>
@@ -156,6 +156,6 @@ export default function ChangePasswordPage() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </>
   );
 }
