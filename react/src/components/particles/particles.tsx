@@ -22,6 +22,8 @@ export const Particle = () => {
     [darkMode]
   );
 
+  DarkReader.disable();
+
   return (
     <Particles
       id="tsparticles"

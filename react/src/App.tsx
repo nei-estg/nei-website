@@ -15,7 +15,6 @@ function App() {
 
   const themeMode = useSelector((state: RootState) => state.theme.darkMode);
 
-
   return (
     <>
       <CssBaseline />

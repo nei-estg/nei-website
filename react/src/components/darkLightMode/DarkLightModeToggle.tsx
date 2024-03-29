@@ -2,7 +2,7 @@ import { CssBaseline, Switch, Container, FormControlLabel, styled } from "@mui/m
 import { toggleTheme } from "./../redux/actions";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "./../redux/store";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import routes from "@src/router/Routes";
 
 
 
@@ -12,7 +12,18 @@ function DarkLightModeToggle() {
   const themeMode = useSelector((state: RootState) => state.theme.darkMode);
 
   const toggleDarkMode = () => {
+
     dispatch(toggleTheme());
+
+    if (themeMode == false) {
+      DarkReader.disable();
+      localStorage.setItem('darkReader', 'light');
+    }
+    else 
+    {
+      DarkReader.disable();
+      localStorage.setItem('darkReader', 'light');
+    }
   };
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
@@ -63,13 +74,13 @@ function DarkLightModeToggle() {
   }));
 
   return (
-    <ThemeProvider theme={createTheme({ palette: { mode: themeMode ? 'dark' : 'light' } })}>
+    <>
       <CssBaseline />
       <Container>
         <FormControlLabel
           control={<MaterialUISwitch sx={{ m: 1 }} checked={themeMode} onChange={toggleDarkMode} />} label={undefined} />
       </Container>
-    </ThemeProvider>
+    </>
   );
 }
 
