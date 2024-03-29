@@ -143,7 +143,7 @@ export default function ActivateAccountPage() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" color={darkMode ? "#FFFFFF" : "#191919"}>
+          <Typography component="h1" variant="h5" color={darkReader ? "#FFFFFF" : "#191919"}>
             Ativar Conta
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '70%' }}>

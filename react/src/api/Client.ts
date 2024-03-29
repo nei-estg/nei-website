@@ -1,11 +1,13 @@
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { toast, Bounce } from 'react-toastify';
+import { RootState } from '@src/components/redux/store';
+
 
 const client = axios.create({
   baseURL: "/"
 });
 
-const darkReader = useSelector((state: RootState) => state.theme.darkMode);
 
 client.interceptors.response.use(
   (response) => {
@@ -24,7 +26,7 @@ client.interceptors.response.use(
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "dark",
             transition: Bounce,
           });
         } else if (error.response.data) {
@@ -36,7 +38,7 @@ client.interceptors.response.use(
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "dark",
             transition: Bounce,
           });
         } else {
@@ -48,7 +50,7 @@ client.interceptors.response.use(
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "dark",
             transition: Bounce,
           });
         }
@@ -61,7 +63,7 @@ client.interceptors.response.use(
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: darkReader ? "dark" : "light",
+          theme: "dark",
           transition: Bounce,
         });
       } else if (error.response.status === 429) {
@@ -73,7 +75,7 @@ client.interceptors.response.use(
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: darkReader ? "dark" : "light",
+          theme: "dark",
           transition: Bounce,
         });
       } else if (error.response.status === 500) {
@@ -85,7 +87,7 @@ client.interceptors.response.use(
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: darkReader ? "dark" : "light",
+          theme: "dark",
           transition: Bounce,
         });
       } else if (error.response.status === 502) {
@@ -97,7 +99,7 @@ client.interceptors.response.use(
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: darkReader ? "dark" : "light",
+          theme: "dark",
           transition: Bounce,
         });
       }

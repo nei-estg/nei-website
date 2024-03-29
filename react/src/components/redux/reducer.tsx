@@ -13,6 +13,7 @@ const initialState: ThemeState = {
 
 if(initialState.darkMode == true)
 {
+  DarkReader.setFetchMethod(window.fetch);
   DarkReader.enable();
   localStorage.setItem('darkReader', 'dark');
 }

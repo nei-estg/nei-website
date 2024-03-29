@@ -16,13 +16,13 @@ function DarkLightModeToggle() {
     dispatch(toggleTheme());
 
     if (themeMode == false) {
-      DarkReader.disable();
+      DarkReader.enable();
       localStorage.setItem('darkReader', 'light');
     }
     else 
     {
       DarkReader.disable();
-      localStorage.setItem('darkReader', 'light');
+      localStorage.setItem('darkReader', 'dark');
     }
   };
 

@@ -177,11 +177,11 @@ export default function Register() {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" color={darkMode ? "#FFFFFF" : "#191919"}>
+          <Typography component="h1" variant="h5" color={darkReader ? "#FFFFFF" : "#191919"}>
             Criar Conta
           </Typography>
 
-          {userCreateAccount && darkMode && (
+          {userCreateAccount && darkReader && (
             <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
               Precisas de ativar a tua conta! Se o teu email da conta
               corresponder a um email de estudante, vais receber um email para
@@ -191,7 +191,7 @@ export default function Register() {
             </Alert>
           )}
 
-          {userCreateAccount && !darkMode && (
+          {userCreateAccount && !darkReader && (
             <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
               Precisas de ativar a tua conta! Se o teu email da conta
               corresponder a um email de estudante, vais receber um email para

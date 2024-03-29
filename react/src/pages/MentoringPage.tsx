@@ -88,7 +88,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",der ? "dark" : "light",
+            theme: darkReader ? "dark" : "light",
             transition: Bounce,
           }
         );
@@ -372,7 +372,7 @@ export default function MentoringPage() {
     <ThemeProvider theme={theme}>
 
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
-        {darkMode ? (
+        {darkReader ? (
           <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
             A tua privacidade é uma prioridade. Por isso, não vais saber quem é a
             outra pessoa até aceitares a mentoria. Depois, terão de combinar como
@@ -394,7 +394,7 @@ export default function MentoringPage() {
         <Typography
           variant="h4"
           sx={{
-            color: darkMode ? "#FFFFFF" : "#1E2022",
+            color: darkReader ? "#FFFFFF" : "#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -451,7 +451,7 @@ export default function MentoringPage() {
         <Typography
           variant="h4"
           sx={{
-            color: darkMode ? "#FFFFFF" : "#1E2022",
+            color: darkReader ? "#FFFFFF" : "#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -466,7 +466,7 @@ export default function MentoringPage() {
         {mentoringRequestList.length === 0 ? (
           <Typography
             variant="h5"
-            color={darkMode ? "#FFFFFF" : "#1E2022"}
+            color={darkReader ? "#FFFFFF" : "#1E2022"}
             fontWeight="700"
             align="center"
           >
@@ -489,7 +489,7 @@ export default function MentoringPage() {
                   justifyContent: "center",
                   alignContent: "center",
                   flexDirection: "column", // Para colocar os elementos um em cima do outro
-                  boxShadow: darkMode ? "0px 0px 10px rgba(255, 255, 255, 0.1)" : "0px 0px 10px rgba(0, 0, 0, 0.1)", // Adiciona uma sombra
+                  boxShadow: darkReader ? "0px 0px 10px rgba(255, 255, 255, 0.1)" : "0px 0px 10px rgba(0, 0, 0, 0.1)", // Adiciona uma sombra
                   padding: "20px", // Adiciona preenchimento para destacar a sombra
                   borderRadius: "8px", // Adiciona bordas arredondadas para um visual mais suave
                   width: "300px",
@@ -507,7 +507,7 @@ export default function MentoringPage() {
                   variant="subtitle1"
                   align="center"
                   gutterBottom
-                  sx={{ marginBottom: "20px", color: darkMode ? "#FFFFFF" : "#191919" }}
+                  sx={{ marginBottom: "20px", color: darkReader ? "#FFFFFF" : "#191919" }}
                 >
                   <MenuBookIcon
                     sx={{
@@ -519,7 +519,7 @@ export default function MentoringPage() {
                   {correctText(mentoringRequest.curricularUnit.name)}
                 </Typography>
 
-                <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: darkMode ? "#FFFFFF" : "#191919" }}>
+                <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: darkReader ? "#FFFFFF" : "#191919" }}>
                   <AccessTimeFilledIcon
                     sx={{
                       marginRight: "5px",
@@ -557,7 +557,7 @@ export default function MentoringPage() {
         <Typography
           variant="h4"
           sx={{
-            color: darkMode ? "#FFFFFF" : "#1E2022",
+            color: darkReader ? "#FFFFFF" : "#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -572,7 +572,7 @@ export default function MentoringPage() {
         {mentoringList.length === 0 ? (
           <Typography
             variant="h5"
-            color={darkMode ? "#FFFFFF" : "#1E2022"}
+            color={darkReader ? "#FFFFFF" : "#1E2022"}
             fontWeight="700"
             align="center"
           >
@@ -599,7 +599,7 @@ export default function MentoringPage() {
                   alignContent: "center",
                   flexDirection: "column",
                   width: "300px",
-                  boxShadow: darkMode ? "0px 0px 10px rgba(255, 255, 255, 0.1)" : "0px 0px 10px rgba(0, 0, 0, 0.1)", // Adiciona uma sombra
+                  boxShadow: darkReader ? "0px 0px 10px rgba(255, 255, 255, 0.1)" : "0px 0px 10px rgba(0, 0, 0, 0.1)", // Adiciona uma sombra
                   padding: "20px", // Adiciona preenchimento para destacar a sombra
                   borderRadius: "8px", // Adiciona bordas arredondadas para um visual mais suave
                 }}
@@ -614,7 +614,7 @@ export default function MentoringPage() {
                   variant="subtitle1"
                   align="center"
                   gutterBottom
-                  sx={{ marginBottom: "20px", color: darkMode ? "#FFFFFF" : "#191919" }}
+                  sx={{ marginBottom: "20px", color: darkReader ? "#FFFFFF" : "#191919" }}
                 >
                   <MenuBookIcon
                     sx={{
@@ -632,7 +632,7 @@ export default function MentoringPage() {
                       <img
                         src={discordImg}
                         alt="discord"
-                        style={{ marginRight: "5px", marginBottom: "-5px", color: darkMode ? "#FFFFFF" : "#191919" }}
+                        style={{ marginRight: "5px", marginBottom: "-5px", color: darkReader ? "#FFFFFF" : "#191919" }}
                       />
                       {mentoring.mentee?.profilemodel?.discord}
                       (mentorado)
@@ -642,7 +642,7 @@ export default function MentoringPage() {
                       variant="subtitle1"
                       align="center"
                       gutterBottom
-                      sx={{ marginBottom: "20px", color: darkMode ? "#FFFFFF" : "#191919" }}
+                      sx={{ marginBottom: "20px", color: darkReader ? "#FFFFFF" : "#191919" }}
                     >
                       <img
                         src={discordImg}
@@ -655,7 +655,7 @@ export default function MentoringPage() {
                   </>
                 ) : (
                   <>
-                    <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: darkMode ? "#FFFFFF" : "#191919" }}>
+                    <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: darkReader ? "#FFFFFF" : "#191919" }}>
                       <img
                         src={mailImg}
                         alt="mail"
@@ -668,7 +668,7 @@ export default function MentoringPage() {
                       variant="subtitle1"
                       align="center"
                       gutterBottom
-                      sx={{ marginBottom: "20px", color: darkMode ? "#FFFFFF" : "#191919" }}
+                      sx={{ marginBottom: "20px", color: darkReader ? "#FFFFFF" : "#191919" }}
                     >
                       <img
                         src={mailImg}
@@ -681,7 +681,7 @@ export default function MentoringPage() {
                 )}
 
 
-                <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: darkMode ? "#FFFFFF" : "#191919" }}>
+                <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: darkReader ? "#FFFFFF" : "#191919" }}>
                   <AccessTimeFilledIcon
                     sx={{
                       marginRight: "5px",

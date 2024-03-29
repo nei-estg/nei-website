@@ -474,7 +474,7 @@ export default function ProfilePage() {
                           variant="filled"
                           label="Ano"
                           defaultValue={user.profilemodel?.year}
-                          sx={{ width: "100%", backgroundColor: darkMode ? "#FFFFFF" : ""}}
+                          sx={{ width: "100%", backgroundColor: darkReader ? "#FFFFFF" : ""}}
                           helperText="Todos os anos tens que atualizar, não te esqueças! Este deve ser referente ao teu curso mais recente!"
                         >
                           <MenuItem value={1}>1st</MenuItem>

@@ -267,48 +267,23 @@ export default function CalendarPage() {
           },
         },
       },
-      MuiSelect: {
-        styleOverrides: {
-          root: {
-            backgroundColor: 'rgb(232, 241, 250)',
-            '&:hover': {
-              backgroundColor: 'rgb(232, 241, 250)',
-              '@media (hover: none)': {
-                backgroundColor: 'rgb(232, 241, 250)',
-              },
-            },
-            '&.Mui-focused': {
-              backgroundColor: 'rgb(232, 241, 250)',
-            },
-          },
-        },
-      },
-    }
+    },
   });
 
   return (
     <ThemeProvider theme={theme}>
-
       <Container maxWidth="xl" sx={{ marginBottom: '60px' }}>
-        {darkMode ? (
-          <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
+        <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
             Podes ver eventos adicionados pela comunidade e verificados pelo NEI.
             Também mostramos feriados, e tu, com a tua sessão iniciada, podes criar eventos.
             Quando crias um evento, ele fica visível para ti até que atualizes a página.
-          </Alert>
-        ) : (
-          <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
-            Podes ver eventos adicionados pela comunidade e verificados pelo NEI.
-            Também mostramos feriados, e tu, com a tua sessão iniciada, podes criar eventos.
-            Quando crias um evento, ele fica visível para ti até que atualizes a página.
-          </Alert>
-        )}
+        </Alert>
 
 
         <Typography
           variant="h4"
           sx={{
-            color: darkMode ? "#FFFFFF" : "#1E2022",
+            color: "#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -320,7 +295,7 @@ export default function CalendarPage() {
           Calendário
         </Typography>
 
-        <div style={{ borderRadius: 5, backgroundColor: darkMode ? "#FFFFFF" : "#FFFFFF" }}>
+        <div>
           <Calendar
             views={["day", "work_week", "month"]}
             selectable
@@ -352,24 +327,24 @@ export default function CalendarPage() {
               border: "2px solid #000",
               textAlign: "center",
               boxShadow: 24,
-              backgroundColor: darkMode ? "#191919" : "#FFFFFF",
+              backgroundColor: "#FFFFFF",
               p: 4,
               borderRadius: 2
             }}
           >
-            <p style={{ color: darkMode ? "#FFFF" : "#191919" }}>Titulo: {selectedEvent?.name}</p>
-            <p style={{ color: darkMode ? "#FFFF" : "#191919" }}>Descrição: {selectedEvent?.description}</p>
-            <p style={{ color: darkMode ? "#FFFF" : "#191919" }}>
+            <p style={{ color: darkReader ? "#FFFF" : "#191919" }}>Titulo: {selectedEvent?.name}</p>
+            <p style={{ color: darkReader ? "#FFFF" : "#191919" }}>Descrição: {selectedEvent?.description}</p>
+            <p style={{ color: darkReader ? "#FFFF" : "#191919" }}>
               Inicio: {new Date(selectedEvent?.startDate).toLocaleString("pt-PT")}
             </p>
-            <p style={{ color: darkMode ? "#FFFF" : "#191919" }}>Fim: {new Date(selectedEvent?.endDate).toLocaleString("pt-PT")}</p>
+            <p style={{ color: darkReader ? "#FFFF" : "#191919" }}>Fim: {new Date(selectedEvent?.endDate).toLocaleString("pt-PT")}</p>
             {selectedEvent?.place && <p>Local: {selectedEvent.place}</p>}
             {selectedEvent?.curricularUnit && (
               <>
-                <p style={{ color: darkMode ? "#FFFF" : "#191919" }}>
+                <p style={{ color: darkReader ? "#FFFF" : "#191919" }}>
                   Unidade Curricular: {selectedEvent.curricularUnit.abbreviation}
                 </p>
-                <p style={{ color: darkMode ? "#FFFF" : "#191919" }}>
+                <p style={{ color: darkReader ? "#FFFF" : "#191919" }}>
                   Curso:{" "}
                   {selectedEvent.curricularUnit?.course
                     ?.map((course) => course.abbreviation)
@@ -397,13 +372,13 @@ export default function CalendarPage() {
               textAlign: "center",
               boxShadow: 24,
               p: 4,
-              backgroundColor: darkMode ? "#191919" : "#FFFFFF",
+              backgroundColor: darkReader ? "#191919" : "#FFFFFF",
               borderRadius: 2,
             }}
           >
-            <h1 style={{ color: darkMode ? "#FFFF" : "#191919" }}>Adicionar Evento</h1>
+            <h1 style={{ color: darkReader ? "#FFFF" : "#191919" }}>Adicionar Evento</h1>
             {!isLoggedIn() ? (
-              <h2 style={{ color: darkMode ? "#FFFF" : "#191919" }}>Para adicionar um evento é necessário iniciar sessão!</h2>
+              <h2 style={{ color: darkReader ? "#FFFF" : "#191919" }}>Para adicionar um evento é necessário iniciar sessão!</h2>
             ) : (
               <>
                 <TextField

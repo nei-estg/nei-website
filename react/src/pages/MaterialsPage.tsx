@@ -316,7 +316,7 @@ export default function MaterialsPage() {
     <ThemeProvider theme={theme}>
 
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
-        {darkMode ? (
+        {darkReader ? (
           <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
             Podes ver materiais adicionados pela comunidade e verificados pelo
             NEI. E tu, com a tua sessão iniciada, podes adicionar também.
@@ -331,7 +331,7 @@ export default function MaterialsPage() {
         <Typography
           variant="h4"
           sx={{
-            color: darkMode ? "#FFFFFF" : "#1E2022",
+            color: darkReader ? "#FFFFFF" : "#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -362,7 +362,7 @@ export default function MaterialsPage() {
               boxShadow: 24,
               p: 4,
               borderRadius: 2,
-              backgroundColor: darkMode ? "#191919" : "#FFFFFF",
+              backgroundColor: darkReader ? "#191919" : "#FFFFFF",
             }}
           >
             <h1>Adicionar Material</h1>
@@ -474,7 +474,7 @@ export default function MaterialsPage() {
             )}
           </Box>
         </Modal>
-        <div style={{ height: 400, width: "100%", borderRadius: 5, backgroundColor: darkMode ? "#ffffff" : "#ffffff" }}>
+        <div style={{ height: 400, width: "100%", borderRadius: 5, backgroundColor: darkReader ? "#ffffff" : "#ffffff" }}>
           <DataGrid
             rows={materialsList}
             columns={columns}
