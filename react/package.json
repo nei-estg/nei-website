@@ -23,7 +23,7 @@
     "dayjs": "^1.11.10",
     "moment": "^2.30.1",
     "react": "^18.2.0",
-    "react-big-calendar": "^1.10.3",
+    "react-big-calendar": "^1.11.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1",
     "react-terminal": "^1.4.4",
