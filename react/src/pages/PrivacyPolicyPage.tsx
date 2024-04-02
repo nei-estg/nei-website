@@ -1,21 +1,15 @@
 import {
   Container,
-  ThemeProvider,
   Typography,
-  createTheme,
 } from "@mui/material";
-import { RootState } from "@src/components/redux/store";
 import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 
 const PrivacyPolicyPage = () => {
   useEffect(() => {
     document.title = routes.privacypolicypage.name;
   });
-
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
 
 
   return (

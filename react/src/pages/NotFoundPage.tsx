@@ -1,13 +1,9 @@
 import {
   Container,
-  ThemeProvider,
   Typography,
-  createTheme,
 } from "@mui/material";
-import { RootState } from "@src/components/redux/store";
 import routes from "@src/router/Routes";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 
 
 const NotFoundPage = () => {
@@ -15,7 +11,6 @@ const NotFoundPage = () => {
     document.title = routes.notfoundpage.name;
   }, []);
 
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
 
 
   return (

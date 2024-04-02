@@ -6,21 +6,18 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { RootState } from "@src/components/redux/store";
 import { loginUser } from "@src/api/UserRoutes";
 import { IUser } from "@src/interfaces/IUser";
 import routes from "@src/router/Routes";
 import * as React from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
 
 export default function LoginPage() {
-  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
 
   useEffect(() => {
     document.title = routes.loginpage.name;
@@ -42,7 +39,7 @@ export default function LoginPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme: "light",
         transition: Bounce,
       });
       return;

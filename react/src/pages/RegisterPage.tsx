@@ -6,7 +6,6 @@ import {
   InputLabel,
   ListItemText,
   MenuItem,
-  OutlinedInput,
   Select,
   SelectChangeEvent,
 } from "@mui/material";
@@ -17,10 +16,9 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { RootState } from "@src/components/redux/store";
 import { getCourses } from "@src/api/CourseRoutes";
 import { registerUser } from "@src/api/UserRoutes";
 import { ICourse } from "@src/interfaces/ICourse";
@@ -28,7 +26,6 @@ import { IUser } from "@src/interfaces/IUser";
 import routes from "@src/router/Routes";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
 
@@ -47,9 +44,6 @@ const MenuProps = {
 
 
 export default function Register() {
-  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
-
-
   const [userCreateAccount, setUserCreateAccount] = useState(false);
 
   const [courses, setCourses] = React.useState<ICourse[]>([]);
@@ -72,7 +66,7 @@ export default function Register() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -119,7 +113,7 @@ export default function Register() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme:"light",
         transition: Bounce,
       });
     }
@@ -177,21 +171,11 @@ export default function Register() {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" color={darkReader ? "#FFFFFF" : "#191919"}>
+          <Typography component="h1" variant="h5" color="#191919">
             Criar Conta
           </Typography>
 
-          {userCreateAccount && darkReader && (
-            <Alert variant="filled" severity="info" sx={{ marginTop: "30px", marginBottom: "30px", color: "#FFFFFF" }}>
-              Precisas de ativar a tua conta! Se o teu email da conta
-              corresponder a um email de estudante, vais receber um email para
-              ativares a tua conta. Se não corresponder, precisas de contactar o
-              NEI para confirmar que és estudante ou ex-estudante da ESTG. Até
-              ativares a tua conta, não vais conseguir entrar.
-            </Alert>
-          )}
-
-          {userCreateAccount && !darkReader && (
+          {userCreateAccount && (
             <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
               Precisas de ativar a tua conta! Se o teu email da conta
               corresponder a um email de estudante, vais receber um email para

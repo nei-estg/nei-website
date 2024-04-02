@@ -19,19 +19,16 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
-  ThemeProvider,
   Tooltip,
   Typography,
   createTheme,
 } from "@mui/material";
-import { RootState } from "@src/components/redux/store";
 import { getCourses } from "@src/api/CourseRoutes";
 import { getUser, updateUser } from "@src/api/UserRoutes";
 import { ICourse } from "@src/interfaces/ICourse";
 import { IUser } from "@src/interfaces/IUser";
 import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
 
@@ -39,9 +36,6 @@ import { Bounce, toast } from "react-toastify";
 
 
 export default function ProfilePage() {
-  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
-
-
   const [user, setUser] = useState<IUser>({} as IUser);
   const [isEditing, setIsEditing] = useState(false); // Estado para controlar a visibilidade
   const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
@@ -82,7 +76,7 @@ export default function ProfilePage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -101,7 +95,7 @@ export default function ProfilePage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -186,7 +180,7 @@ export default function ProfilePage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: darkReader ? "dark" : "light",
+          theme: "light",
           transition: Bounce,
         });
         //TODO: Update stuff on localstorage
@@ -200,7 +194,7 @@ export default function ProfilePage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: darkReader ? "dark" : "light",
+          theme: "light",
           transition: Bounce,
         });
       });
@@ -473,7 +467,7 @@ export default function ProfilePage() {
                           variant="filled"
                           label="Ano"
                           defaultValue={user.profilemodel?.year}
-                          sx={{ width: "100%", backgroundColor: darkReader ? "#FFFFFF" : ""}}
+                          sx={{ width: "100%", backgroundColor: ""}}
                           helperText="Todos os anos tens que atualizar, não te esqueças! Este deve ser referente ao teu curso mais recente!"
                         >
                           <MenuItem value={1}>1st</MenuItem>

@@ -34,8 +34,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Bounce, toast } from "react-toastify";
 import "../components/calendar/calendar.css";
 import routes from "@src/router/Routes";
-import { RootState } from "@src/components/redux/store";
-import { useSelector } from "react-redux";
 
 moment.locale("pt-BR"); // Set the locale to Portuguese
 const localizer = momentLocalizer(moment);
@@ -55,9 +53,6 @@ const customLabels = {
 
 
 export default function CalendarPage() {
-  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
-
-
   const [eventsData, setEventsData] = useState<ICalendar[]>([]);
   const [coursesData, setCoursesData] = useState<ICourse[]>([]);
   const [openAddEventModal, setOpenAddEventModal] = useState(false);
@@ -99,7 +94,7 @@ export default function CalendarPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -121,7 +116,7 @@ export default function CalendarPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -149,7 +144,7 @@ export default function CalendarPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme:"light",
         transition: Bounce,
       });
       return;
@@ -165,7 +160,7 @@ export default function CalendarPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme: "light",
         transition: Bounce,
       });
       return;
@@ -191,7 +186,7 @@ export default function CalendarPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -211,7 +206,7 @@ export default function CalendarPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -332,19 +327,19 @@ export default function CalendarPage() {
               borderRadius: 2
             }}
           >
-            <p style={{ color: darkReader ? "#FFFF" : "#191919" }}>Titulo: {selectedEvent?.name}</p>
-            <p style={{ color: darkReader ? "#FFFF" : "#191919" }}>Descrição: {selectedEvent?.description}</p>
-            <p style={{ color: darkReader ? "#FFFF" : "#191919" }}>
+            <p style={{ color: "#191919" }}>Titulo: {selectedEvent?.name}</p>
+            <p style={{ color: "#191919" }}>Descrição: {selectedEvent?.description}</p>
+            <p style={{ color: "#191919" }}>
               Inicio: {new Date(selectedEvent?.startDate).toLocaleString("pt-PT")}
             </p>
-            <p style={{ color: darkReader ? "#FFFF" : "#191919" }}>Fim: {new Date(selectedEvent?.endDate).toLocaleString("pt-PT")}</p>
+            <p style={{ color: "#191919" }}>Fim: {new Date(selectedEvent?.endDate).toLocaleString("pt-PT")}</p>
             {selectedEvent?.place && <p>Local: {selectedEvent.place}</p>}
             {selectedEvent?.curricularUnit && (
               <>
-                <p style={{ color: darkReader ? "#FFFF" : "#191919" }}>
+                <p style={{ color: "#191919" }}>
                   Unidade Curricular: {selectedEvent.curricularUnit.abbreviation}
                 </p>
-                <p style={{ color: darkReader ? "#FFFF" : "#191919" }}>
+                <p style={{ color: "#191919" }}>
                   Curso:{" "}
                   {selectedEvent.curricularUnit?.course
                     ?.map((course) => course.abbreviation)
@@ -378,7 +373,7 @@ export default function CalendarPage() {
           >
             <h1>Adicionar Evento</h1>
             {!isLoggedIn() ? (
-              <h2 style={{ color: darkReader ? "#FFFF" : "#191919" }}>Para adicionar um evento é necessário iniciar sessão!</h2>
+              <h2 style={{ color: "#191919" }}>Para adicionar um evento é necessário iniciar sessão!</h2>
             ) : (
               <>
                 <TextField

@@ -1,11 +1,9 @@
-import { Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, ThemeProvider, Typography, createTheme } from "@mui/material";
+import { Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography, createTheme } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { activateAccount, getActivateAccountCode } from "@src/api/UserRoutes";
 import routes from "@src/router/Routes";
 import { toast, Bounce } from "react-toastify";
 import { useEffect, useState } from "react";
-import { RootState } from "@src/components/redux/store";
-import { useSelector } from "react-redux";
 
 
 
@@ -13,7 +11,6 @@ import { useSelector } from "react-redux";
 
 export default function ActivateAccountPage() {
   const [clickGetCode, setClickGetCode] = useState(false);
-  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
 
 
   useEffect(() => {
@@ -36,7 +33,7 @@ export default function ActivateAccountPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme: "light",
         transition: Bounce,
       });
     }).catch(() => {
@@ -50,7 +47,7 @@ export default function ActivateAccountPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme: "light",
         transition: Bounce,
       });
     });
@@ -73,7 +70,7 @@ export default function ActivateAccountPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme: "light",
         transition: Bounce,
       });
     }).catch(() => {
@@ -85,7 +82,7 @@ export default function ActivateAccountPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme: "light",
         transition: Bounce,
       });
     });
@@ -129,7 +126,7 @@ export default function ActivateAccountPage() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Container component="main" maxWidth="xs" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box
@@ -199,6 +196,6 @@ export default function ActivateAccountPage() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </>
   );
 }

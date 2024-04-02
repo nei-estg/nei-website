@@ -3,12 +3,9 @@ import moment from "moment";
 import events from "./events";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState } from "react";
-import { RootState } from "@src/components/redux/store";
-import { useSelector } from "react-redux";
 
 
 
-const darkMode = useSelector((state: RootState) => state.theme.darkMode);
 
 moment.locale("pt-br");
 const localizer = momentLocalizer(moment);

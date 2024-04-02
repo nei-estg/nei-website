@@ -6,25 +6,20 @@ import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { RootState } from '@src/components/redux/store';
 import { changePassword } from '@src/api/UserRoutes';
 import { isLoggedIn } from '@src/api/utils/LoginStatus';
 import routes from '@src/router/Routes';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { Bounce, toast } from 'react-toastify';
 
 
 
 
 export default function ChangePasswordPage() {
-
-  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
-
 
   useEffect(() => {
     document.title = routes.changepasswordpage.name;
@@ -55,7 +50,7 @@ export default function ChangePasswordPage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: darkReader ? "dark" : "light",
+          theme: "light",
           transition: Bounce,
         }
       );

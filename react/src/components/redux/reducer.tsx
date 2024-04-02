@@ -11,14 +11,6 @@ const initialState: ThemeState = {
 };
 
 
-if(initialState.darkMode == true)
-{
-  DarkReader.setFetchMethod(window.fetch);
-  DarkReader.enable();
-  localStorage.setItem('darkReader', 'dark');
-}
-
-
 const themeReducer = (state = initialState, action: { type: string }) => {
   switch (action.type) {
     case TOGGLE_THEME:

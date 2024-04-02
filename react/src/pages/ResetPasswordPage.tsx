@@ -9,12 +9,10 @@ import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { RootState } from "@src/components/redux/store";
 import { getResetPasswordCode, resetPassword } from "@src/api/UserRoutes";
 import routes from "@src/router/Routes";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
 
@@ -22,8 +20,6 @@ import { Bounce, toast } from "react-toastify";
 
 
 export default function ResetPasswordPage() {
-  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
-
   const [clickGetCode, setClickGetCode] = useState(false);
 
 
@@ -47,7 +43,7 @@ export default function ResetPasswordPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme: "light",
         transition: Bounce,
       });
     })
@@ -64,7 +60,7 @@ export default function ResetPasswordPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -92,7 +88,7 @@ export default function ResetPasswordPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -108,7 +104,7 @@ export default function ResetPasswordPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );

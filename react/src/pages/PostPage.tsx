@@ -8,14 +8,12 @@ import {
   createTheme,
   useMediaQuery
 } from "@mui/material";
-import { RootState } from "@src/components/redux/store";
 import { getBlog } from "@src/api/BlogRoutes";
 import Carousel from "@src/components/post/Carousel";
 import { IBlogPost } from "@src/interfaces/IBlogPost";
 import { ICourse } from "@src/interfaces/ICourse";
 import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
@@ -24,8 +22,6 @@ import { Bounce, toast } from "react-toastify";
 
 
 export default function PostPage() {
-  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
-
   const defaultTheme = createTheme();
 
 
@@ -63,7 +59,7 @@ export default function PostPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -108,7 +104,7 @@ export default function PostPage() {
                     </Button>
 
                     <Typography
-                      color={darkReader ? "#90CAF9" :"#002454"}
+                      color="#002454"
                       sx={{
                         fontSize: {
                           xs: "24px",
@@ -216,7 +212,7 @@ export default function PostPage() {
 
                     {/*conteudo*/}
                     <Typography
-                      color={darkReader ? "#FFFF" :"#1E2022"}
+                      color="#1E2022"
                       sx={{
                         fontSize: {
                           xs: "20px",

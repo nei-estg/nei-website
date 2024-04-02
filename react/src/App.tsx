@@ -7,13 +7,9 @@ import FooterWrapper from "./components/footer/FooterWrapper";
 import NavBarWrapper from "./components/navbar/NavBarWrapper";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSelector } from "react-redux";
-import { RootState } from "@src/components/redux/store";
 
 
 function App() {
-
-  const themeMode = useSelector((state: RootState) => state.theme.darkMode);
 
   return (
     <>
@@ -29,7 +25,7 @@ function App() {
           }}
         >
           <NavBarWrapper />
-          <Container maxWidth={false} disableGutters={true} sx={{ flexGrow: 1, backgroundColor: themeMode ? "#191919" : "#FFFFFF" }}>
+          <Container maxWidth={false} disableGutters={true} sx={{ flexGrow: 1, backgroundColor: "#FFFFFF" }}>
             <Router />
           </Container>
           <FooterWrapper />

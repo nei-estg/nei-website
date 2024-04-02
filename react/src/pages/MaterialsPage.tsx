@@ -9,7 +9,6 @@ import {
   ListItemText,
   MenuItem,
   Modal,
-  OutlinedInput,
   Select,
   SelectChangeEvent,
   TextField,
@@ -17,7 +16,6 @@ import {
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { RootState } from "@src/components/redux/store";
 import { getCourses } from "@src/api/CourseRoutes";
 import {
   createMaterial,
@@ -31,7 +29,6 @@ import { IMaterial } from "@src/interfaces/IMaterial";
 import { IMaterialTag } from "@src/interfaces/IMaterialTag";
 import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
 
@@ -49,7 +46,6 @@ const MenuProps = {
 
 
 export default function MaterialsPage() {
-  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
   const [materialsList, setMaterialsList] = useState<IMaterial[]>([]);
   const [curricularUnits, setCurricularUnits] = useState<ICurricularUnit[]>([]);
   const [coursesData, setCoursesData] = useState<ICourse[]>([]);
@@ -80,7 +76,7 @@ export default function MaterialsPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme: "light",
         transition: Bounce,
       });
       return;
@@ -96,7 +92,7 @@ export default function MaterialsPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme: "light",
         transition: Bounce,
       });
       return;
@@ -123,7 +119,7 @@ export default function MaterialsPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -139,7 +135,7 @@ export default function MaterialsPage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: darkReader ? "dark" : "light",
+          theme: "light",
           transition: Bounce,
         });
       });
@@ -162,7 +158,7 @@ export default function MaterialsPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -184,7 +180,7 @@ export default function MaterialsPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme:"light",
             transition: Bounce,
           }
         );
@@ -205,7 +201,7 @@ export default function MaterialsPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -324,7 +320,7 @@ export default function MaterialsPage() {
         <Typography
           variant="h4"
           sx={{
-            color: darkReader ? "#FFFFFF" : "#1E2022",
+            color: "#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -355,7 +351,7 @@ export default function MaterialsPage() {
               boxShadow: 24,
               p: 4,
               borderRadius: 2,
-              backgroundColor: darkReader ? "#191919" : "#FFFFFF",
+              backgroundColor: "#FFFFFF",
             }}
           >
             <h1>Adicionar Material</h1>
@@ -467,7 +463,7 @@ export default function MaterialsPage() {
             )}
           </Box>
         </Modal>
-        <div style={{ height: 400, width: "100%", borderRadius: 5, backgroundColor: darkReader ? "#ffffff" : "#ffffff" }}>
+        <div style={{ height: 400, width: "100%", borderRadius: 5, backgroundColor: "#ffffff" }}>
           <DataGrid
             rows={materialsList}
             columns={columns}

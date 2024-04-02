@@ -1,30 +1,8 @@
 import { CssBaseline, Switch, Container, FormControlLabel, styled } from "@mui/material";
-import { toggleTheme } from "./../redux/actions";
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from "./../redux/store";
-import routes from "@src/router/Routes";
 
 
 
 function DarkLightModeToggle() {
-
-  const dispatch = useDispatch();
-  const themeMode = useSelector((state: RootState) => state.theme.darkMode);
-
-  const toggleDarkMode = () => {
-
-    dispatch(toggleTheme());
-
-    if (themeMode == false) {
-      DarkReader.enable();
-      localStorage.setItem('darkReader', 'light');
-    }
-    else 
-    {
-      DarkReader.disable();
-      localStorage.setItem('darkReader', 'dark');
-    }
-  };
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -78,7 +56,7 @@ function DarkLightModeToggle() {
       <CssBaseline />
       <Container>
         <FormControlLabel
-          control={<MaterialUISwitch sx={{ m: 1 }} checked={themeMode} onChange={toggleDarkMode} />} 
+          control={<MaterialUISwitch sx={{ m: 1 }} />} 
           label={undefined} />
       </Container>
     </>

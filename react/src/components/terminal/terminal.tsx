@@ -1,15 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './terminal.css';
-import { useSelector } from 'react-redux';
-import { RootState } from "@src/components/redux/store";
 
 
 const Terminal: React.FC = () => {
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
-
   const [input, setInput] = useState<string>('');
   const [output, setOutput] = useState<string[]>([]);
-  const [terminalColor, setTerminalColor] = useState<string>(darkMode ? '#000000' : '#ffffff');
+  const [terminalColor, setTerminalColor] = useState<string>('#ffffff');
   const [typingAnimationVisible, setTypingAnimationVisible] = useState<boolean>(false);
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -38,7 +34,7 @@ const Terminal: React.FC = () => {
     }, 1000);
 
     return () => clearTimeout(typingAnimationTimeout);
-  }, [darkMode]);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -90,12 +86,12 @@ const Terminal: React.FC = () => {
           <span className="macbook-button green"></span>
         </div>
       </div>
-      <div className="screen" style={{ border: '1px solid #c0c0c0', backgroundColor: darkMode ? '#000000' : '#FFFFFF', color: '#ffffff' }}>
+      <div className="screen" style={{ border: '1px solid #c0c0c0', backgroundColor: '#FFFFFF', color: '#ffffff' }}>
         <div className="terminal" ref={terminalRef}>
-          <div style={{ color: darkMode ? '#ffffff' : '#000000' }}>Bem-vindo ao terminal do NEI!</div>
-          <div style={{ color: darkMode ? '#ffffff' : '#000000' }}>Escreve "help" para veres todos os comandos</div>
+          <div style={{ color: '#000000' }}>Bem-vindo ao terminal do NEI!</div>
+          <div style={{ color: '#000000' }}>Escreve "help" para veres todos os comandos</div>
           {output.map((line, index) => (
-            <div key={index} style={{ color: darkMode ? '#ffffff' : '#000000' }}>{line}</div>
+            <div key={index} style={{ color: '#000000' }}>{line}</div>
           ))}
           <div className="terminal-input">
             <span>$</span>
@@ -104,7 +100,7 @@ const Terminal: React.FC = () => {
               value={input}
               onChange={handleInputChange}
               onKeyDown={handleEnterPress}
-              style={{color: darkMode ? '#ffffff' : '#000000'}}
+              style={{color: '#000000'}}
             />
             {typingAnimationVisible && <span className="typing-animation"></span>}
           </div>

@@ -15,10 +15,7 @@ import { isLoggedIn } from "@src/api/utils/LoginStatus";
 import routes from "@src/router/Routes";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import DarkLightModeToggle from "../darkLightMode/DarkLightModeToggle";
-import { useSelector } from "react-redux";
-import { RootState } from "@src/components/redux/store";
-import { createTheme, ThemeProvider } from "@mui/material";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 
 const navbar = {
@@ -63,8 +60,6 @@ const settings = {
 };
 
 function NavBarMain() {
-  const themeMode = useSelector((state: RootState) => state.theme.darkMode);
-
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -91,8 +86,14 @@ function NavBarMain() {
   };
 
 
+  const handleOpenDarkReader = () => {
+    window.open("https://darkreader.org/");
+  };
+
+
+
   return (
-    <ThemeProvider theme={createTheme({ palette: { mode: themeMode ? 'dark' : 'light' } })}>
+    <>
       <div style={{ zIndex: 2, position: "relative" }}>
         <AppBar
           position="static"
@@ -124,7 +125,7 @@ function NavBarMain() {
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleOpenNavMenu}
-                  color={themeMode ? '#191919' : '#FFFFFF'}
+                  color="#FFFFFF"
                 >
                   <MenuIcon/>
                 </IconButton>
@@ -149,7 +150,7 @@ function NavBarMain() {
                     >
                       <Button
                         onClick={() => navigate(page.URL)}
-                        sx={{ color: themeMode ? "inherit" : "#191919", textTransform: "none" }}
+                        sx={{ color: "#191919", textTransform: "none" }}
                       >
                         {page.name}
                       </Button>
@@ -177,7 +178,7 @@ function NavBarMain() {
                   flexGrow: 1,
                   fontWeight: 700,
                   letterSpacing: ".3rem",
-                  color: themeMode ? "inherit" : "#191919",
+                  color: "#191919",
                   textDecoration: "none",
                 }}
                 href="/"
@@ -185,8 +186,14 @@ function NavBarMain() {
                 NEI
               </Typography>
 
-              <Box sx={{flexGrow: 0, display: { xs: "flex", md: "none" }, marginLeft: '-120px', marginRight: '-30px'}}>
-                <DarkLightModeToggle />
+              <Box sx={{flexGrow: 0, display: { xs: "flex", md: "none" },}}>
+                <Tooltip title="Ativar o modo escuro">
+                      <IconButton onClick={handleOpenDarkReader}>
+                        <Avatar sx={{ backgroundColor: "#054496", color: "#FFFFFF" }}>
+                          <DarkModeIcon />
+                        </Avatar>
+                      </IconButton>
+                    </Tooltip>
               </Box>
 
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -201,9 +208,8 @@ function NavBarMain() {
                       my: 2,
                       color:
                         page.requiredLogin && !isLoggedIn() ? "#969696" : // requiredLogin e não logado
-                          themeMode && !page.requiredLogin ? "inherit" : // dark e não requiredLogin
-                            !themeMode && !page.requiredLogin ? "#191919" : // light e não requiredLogin
-                            !themeMode && page.requiredLogin && isLoggedIn() ? "#191919" : // light, requiredLogin e logado
+                            !page.requiredLogin ? "#191919" : // não requiredLogin
+                            page.requiredLogin && isLoggedIn() ? "#191919" : // requiredLogin e logado
                               "#FFFFFF", // Todas as outras condições padrão
                       display: "block",
                     }}
@@ -214,8 +220,14 @@ function NavBarMain() {
                 ))}
               </Box>
 
-              <Box sx={{flexGrow: 0, display: { xs: "none", md: "flex", marginRight: '-30px'}}}>
-                <DarkLightModeToggle />
+              <Box sx={{flexGrow: 0, display: { xs: "none", md: "flex", },}}>
+                <Tooltip title="Ativar o modo escuro">
+                      <IconButton onClick={handleOpenDarkReader}>
+                        <Avatar sx={{ backgroundColor: "#054496", color: "#FFFFFF" }}>
+                          <DarkModeIcon />
+                        </Avatar>
+                      </IconButton>
+                    </Tooltip>
               </Box>
 
               {/* icon user */}
@@ -283,7 +295,7 @@ function NavBarMain() {
           </Container>
         </AppBar>
       </div>
-    </ThemeProvider>
+    </>
   );
 }
 export default NavBarMain;

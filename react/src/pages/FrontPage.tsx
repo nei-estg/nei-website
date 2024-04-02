@@ -22,14 +22,12 @@ import { ThemeProvider } from '@emotion/react';
 
 
 export default function FrontPage() {
-
-  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
   const [showForm, setShowForm] = useState(true);
 
 
   useEffect(() => {
     document.title = routes.frontpage.name;
-  }, [darkReader]);
+  }, []);
 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -53,7 +51,7 @@ export default function FrontPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? 'dark' : 'light',
+            theme: 'light',
             transition: Bounce,
           }
         );
@@ -69,7 +67,7 @@ export default function FrontPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? 'dark' : 'light',
+            theme: 'light',
             transition: Bounce,
           }
         );
@@ -100,7 +98,7 @@ export default function FrontPage() {
 
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <div>
         <div
           id="bgnr"
@@ -126,8 +124,8 @@ export default function FrontPage() {
               justifyContent: 'center',
             }}
           >
-            <h1 style={{color: (darkReader && window.innerWidth <= 1200) ? "#FFFFFF" :  (darkReader && window.innerWidth > 1200) ? "#FFFFFF" : (!darkReader && window.innerWidth <= 1200) ? "#191919" : (!darkReader && window.innerWidth > 1200) ? "#FFFFFF" : ""}}>Bem-vindo ao NEI!</h1>
-            <p style={{color: (darkReader && window.innerWidth <= 1200) ? "#FFFFFF" :  (darkReader && window.innerWidth > 1200) ? "#FFFFFF" : (!darkReader && window.innerWidth <= 1200) ? "#191919" : (!darkReader && window.innerWidth > 1200) ? "#FFFFFF" : ""}}>Prepara-te para passar maior parte do teu tempo aqui!</p>
+            <h1 style={{color: (window.innerWidth <= 1200) ? "#191919" : (window.innerWidth > 1200) ? "#FFFFFF" : ""}}>Bem-vindo ao NEI!</h1>
+            <p style={{color: (window.innerWidth <= 1200) ? "#191919" : (window.innerWidth > 1200) ? "#FFFFFF" : ""}}>Prepara-te para passar maior parte do teu tempo aqui!</p>
           </div>
           <div
             style={{
@@ -184,7 +182,7 @@ export default function FrontPage() {
           >
             <div id="div1" style={{ margin: '20px' }}>
               <a href={routes.aboutFAQpage.path} style={{ textDecoration: 'none' }}>
-                <h1 style={{ color: darkReader ? '#FFFFFF' : "#191919" }}>Sobre o Nosso Núcleo</h1>
+                <h1 style={{ color: "#191919" }}>Sobre o Nosso Núcleo</h1>
                 <a href="/about" target="_blank" style={{ textDecoration: 'none' }}>
                   <img
                     src="logo.png"
@@ -192,7 +190,7 @@ export default function FrontPage() {
                     style={{ height: '150px', width: '150px' }}
                   />
                 </a>
-                <p style={{ color: darkReader ? '#FFFFFF' : "#191919", fontWeight: 'bold' }}>
+                <p style={{ color: "#191919", fontWeight: 'bold' }}>
                   Direção, Cursos, entre outros.
                 </p>
               </a>
@@ -200,13 +198,13 @@ export default function FrontPage() {
 
             <div id="div1" style={{ margin: '20px' }}>
               <a href={routes.blogpage.path} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                <h1 style={{ color: darkReader ? '#FFFFFF' : "#191919" }}>Atividades</h1>
+                <h1 style={{ color: "#191919" }}>Atividades</h1>
                 <img
                   src="/icon/laptop.png"
                   alt="Descrição da imagem"
                   style={{ height: '150px', width: '150px' }}
                 />
-                <p style={{ color: darkReader ? '#FFFFFF' : "#191919", fontWeight: 'bold' }}>
+                <p style={{ color: "#191919", fontWeight: 'bold' }}>
                   Eventos e Atividades mais recentes.
                 </p>
               </a>
@@ -224,7 +222,7 @@ export default function FrontPage() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: darkReader ? '#2f2f2f' : '#FFFFFF'
+          backgroundColor: '#FFFFFF'
         }}
       >
         <div
@@ -237,7 +235,7 @@ export default function FrontPage() {
         >
           {showForm && (
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3, }}>
-              <h1 className="responsive-header" style={{ color: darkReader ? '#FFFFFF' : '#191919' }}>Dúvidas? Envia-nos uma mensagem! :)</h1>
+              <h1 className="responsive-header" style={{ color: '#191919' }}>Dúvidas? Envia-nos uma mensagem! :)</h1>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -299,12 +297,12 @@ export default function FrontPage() {
               </Button>
             </Box>
           )}
-          {!showForm && <div style={{ color: darkReader ? '#FFFFFF' : '#191919' }}>Obrigado, até breve!</div>}
+          {!showForm && <div style={{ color: '#191919' }}>Obrigado, até breve!</div>}
         </div>
       </div>
       <div style={{ zIndex: 1, position: 'absolute' }}>
         <Particle />
       </div>
-    </ThemeProvider>
+    </>
   );
 }

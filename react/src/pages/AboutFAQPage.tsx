@@ -1,5 +1,5 @@
 import { GitHub, LinkedIn } from "@mui/icons-material";
-import { Avatar, Box, Grid, Paper, Tab, Tabs, Typography, makeStyles, styled } from "@mui/material";
+import { Avatar, Box, Grid, Paper, Tab, Tabs, Typography, styled } from "@mui/material";
 import Container from "@mui/material/Container";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { getFAQ } from "@src/api/AboutRoutes";
@@ -7,9 +7,7 @@ import AccordionUsage from "@src/components/aboutFAQ/Accordion";
 import { IFAQ } from "@src/interfaces/IFAQ";
 import routes from "@src/router/Routes";
 import { SyntheticEvent, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
-import { RootState } from "@src/components/redux/store";
 
 
 interface TeamItem {
@@ -133,7 +131,6 @@ const transformData = (originalData: IFAQ[]): FaqSection[] => {
 
 export default function AboutFAQPage() {
 
-  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
   const [valueDirecao, setValueDirecao] = useState(0);
 
   const handleChangeDirecao = (event: SyntheticEvent, newValue: number) => {
@@ -164,11 +161,11 @@ export default function AboutFAQPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme:"light",
         transition: Bounce,
       });
     });
-  }, [darkReader])
+  }, [])
 
   const defaultTheme = createTheme();
 
@@ -179,7 +176,7 @@ export default function AboutFAQPage() {
         {/*About Us*/}
         <Typography variant="h4"
           sx={{
-            color: darkReader ? "#FFFFFF" : '#1E2022',
+            color: '#1E2022',
             display: 'flex',
             fontWeight: 700,
             flexDirection: 'column',
@@ -205,7 +202,7 @@ export default function AboutFAQPage() {
         <Container maxWidth="lg">
           <Typography variant="h6"
             sx={{
-              color: darkReader ? "#FFFFFF" : "#1E2022" ,
+              color: "#1E2022" ,
               display: 'flex',
               fontWeight: 500,
               flexDirection: 'column',
@@ -228,7 +225,7 @@ export default function AboutFAQPage() {
 
           <Typography variant="h6"
             sx={{
-              color: darkReader ? "#FFFFFF" : "#1E2022" ,
+              color: "#1E2022" ,
               display: 'flex',
               fontWeight: 500,
               flexDirection: 'column',
@@ -250,7 +247,7 @@ export default function AboutFAQPage() {
 
           <Typography variant="h6"
             sx={{
-              color: darkReader ? "#FFFFFF" : "#1E2022" ,
+              color: "#1E2022" ,
               display: 'flex',
               fontWeight: 500,
               flexDirection: 'column',
@@ -305,7 +302,7 @@ export default function AboutFAQPage() {
               {member.team.map((teamMember, teamIndex) => (
                 <Grid item xs={12} sm={4} md={3} lg={2} xl={1} key={teamIndex} display="flex" alignItems="center" sx={{marginBottom: '1px', [defaultTheme.breakpoints.up('xl')]: { marginRight: '41px', }, }}>
                   <Grid container direction="column" display="flex" alignItems="center" >
-                    <Item sx={{backgroundColor: darkReader ? "#181A1B" : "#FFFFFF",}}>
+                    <Item sx={{backgroundColor: "#FFFFFF",}}>
                       <Avatar src={teamMember.photo} sx={{ width: '115px', height: '128px', marginBottom: '10px' }} variant="rounded" />
 
                       <Typography variant="subtitle1" color="primary">{teamMember.role}</Typography>
@@ -375,7 +372,7 @@ export default function AboutFAQPage() {
               {courses.course.map((course, courseIndex) => (
                 <Grid item xs={12} sm={4} md={3} lg={2} xl={1} key={courseIndex} display="flex" sx={{ marginBottom: '1px', [defaultTheme.breakpoints.up('xl')]: { marginRight: '41px', }, }}>
                   <Grid container direction="column" display="flex">
-                    <Item onClick={() => window.open(course.URL, '_blank')} style={{ cursor: 'pointer', textAlign: 'center' }} sx={{backgroundColor: darkReader ? "#181A1B" : "#FFFFFF",}}>
+                    <Item onClick={() => window.open(course.URL, '_blank')} style={{ cursor: 'pointer', textAlign: 'center' }} sx={{backgroundColor: "#FFFFFF",}}>
                       <Avatar src={course.photo} sx={{ width: '115px', height: 'auto', objectFit: 'cover', marginBottom: '10px', display: 'block', margin: '0 auto' }} variant="rounded" />
                       <Typography variant="subtitle1" color="primary">{course.sigla}</Typography>
                       <Typography variant="subtitle2" sx={{color: "#969696"}}>{course.name}</Typography>
@@ -394,7 +391,7 @@ export default function AboutFAQPage() {
           <div>
             <Typography variant="h4"
               sx={{
-                color: darkReader ? "#FFFFFF" : "#1E2022" ,
+                color: "#1E2022" ,
                 display: 'flex',
                 fontWeight: 700,
                 flexDirection: 'column',
@@ -420,7 +417,7 @@ export default function AboutFAQPage() {
               <div key={index}>
                 <Typography variant="h5"
                   sx={{
-                    color: darkReader ? "#FFFFFF" : "#1E2022" ,
+                    color: "#1E2022" ,
                     display: 'flex',
                     fontWeight: 700,
                     flexDirection: 'column',

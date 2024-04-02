@@ -2,27 +2,22 @@ import { useCallback } from "react";
 import type { Container, Engine } from "tsparticles-engine";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-import { RootState } from "@src/components/redux/store";
-import { useSelector } from "react-redux";
 
 
 export const Particle = () => {
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
 
   const particlesInit = useCallback(async (engine: Engine) => {
     //console.log(engine);
     await loadSlim(engine);
-  }, [darkMode]);
+  }, []);
 
   const particlesLoaded = useCallback(
     async (container: Container | undefined) => {
       //await console.log(container);
       await container;
     },
-    [darkMode]
+    []
   );
-
-  DarkReader.disable();
 
   return (
     <Particles
@@ -32,7 +27,7 @@ export const Particle = () => {
       options={{
         background: {
           color: {
-            value: darkMode ? "#191919" : "#FFFFFF",
+            value: "#FFFFFF",
           },
         },
         fpsLimit: 100,
@@ -60,15 +55,15 @@ export const Particle = () => {
         },
         particles: {
           color: {
-            value: darkMode ? "#FFFFFF" : "#191919",
+            value: "#191919",
           },
           links: {
             color: {
-              value: darkMode ? "#FFFFFF" : "#191919",
+              value: "#191919",
             },
             distance: 100,
             enable: true,
-            opacity: darkMode ? "0.5" : "0.2",
+            opacity: "0.2",
             width: 1,
           },
           move: {

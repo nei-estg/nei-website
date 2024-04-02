@@ -14,7 +14,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "@src/components/redux/store";
 
 export const FooterMain = () => {
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -68,7 +67,7 @@ export const FooterMain = () => {
                     sx={{
                       marginTop: "10px",
                       textAlign: { xs: "center", sm: "center", md: "center" },
-                      color: darkMode ? "#FFFFFF" : "#191919"
+                      color: "#191919"
                     }}
                     variant="h6"
                   >
@@ -77,7 +76,7 @@ export const FooterMain = () => {
                   <Typography
                     variant="body2"
                     sx={{ textAlign: "center" }}
-                    color={darkMode ? "#FFFFFF" : "#191919"}
+                    color="#191919"
                   >
                     Núcleo de Estudantes de Informática da ESTG
                   </Typography>
@@ -89,7 +88,7 @@ export const FooterMain = () => {
                 variant="h6"
                 gutterBottom
                 align={isSmallScreen ? "center" : "center"}
-                color={darkMode ? "#FFFFFF" : "#191919"}
+                color="#191919"
               >
                 Links
               </Typography>
@@ -101,7 +100,7 @@ export const FooterMain = () => {
                 >
                   <Button
                     component={RouterLink}
-                    sx={{ marginLeft: "0px", color: darkMode ? "#FFFFFF" : "#191919", textTransform: 'lowercase', }}
+                    sx={{ marginLeft: "0px", color: "#191919", textTransform: 'lowercase', }}
                     to={link.to}
                   >
                     <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
@@ -116,7 +115,7 @@ export const FooterMain = () => {
                 variant="h6"
                 gutterBottom
                 align={isSmallScreen ? "center" : "center"}
-                color={darkMode ? "#FFFFFF" : "#191919"}
+                color="#191919"
               >
                 Redes Sociais
               </Typography>
@@ -128,7 +127,7 @@ export const FooterMain = () => {
                 >
                   <Button key={sn.id}
                     component={RouterLink}
-                    sx={{ marginLeft: "0px", color: darkMode ? "#FFFFFF" : "#191919", textTransform: 'lowercase', }}
+                    sx={{ marginLeft: "0px", color: "#191919", textTransform: 'lowercase', }}
                     to={sn.URL}
                   >
                     <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
@@ -140,7 +139,7 @@ export const FooterMain = () => {
             </Grid>
           </Grid>
           <Box mt={5}>
-            <Typography variant="body2" align="center" color={darkMode ? "#FFFFFF" : "#191919"}>
+            <Typography variant="body2" align="center" color="#191919">
               Made with ❤️ and ☕ by NEI's Web Development Team
             </Typography>
           </Box>

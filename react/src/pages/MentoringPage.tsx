@@ -18,7 +18,6 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-import { RootState } from "@src/components/redux/store";
 import { getCurricularUnitsCourseUser } from "@src/api/CourseRoutes";
 import {
   createMentoring,
@@ -32,15 +31,10 @@ import { IMentoring } from "@src/interfaces/IMentoring";
 import { IMentoringRequest } from "@src/interfaces/IMentoringRequest";
 import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
 
 export default function MentoringPage() {
-
-  const darkReader = useSelector((state: RootState) => state.theme.darkMode);
-
-
   const [mentoringRequestList, setMentoringRequestList] = useState<
     IMentoringRequest[]
   >([]);
@@ -68,7 +62,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -88,7 +82,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -108,7 +102,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -129,7 +123,7 @@ export default function MentoringPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme: "light",
         transition: Bounce,
       });
       return;
@@ -150,7 +144,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -169,7 +163,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -193,7 +187,7 @@ export default function MentoringPage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: darkReader ? "dark" : "light",
+          theme: "light",
           transition: Bounce,
         });
         //TODO: Remove mentoring request from list
@@ -212,7 +206,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: darkReader ? "dark" : "light",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -289,7 +283,7 @@ export default function MentoringPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkReader ? "dark" : "light",
+        theme: "light",
         transition: Bounce,
       });
       //! Delete the mentoring from the list
@@ -306,7 +300,7 @@ export default function MentoringPage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: darkReader ? "dark" : "light",
+          theme: "light",
           transition: Bounce,
         }
       );
@@ -384,7 +378,7 @@ export default function MentoringPage() {
         <Typography
           variant="h4"
           sx={{
-            color: darkReader ? "#FFFFFF" : "#1E2022",
+            color: "#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -441,7 +435,7 @@ export default function MentoringPage() {
         <Typography
           variant="h4"
           sx={{
-            color: darkReader ? "#FFFFFF" : "#1E2022",
+            color:"#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -456,7 +450,7 @@ export default function MentoringPage() {
         {mentoringRequestList.length === 0 ? (
           <Typography
             variant="h5"
-            color={darkReader ? "#FFFFFF" : "#1E2022"}
+            color="#1E2022"
             fontWeight="700"
             align="center"
           >
@@ -479,7 +473,7 @@ export default function MentoringPage() {
                   justifyContent: "center",
                   alignContent: "center",
                   flexDirection: "column", // Para colocar os elementos um em cima do outro
-                  boxShadow: darkReader ? "0px 0px 10px rgba(255, 255, 255, 0.1)" : "0px 0px 10px rgba(0, 0, 0, 0.1)", // Adiciona uma sombra
+                  boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)", // Adiciona uma sombra
                   padding: "20px", // Adiciona preenchimento para destacar a sombra
                   borderRadius: "8px", // Adiciona bordas arredondadas para um visual mais suave
                   width: "300px",
@@ -497,7 +491,7 @@ export default function MentoringPage() {
                   variant="subtitle1"
                   align="center"
                   gutterBottom
-                  sx={{ marginBottom: "20px", color: darkReader ? "#FFFFFF" : "#191919" }}
+                  sx={{ marginBottom: "20px", color: "#191919" }}
                 >
                   <MenuBookIcon
                     sx={{
@@ -509,7 +503,7 @@ export default function MentoringPage() {
                   {correctText(mentoringRequest.curricularUnit.name)}
                 </Typography>
 
-                <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: darkReader ? "#FFFFFF" : "#191919" }}>
+                <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: "#191919" }}>
                   <AccessTimeFilledIcon
                     sx={{
                       marginRight: "5px",
@@ -547,7 +541,7 @@ export default function MentoringPage() {
         <Typography
           variant="h4"
           sx={{
-            color: darkReader ? "#FFFFFF" : "#1E2022",
+            color: "#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -562,7 +556,7 @@ export default function MentoringPage() {
         {mentoringList.length === 0 ? (
           <Typography
             variant="h5"
-            color={darkReader ? "#FFFFFF" : "#1E2022"}
+            color="#1E2022"
             fontWeight="700"
             align="center"
           >
@@ -589,7 +583,7 @@ export default function MentoringPage() {
                   alignContent: "center",
                   flexDirection: "column",
                   width: "300px",
-                  boxShadow: darkReader ? "0px 0px 10px rgba(255, 255, 255, 0.1)" : "0px 0px 10px rgba(0, 0, 0, 0.1)", // Adiciona uma sombra
+                  boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)", // Adiciona uma sombra
                   padding: "20px", // Adiciona preenchimento para destacar a sombra
                   borderRadius: "8px", // Adiciona bordas arredondadas para um visual mais suave
                 }}
@@ -604,7 +598,7 @@ export default function MentoringPage() {
                   variant="subtitle1"
                   align="center"
                   gutterBottom
-                  sx={{ marginBottom: "20px", color: darkReader ? "#FFFFFF" : "#191919" }}
+                  sx={{ marginBottom: "20px", color: "#191919" }}
                 >
                   <MenuBookIcon
                     sx={{
@@ -622,7 +616,7 @@ export default function MentoringPage() {
                       <img
                         src={discordImg}
                         alt="discord"
-                        style={{ marginRight: "5px", marginBottom: "-5px", color: darkReader ? "#FFFFFF" : "#191919" }}
+                        style={{ marginRight: "5px", marginBottom: "-5px", color: "#191919" }}
                       />
                       {mentoring.mentee?.profilemodel?.discord}
                       (mentorado)
@@ -632,7 +626,7 @@ export default function MentoringPage() {
                       variant="subtitle1"
                       align="center"
                       gutterBottom
-                      sx={{ marginBottom: "20px", color: darkReader ? "#FFFFFF" : "#191919" }}
+                      sx={{ marginBottom: "20px", color: "#191919" }}
                     >
                       <img
                         src={discordImg}
@@ -645,7 +639,7 @@ export default function MentoringPage() {
                   </>
                 ) : (
                   <>
-                    <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: darkReader ? "#FFFFFF" : "#191919" }}>
+                    <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: "#191919" }}>
                       <img
                         src={mailImg}
                         alt="mail"
@@ -658,7 +652,7 @@ export default function MentoringPage() {
                       variant="subtitle1"
                       align="center"
                       gutterBottom
-                      sx={{ marginBottom: "20px", color: darkReader ? "#FFFFFF" : "#191919" }}
+                      sx={{ marginBottom: "20px", color: "#191919" }}
                     >
                       <img
                         src={mailImg}
@@ -671,7 +665,7 @@ export default function MentoringPage() {
                 )}
 
 
-                <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: darkReader ? "#FFFFFF" : "#191919" }}>
+                <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: "#191919" }}>
                   <AccessTimeFilledIcon
                     sx={{
                       marginRight: "5px",
