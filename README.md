@@ -55,7 +55,7 @@ Made with ☕ and 💜 by NEI's Web Development Team:
 <table>
   <tr>
     <td align="center">
-      <a href="#">
+      <a href="https://github.com/heyliceeee">
         <img src="https://github.com/heyliceeee.png" width="100px;" alt="Foto da Alice Dias no GitHub"/><br>
         <sub>
           <b>Alice Dias</b>
@@ -63,7 +63,7 @@ Made with ☕ and 💜 by NEI's Web Development Team:
       </a>
     </td>
     <td align="center">
-      <a href="#">
+      <a href="https://github.com/joaopsoliveira03">
         <img src="https://github.com/joaopsoliveira03.png" width="100px;" alt="Foto do João Oliveira no GitHub"/><br>
         <sub>
           <b>João Oliveira</b>
@@ -71,7 +71,7 @@ Made with ☕ and 💜 by NEI's Web Development Team:
       </a>
     </td>
     <td align="center">
-      <a href="#">
+      <a href="https://github.com/cynlik">
         <img src="https://github.com/cynlik.png" width="100px;" alt="Foto do Leandro Magalhães no GitHub"/><br>
         <sub>
           <b>Leandro Magalhães</b>
@@ -79,7 +79,7 @@ Made with ☕ and 💜 by NEI's Web Development Team:
       </a>
     </td>
     <td align="center">
-      <a href="#">
+      <a href="https://github.com/Lsmiguel">
         <img src="https://github.com/Lsmiguel.png" width="100px;" alt="Foto do Miguel no GitHub"/><br>
         <sub>
           <b>Miguel</b>
