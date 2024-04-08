@@ -15,7 +15,7 @@
     "@mui/icons-material": "^5.15.12",
     "@mui/material": "^5.15.12",
     "@mui/x-data-grid": "^6.19.6",
-    "@mui/x-date-pickers": "^6.19.5",
+    "@mui/x-date-pickers": "^6.19.6",
     "@tsparticles/react": "^3.0.0",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.7",
