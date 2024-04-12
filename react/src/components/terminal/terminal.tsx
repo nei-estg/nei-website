@@ -86,12 +86,12 @@ const Terminal: React.FC = () => {
           <span className="macbook-button green"></span>
         </div>
       </div>
-      <div className="screen" style={{ border: '1px solid #c0c0c0', backgroundColor: '#FFFFFF', color: '#ffffff' }}>
+      <div className="screen" style={{ border: '1px solid #c0c0c0', backgroundColor: '#191919', color: '#ffffff' }}>
         <div className="terminal" ref={terminalRef}>
-          <div style={{ color: '#000000' }}>Bem-vindo ao terminal do NEI!</div>
-          <div style={{ color: '#000000' }}>Escreve "help" para veres todos os comandos</div>
+          <div style={{ color: '#FFFFFF' }}>Bem-vindo ao terminal do NEI!</div>
+          <div style={{ color: '#FFFFFF' }}>Escreve "help" para veres todos os comandos</div>
           {output.map((line, index) => (
-            <div key={index} style={{ color: '#000000' }}>{line}</div>
+            <div key={index} style={{ color: '#FFFFFF' }}>{line}</div>
           ))}
           <div className="terminal-input">
             <span>$</span>
@@ -100,7 +100,7 @@ const Terminal: React.FC = () => {
               value={input}
               onChange={handleInputChange}
               onKeyDown={handleEnterPress}
-              style={{color: '#000000'}}
+              style={{color: '#FFFFFF'}}
             />
             {typingAnimationVisible && <span className="typing-animation"></span>}
           </div>

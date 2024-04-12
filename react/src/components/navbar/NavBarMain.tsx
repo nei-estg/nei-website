@@ -125,9 +125,8 @@ function NavBarMain() {
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleOpenNavMenu}
-                  color="#FFFFFF"
-                >
-                  <MenuIcon/>
+                  style={{color: "#ffffff"}}>
+                  <MenuIcon />
                 </IconButton>
                 <Menu
                   id="menu-appbar"
@@ -178,23 +177,13 @@ function NavBarMain() {
                   flexGrow: 1,
                   fontWeight: 700,
                   letterSpacing: ".3rem",
-                  color: "#191919",
+                  color: "#FFFFFF",
                   textDecoration: "none",
                 }}
                 href="/"
               >
                 NEI
               </Typography>
-
-              <Box sx={{flexGrow: 0, display: { xs: "flex", md: "none" },}}>
-                <Tooltip title="Ativar o modo escuro">
-                      <IconButton onClick={handleOpenDarkReader}>
-                        <Avatar sx={{ backgroundColor: "#054496", color: "#FFFFFF" }}>
-                          <DarkModeIcon />
-                        </Avatar>
-                      </IconButton>
-                    </Tooltip>
-              </Box>
 
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                 {navbar.pages.map((page) => (
@@ -208,8 +197,8 @@ function NavBarMain() {
                       my: 2,
                       color:
                         page.requiredLogin && !isLoggedIn() ? "#969696" : // requiredLogin e não logado
-                            !page.requiredLogin ? "#191919" : // não requiredLogin
-                            page.requiredLogin && isLoggedIn() ? "#191919" : // requiredLogin e logado
+                            !page.requiredLogin ? "#FFFFFF" : // não requiredLogin
+                            page.requiredLogin && isLoggedIn() ? "#FFFFFF" : // requiredLogin e logado
                               "#FFFFFF", // Todas as outras condições padrão
                       display: "block",
                     }}
@@ -218,16 +207,6 @@ function NavBarMain() {
                     {page.name}
                   </Button>
                 ))}
-              </Box>
-
-              <Box sx={{flexGrow: 0, display: { xs: "none", md: "flex", },}}>
-                <Tooltip title="Ativar o modo escuro">
-                      <IconButton onClick={handleOpenDarkReader}>
-                        <Avatar sx={{ backgroundColor: "#054496", color: "#FFFFFF" }}>
-                          <DarkModeIcon />
-                        </Avatar>
-                      </IconButton>
-                    </Tooltip>
               </Box>
 
               {/* icon user */}

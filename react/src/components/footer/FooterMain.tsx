@@ -10,8 +10,6 @@ import {
   useTheme,
 } from "@mui/material";
 import logo from "../../assets/logo.png";
-import { useSelector } from "react-redux";
-import { RootState } from "@src/components/redux/store";
 
 export const FooterMain = () => {
   const theme = useTheme();
@@ -67,7 +65,7 @@ export const FooterMain = () => {
                     sx={{
                       marginTop: "10px",
                       textAlign: { xs: "center", sm: "center", md: "center" },
-                      color: "#191919"
+                      color: "#FFFFFF"
                     }}
                     variant="h6"
                   >
@@ -76,7 +74,7 @@ export const FooterMain = () => {
                   <Typography
                     variant="body2"
                     sx={{ textAlign: "center" }}
-                    color="#191919"
+                    color="#FFFFFF"
                   >
                     Núcleo de Estudantes de Informática da ESTG
                   </Typography>
@@ -88,7 +86,7 @@ export const FooterMain = () => {
                 variant="h6"
                 gutterBottom
                 align={isSmallScreen ? "center" : "center"}
-                color="#191919"
+                color="#FFFFFF"
               >
                 Links
               </Typography>
@@ -100,7 +98,7 @@ export const FooterMain = () => {
                 >
                   <Button
                     component={RouterLink}
-                    sx={{ marginLeft: "0px", color: "#191919", textTransform: 'lowercase', }}
+                    sx={{ marginLeft: "0px", color: "#FFFFFF", textTransform: 'lowercase', }}
                     to={link.to}
                   >
                     <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
@@ -115,7 +113,7 @@ export const FooterMain = () => {
                 variant="h6"
                 gutterBottom
                 align={isSmallScreen ? "center" : "center"}
-                color="#191919"
+                color="#FFFFFF"
               >
                 Redes Sociais
               </Typography>
@@ -127,7 +125,7 @@ export const FooterMain = () => {
                 >
                   <Button key={sn.id}
                     component={RouterLink}
-                    sx={{ marginLeft: "0px", color: "#191919", textTransform: 'lowercase', }}
+                    sx={{ marginLeft: "0px", color: "#FFFFFF", textTransform: 'lowercase', }}
                     to={sn.URL}
                   >
                     <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
@@ -139,7 +137,7 @@ export const FooterMain = () => {
             </Grid>
           </Grid>
           <Box mt={5}>
-            <Typography variant="body2" align="center" color="#191919">
+            <Typography variant="body2" align="center" color="#FFFFFF">
               Made with ❤️ and ☕ by NEI's Web Development Team
             </Typography>
           </Box>
