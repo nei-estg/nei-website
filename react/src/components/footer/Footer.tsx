@@ -20,6 +20,15 @@ export const Footer = () => {
     {id: 2, name: "linkedin", URL: "https://www.linkedin.com/company/estg-nei"},
     {id: 3, name: "instagram", URL: "https://www.instagram.com/nei_estg/"},
     {id: 4, name: "discord", URL: "https://discord.gg/xbD38MS2e8"},
+    {id: 5, name: "linktree", URL: "https://linktr.ee/nei.estg"},
+  ];
+
+  const linksWebsite = [
+    {id: 1, name: "Sobre Nós", to: routes.aboutFAQpage.path},
+    {id: 2, name: "Blog", to: routes.blogpage.path},
+    {id: 3, name: "Calendário", to: routes.calendarpage.path},
+    {id: 4, name: "Materiais UC's", to: routes.materialspage.path},
+    {id: 5, name: "Política de Privacidade", to: routes.privacypolicypage.path},
   ];
 
   return (
@@ -31,9 +40,9 @@ export const Footer = () => {
           p: 6,
         }}
       >
-        <Container maxWidth="lg">
-          <Grid container spacing={5}>
-            <Grid item xs={12} sm={6}>
+      <Container maxWidth="lg">
+        <Grid container spacing={5}>
+            <Grid item xs={12} sm={5} style={{ display: "flex", alignItems: "center" }}>
               <Grid
                 container
                 direction="row"
@@ -51,20 +60,20 @@ export const Footer = () => {
                 />
                 <div>
                   <Typography
-                    sx={{
+                    sx={{ marginTop: "10px" ,
                       textAlign: { xs: "center", sm: "center", md: "center" },
                     }}
-                    variant="body2"
+                    variant="h6"
                   >
                     NEI
                   </Typography>
-                  <Typography variant="body2" sx={{textAlign: "center"}}>
+                  <Typography variant="body2" sx={{ textAlign: "center" }}>
                     Núcleo de Estudantes de Informática da ESTG
                   </Typography>
                 </div>
               </Grid>
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <Typography
                 variant="h6"
                 gutterBottom
@@ -72,80 +81,23 @@ export const Footer = () => {
               >
                 Links
               </Typography>
-              <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.aboutFAQpage.path}
-                >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Sobre Nós
-                  </Typography>
-                </Button>
-              </Box>
 
-              <Box
+              {linksWebsite.map((link, index) => (
+                <Box
                 display="flex"
                 justifyContent={isSmallScreen ? "center" : "center"}
               >
                 <Button
                   component={RouterLink}
                   sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.blogpage.path}
+                  to={link.to}
                 >
                   <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Blog
+                    {link.name}
                   </Typography>
                 </Button>
               </Box>
-
-              <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.calendarpage.path}
-                >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Calendário
-                  </Typography>
-                </Button>
-              </Box>
-
-              <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.materialspage.path}
-                >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Materiais UC's
-                  </Typography>
-                </Button>
-              </Box>
-
-              <Box
-                display="flex"
-                justifyContent={isSmallScreen ? "center" : "center"}
-              >
-                <Button
-                  component={RouterLink}
-                  sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
-                  to={routes.privacypolicypage.path}
-                >
-                  <Typography variant="button" sx={{ textTransform: 'capitalize' }}>
-                    Política de Privacidade
-                  </Typography>
-                </Button>
-              </Box>
+              ))}
             </Grid>
             <Grid item xs={12} sm={3}>
               <Typography
@@ -155,13 +107,13 @@ export const Footer = () => {
               >
                 Redes Sociais
               </Typography>
-              
+
               {socialNetworks.map((sn, index) => (
                 <Box
                 display="flex"
-                justifyContent={{ xs: "center", md: "center" }}
+                justifyContent={isSmallScreen ? "center" : "center"}
               >
-                <Button key={sn.id}
+                 <Button key={sn.id}
                   component={RouterLink}
                   sx={{ marginLeft: "0px", color: "#ffffff", textTransform: 'lowercase', }}
                   to={sn.URL}

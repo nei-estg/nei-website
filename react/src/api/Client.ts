@@ -1,9 +1,13 @@
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { toast, Bounce } from 'react-toastify';
+import { RootState } from '@src/components/redux/store';
+
 
 const client = axios.create({
   baseURL: "/"
 });
+
 
 client.interceptors.response.use(
   (response) => {

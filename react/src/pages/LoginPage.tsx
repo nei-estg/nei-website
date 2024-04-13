@@ -6,7 +6,7 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { loginUser } from "@src/api/UserRoutes";
@@ -16,7 +16,6 @@ import * as React from "react";
 import { useEffect } from "react";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
 
 export default function LoginPage() {
 
@@ -40,7 +39,7 @@ export default function LoginPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: "light",
         transition: Bounce,
       });
       return;
@@ -48,9 +47,48 @@ export default function LoginPage() {
     window.location.href = routes.frontpage.path;
   };
 
+
+
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    }
+  });
+
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xl" sx={{marginTop: '60px', marginBottom: '60px'}}>
+    <>
+      <Container component="main" maxWidth="xl" sx={{ marginTop: '60px', marginBottom: '60px' }}>
         <CssBaseline />
         <Box
           sx={{
@@ -68,12 +106,13 @@ export default function LoginPage() {
           <Box
             component="form"
             onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
+            sx={{ mt: 3, width: '70%' }}
           >
             <TextField
               margin="normal"
               required
               fullWidth
+              variant="filled"
               id="username"
               label="Username"
               name="username"
@@ -83,6 +122,7 @@ export default function LoginPage() {
             <TextField
               margin="normal"
               required
+              variant="filled"
               fullWidth
               name="password"
               label="Palavra-Passe"
@@ -94,9 +134,9 @@ export default function LoginPage() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "#054496", color: "#FFFFFF" }}
             >
-              Sign In
+              Iniciar Sessão
             </Button>
             <Grid container>
               <Grid item xs>
@@ -113,6 +153,6 @@ export default function LoginPage() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </>
   );
 }

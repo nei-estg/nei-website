@@ -2,9 +2,12 @@ import axios from "axios";
 import { isLoggedIn } from "./utils/LoginStatus";
 import { toast, Bounce } from 'react-toastify';
 
+
+
 const client = axios.create({
   baseURL: "/",
 });
+
 
 client.interceptors.request.use(
   (config) => {

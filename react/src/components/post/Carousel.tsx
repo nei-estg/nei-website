@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { Box, Button, Container, MobileStepper, Paper, ThemeProvider, Typography, createTheme, useTheme } from '@mui/material';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useState } from 'react';
+import { Box, Button, Container, MobileStepper, ThemeProvider, createTheme } from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 
 export default function Carousel({data, maxWidth}) {

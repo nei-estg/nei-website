@@ -1,6 +1,5 @@
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import AddIcon from "@mui/icons-material/Add";
-import CancelIcon from "@mui/icons-material/Cancel";
 import CheckIcon from "@mui/icons-material/Check";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
@@ -34,8 +33,8 @@ import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
+
 export default function MentoringPage() {
-  const defaultTheme = createTheme();
   const [mentoringRequestList, setMentoringRequestList] = useState<
     IMentoringRequest[]
   >([]);
@@ -63,7 +62,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -83,7 +82,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -103,7 +102,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -124,7 +123,7 @@ export default function MentoringPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: "light",
         transition: Bounce,
       });
       return;
@@ -145,7 +144,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -164,7 +163,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -188,7 +187,7 @@ export default function MentoringPage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: "light",
           transition: Bounce,
         });
         //TODO: Remove mentoring request from list
@@ -207,7 +206,7 @@ export default function MentoringPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -284,7 +283,7 @@ export default function MentoringPage() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: "light",
         transition: Bounce,
       });
       //! Delete the mentoring from the list
@@ -301,23 +300,80 @@ export default function MentoringPage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: "light",
           transition: Bounce,
         }
       );
     })
   }
 
+
+  const discordImg = "https://img.icons8.com/ios-glyphs/24/636F80/discord.png";
+  const mailImg = "https://img.icons8.com/ios-glyphs/24/636F80/secured-letter--v1.png";
+
+  /** verifica se tanto o mentor como o mentorado têm discord
+   * 
+   * @param mentoring 
+   * @returns true caso os dois tenham discord, caso contrario, false
+   */
+  function checkMentorMenteeHaveDiscord(mentoring: IMentoring): boolean {
+
+    if (mentoring.mentee?.profilemodel?.discord == null || mentoring.mentor?.profilemodel?.discord == null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    }
+  });
+
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
+
       <Container maxWidth="xl" sx={{ marginBottom: "60px" }}>
         <Alert severity="info" sx={{ marginTop: "30px", marginBottom: "30px" }}>
-          A tua privacidade é uma prioridade. Por isso, não vais saber quem é a
-          outra pessoa até aceitares a mentoria. Depois, terão de combinar como
-          falar, usando Discord, Teams, ou o que preferirem, para realizar a
-          mentoria. É simples e seguro, garantindo que escolhes com quem queres
-          partilhar informações.
-        </Alert>
+            A tua privacidade é uma prioridade. Por isso, não vais saber quem é a
+            outra pessoa até aceitares a mentoria. Depois, terão de combinar como
+            falar, usando Discord, Teams, ou o que preferirem, para realizar a
+            mentoria. É simples e seguro, garantindo que escolhes com quem queres
+            partilhar informações.
+          </Alert>
+
 
         <Typography
           variant="h4"
@@ -337,12 +393,12 @@ export default function MentoringPage() {
         <Box
           component="form"
           onSubmit={handleCreateMentoringRequest}
-          sx={{ width: "50%", margin: "auto" }} // Adiciona margin auto para centralizar horizontalmente
+          sx={{ width: "300px", margin: "auto" }} // Adiciona margin auto para centralizar horizontalmente
         >
           <FormControl fullWidth sx={{ mt: 2, textAlign: "center" }}>
             {" "}
             {/* Adiciona textAlign center para centralizar o FormControl */}
-            <InputLabel id="curricular-unit-label">
+            <InputLabel id="curricular-unit-label" variant="filled">
               Unidade Curricular
             </InputLabel>
             <Select
@@ -350,6 +406,7 @@ export default function MentoringPage() {
               id="curricularUnit"
               label="Unidade Curricular"
               value={selectedCurricularUnit?.abbreviation}
+              variant="filled"
               onChange={handleSelectCurricularUnit}
             >
               {curricularUnitList.map((unit) => (
@@ -378,7 +435,7 @@ export default function MentoringPage() {
         <Typography
           variant="h4"
           sx={{
-            color: "#1E2022",
+            color:"#1E2022",
             display: "flex",
             fontWeight: 700,
             flexDirection: "column",
@@ -419,13 +476,14 @@ export default function MentoringPage() {
                   boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)", // Adiciona uma sombra
                   padding: "20px", // Adiciona preenchimento para destacar a sombra
                   borderRadius: "8px", // Adiciona bordas arredondadas para um visual mais suave
-                  width: "25%",
+                  width: "300px",
                 }}
                 component="form"
                 onSubmit={handleCreateMentoring} // Passa o evento e o ID do pedido de mentoria
               >
                 <TextField
                   name="requestId"
+                  variant="filled"
                   value={mentoringRequest.id}
                   sx={{ display: "none" }}
                 />
@@ -433,7 +491,7 @@ export default function MentoringPage() {
                   variant="subtitle1"
                   align="center"
                   gutterBottom
-                  sx={{ marginBottom: "20px" }}
+                  sx={{ marginBottom: "20px", color: "#191919" }}
                 >
                   <MenuBookIcon
                     sx={{
@@ -445,7 +503,7 @@ export default function MentoringPage() {
                   {correctText(mentoringRequest.curricularUnit.name)}
                 </Typography>
 
-                <Typography variant="subtitle1" align="center" gutterBottom>
+                <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: "#191919" }}>
                   <AccessTimeFilledIcon
                     sx={{
                       marginRight: "5px",
@@ -459,7 +517,7 @@ export default function MentoringPage() {
                 {mentoringRequest.mentee != null ? (
                   <Button
                     variant="contained"
-                    sx={{ mt: 2, borderRadius: "100px" }}
+                    sx={{ mt: 2, borderRadius: "100px", '&.Mui-disabled': { backgroundColor: "#E0E0E0" } }}
                     disabled
                   >
                     <CheckIcon sx={{ marginRight: "5px" }} /> Teu Pedido
@@ -514,6 +572,7 @@ export default function MentoringPage() {
             }}
           >
             {mentoringList.map((mentoring) => (
+              //TODO: DARK CARD
               <Box
                 component="form"
                 onSubmit={handleStopMentoring}
@@ -523,7 +582,7 @@ export default function MentoringPage() {
                   justifyContent: "center",
                   alignContent: "center",
                   flexDirection: "column",
-                  width: "25%",
+                  width: "300px",
                   boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)", // Adiciona uma sombra
                   padding: "20px", // Adiciona preenchimento para destacar a sombra
                   borderRadius: "8px", // Adiciona bordas arredondadas para um visual mais suave
@@ -531,6 +590,7 @@ export default function MentoringPage() {
               >
                 <TextField
                   name="mentoringId"
+                  variant="filled"
                   value={mentoring.id}
                   sx={{ display: "none" }}
                 />
@@ -538,7 +598,7 @@ export default function MentoringPage() {
                   variant="subtitle1"
                   align="center"
                   gutterBottom
-                  sx={{ marginBottom: "20px" }}
+                  sx={{ marginBottom: "20px", color: "#191919" }}
                 >
                   <MenuBookIcon
                     sx={{
@@ -550,36 +610,62 @@ export default function MentoringPage() {
                   {correctText(mentoring.curricularUnit?.name)}
                 </Typography>
 
-                <Typography variant="subtitle1" align="center" gutterBottom>
-                  <img
-                    src="https://img.icons8.com/ios-glyphs/24/636F80/discord.png"
-                    alt="discord"
-                    style={{ marginRight: "5px", marginBottom: "-5px" }}
-                  />
-                  @&nbsp;
-                  {mentoring.mentee?.profilemodel?.discord ||
-                    mentoring.mentee?.email}{" "}
-                  (mentorado)
-                </Typography>
+                {checkMentorMenteeHaveDiscord(mentoring) === true ? (
+                  <>
+                    <Typography variant="subtitle1" align="center" gutterBottom>
+                      <img
+                        src={discordImg}
+                        alt="discord"
+                        style={{ marginRight: "5px", marginBottom: "-5px", color: "#191919" }}
+                      />
+                      {mentoring.mentee?.profilemodel?.discord}
+                      (mentorado)
+                    </Typography>
 
-                <Typography
-                  variant="subtitle1"
-                  align="center"
-                  gutterBottom
-                  sx={{ marginBottom: "20px" }}
-                >
-                  <img
-                    src="https://img.icons8.com/ios-glyphs/24/636F80/discord.png"
-                    alt="discord"
-                    style={{ marginRight: "5px", marginBottom: "-5px" }}
-                  />
-                  @&nbsp;
-                  {mentoring.mentor?.profilemodel?.discord ||
-                    mentoring.mentor?.email}{" "}
-                  (mentor)
-                </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      align="center"
+                      gutterBottom
+                      sx={{ marginBottom: "20px", color: "#191919" }}
+                    >
+                      <img
+                        src={discordImg}
+                        alt="discord"
+                        style={{ marginRight: "5px", marginBottom: "-5px" }}
+                      />
+                      {mentoring.mentor?.profilemodel?.discord}
+                      (mentor)
+                    </Typography>
+                  </>
+                ) : (
+                  <>
+                    <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: "#191919" }}>
+                      <img
+                        src={mailImg}
+                        alt="mail"
+                        style={{ marginRight: "5px", marginBottom: "-5px" }}
+                      />
+                      {mentoring.mentee?.email} (mentorado)
+                    </Typography>
 
-                <Typography variant="subtitle1" align="center" gutterBottom>
+                    <Typography
+                      variant="subtitle1"
+                      align="center"
+                      gutterBottom
+                      sx={{ marginBottom: "20px", color: "#191919" }}
+                    >
+                      <img
+                        src={mailImg}
+                        alt="mail"
+                        style={{ marginRight: "5px", marginBottom: "-5px" }}
+                      />
+                      {mentoring.mentor?.email} (mentor)
+                    </Typography>
+                  </>
+                )}
+
+
+                <Typography variant="subtitle1" align="center" gutterBottom sx={{ color: "#191919" }}>
                   <AccessTimeFilledIcon
                     sx={{
                       marginRight: "5px",
@@ -599,7 +685,7 @@ export default function MentoringPage() {
                     backgroundColor: "#054496",
                   }}
                 >
-                  <DoneAllIcon sx={{ marginRight: "5px" }} /> Terminar
+                  <DoneAllIcon sx={{ marginRight: "5px", color: "#FFFFFF" }} /> Terminar
                 </Button>
               </Box>
             ))}

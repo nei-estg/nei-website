@@ -3,7 +3,9 @@ import type { Container, Engine } from "tsparticles-engine";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 
+
 export const Particle = () => {
+
   const particlesInit = useCallback(async (engine: Engine) => {
     //console.log(engine);
     await loadSlim(engine);
@@ -56,10 +58,12 @@ export const Particle = () => {
             value: "#ffffff",
           },
           links: {
-            color: "#ffffff",
+            color: {
+              value: "#ffffff",
+            },
             distance: 100,
             enable: true,
-            opacity: 0.5,
+            opacity: "0.2",
             width: 1,
           },
           move: {

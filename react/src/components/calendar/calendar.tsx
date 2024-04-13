@@ -4,6 +4,9 @@ import events from "./events";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState } from "react";
 
+
+
+
 moment.locale("pt-br");
 const localizer = momentLocalizer(moment);
 
@@ -15,7 +18,7 @@ export default function ReactBigCalendar() {
   };
 
   return (
-    <div className="App" style={{ width: "800px", margin: "0 auto" }}>
+    <div className="App" style={{ width: "800px", margin: "0 auto", }}>
       <Calendar
         views={["day", "agenda", "work_week", "month"]}
         selectable

@@ -1,12 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './terminal.css';
 
+
 const Terminal: React.FC = () => {
   const [input, setInput] = useState<string>('');
   const [output, setOutput] = useState<string[]>([]);
-  const [terminalColor, setTerminalColor] = useState<string>('#000');
+  const [terminalColor, setTerminalColor] = useState<string>('#ffffff');
   const [typingAnimationVisible, setTypingAnimationVisible] = useState<boolean>(false);
   const terminalRef = useRef<HTMLDivElement>(null);
+
+  const getTextColor = (backgroundColor: string): string => {
+    const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
+      const bigint = parseInt(hex.slice(1), 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return { r, g, b };
+    };
+
+    const { r, g, b } = hexToRgb(backgroundColor);
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+    return brightness > 128 ? '#000000' : '#ffffff';
+  };
 
   useEffect(() => {
     if (terminalRef.current) {
@@ -53,31 +69,13 @@ const Terminal: React.FC = () => {
         result = 'Podes contactar-nos em nei@estg.ipp.pt';
         break;
       default:
-        if (command.trim().toLowerCase().startsWith('color')) {
-          const colorArgs = command.trim().split(' ');
-          if (colorArgs.length === 2) {
-            const newColor = colorArgs[1];
-            if (/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(newColor)) {
-              setTerminalColor(newColor);
-              return;
-            } else {
-              result = 'Invalid color format. Please use a valid hexadecimal color code (e.g., #RRGGBB).';
-            }
-          } else {
-            result = 'Invalid color command format. Usage: color <hex color>';
-          }
-        } else {
-          result = `Command not recognized: ${command}`;
-        }
+        result = `Command not recognized: ${command}`;
     }
     setOutput(prevOutput => [...prevOutput, `$ ${command}`, result]);
   };
 
-  const handleColorChange = (color: string) => {
-    setTerminalColor(color);
-  };
-
   const textColor = getTextColor(terminalColor);
+
 
   return (
     <div className="laptop-bezel">
@@ -88,12 +86,12 @@ const Terminal: React.FC = () => {
           <span className="macbook-button green"></span>
         </div>
       </div>
-      <div className="screen" style={{ backgroundColor: terminalColor, color: textColor }}>
+      <div className="screen" style={{ border: '1px solid #c0c0c0', backgroundColor: '#191919', color: '#ffffff' }}>
         <div className="terminal" ref={terminalRef}>
-          <div>Bem-vindo ao terminal do NEI!</div>
-          <div>Escreve "help" para veres todos os comandos</div>
+          <div style={{ color: '#FFFFFF' }}>Bem-vindo ao terminal do NEI!</div>
+          <div style={{ color: '#FFFFFF' }}>Escreve "help" para veres todos os comandos</div>
           {output.map((line, index) => (
-            <div key={index}>{line}</div>
+            <div key={index} style={{ color: '#FFFFFF' }}>{line}</div>
           ))}
           <div className="terminal-input">
             <span>$</span>
@@ -102,28 +100,14 @@ const Terminal: React.FC = () => {
               value={input}
               onChange={handleInputChange}
               onKeyDown={handleEnterPress}
+              style={{color: '#FFFFFF'}}
             />
-            {typingAnimationVisible && <span className="typing-animation">_</span>}
+            {typingAnimationVisible && <span className="typing-animation"></span>}
           </div>
         </div>
       </div>
     </div>
   );
-};
-
-const getTextColor = (backgroundColor: string): string => {
-  const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
-    const bigint = parseInt(hex.slice(1), 16);
-    const r = (bigint >> 16) & 255;
-    const g = (bigint >> 8) & 255;
-    const b = bigint & 255;
-    return { r, g, b };
-  };
-
-  const { r, g, b } = hexToRgb(backgroundColor);
-  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-
-  return brightness > 128 ? '#000' : '#fff';
 };
 
 export default Terminal;

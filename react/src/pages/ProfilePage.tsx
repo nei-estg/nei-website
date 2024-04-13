@@ -19,7 +19,6 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
-  ThemeProvider,
   Tooltip,
   Typography,
   createTheme,
@@ -32,7 +31,9 @@ import routes from "@src/router/Routes";
 import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
+
+
+
 
 export default function ProfilePage() {
   const [user, setUser] = useState<IUser>({} as IUser);
@@ -75,7 +76,7 @@ export default function ProfilePage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -94,7 +95,7 @@ export default function ProfilePage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -179,7 +180,7 @@ export default function ProfilePage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: "light",
           transition: Bounce,
         });
         //TODO: Update stuff on localstorage
@@ -193,14 +194,51 @@ export default function ProfilePage() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: "light",
           transition: Bounce,
         });
       });
   };
 
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    }
+  });
+
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <>
       <Container maxWidth="xl" sx={{ marginTop: "30px", marginBottom: "60px" }}>
         <div>
           <Grid container spacing={1}>
@@ -212,15 +250,7 @@ export default function ProfilePage() {
                 justifyContent="center"
               >
                 {!isEditing && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "92%",
-                    }}
-                  >
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "93%", }}>
                     {/*foto*/}
                     <Avatar
                       sx={{ width: "160px", height: "160px" }}
@@ -311,49 +341,47 @@ export default function ProfilePage() {
                 )}
 
                 {isEditing && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "92%",
-                    }}
+                  <div style={{
+                    display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "93%",
+                  }}
                   >
-                    <Box component="form" onSubmit={handleSubmit}>
+                    <Box component="form" onSubmit={handleSubmit} >
                       {/*nome*/}
                       <div
                         style={{
                           marginTop: "40px",
-                          width: "70%",
+                          width: "100%",
                           display: "flex",
                           justifyContent: "space-between",
                         }}
                       >
                         <TextField
                           id="tf-firstName"
+                          variant="filled"
                           label="Primeiro Nome"
                           name="firstName"
                           defaultValue={user.first_name}
-                          sx={{ width: "48%" }}
+                          sx={{ width: "48%", }}
                         />
                         <TextField
                           id="tf-lastName"
                           label="Último Nome"
                           name="lastName"
+                          variant="filled"
                           defaultValue={user.last_name}
-                          sx={{ width: "48%" }}
+                          sx={{ width: "48%",}}
                         />
                       </div>
 
                       {/*username*/}
-                      <div style={{ marginTop: "20px", width: "70%" }}>
+                      <div style={{ marginTop: "20px", width: "100%" }}>
                         <TextField
                           id="tf-username"
                           label="Username"
+                          variant="filled"
                           name="username"
                           defaultValue={user.username}
-                          sx={{ width: "100%" }}
+                          sx={{ width: "100%", }}
                           InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
@@ -365,13 +393,14 @@ export default function ProfilePage() {
                       </div>
 
                       {/*username Discord*/}
-                      <div style={{ marginTop: "20px", width: "70%" }}>
+                      <div style={{ marginTop: "20px", width: "100%" }}>
                         <TextField
                           id="tf-usernameDiscord"
                           label="Discord Username"
                           name="discord"
+                          variant="filled"
                           defaultValue={user.profilemodel?.discord}
-                          sx={{ width: "100%" }}
+                          sx={{ width: "100%", }}
                           InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
@@ -383,22 +412,23 @@ export default function ProfilePage() {
                       </div>
 
                       {/*email*/}
-                      <div style={{ marginTop: "20px", width: "70%" }}>
+                      <div style={{ marginTop: "20px", width: "100%" }}>
                         <TextField
                           id="tf-email"
                           label="Email"
+                          variant="filled"
                           defaultValue={user.email}
                           type="email"
                           name="email"
-                          sx={{ width: "100%" }}
+                          sx={{ width: "100%", }}
                           input={<OutlinedInput label="Email" />}
                         />
                       </div>
 
                       {/*cursos*/}
-                      <div style={{ marginTop: "25px", width: "70%" }}>
+                      <div style={{ marginTop: "25px", width: "100%" }}>
                         <FormControl sx={{ width: "100%" }}>
-                          <InputLabel id="course-label">Cursos</InputLabel>
+                          <InputLabel id="course-label" variant="filled">Cursos</InputLabel>
                           <Select
                             labelId="course-label"
                             id="course"
@@ -406,7 +436,6 @@ export default function ProfilePage() {
                             required
                             value={selectedCourses}
                             onChange={handleChangeCourses}
-                            input={<OutlinedInput label="Course" />}
                             renderValue={(selected) => selected.join(", ")}
                             MenuProps={MenuProps}
                           >
@@ -430,14 +459,15 @@ export default function ProfilePage() {
                       </div>
 
                       {/*ano*/}
-                      <div style={{ marginTop: "20px", width: "70%" }}>
+                      <div style={{ marginTop: "20px", width: "100%" }}>
                         <TextField
                           id="tf-year"
                           select
                           name="year"
+                          variant="filled"
                           label="Ano"
                           defaultValue={user.profilemodel?.year}
-                          sx={{ width: "100%" }}
+                          sx={{ width: "100%", backgroundColor: ""}}
                           helperText="Todos os anos tens que atualizar, não te esqueças! Este deve ser referente ao teu curso mais recente!"
                         >
                           <MenuItem value={1}>1st</MenuItem>
@@ -501,15 +531,7 @@ export default function ProfilePage() {
                   </div>
                 )}
 
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "end",
-                    justifyContent: "end",
-                    width: "8%",
-                  }}
-                >
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "end", justifyContent: "end", width: "7%", }}>
                   <Button
                     onClick={handleEditClick}
                     variant="contained"
@@ -528,6 +550,6 @@ export default function ProfilePage() {
           </Grid>
         </div>
       </Container>
-    </ThemeProvider>
+    </>
   );
 }

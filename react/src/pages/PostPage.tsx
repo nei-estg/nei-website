@@ -17,9 +17,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
-const defaultTheme = createTheme();
+
+
+
 
 export default function PostPage() {
+  const defaultTheme = createTheme();
+
+
   const isXs = useMediaQuery(defaultTheme.breakpoints.only("xs"));
   const isSm = useMediaQuery(defaultTheme.breakpoints.only("sm"));
   const isMd = useMediaQuery(defaultTheme.breakpoints.only("md"));
@@ -54,7 +59,7 @@ export default function PostPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "light",
             transition: Bounce,
           }
         );
@@ -63,6 +68,7 @@ export default function PostPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+
       <Container maxWidth="xl" sx={{ marginTop: "30px", marginBottom: "60px" }}>
         <div>
           <Grid container spacing={1}>

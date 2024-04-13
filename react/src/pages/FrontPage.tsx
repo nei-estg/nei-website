@@ -1,11 +1,11 @@
 import {
   Box,
   Button,
+  createTheme,
   CssBaseline,
   Grid,
   TextField,
-  ThemeProvider,
-  createTheme,
+  ThemeProvider
 } from '@mui/material';
 import { sendContactForm } from '@src/api/ContactRoutes';
 import { IContact } from '@src/interfaces/IContact';
@@ -17,14 +17,16 @@ import './css/FrontPage.css';
 import Terminal from '@src/components/terminal/terminal';
 import routes from '@src/router/Routes';
 
-const defaultTheme = createTheme();
+
 
 export default function FrontPage() {
   const [showForm, setShowForm] = useState(true);
 
+
   useEffect(() => {
     document.title = routes.frontpage.name;
   }, []);
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -47,7 +49,7 @@ export default function FrontPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: 'dark',
+            theme: 'light',
             transition: Bounce,
           }
         );
@@ -63,14 +65,38 @@ export default function FrontPage() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: 'dark',
+            theme: 'light',
             transition: Bounce,
           }
         );
       });
   };
+
+
+  const theme = createTheme({
+    components: {
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(232, 241, 250)',
+            '&:hover': {
+              backgroundColor: 'rgb(232, 241, 250)',
+              '@media (hover: none)': {
+                backgroundColor: 'rgb(232, 241, 250)',
+              },
+            },
+            '&.Mui-focused': {
+              backgroundColor: 'rgb(232, 241, 250)',
+            },
+          },
+        },
+      },
+    },
+  });
+
+
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <div>
         <div
           id="bgnr"
@@ -96,8 +122,8 @@ export default function FrontPage() {
               justifyContent: 'center',
             }}
           >
-            <h1 style={{ color: 'white' }}>Bem-vindo ao NEI!</h1>
-            <p style={{ color: 'white' }}>Prepara-te para passar maior parte do teu tempo aqui!</p>
+            <h1 style={{color: (window.innerWidth <= 1200) ? "#FFFFFF" : (window.innerWidth > 1200) ? "#FFFFFF" : ""}}>Bem-vindo ao NEI!</h1>
+            <p style={{color: (window.innerWidth <= 1200) ? "#FFFFFF" : (window.innerWidth > 1200) ? "#FFFFFF" : ""}}>Prepara-te para passar maior parte do teu tempo aqui!</p>
           </div>
           <div
             style={{
@@ -154,7 +180,7 @@ export default function FrontPage() {
           >
             <div id="div1" style={{ margin: '20px' }}>
               <a href={routes.aboutFAQpage.path} style={{ textDecoration: 'none' }}>
-                <h1 style={{ color: 'white' }}>Sobre o Nosso Núcleo</h1>
+                <h1 style={{ color: "#FFFFFF" }}>Sobre o Nosso Núcleo</h1>
                 <a href="/about" target="_blank" style={{ textDecoration: 'none' }}>
                   <img
                     src="logo.png"
@@ -162,7 +188,7 @@ export default function FrontPage() {
                     style={{ height: '150px', width: '150px' }}
                   />
                 </a>
-                <p style={{ color: 'white', fontWeight: 'bold' }}>
+                <p style={{ color: "#FFFFFF", fontWeight: 'bold' }}>
                   Direção, Cursos, entre outros.
                 </p>
               </a>
@@ -170,13 +196,13 @@ export default function FrontPage() {
 
             <div id="div1" style={{ margin: '20px' }}>
               <a href={routes.blogpage.path} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                <h1 style={{ color: 'white' }}>Atividades</h1>
+                <h1 style={{ color: "#FFFFFF" }}>Atividades</h1>
                 <img
                   src="/icon/laptop.png"
                   alt="Descrição da imagem"
                   style={{ height: '150px', width: '150px' }}
                 />
-                <p style={{ color: 'white', fontWeight: 'bold' }}>
+                <p style={{ color: "#FFFFFF", fontWeight: 'bold' }}>
                   Eventos e Atividades mais recentes.
                 </p>
               </a>
@@ -194,7 +220,7 @@ export default function FrontPage() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'white'
+          backgroundColor: '#191919'
         }}
       >
         <div
@@ -202,17 +228,18 @@ export default function FrontPage() {
             zIndex: 2,
             position: 'relative',
             textAlign: 'center',
-            width: '50%',
+            width: '70%',
           }}
         >
           {showForm && (
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <h1 className="responsive-header">Dúvidas? Envia-nos uma mensagem! :)</h1>
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3, }}>
+              <h1 className="responsive-header" style={{ color: '#FFFFFF' }}>Dúvidas? Envia-nos uma mensagem! :)</h1>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     autoComplete="name"
                     name="uName"
+                    variant="filled"
                     required
                     fullWidth
                     id="uName"
@@ -224,6 +251,7 @@ export default function FrontPage() {
                     required
                     fullWidth
                     id="email"
+                    variant="filled"
                     label="Email"
                     name="email"
                     autoComplete="email"
@@ -233,6 +261,7 @@ export default function FrontPage() {
                   <TextField
                     autoComplete="subject"
                     name="subject"
+                    variant="filled"
                     required
                     fullWidth
                     id="subject"
@@ -245,28 +274,28 @@ export default function FrontPage() {
                     fullWidth
                     name="message"
                     label="Mensagem"
+                    variant="filled"
                     id="message"
                     autoComplete=""
                     multiline
-                    variant="outlined"
                   />
                 </Grid>
               </Grid>
               <Button
                 type="submit"
                 variant="contained"
-                sx={{ 
-                  mt: 3, 
-                  mb: 2, 
-                  width: { xs: '100%', sm: '50%' }, 
-                  borderRadius: '8px' 
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  width: { xs: '100%', sm: '50%' },
+                  borderRadius: '8px'
                 }}
               >
                 Enviar Mensagem
               </Button>
             </Box>
           )}
-          {!showForm && <div>Obrigado, até breve!</div>}
+          {!showForm && <div style={{ color: '#FFFFFF' }}>Obrigado, até breve!</div>}
         </div>
       </div>
       <div style={{ zIndex: 1, position: 'absolute' }}>

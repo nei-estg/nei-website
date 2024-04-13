@@ -1,5 +1,4 @@
 import MenuIcon from "@mui/icons-material/Menu";
-import PersonIcon from "@mui/icons-material/Person";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -16,6 +15,8 @@ import { isLoggedIn } from "@src/api/utils/LoginStatus";
 import routes from "@src/router/Routes";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+
 
 const navbar = {
   pages: [
@@ -84,152 +85,164 @@ function NavBarMain() {
     setAnchorElUser(null);
   };
 
-  return (
-    <div style={{ zIndex: 2, position: "relative" }}>
-      <AppBar
-        position="static"
-        elevation={0}
-        sx={{ backgroundColor: "transparent" }}
-      >
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            {/* screen > 899 x 877 */}
-            <Avatar
-              alt="NEI"
-              src="/logo.png"
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            />
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="nei menu"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
+  const handleOpenDarkReader = () => {
+    window.open("https://darkreader.org/");
+  };
+
+
+
+  return (
+    <>
+      <div style={{ zIndex: 2, position: "relative" }}>
+        <AppBar
+          position="static"
+          elevation={0}
+          sx={{ backgroundColor: "transparent" }}
+        >
+          <Container maxWidth="xl">
+            <Toolbar disableGutters>
+              {/* screen > 899 x 877 */}
+              <Avatar
+                alt="NEI"
+                src="/logo.png"
+                component="a"
+                href="/"
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              />
+
+              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+                <IconButton
+                  size="large"
+                  aria-label="nei menu"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  style={{color: "#ffffff"}}>
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                  keepMounted
+                  transformOrigin={{ vertical: "top", horizontal: "left" }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{ display: { xs: "block", md: "none" }, }}
+                >
+                  {navbar.pages.map((page) => (
+                    <MenuItem
+                      key={page.id}
+                      onClick={() => {
+                        handleCloseNavMenu();
+                        navigate(page.URL);
+                      }}
+                      disabled={!isLoggedIn() && page.requiredLogin}
+                    >
+                      <Button
+                        onClick={() => navigate(page.URL)}
+                        sx={{ color: "#191919", textTransform: "none" }}
+                      >
+                        {page.name}
+                      </Button>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+
+              {/* screen <= 899 x 877 */}
+              <Avatar
+                alt="NEI"
+                src="/logo.png"
+                sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+                component="a"
+                href="/"
+              />
+
+              <Typography
+                variant="h5"
+                noWrap
+                component="a"
+                sx={{
+                  mr: 2,
+                  display: { xs: "flex", md: "none" },
+                  flexGrow: 1,
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "#FFFFFF",
+                  textDecoration: "none",
+                }}
+                href="/"
               >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                keepMounted
-                transformOrigin={{ vertical: "top", horizontal: "left" }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{ display: { xs: "block", md: "none" } }}
-              >
+                NEI
+              </Typography>
+
+              <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                 {navbar.pages.map((page) => (
-                  <MenuItem
+                  <Button
                     key={page.id}
                     onClick={() => {
                       handleCloseNavMenu();
                       navigate(page.URL);
                     }}
+                    style={{
+                      my: 2,
+                      color:
+                        page.requiredLogin && !isLoggedIn() ? "#969696" : // requiredLogin e não logado
+                            !page.requiredLogin ? "#FFFFFF" : // não requiredLogin
+                            page.requiredLogin && isLoggedIn() ? "#FFFFFF" : // requiredLogin e logado
+                              "#FFFFFF", // Todas as outras condições padrão
+                      display: "block",
+                    }}
                     disabled={!isLoggedIn() && page.requiredLogin}
                   >
-                    <Button
-                      onClick={() => navigate(page.URL)}
-                      sx={{ color: "inherit", textTransform: "none" }}
-                    >
-                      {page.name}
-                    </Button>
-                  </MenuItem>
+                    {page.name}
+                  </Button>
                 ))}
-              </Menu>
-            </Box>
-
-            {/* screen <= 899 x 877 */}
-            <Avatar
-              alt="NEI"
-              src="/logo.png"
-              sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
-              component="a"
-              href="/"
-            />
-
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              NEI
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {navbar.pages.map((page) => (
-                <Button
-                  key={page.id}
-                  onClick={() => {
-                    handleCloseNavMenu();
-                    navigate(page.URL);
-                  }}
-                  style={{
-                    my: 2,
-                    color:
-                      !isLoggedIn() && page.requiredLogin ? "#969696" : "white",
-                    display: "block",
-                  }}
-                  disabled={!isLoggedIn() && page.requiredLogin}
-                >
-                  {page.name}
-                </Button>
-              ))}
-            </Box>
-
-            <Box sx={{ flexGrow: 0 }}>
-              {isLoggedIn() ? (
-                <Tooltip title="Abrir Definições">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      sx={{ backgroundColor: "#054496" }}
-                      alt="Perfil"
-                      src={localStorage.getItem("profile") || undefined}
-                    />
-                  </IconButton>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Iniciar Sessão">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar sx={{ backgroundColor: "#054496" }}>
-                      <PersonIcon />
-                    </Avatar>
-                  </IconButton>
-                </Tooltip>
-              )}
+              </Box>
 
               {/* icon user */}
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                keepMounted
-                transformOrigin={{ vertical: "top", horizontal: "right" }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {isLoggedIn()
-                  ? settings.logged.map((setting) => (
+              <Box sx={{ flexGrow: 0 }}>
+                {isLoggedIn() ? (
+                  <Tooltip title="Abrir Definições">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar
+                        sx={{ backgroundColor: "#054496", color: "#FFFFFF" }}
+                        alt="Perfil"
+                        src={localStorage.getItem("profile") || undefined}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Iniciar Sessão">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar sx={{ backgroundColor: "#054496", color: "#FFFF" }} />
+                    </IconButton>
+                  </Tooltip>
+                )}
+
+
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                  keepMounted
+                  transformOrigin={{ vertical: "top", horizontal: "right" }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+
+                  {isLoggedIn()
+                    ? settings.logged.map((setting) => (
                       <Link
                         key={setting.id}
                         href={setting.URL}
@@ -242,7 +255,7 @@ function NavBarMain() {
                         </MenuItem>
                       </Link>
                     ))
-                  : settings.guest.map((setting) => (
+                    : settings.guest.map((setting) => (
                       <Link
                         key={setting.id}
                         href={setting.URL}
@@ -255,12 +268,13 @@ function NavBarMain() {
                         </MenuItem>
                       </Link>
                     ))}
-              </Menu>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </div>
+                </Menu>
+              </Box>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </div>
+    </>
   );
 }
 export default NavBarMain;

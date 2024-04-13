@@ -319,7 +319,8 @@ class UserViewSet(CreateAndViewModelViewSet, mixins.UpdateModelMixin):
       send_mail('NEI - Account Activation', "Please activate your account with the following code: " + activation.code, None, [user.email], fail_silently=False)
     
     serializer = UserSerializer(user)
-    serializer.data.pop('password')
+    if 'password' in serializer.data:
+      del serializer.data['password']
     return Response(serializer.data, status=status.HTTP_201_CREATED)
   
   #TODO: Adjust and test this method
