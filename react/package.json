@@ -30,7 +30,7 @@
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.22.3",
     "react-terminal": "^1.4.4",
-    "react-toastify": "^10.0.4",
+    "react-toastify": "^10.0.5",
     "react-tsparticles": "^2.12.2",
     "redux": "^5.0.1",
     "tsparticles-engine": "^2.12.0",
