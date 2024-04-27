@@ -19,9 +19,6 @@ This website serves as a centralized platform for ESTG IT students to access imp
 ## Prerequisites
 
 - Docker
-- Node.js
-- Python
-- Pip
 
 ## Getting Started
 
@@ -71,18 +68,18 @@ Made with ☕ and 💜 by NEI's Web Development Team:
       </a>
     </td>
     <td align="center">
-      <a href="https://github.com/cynlik">
-        <img src="https://github.com/cynlik.png" width="100px;" alt="Foto do Leandro Magalhães no GitHub"/><br>
-        <sub>
-          <b>Leandro Magalhães</b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
       <a href="https://github.com/Lsmiguel">
         <img src="https://github.com/Lsmiguel.png" width="100px;" alt="Foto do Miguel no GitHub"/><br>
         <sub>
           <b>Miguel</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/cynlik">
+        <img src="https://github.com/cynlik.png" width="100px;" alt="Foto do Leandro Magalhães no GitHub"/><br>
+        <sub>
+          <b>Leandro Magalhães</b>
         </sub>
       </a>
     </td>
