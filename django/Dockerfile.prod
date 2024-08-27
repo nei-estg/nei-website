@@ -5,7 +5,10 @@ WORKDIR /app
 COPY . /app
 RUN pip install -r requirements.txt --no-cache-dir && \
     python manage.py collectstatic --noinput && \
-    adduser --disabled-password --gecos '' nei
+    adduser --disabled-password --gecos '' nei && \
+    chown -R nei:nei * && \
+    chmod -R 750 *
+
 USER nei
 EXPOSE 8000
 CMD python manage.py makemigrations --noinput; \
