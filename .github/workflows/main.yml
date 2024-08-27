@@ -1,4 +1,4 @@
-name: NEI CI
+name: NEI CI - Production Test
 
 on:
   push:
@@ -23,12 +23,13 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Docker Compose Action
         uses: hoverkraft-tech/compose-action@v2.0.1
         with:
           compose-file: docker-compose.prod.yml
+          down-flags: "--volumes"
           
       - name: Run Django Tests
         run: docker-compose exec -T django python manage.py test
