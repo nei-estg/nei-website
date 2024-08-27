@@ -32,7 +32,4 @@ jobs:
           down-flags: "--remove-orphans --volumes"
           
       - name: Run Django Tests
-        uses: hoverkraft-tech/compose-action@v2.0.1
-        with:
-          compose-flags: "exec -T django python manage.py test"
-        #run: docker-compose exec -T django python manage.py test
+        run: docker compose exec -T django python manage.py test
