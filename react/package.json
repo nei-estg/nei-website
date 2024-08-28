@@ -16,7 +16,7 @@
     "@mui/material": "^5.15.17",
     "@mui/x-data-grid": "^6.19.11",
     "@reduxjs/toolkit": "^2.2.3",
-    "@mui/x-date-pickers": "^6.19.7",
+    "@mui/x-date-pickers": "^6.20.2",
     "@tsparticles/react": "^3.0.0",
     "@types/react-redux": "^7.1.33",
     "@types/react-router-dom": "^5.3.3",
