@@ -60,8 +60,8 @@ Made with ☕ and 💜 by NEI's Web Development Team:
       </a>
     </td>
     <td align="center">
-      <a href="https://github.com/joaopsoliveira03">
-        <img src="https://github.com/joaopsoliveira03.png" width="100px;" alt="Foto do João Oliveira no GitHub"/><br>
+      <a href="https://github.com/cyberhackerfly">
+        <img src="https://github.com/cyberhackerfly.png" width="100px;" alt="Foto do João Oliveira no GitHub"/><br>
         <sub>
           <b>João Oliveira</b>
         </sub>
