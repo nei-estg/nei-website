@@ -15,7 +15,7 @@
     "@mui/icons-material": "^5.15.17",
     "@mui/material": "^5.16.6",
     "@mui/x-data-grid": "^6.20.4",
-    "@reduxjs/toolkit": "^2.2.3",
+    "@reduxjs/toolkit": "^2.2.7",
     "@mui/x-date-pickers": "^6.20.2",
     "@tsparticles/react": "^3.0.0",
     "@types/react-redux": "^7.1.33",
