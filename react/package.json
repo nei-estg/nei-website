@@ -20,7 +20,7 @@
     "@tsparticles/react": "^3.0.0",
     "@types/react-redux": "^7.1.33",
     "@types/react-router-dom": "^5.3.3",
-    "axios": "^1.7.5",
+    "axios": "^1.7.6",
     "date-holidays": "^3.23.12",
     "dayjs": "^1.11.13",
     "moment": "^2.30.1",
