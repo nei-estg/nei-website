@@ -15,6 +15,7 @@ if DEBUG:
   ALLOWED_HOSTS += ['*']
 else:
   ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOST', '')]
+  SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
 
 # Application definition
 

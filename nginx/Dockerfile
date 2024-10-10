@@ -1,4 +1,4 @@
-FROM node:21.4-slim as build
+FROM node:21.4-slim AS build
 WORKDIR /app
 COPY ./react /app
 RUN npm install -g typescript vite && npm install && npm run build
