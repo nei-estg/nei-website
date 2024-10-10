@@ -1,4 +1,4 @@
-FROM python:3.13.0rc2
+FROM python:3.10.14
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 RUN pip install --upgrade pip --no-cache-dir
 WORKDIR /app
